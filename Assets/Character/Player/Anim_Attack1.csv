@@ -1,0 +1,9 @@
+Time(•b),Action(‚â‚é‚±‚Æ),Object(‰½‚ð)
+0.5,Sound,Player/equip
+3.5,Sound,Weapon/Sabel/swish_S
+4,AttackStart,0
+5,PhysicsSound,footstep
+5.5,Sound,Player/VO_J_attack
+7,AttackEnd,0
+8.5,AnimCancel,
+28,PhysicsSound,footstep
