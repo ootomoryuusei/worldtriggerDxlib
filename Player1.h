@@ -8,8 +8,6 @@ public:
 	~Player1();
 	void Update() override;
 	void Draw() override;
-
-	MATRIX ChangeFLOAT3ToMATRIX(FLOAT3 pos, FLOAT3 rot);
 private:
 	int hBlade; // サーベルモデルのデータ
 };

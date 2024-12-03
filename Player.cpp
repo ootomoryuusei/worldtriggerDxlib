@@ -249,7 +249,7 @@ void Player::Draw()
 {
 	Object3D::Draw(); // 基底クラスの関数を呼ぶ→Playerキャラを描画する
 
-	DrawCapsule3D(position, position + VGet(0, 160, 0), 30, 20, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);
+	/*DrawCapsule3D(position, position + VGet(0, 160, 0), 30, 20, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);*/
 
 	int wp = MV1SearchFrame(hModel, "wp");
 	MATRIX mSabel = MV1GetFrameLocalWorldMatrix(hModel, wp);
@@ -259,7 +259,7 @@ void Player::Draw()
 	MV1DrawModel(hSabel);
 
 	// サーベルの刃は、(0,0,0)～(0,-150,0)にある。これにmSabelをかけると、今の座標が手に入る
-	DrawLine3D(VGet(0, 0, 0) * mSabel, VGet(0, -150, 0) * mSabel, GetColor(255, 0, 0));
+	/*DrawLine3D(VGet(0, 0, 0) * mSabel, VGet(0, -150, 0) * mSabel, GetColor(255, 0, 0));*/
 }
 
 Player::AttackKey::AttackKey()

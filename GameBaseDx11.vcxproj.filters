@@ -91,6 +91,7 @@
       <Filter>10PlayScene</Filter>
     </ClCompile>
     <ClCompile Include="Player1.cpp" />
+    <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -168,5 +169,6 @@
       <Filter>10PlayScene</Filter>
     </ClInclude>
     <ClInclude Include="Player1.h" />
+    <ClInclude Include="Tile.h" />
   </ItemGroup>
 </Project>

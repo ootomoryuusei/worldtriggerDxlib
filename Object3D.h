@@ -69,6 +69,8 @@ public:
 
 	// ベクトルに向かって移動する
 	void MoveTo(VECTOR vec, float speed);
+
+	MATRIX ChangeFLOAT3ToMATRIX(FLOAT3 pos, FLOAT3 rot);
 protected:
 	int hModel;  // モデルデータ
 	VECTOR position; // 座標

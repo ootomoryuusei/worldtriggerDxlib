@@ -62,3 +62,13 @@ void Object3D::MoveTo(VECTOR vec, float speed)
 {
 	position += VNorm(vec) * speed;
 }
+
+MATRIX Object3D::ChangeFLOAT3ToMATRIX(FLOAT3 pos, FLOAT3 rot)
+{
+	MATRIX mTrans = MGetTranslate(pos); // 移動行列
+	MATRIX mRotX = MGetRotX(rot.x); // X軸の回転行列
+	MATRIX mRotY = MGetRotY(rot.y); // Y軸の回転行列
+	MATRIX mRotZ = MGetRotZ(rot.z); // Z軸の回転行列
+	MATRIX matrix = mRotZ * mRotX * mRotY * mTrans;
+	return matrix;
+}
