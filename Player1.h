@@ -1,5 +1,8 @@
 #pragma once
 #include "Object3D.h"
+
+class Tile;
+
 class Player1 :
     public Object3D
 {
@@ -10,5 +13,7 @@ public:
 	void Draw() override;
 private:
 	int hBlade; // サーベルモデルのデータ
+
+	Tile* tile;
 };
 

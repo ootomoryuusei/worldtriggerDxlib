@@ -1,5 +1,6 @@
 #include "Player1.h"
 #include "Camera.h"
+#include"Tile.h"
 
 Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1)
 {
@@ -9,6 +10,8 @@ Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1)
 	assert(hBlade >= 0);
 	position = VGet(0, 0, 0);
 	rotation = VGet(0, 0, 0);
+	tile = new Tile(this);
+	tile->Initialize();
 }
 
 Player1::~Player1()
@@ -38,7 +41,10 @@ void Player1::Update()
 
 void Player1::Draw()
 {
-	Object3D::Draw(); // 基底クラスの関数を呼ぶ→Playerキャラを描画する
+	//Object3D::Draw(); // 基底クラスの関数を呼ぶ→Playerキャラを描画する
+	MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(tile->GetTileData(0, 5),rotation);
+	MV1SetMatrix(hModel, mModel);
+	MV1DrawModel(hModel);
 
 	/*DrawCapsule3D(position, position + VGet(0, 160, 0), 30, 20, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);*/
 
