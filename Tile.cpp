@@ -6,6 +6,8 @@ Tile::Tile(GameObject* parent) : Object3D(parent)
 	tHSize = 1.5;
 	hModel = MV1LoadModel("Assets//Tile.mv1");
 	assert(hModel >= 0);
+	hTile = LoadGraph("Assets//Image//Tile.png");
+	assert(hTile >= 0);
 	int count = 0;
 	for (int i = 0; i < z; i++) {
 		for (int j = 0; j < x; j++) {
@@ -28,6 +30,10 @@ Tile::~Tile()
 		MV1DeleteModel(hModel);
 		hModel = -1;
 	}
+	if (hTile > 0) {
+		DeleteGraph(hTile);
+		hTile = -1;
+	}
 }
 
 void Tile::Update()
@@ -49,6 +55,14 @@ void Tile::Draw()
 		for (int j = 0; j < x; j++) {
 			MV1SetMatrix(hModel, Object3D::ChangeFLOAT3ToMATRIX(Tiles[i][j].position, rotation));
 			MV1DrawModel(hModel);
+		}
+	}
+
+	int xpos = 300;
+	int ypos = 300;
+	for (int i = 0; i < z; i++) {
+		for (int j = 0; j < x; j++) {
+			DrawGraph(xpos + j * 32, ypos + i * 28, hTile , TRUE);
 		}
 	}
 }

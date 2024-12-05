@@ -13,7 +13,13 @@ public:
 	void Draw() override;
 private:
 	int hBlade; // サーベルモデルのデータ
-
 	Tile* tile;
+
+	int hPIcon;
+	
+
+	struct CHARACTER_STATUS
+	{
+	};
 };
 

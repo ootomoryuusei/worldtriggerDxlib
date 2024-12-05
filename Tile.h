@@ -3,10 +3,7 @@
 
 const int z = 11;
 const int x = 11;
-struct TILEDATA {
-	VECTOR position;
-	int num;
-};
+
 
 class Tile :
     public Object3D
@@ -19,8 +16,11 @@ public:
 
 	VECTOR GetTileData(int _h, int _w) { return Tiles[_h][_w].position; }
 private:
-
-	
+	struct TILEDATA {
+		VECTOR position;
+		int num;
+	};
+	int hTile;
 
 	TILEDATA Tiles[z][x];
 

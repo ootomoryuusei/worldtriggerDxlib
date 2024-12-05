@@ -6,8 +6,10 @@ Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1)
 {
 	hModel = MV1LoadModel("Assets//human.mv1");
 	assert(hModel >= 0);
-	hBlade = MV1LoadModel("Assets//Blade.mv1");
+	hBlade = MV1LoadModel("Assets//SampleAsteroid.mv1");
 	assert(hBlade >= 0);
+	hPIcon = LoadGraph("Assets//Image//pIcon.png");
+	assert(hPIcon >= 0);
 	position = VGet(0, 0, 0);
 	rotation = VGet(0, 0, 0);
 	tile = new Tile(this);
@@ -23,6 +25,10 @@ Player1::~Player1()
 	if (hBlade > 0) {
 		MV1DeleteModel(hBlade);
 		hBlade = -1;
+	}
+	if (hPIcon > 0) {
+		DeleteGraph(hPIcon);
+		hPIcon = -1;
 	}
 }
 
@@ -55,11 +61,12 @@ void Player1::Draw()
 
     if (hBlade > 0) { // モデルがロードされていれば
 		// サーベルを描画する
-	/*	MV1SetMatrix(hBlade,ChangeFLOAT3ToMATRIX(position,rotation));
-		MV1DrawModel(hBlade); ;*/
-		// サーベルを描画する
 		MV1SetMatrix(hBlade, mBlade);
 		MV1DrawModel(hBlade);
+	};
+
+	if (hBlade > 0) { // モデルがロードされていれば
+		DrawGraph(300, 300, hPIcon, TRUE);
 	};
 
 	// サーベルの刃は、(0,0,0)～(0,-150,0)にある。これにmSabelをかけると、今の座標が手に入る
