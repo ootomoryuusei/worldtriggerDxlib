@@ -74,11 +74,11 @@ void Player::Update()
 	//VECTOR vRot = VGet(0, 100, 300) * mRot;
 	//SetCameraPositionAndTarget_UpVecY(position + pRot, position + vRot);
 
-	ImGui::Begin("position");
+	/*ImGui::Begin("position");
 	ImGui::InputFloat("X", &position.x);
 	ImGui::InputFloat("Y", &position.y);
 	ImGui::InputFloat("Z", &position.z);
-	ImGui::End();
+	ImGui::End();*/
 }
 
 void Player::updateNormal()

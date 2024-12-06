@@ -1,9 +1,12 @@
 #pragma once
 #include "Object3D.h"
+#include<vector>
+#include<map>
 
 const int z = 11;
 const int x = 11;
 
+class player1;
 
 class Tile :
     public Object3D
@@ -21,10 +24,20 @@ private:
 		int num;
 	};
 	int hTile;
+	int hTileFrame;
 
 	TILEDATA Tiles[z][x];
 
+	TILEDATA pTile[z][x];
+
 	float tWSize, tHSize;
 	
+	int prevX, prevY;
+	int cX, cY;
+	bool prevKey;
+
+	std::map<int,int> way;
+
+	CHARACTER_STATUS getStatus;
 };
 

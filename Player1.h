@@ -3,6 +3,8 @@
 
 class Tile;
 
+
+
 class Player1 :
     public Object3D
 {
@@ -11,15 +13,20 @@ public:
 	~Player1();
 	void Update() override;
 	void Draw() override;
+
+	CHARACTER_STATUS GetCStatus() { return cStatus; }
 private:
 	int hBlade; // サーベルモデルのデータ
 	Tile* tile;
 
 	int hPIcon;
-	
 
-	struct CHARACTER_STATUS
-	{
-	};
+	bool prevKey;
+	
+	int cX, cY;
+	int prevX, prevY;
+
+	CHARACTER_STATUS cStatus;
+	
 };
 

@@ -170,5 +170,6 @@
     </ClInclude>
     <ClInclude Include="Player1.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="ヘッダー.h" />
   </ItemGroup>
 </Project>

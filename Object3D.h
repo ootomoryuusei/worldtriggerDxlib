@@ -2,6 +2,12 @@
 // GameObject¨Object3D¨Player/Ground‚ÌŠÖŒW‚É‚·‚é
 #include "Engine/GameObject.h"
 
+struct CHARACTER_STATUS
+{
+	int move, attack, speed, defense;
+};
+
+
 inline float ToRad(float deg) { return deg * XM_PI / 180.0f; }
 
 inline VECTOR operator +(const VECTOR& a, const VECTOR& b) {

@@ -14,15 +14,15 @@ Camera::Camera(GameObject* parent) : Object3D(parent)
 	//position = VGet(0, 200, -300) * MGetRotY(rotY) + pPos;
 	//lookTarget = VGet(0, 100, 300) * MGetRotY(rotY) + pPos;
 	//rotation = VGet(0, 0, 0);
-	/*Player1* pPlayer1 = GetParent()->FindGameObject<Player1>();
+	Player1* pPlayer1 = GetParent()->FindGameObject<Player1>();
 	VECTOR pPos = pPlayer1->GetPosition();
 	float rotY = pPlayer1->GetRotate().y;
-	position = VGet(0, 0, 0) * MGetRotY(rotY) + pPos;
-	lookTarget = VGet(0, 0, 0) * MGetRotY(rotY) + pPos;
-	rotation = VGet(0, 0, 0);*/
+	position = VGet(0, 10, 8) * MGetRotY(rotY) + pPos;
+	lookTarget = VGet(0, 5, -1) * MGetRotY(rotY) + pPos;
+	rotation = VGet(0, 0, 0);
 
-	position = VGet(0, 100,0);
-    lookTarget = VGet(6,0,0);
+	/*position = VGet(0, 100,0);
+    lookTarget = VGet(6,0,0);*/
 }
 
 Camera::~Camera()
@@ -31,7 +31,7 @@ Camera::~Camera()
 
 void Camera::Update()
 {
-	if (CheckHitKey(KEY_INPUT_UP)) {
+	/*if (CheckHitKey(KEY_INPUT_UP)) {
 		position.y += cSpeed;
 	}
 	if (CheckHitKey(KEY_INPUT_DOWN)) {
@@ -55,7 +55,7 @@ void Camera::Update()
 	}
 	if (CheckHitKey(KEY_INPUT_D)) {
 		position.x += cSpeed;
-	}
+	}*/
 
 	ImGui::Begin("position");
 	ImGui::InputFloat("X", &position.x);

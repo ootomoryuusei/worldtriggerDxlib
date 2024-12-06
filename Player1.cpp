@@ -14,6 +14,16 @@ Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1)
 	rotation = VGet(0, 0, 0);
 	tile = new Tile(this);
 	tile->Initialize();
+	cX = 0;
+	cY = 0;
+	prevX = 0;
+	prevY = 0;
+	prevKey = false;
+
+	cStatus.move = 5;
+	cStatus.attack = 4;
+	cStatus.speed = 6;
+	cStatus.defense = 10;
 }
 
 Player1::~Player1()
@@ -34,22 +44,65 @@ Player1::~Player1()
 
 void Player1::Update()
 {
-	//// カメラの設定
-	//MATRIX mRot = MGetRotY(rotation.y);  // 回転行列
-	//// 回ってないとき、プレイヤーからどれぐらい後ろ？→ベクトル
-	//VECTOR tmpP = VGet(0, 65, 0);
-	//// これに回転行列をかける
-	//VECTOR pRot = tmpP * mRot;
-	//// これにプレイヤーの座標を足すと、カメラ位置が出る
-	//VECTOR vRot = VGet(0, 0, 3) * mRot;
-	//SetCameraPositionAndTarget_UpVecY(position + pRot, position + vRot);
+	/*if (CheckHitKey(KEY_INPUT_W)) {
+		if (prevKey == false) {
+			prevY = cY;
+			cY += 1;
+			if (cY > z - 1) {
+				cY = prevY;
+			}
+		}
+		prevKey = true;
+	}else 
+	if (CheckHitKey(KEY_INPUT_S)) {
+		if (prevKey == false) {
+			prevY = cY;
+			cY -= 1;
+			if (cY < 0) {
+				cY = prevY;
+			}
+		}
+		prevKey = true;
+	}else
+	if (CheckHitKey(KEY_INPUT_A)) {
+		if (prevKey == false) {
+			prevX = cX;
+			cX += 1;
+			if (cX > x - 1) {
+				cX = prevX;
+			}
+		}
+		prevKey = true;
+	}else
+	if (CheckHitKey(KEY_INPUT_D)) {
+		if (prevKey == false) {
+			prevX = cX;
+			cX -= 1;
+			if (cX < 0) {
+				cX = prevX;
+			}
+		}
+		prevKey = true;
+	}else {
+		prevKey = false;
+	}*/
+	// カメラの設定
+	MATRIX mRot = MGetRotY(rotation.y);  // 回転行列
+	// 回ってないとき、プレイヤーからどれぐらい後ろ？→ベクトル
+	VECTOR tmpP = VGet(0, 5, 10);
+	// これに回転行列をかける
+	VECTOR pRot = tmpP * mRot;
+	// これにプレイヤーの座標を足すと、カメラ位置が出る
+	VECTOR vRot = VGet(0,5,-5) * mRot;
+	SetCameraPositionAndTarget_UpVecY(position + pRot, position + vRot);
+	position = tile->GetTileData(cY, cX);
 }
 
 void Player1::Draw()
 {
 	//Object3D::Draw(); // 基底クラスの関数を呼ぶ→Playerキャラを描画する
-	MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(tile->GetTileData(0, 5),rotation);
-	MV1SetMatrix(hModel, mModel);
+	MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position,rotation);
+	MV1SetMatrix(hModel,mModel);
 	MV1DrawModel(hModel);
 
 	/*DrawCapsule3D(position, position + VGet(0, 160, 0), 30, 20, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);*/
@@ -65,9 +118,9 @@ void Player1::Draw()
 		MV1DrawModel(hBlade);
 	};
 
-	if (hBlade > 0) { // モデルがロードされていれば
-		DrawGraph(300, 300, hPIcon, TRUE);
-	};
+	//if (hPIcon > 0) { // モデルがロードされていれば
+	//	DrawGraph(300, 300, hPIcon, TRUE);
+	//};
 
 	// サーベルの刃は、(0,0,0)～(0,-150,0)にある。これにmSabelをかけると、今の座標が手に入る
 	/*DrawLine3D(VGet(0, 0, 0) * hBlade, VGet(0, -150, 0) * hBlade, GetColor(255, 0, 0));*/
