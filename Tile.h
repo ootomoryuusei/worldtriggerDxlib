@@ -8,10 +8,6 @@ const int x = 11;
 
 class player1;
 
-struct POSITION {
-	int x, y;
-};
-
 class Tile :
     public Object3D
 {
@@ -35,6 +31,7 @@ private:
 	};
 	int hTile;
 	int hTileFrame;
+	int hPIcon;
 
 	TILEDATA Tiles[z][x];
 

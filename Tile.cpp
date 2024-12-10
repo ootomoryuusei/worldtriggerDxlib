@@ -12,6 +12,8 @@ Tile::Tile(GameObject* parent) : Object3D(parent)
 	assert(hTile >= 0);
 	hTileFrame = LoadGraph("Assets//Image//TileSelectFrame.png");
 	assert(hTileFrame >= 0);
+	hPIcon = LoadGraph("Assets//Image//pIcon.png");
+	assert(hPIcon);
 	position = VGet(0, 0, 0);
 	rotation.y = XMConvertToRadians(90.0f);
 	int count = 0;
@@ -132,10 +134,13 @@ void Tile::Update()
 	if(size >= getStatus.move){
 		compWay = true;
 	}
+
+	
 }
 
 void Tile::Draw()
 {
+	Player1* pl1 = GetParent()->FindGameObject<Player1>();
 	for (int i = 0; i < z; i++) {
 		for (int j = 0; j < x; j++) {
 			MV1SetMatrix(hModel, Object3D::ChangeFLOAT3ToMATRIX(Tiles[i][j].position, rotation));
@@ -149,6 +154,14 @@ void Tile::Draw()
 	for (int i = 0; i < z; i++) {
 		for (int j = 0; j < x; j++) {
 			DrawGraph(pTile[i][j].position.x,pTile[i][j].position.y, hTile, TRUE);
+		}
+	}
+
+	for (int i = 0; i < z; i++) {
+		for (int j = 0; j < x; j++) {
+			if (Tiles[i][j].position.x == pl1->GetPosition().x && Tiles[i][j].position.y == pl1->GetPosition().y) {
+				DrawGraph(pTile[i][j].position.x, pTile[i][j].position.y, hPIcon, TRUE);
+			}
 		}
 	}
 

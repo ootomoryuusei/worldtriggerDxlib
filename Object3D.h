@@ -2,6 +2,10 @@
 // GameObject¨Object3D¨Player/Ground‚ÌŠÖŒW‚É‚·‚é
 #include "Engine/GameObject.h"
 
+struct POSITION {
+	int x, y;
+};
+
 struct CHARACTER_STATUS
 {
 	int move, attack, speed, defense;
