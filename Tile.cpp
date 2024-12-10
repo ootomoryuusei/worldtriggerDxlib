@@ -38,6 +38,7 @@ Tile::Tile(GameObject* parent) : Object3D(parent)
 	prevY = 0;
 	cX = 0;
 	cY = 0;
+	compWay = false;
 }
 
 Tile::~Tile()
@@ -75,7 +76,11 @@ void Tile::Update()
 	ImGui::InputFloat("Z", &rotation.z);
 	ImGui::End();*/
 
-	if (CheckHitKey(KEY_INPUT_W)) {
+	Player1* pl1 = GetParent()->FindGameObject<Player1>();
+	getStatus = pl1->GetCStatus();
+	int size = way.size();
+
+	if (CheckHitKey(KEY_INPUT_UP)) {
 		if (prevKey == false) {
 			prevY = cY;
 			cY += 1;
@@ -85,7 +90,7 @@ void Tile::Update()
 		}
 		prevKey = true;
 	}
-	else if (CheckHitKey(KEY_INPUT_S)) {
+	else if (CheckHitKey(KEY_INPUT_DOWN)) {
 		if (prevKey == false) {
 			prevY = cY;
 			cY -= 1;
@@ -94,7 +99,7 @@ void Tile::Update()
 			}
 		}
 		prevKey = true;
-	}else if (CheckHitKey(KEY_INPUT_A)) {
+	}else if (CheckHitKey(KEY_INPUT_LEFT)) {
 		if (prevKey == false) {
 			prevX = cX;
 			cX += 1;
@@ -103,7 +108,7 @@ void Tile::Update()
 			}
 		}
 		prevKey = true;
-	}else if (CheckHitKey(KEY_INPUT_D)) {
+	}else if (CheckHitKey(KEY_INPUT_RIGHT)) {
 		if (prevKey == false) {
 			prevX = cX;
 			cX -= 1;
@@ -112,15 +117,20 @@ void Tile::Update()
 			}
 		}
 		prevKey = true;	
+	}else if (CheckHitKey(KEY_INPUT_RETURN)) {
+		if (prevKey == false) {
+			
+			if (size < getStatus.move) {
+				way.push_back({ cX,cY });
+			}
+		}
+		prevKey = true;
 	}else {
 		prevKey = false;
 	}
-
-	if (CheckHitKey(KEY_INPUT_RETURN)) {
-		Player1* pl1 = GetParent()->FindGameObject<Player1>();
-		getStatus = pl1->GetCStatus();
-		int size = way.size();
-		way[size] = (cY, cX);
+		
+	if(size >= getStatus.move){
+		compWay = true;
 	}
 }
 

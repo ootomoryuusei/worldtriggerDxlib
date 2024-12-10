@@ -26,6 +26,10 @@ private:
 	int cX, cY;
 	int prevX, prevY;
 
+	float movetime;
+	float flame;
+	float time;
+
 	CHARACTER_STATUS cStatus;
 	
 };

@@ -24,6 +24,10 @@ Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1)
 	cStatus.attack = 4;
 	cStatus.speed = 6;
 	cStatus.defense = 10;
+
+	movetime = 5.0f;
+	flame = 1.0f / 60.0f;
+	time = 0.0f;
 }
 
 Player1::~Player1()
@@ -95,7 +99,37 @@ void Player1::Update()
 	// これにプレイヤーの座標を足すと、カメラ位置が出る
 	VECTOR vRot = VGet(0,5,-5) * mRot;
 	SetCameraPositionAndTarget_UpVecY(position + pRot, position + vRot);
-	position = tile->GetTileData(cY, cX);
+	tile = GetParent()->FindGameObject<Tile>();
+	/*if (tile->GetCompWay()) {
+		time += flame;
+		if (time > movetime) {
+			for (auto& itr : tile->GetWay()) {
+				position = tile->GetTileData(itr.y, itr.x);
+			}
+			time = 0.0f;
+		}
+	}*/
+	if (tile->GetCompWay()) {
+		time += flame;  // 時間を増加させる
+		if (time > movetime) {  // 一定の時間が経過した場合
+			static size_t index = 0;  // 現在処理しているイテレーターのインデックス
+			const auto& way = tile->GetWay();
+
+			// イテレーターが範囲内にある場合に処理
+			if (index < way.size()) {
+				// 現在の位置を取得
+				position = tile->GetTileData(way[index].y, way[index].x);
+				// インデックスを次に進める
+				++index;
+			}
+			else {
+				// すべての処理が終わった場合、インデックスをリセット
+				tile->SetCompWay(false);
+			}
+			time = 0.0f;  // 時間リセット
+		}
+	}
+	
 }
 
 void Player1::Draw()
