@@ -2,8 +2,16 @@
 // GameObjectÅ®Object3DÅ®Player/GroundÇÃä÷åWÇ…Ç∑ÇÈ
 #include "Engine/GameObject.h"
 
+const int z = 11;
+const int x = 11;
+
 struct POSITION {
 	int x, y;
+};
+
+struct TILEDATA {
+	VECTOR position;
+	int num;
 };
 
 struct CHARACTER_STATUS

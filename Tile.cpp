@@ -8,12 +8,7 @@ Tile::Tile(GameObject* parent) : Object3D(parent)
 	tHSize = 1.75;
 	hModel = MV1LoadModel("Assets//Tile.mv1");
 	assert(hModel >= 0);
-	hTile = LoadGraph("Assets//Image//Tile.png");
-	assert(hTile >= 0);
-	hTileFrame = LoadGraph("Assets//Image//TileSelectFrame.png");
-	assert(hTileFrame >= 0);
-	hPIcon = LoadGraph("Assets//Image//pIcon.png");
-	assert(hPIcon);
+	
 	position = VGet(0, 0, 0);
 	rotation.y = XMConvertToRadians(90.0f);
 	int count = 0;
@@ -23,24 +18,14 @@ Tile::Tile(GameObject* parent) : Object3D(parent)
 		for (int j = 0; j < x; j++) {
 			if (j % 2 == 1) {
 				Tiles[i][j].position = { position.x + tWSize * j,position.y,position.z - tHSize/2 - tHSize * i };
-				pTile[i][j].position = { xpos - j * 26, ypos - 28 / 2 - i * 28 };
 			}
 			else {
 				Tiles[i][j].position = { position.x + tWSize * j,position.y,position.z - tHSize * i };
-				pTile[i][j].position = { xpos - j * 26, ypos - i * 28 };
 			}
-			
 			Tiles[i][j].num = count;
-			pTile[i][j].num = count;
 			count++;
 		}
 	}
-	prevKey = false;
-	prevX = 0;
-	prevY = 0;
-	cX = 0;
-	cY = 0;
-	compWay = false;
 }
 
 Tile::~Tile()
@@ -48,14 +33,6 @@ Tile::~Tile()
 	if(hModel > 0) {
 		MV1DeleteModel(hModel);
 		hModel = -1;
-	}
-	if (hTile > 0) {
-		DeleteGraph(hTile);
-		hTile = -1;
-	}
-	if (hTileFrame > 0) {
-		DeleteGraph(hTileFrame);
-		hTileFrame = -1;
 	}
 }
 
@@ -78,62 +55,7 @@ void Tile::Update()
 	ImGui::InputFloat("Z", &rotation.z);
 	ImGui::End();*/
 
-	Player1* pl1 = GetParent()->FindGameObject<Player1>();
-	getStatus = pl1->GetCStatus();
-	int size = way.size();
-
-	if (CheckHitKey(KEY_INPUT_UP)) {
-		if (prevKey == false) {
-			prevY = cY;
-			cY += 1;
-			if (cY > z - 1) {
-				cY = prevY;
-			}
-		}
-		prevKey = true;
-	}
-	else if (CheckHitKey(KEY_INPUT_DOWN)) {
-		if (prevKey == false) {
-			prevY = cY;
-			cY -= 1;
-			if (cY < 0) {
-				cY = prevY;
-			}
-		}
-		prevKey = true;
-	}else if (CheckHitKey(KEY_INPUT_LEFT)) {
-		if (prevKey == false) {
-			prevX = cX;
-			cX += 1;
-			if (cX > x - 1) {
-				cX = prevX;
-			}
-		}
-		prevKey = true;
-	}else if (CheckHitKey(KEY_INPUT_RIGHT)) {
-		if (prevKey == false) {
-			prevX = cX;
-			cX -= 1;
-			if (cX < 0) {
-				cX = prevX;
-			}
-		}
-		prevKey = true;	
-	}else if (CheckHitKey(KEY_INPUT_RETURN)) {
-		if (prevKey == false) {
-			
-			if (size < getStatus.move) {
-				way.push_back({ cX,cY });
-			}
-		}
-		prevKey = true;
-	}else {
-		prevKey = false;
-	}
-		
-	if(size >= getStatus.move){
-		compWay = true;
-	}
+	
 
 	
 }
@@ -151,19 +73,5 @@ void Tile::Draw()
 	/*MV1SetMatrix(hModel, Object3D::ChangeFLOAT3ToMATRIX(Tiles[0][1].position, rotation));
 	MV1DrawModel(hModel);*/
 
-	for (int i = 0; i < z; i++) {
-		for (int j = 0; j < x; j++) {
-			DrawGraph(pTile[i][j].position.x,pTile[i][j].position.y, hTile, TRUE);
-		}
-	}
-
-	for (int i = 0; i < z; i++) {
-		for (int j = 0; j < x; j++) {
-			if (Tiles[i][j].position.x == pl1->GetPosition().x && Tiles[i][j].position.y == pl1->GetPosition().y) {
-				DrawGraph(pTile[i][j].position.x, pTile[i][j].position.y, hPIcon, TRUE);
-			}
-		}
-	}
-
-	DrawGraph(pTile[cY][cX].position.x,pTile[cY][cX].position.y, hTileFrame, TRUE);
+	
 }

@@ -1,6 +1,7 @@
 #include "Player1.h"
 #include "Camera.h"
 #include"Tile.h"
+#include"Icon.h"
 
 Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1),hShield(-1)
 {
@@ -16,8 +17,6 @@ Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1),hShield(-1)
 	assert(hPIcon >= 0);*/
 	position = VGet(0, 0, 0);
 	rotation = VGet(0, 0, 0);
-	tile = new Tile(this);
-	tile->Initialize();
 	cPos.x = 0;
 	cPos.y = 0;
 	prevX = 0;
@@ -60,48 +59,7 @@ Player1::~Player1()
 
 void Player1::Update()
 {
-	/*if (CheckHitKey(KEY_INPUT_W)) {
-		if (prevKey == false) {
-			prevY = cY;
-			cY += 1;
-			if (cY > z - 1) {
-				cY = prevY;
-			}
-		}
-		prevKey = true;
-	}else 
-	if (CheckHitKey(KEY_INPUT_S)) {
-		if (prevKey == false) {
-			prevY = cY;
-			cY -= 1;
-			if (cY < 0) {
-				cY = prevY;
-			}
-		}
-		prevKey = true;
-	}else
-	if (CheckHitKey(KEY_INPUT_A)) {
-		if (prevKey == false) {
-			prevX = cX;
-			cX += 1;
-			if (cX > x - 1) {
-				cX = prevX;
-			}
-		}
-		prevKey = true;
-	}else
-	if (CheckHitKey(KEY_INPUT_D)) {
-		if (prevKey == false) {
-			prevX = cX;
-			cX -= 1;
-			if (cX < 0) {
-				cX = prevX;
-			}
-		}
-		prevKey = true;
-	}else {
-		prevKey = false;
-	}*/
+	
 	// カメラの設定
 	MATRIX mRot = MGetRotY(rotation.y);  // 回転行列
 	// 回ってないとき、プレイヤーからどれぐらい後ろ？→ベクトル
@@ -111,25 +69,25 @@ void Player1::Update()
 	// これにプレイヤーの座標を足すと、カメラ位置が出る
 	VECTOR vRot = VGet(0,5,-5) * mRot;
 	SetCameraPositionAndTarget_UpVecY(position + pRot, position + vRot);
-	tile = GetParent()->FindGameObject<Tile>();
-
-	if (tile->GetCompWay()) {
+	icon = GetParent()->FindGameObject<Icon>();
+	Tile* tile = GetParent()->FindGameObject<Tile>();
+	if (icon->GetCompWay()) {
 		time += flame;  // 時間を増加させる
 		if (time > movetime) {  // 一定の時間が経過した場合
 			static size_t index = 0;  // 現在処理しているイテレーターのインデックス
-			const auto& way = tile->GetWay();
+			const auto& way = icon->GetWay();
 
 			// イテレーターが範囲内にある場合に処理
 			if (index < way.size()) {
 				// 現在の位置を取得
-				position = tile->GetTileData(way[index].y, way[index].x);
+				position = tile->GetTilesData(way[index].y, way[index].x).position;
 				// インデックスを次に進める
 				++index;
 			}
 			else {
 				// すべての処理が終わった場合、インデックスをリセット
-				tile->SetCompWay(false);
-				tile->GetWay().clear();
+				icon->SetCompWay(false);
+				icon->GetWay().clear();
 			}
 			time = 0.0f;  // 時間リセット
 		}

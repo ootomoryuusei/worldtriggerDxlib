@@ -142,6 +142,7 @@
     <ClCompile Include="Engine\Transform.cpp" />
     <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="Icon.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_draw.cpp" />
     <ClCompile Include="ImGui\imgui_impl_dx11.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Engine\Transform.h" />
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="Icon.h" />
     <ClInclude Include="ImGui\imconfig.h" />
     <ClInclude Include="ImGui\imgui.h" />
     <ClInclude Include="ImGui\imgui_impl_dx11.h" />

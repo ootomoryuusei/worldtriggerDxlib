@@ -1,10 +1,8 @@
 #pragma once
 #include "Object3D.h"
 
-class Tile;
-
-
-
+//class Tile;
+class Icon;
 
 class Player1 :
     public Object3D
@@ -17,7 +15,6 @@ public:
 
 	CHARACTER_STATUS GetCStatus() { return cStatus; }
 
-	/*int GetNowNum() { return nowNum; }*/
 	VECTOR GetPosition() { return position; }
 private:
 	int hBlade; // サーベルモデルのデータ
@@ -26,7 +23,8 @@ private:
 
 	int hAsteroid;
 
-	Tile* tile;
+	/*Tile* tile;*/
+	Icon* icon;
 
 	int hPIcon;
 

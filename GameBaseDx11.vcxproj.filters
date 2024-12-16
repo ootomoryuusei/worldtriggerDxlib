@@ -92,6 +92,7 @@
     </ClCompile>
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Icon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -171,5 +172,6 @@
     <ClInclude Include="Player1.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="ヘッダー.h" />
+    <ClInclude Include="Icon.h" />
   </ItemGroup>
 </Project>
