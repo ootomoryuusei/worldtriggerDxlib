@@ -20,6 +20,7 @@ private:
 	int hTile;
 	int hTileFrame;
 	int hPIcon;
+	int hSelectIcon;
 
 	int hATIcon;
 	int hDTIcon;

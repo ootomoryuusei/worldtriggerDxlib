@@ -1,6 +1,7 @@
 #include "Icon.h"
 #include"Tile.h"
 #include"Player1.h"
+#include "ImGui/imgui.h"
 
 Icon::Icon(GameObject* parent) : Object3D(parent)
 {
@@ -12,6 +13,8 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 	assert(hPIcon >= 0);
 	hATIcon = LoadGraph("Assets//Image//TriggerIcon//AttackerTrigger0.png");
 	assert(hATIcon >= 0);
+	hSelectIcon = LoadGraph("Assets//Image//TriggerSetUI.png");
+	assert(hSelectIcon >= 0);
 
 	int count = 0;
 	float xpos = 1100;
@@ -135,7 +138,11 @@ void Icon::Draw()
 		}
 	}
 
+	
+
 	DrawGraph(pTile[cY][cX].position.x, pTile[cY][cX].position.y, hTileFrame, TRUE);
 
-	DrawGraph(0,0 ,hATIcon, TRUE);
+	/*DrawGraph(0,0 ,hATIcon, TRUE);*/
+
+	/*DrawGraph(0, 0, hSelectIcon, TRUE);*/
 }

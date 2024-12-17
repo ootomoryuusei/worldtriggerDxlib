@@ -57,11 +57,11 @@ void Camera::Update()
 		position.x += cSpeed;
 	}*/
 
-	ImGui::Begin("position");
+	/*ImGui::Begin("position");
 	ImGui::InputFloat("X", &position.x);
 	ImGui::InputFloat("Y", &position.y);
 	ImGui::InputFloat("Z", &position.z);
-	ImGui::End();
+	ImGui::End();*/
 
 
 	/*if (CheckHitKey(KEY_INPUT_UP)) {
