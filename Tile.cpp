@@ -12,8 +12,6 @@ Tile::Tile(GameObject* parent) : Object3D(parent)
 	position = VGet(0, 0, 0);
 	rotation.y = XMConvertToRadians(90.0f);
 	int count = 0;
-	float xpos = 1100;
-	float ypos = 600;
 	for (int i = 0; i < z; i++) {
 		for (int j = 0; j < x; j++) {
 			if (j % 2 == 1) {
@@ -62,7 +60,7 @@ void Tile::Update()
 
 void Tile::Draw()
 {
-	Player1* pl1 = GetParent()->FindGameObject<Player1>();
+	/*Player1* pl1 = GetParent()->FindGameObject<Player1>();*/
 	for (int i = 0; i < z; i++) {
 		for (int j = 0; j < x; j++) {
 			MV1SetMatrix(hModel, Object3D::ChangeFLOAT3ToMATRIX(Tiles[i][j].position, rotation));

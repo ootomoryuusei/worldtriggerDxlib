@@ -15,6 +15,8 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 	assert(hATIcon >= 0);
 	hSelectIcon = LoadGraph("Assets//Image//TriggerSetUI.png");
 	assert(hSelectIcon >= 0);
+	hMainCircle = LoadGraph("Assets//Image//MainTriggerCircle.png");
+	assert(hMainCircle >= 0);
 
 	int count = 0;
 	float xpos = 1100;
@@ -37,6 +39,16 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 	cX = 0;
 	cY = 0;
 	compWay = false;
+
+	GetGraphSize(hPIcon, &PgraphSize.x,&PgraphSize.y);
+	PgraphSize.halfX = PgraphSize.x / 2.0f;
+	PgraphSize.halfY = PgraphSize.y / 2.0f;
+	GetGraphSize(hMainCircle, &MCgraphSize.x, &MCgraphSize.y);
+	MCgraphSize.halfX = MCgraphSize.x / 2.0f;
+	MCgraphSize.halfY = MCgraphSize.y / 2.0f;
+	GetGraphSize(hTile, &TgraphSize.x, &TgraphSize.y);
+	TgraphSize.halfX = TgraphSize.x / 2.0f;
+	TgraphSize.halfY = TgraphSize.y / 2.0f;
 }
 
 Icon::~Icon()
@@ -119,8 +131,8 @@ void Icon::Draw()
 {
 	Player1* pl1 = GetParent()->FindGameObject<Player1>();
 	Tile* tile = GetParent()->FindGameObject<Tile>();
-	int TpositionX;
-	int TpositionZ;
+	VECTOR Tpostion;
+	VECTOR Ppostion = pl1->GetPosition();
 
 	for (int i = 0; i < z; i++) {
 		for (int j = 0; j < x; j++) {
@@ -130,10 +142,13 @@ void Icon::Draw()
 
 	for (int i = 0; i < z; i++) {
 		for (int j = 0; j < x; j++) {
-			TpositionX = tile->GetTilesData(i, j).position.x;
-			TpositionZ = tile->GetTilesData(i, j).position.z;
-			if (TpositionX == pl1->GetPosition().x && TpositionZ == pl1->GetPosition().z) {
-				DrawGraph(pTile[i][j].position.x, pTile[i][j].position.y,hPIcon, TRUE);
+			Tpostion.x = tile->GetTilesData(i, j).position.x;
+			Tpostion.y = tile->GetTilesData(i, j).position.y;
+			Tpostion.z = tile->GetTilesData(i, j).position.z;
+			if (Tpostion.x == Ppostion.x && Tpostion.y == Ppostion.y && Tpostion.z == Ppostion.z) {
+				DrawCircleGauge(pTile[i][j].position.x + TgraphSize.halfX, pTile[i][j].position.y + TgraphSize.halfY, 15.0, hMainCircle, -15.0,1.0f);
+				DrawGraph(pTile[i][j].position.x + (TgraphSize.halfX - PgraphSize.halfX), pTile[i][j].position.y + (TgraphSize.halfY - PgraphSize.halfY), hPIcon, TRUE);
+				
 			}
 		}
 	}
@@ -145,4 +160,7 @@ void Icon::Draw()
 	/*DrawGraph(0,0 ,hATIcon, TRUE);*/
 
 	/*DrawGraph(0, 0, hSelectIcon, TRUE);*/
+
+	
+	
 }

@@ -2,8 +2,14 @@
 // GameObject¨Object3D¨Player/Ground‚ÌŠÖŒW‚É‚·‚é
 #include "Engine/GameObject.h"
 
-const int z = 1;
+const int z = 11;
 const int x = 11;
+
+
+struct SIZE_2D {
+	int x , y;
+	int halfX, halfY;
+};
 
 struct POSITION {
 	int x, y;

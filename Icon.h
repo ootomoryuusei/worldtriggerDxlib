@@ -22,6 +22,8 @@ private:
 	int hPIcon;
 	int hSelectIcon;
 
+	int hMainCircle;
+
 	int hATIcon;
 	int hDTIcon;
 	int hOTIcon;
@@ -38,5 +40,9 @@ private:
 	std::vector<POSITION> way;
 
 	CHARACTER_STATUS getStatus;
+
+	SIZE_2D PgraphSize;
+	SIZE_2D MCgraphSize;
+	SIZE_2D TgraphSize;
 };
 

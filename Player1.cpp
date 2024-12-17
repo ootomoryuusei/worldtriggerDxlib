@@ -71,6 +71,7 @@ void Player1::Update()
 	SetCameraPositionAndTarget_UpVecY(position + pRot, position + vRot);
 	icon = GetParent()->FindGameObject<Icon>();
 	Tile* tile = GetParent()->FindGameObject<Tile>();
+
 	if (icon->GetCompWay()) {
 		time += flame;  // 時間を増加させる
 		if (time > movetime) {  // 一定の時間が経過した場合
@@ -138,8 +139,5 @@ void Player1::Draw()
 
 	// サーベルの刃は、(0,0,0)～(0,-150,0)にある。これにmSabelをかけると、今の座標が手に入る
 	/*DrawLine3D(VGet(0, 0, 0) * hBlade, VGet(0, -150, 0) * hBlade, GetColor(255, 0, 0));*/
-
-	/*int gHandle = LoadGraph("Assets\\TestCircle.png");
-	DrawCircleGauge(position.x, position.y, 50.0, gHandle, 25.0);*/
 }
 
