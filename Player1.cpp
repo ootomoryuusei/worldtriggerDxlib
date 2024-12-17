@@ -13,8 +13,7 @@ Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1),hShield(-1)
 	assert(hShield >= 0);
 	hAsteroid = MV1LoadModel("Assets//SampleAsteroid.mv1");
 	assert(hAsteroid >= 0);
-	/*hPIcon = LoadGraph("Assets//Image//pIcon.png");
-	assert(hPIcon >= 0);*/
+
 	position = VGet(0, 0, 0);
 	rotation = VGet(0, 0, 0);
 	cPos.x = 0;
@@ -31,6 +30,8 @@ Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1),hShield(-1)
 	movetime = 5.0f;
 	flame = 1.0f / 60.0f;
 	time = 0.0f;
+
+	Trigger = { {0,0,0,0},{0,0,0,0} };
 }
 
 Player1::~Player1()
@@ -51,10 +52,10 @@ Player1::~Player1()
 		MV1DeleteModel(hAsteroid);
 		hAsteroid = -1;
 	}
-	/*if (hPIcon > 0) {
-		DeleteGraph(hPIcon);
-		hPIcon = -1;
-	}*/
+	/*DEL(hModel, 1);
+	DEL(hBlade, 1);
+	DEL(hShield, 1);
+	DEL(hAsteroid, 1);*/
 }
 
 void Player1::Update()
@@ -132,10 +133,6 @@ void Player1::Draw()
 		MV1SetMatrix(hShield,mShield);
 		MV1DrawModel(hShield);
 	}
-
-	//if (hPIcon > 0) { // モデルがロードされていれば
-	//	DrawGraph(300, 300, hPIcon, TRUE);
-	//};
 
 	// サーベルの刃は、(0,0,0)～(0,-150,0)にある。これにmSabelをかけると、今の座標が手に入る
 	/*DrawLine3D(VGet(0, 0, 0) * hBlade, VGet(0, -150, 0) * hBlade, GetColor(255, 0, 0));*/

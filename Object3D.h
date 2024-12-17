@@ -5,6 +5,33 @@
 const int z = 11;
 const int x = 11;
 
+/// <summary>
+/// 
+/// </summary>
+/// <param name="_handle"> ƒnƒ“ƒhƒ‹ </param>
+/// <param name="type"> graph : 0 , model : 1</param>
+inline void DEL(int _handle ,int type) {
+	switch (type) {
+	case 0:
+	{
+		if (_handle > 0) {
+			DeleteGraph(_handle);
+			_handle = -1;
+		}
+		break;
+	}
+	case 1: 
+	{
+		if (_handle > 0) {
+			MV1DeleteModel(_handle);
+			_handle = -1;
+		}
+		break;
+	}
+	default:
+		break;
+	}
+}
 
 struct SIZE_2D {
 	int x , y;

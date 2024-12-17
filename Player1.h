@@ -1,6 +1,19 @@
 #pragma once
 #include "Object3D.h"
 
+struct MainTrigger {
+	int mt1, mt2, mt3, mt4;
+};
+
+struct SubTrigger {
+	int st1, st2, st3, st4;
+};
+
+struct MyTrigger {
+	MainTrigger Main;
+	SubTrigger Sub;
+};
+
 //class Tile;
 class Icon;
 
@@ -41,5 +54,6 @@ private:
 
 	CHARACTER_STATUS cStatus;
 	
+	MyTrigger Trigger;
 };
 

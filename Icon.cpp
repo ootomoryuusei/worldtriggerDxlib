@@ -61,6 +61,10 @@ Icon::~Icon()
 		DeleteGraph(hTileFrame);
 		hTileFrame = -1;
 	}
+	if (hPIcon > 0) {
+		DeleteGraph(hPIcon);
+		hPIcon = -1;
+	}
 }
 
 void Icon::Update()
