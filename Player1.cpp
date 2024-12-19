@@ -147,3 +147,28 @@ void Player1::SetMyTrigger(MyTrigger _trigger)
 	Trigger = _trigger;
 }
 
+void Player1::DrawMyTrigger(MyTrigger _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix)
+{
+	switch (_trigger.Main.mt1)
+	{
+	case FREE:
+	{
+
+	}
+	case MOONBLADE:
+	{
+
+	}
+	case SHIELD:
+	{
+
+	}
+	case ASTEROID:
+	{
+
+	}
+	default:
+		break;
+	}
+}
+

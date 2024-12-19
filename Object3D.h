@@ -10,6 +10,7 @@ const int ASTEROID = 503;
 const int z = 11;
 const int x = 11;
 
+
 struct MainTrigger {
 	int mt1, mt2, mt3, mt4;
 };
@@ -22,6 +23,26 @@ struct MyTrigger {
 	MainTrigger Main;
 	SubTrigger Sub;
 };
+
+struct SIZE_2D {
+	int x, y;
+	int halfX, halfY;
+};
+
+struct POSITION {
+	int x, y;
+};
+
+struct TILEDATA {
+	VECTOR position;
+	int num;
+};
+
+struct CHARACTER_STATUS
+{
+	int move, attack, speed, defense;
+};
+
 
 /// <summary>
 /// 
@@ -78,24 +99,6 @@ inline void IsLoaded(int _handle, MATRIX _matrix , int type = 1) {
 	}
 }
 
-struct SIZE_2D {
-	int x , y;
-	int halfX, halfY;
-};
-
-struct POSITION {
-	int x, y;
-};
-
-struct TILEDATA {
-	VECTOR position;
-	int num;
-};
-
-struct CHARACTER_STATUS
-{
-	int move, attack, speed, defense;
-};
 
 
 inline float ToRad(float deg) { return deg * XM_PI / 180.0f; }

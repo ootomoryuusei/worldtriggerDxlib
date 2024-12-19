@@ -21,7 +21,7 @@ public:
 
 	void SetMyTrigger(MyTrigger _trigger);
 
-	void DrawMyTrigger(MyTrigger _trigger);
+	void DrawMyTrigger(MyTrigger _trigger,MATRIX _leftMatrix,MATRIX _rightMatrix);
 private:
 	int hBlade; // サーベルモデルのデータ
 
