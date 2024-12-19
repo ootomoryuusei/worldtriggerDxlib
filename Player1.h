@@ -1,18 +1,7 @@
 #pragma once
 #include "Object3D.h"
 
-struct MainTrigger {
-	int mt1, mt2, mt3, mt4;
-};
 
-struct SubTrigger {
-	int st1, st2, st3, st4;
-};
-
-struct MyTrigger {
-	MainTrigger Main;
-	SubTrigger Sub;
-};
 
 //class Tile;
 class Icon;
@@ -29,6 +18,10 @@ public:
 	CHARACTER_STATUS GetCStatus() { return cStatus; }
 
 	VECTOR GetPosition() { return position; }
+
+	void SetMyTrigger(MyTrigger _trigger);
+
+	void DrawMyTrigger(MyTrigger _trigger);
 private:
 	int hBlade; // サーベルモデルのデータ
 

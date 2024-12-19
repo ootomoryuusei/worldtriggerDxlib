@@ -111,30 +111,39 @@ void Player1::Draw()
 	assert(RightHand >= 0);
 	MATRIX mBlade = MV1GetFrameLocalWorldMatrix(hModel, RightHand);
 
+	IsLoaded(hBlade, mBlade);
 
-    if (hBlade > 0) { // モデルがロードされていれば
-		// サーベルを描画する
-		MV1SetMatrix(hBlade, mBlade);
-		MV1DrawModel(hBlade);
-	};
+ //   if (hBlade > 0) { // モデルがロードされていれば
+	//	// サーベルを描画する
+	//	MV1SetMatrix(hBlade, mBlade);
+	//	MV1DrawModel(hBlade);
+	//};
 
 	int LeftHand = MV1SearchFrame(hModel, "LeftHand");
 	assert(LeftHand >= 0);
 	MATRIX mLeftHand = MV1GetFrameLocalWorldMatrix(hModel, LeftHand);
 	MATRIX mAsteroid = Object3D::ChangeFLOAT3ToMATRIX(VGet(mLeftHand.m[3][0],mLeftHand.m[3][1] - 0.2f, mLeftHand.m[3][2]),rotation);
 
-	if (hAsteroid > 0) {
+	IsLoaded(hAsteroid,mAsteroid);
+
+	/*if (hAsteroid > 0) {
 		MV1SetMatrix(hAsteroid, mAsteroid);
 		MV1DrawModel(hAsteroid);
-	}
+	}*/
 
 	MATRIX mShield = Object3D::ChangeFLOAT3ToMATRIX({ position.x,position.y,position.z - 1.0f }, rotation);
-	if (hShield > 0) {
+	IsLoaded(hShield, mShield);
+	/*if (hShield > 0) {
 		MV1SetMatrix(hShield,mShield);
 		MV1DrawModel(hShield);
-	}
+	}*/
 
 	// サーベルの刃は、(0,0,0)～(0,-150,0)にある。これにmSabelをかけると、今の座標が手に入る
 	/*DrawLine3D(VGet(0, 0, 0) * hBlade, VGet(0, -150, 0) * hBlade, GetColor(255, 0, 0));*/
+}
+
+void Player1::SetMyTrigger(MyTrigger _trigger)
+{
+	Trigger = _trigger;
 }
 

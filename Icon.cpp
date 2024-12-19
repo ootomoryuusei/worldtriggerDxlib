@@ -49,6 +49,8 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 	GetGraphSize(hTile, &TgraphSize.x, &TgraphSize.y);
 	TgraphSize.halfX = TgraphSize.x / 2.0f;
 	TgraphSize.halfY = TgraphSize.y / 2.0f;
+
+	SetTrigger = { { MOONBLADE, SHIELD, FREE, FREE },{SHIELD,ASTEROID,FREE,FREE} };
 }
 
 Icon::~Icon()
@@ -129,6 +131,8 @@ void Icon::Update()
 	if (size >= getStatus.move) {
 		compWay = true;
 	}
+
+	pl1->SetMyTrigger(SetTrigger);
 }
 
 void Icon::Draw()
@@ -161,10 +165,7 @@ void Icon::Draw()
 
 	DrawGraph(pTile[cY][cX].position.x, pTile[cY][cX].position.y, hTileFrame, TRUE);
 
-	/*DrawGraph(0,0 ,hATIcon, TRUE);*/
+	DrawGraph(0, 0, hSelectIcon, TRUE);
 
-	/*DrawGraph(0, 0, hSelectIcon, TRUE);*/
-
-	
-	
+	DrawGraph(0, 0, hATIcon, TRUE);
 }

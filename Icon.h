@@ -44,5 +44,7 @@ private:
 	SIZE_2D PgraphSize;
 	SIZE_2D MCgraphSize;
 	SIZE_2D TgraphSize;
+
+	MyTrigger SetTrigger;
 };
 

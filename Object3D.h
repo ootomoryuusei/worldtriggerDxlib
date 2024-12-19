@@ -2,8 +2,26 @@
 // GameObject→Object3D→Player/Groundの関係にする
 #include "Engine/GameObject.h"
 
+const int FREE = 500;
+const int MOONBLADE = 501;
+const int SHIELD = 502;
+const int ASTEROID = 503;
+
 const int z = 11;
 const int x = 11;
+
+struct MainTrigger {
+	int mt1, mt2, mt3, mt4;
+};
+
+struct SubTrigger {
+	int st1, st2, st3, st4;
+};
+
+struct MyTrigger {
+	MainTrigger Main;
+	SubTrigger Sub;
+};
 
 /// <summary>
 /// 
@@ -25,6 +43,33 @@ inline void DEL(int _handle ,int type) {
 		if (_handle > 0) {
 			MV1DeleteModel(_handle);
 			_handle = -1;
+		}
+		break;
+	}
+	default:
+		break;
+	}
+}
+
+/// <summary>
+/// モデルがロードされていれば
+/// </summary>
+/// <param name="_handle"> ハンドル</param>
+/// <param name="_matrix"> マトリクス </param>
+/// <param name="type"> graph : 0 , model : 1 </param>
+inline void IsLoaded(int _handle, MATRIX _matrix , int type = 1) {
+	switch (type) {
+	case 0:
+	{
+		if (_handle > 0) {
+		}
+		break;
+	}
+	case 1:
+	{
+		if (_handle > 0) {
+			MV1SetMatrix(_handle,_matrix);
+			MV1DrawModel(_handle);
 		}
 		break;
 	}
