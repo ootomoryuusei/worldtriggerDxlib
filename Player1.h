@@ -19,9 +19,9 @@ public:
 
 	VECTOR GetPosition() { return position; }
 
-	void SetMyTrigger(MyTrigger _trigger);
+	void SetMyTrigger(MYTRIGGER _trigger);
 
-	void DrawMyTrigger(MyTrigger _trigger,MATRIX _leftMatrix,MATRIX _rightMatrix);
+	void DrawMyTrigger(MYTRIGGER _trigger,MATRIX _leftMatrix,MATRIX _rightMatrix);
 private:
 	int hBlade; // サーベルモデルのデータ
 
@@ -47,6 +47,8 @@ private:
 
 	CHARACTER_STATUS cStatus;
 	
-	MyTrigger Trigger;
+	MYTRIGGER Trigger;
+
+
 };
 

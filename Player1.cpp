@@ -31,7 +31,7 @@ Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1),hShield(-1)
 	flame = 1.0f / 60.0f;
 	time = 0.0f;
 
-	Trigger = { {0,0,0,0},{0,0,0,0} };
+	Trigger = {};
 }
 
 Player1::~Player1()
@@ -109,66 +109,82 @@ void Player1::Draw()
 
 	int RightHand = MV1SearchFrame(hModel, "RightHand");
 	assert(RightHand >= 0);
-	MATRIX mBlade = MV1GetFrameLocalWorldMatrix(hModel, RightHand);
-
-	IsLoaded(hBlade, mBlade);
-
- //   if (hBlade > 0) { // モデルがロードされていれば
-	//	// サーベルを描画する
-	//	MV1SetMatrix(hBlade, mBlade);
-	//	MV1DrawModel(hBlade);
-	//};
+	MATRIX mRightHand = MV1GetFrameLocalWorldMatrix(hModel, RightHand);
+	//MATRIX mBlade = MV1GetFrameLocalWorldMatrix(hModel, RightHand);
 
 	int LeftHand = MV1SearchFrame(hModel, "LeftHand");
 	assert(LeftHand >= 0);
 	MATRIX mLeftHand = MV1GetFrameLocalWorldMatrix(hModel, LeftHand);
 	MATRIX mAsteroid = Object3D::ChangeFLOAT3ToMATRIX(VGet(mLeftHand.m[3][0],mLeftHand.m[3][1] - 0.2f, mLeftHand.m[3][2]),rotation);
 
-	IsLoaded(hAsteroid,mAsteroid);
-
-	/*if (hAsteroid > 0) {
-		MV1SetMatrix(hAsteroid, mAsteroid);
-		MV1DrawModel(hAsteroid);
-	}*/
-
 	MATRIX mShield = Object3D::ChangeFLOAT3ToMATRIX({ position.x,position.y,position.z - 1.0f }, rotation);
-	IsLoaded(hShield, mShield);
-	/*if (hShield > 0) {
-		MV1SetMatrix(hShield,mShield);
-		MV1DrawModel(hShield);
-	}*/
+
+	DrawMyTrigger(Trigger, mLeftHand, mRightHand);
 
 	// サーベルの刃は、(0,0,0)～(0,-150,0)にある。これにmSabelをかけると、今の座標が手に入る
 	/*DrawLine3D(VGet(0, 0, 0) * hBlade, VGet(0, -150, 0) * hBlade, GetColor(255, 0, 0));*/
 }
 
-void Player1::SetMyTrigger(MyTrigger _trigger)
+void Player1::SetMyTrigger(MYTRIGGER _trigger)
 {
 	Trigger = _trigger;
 }
 
-void Player1::DrawMyTrigger(MyTrigger _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix)
+void Player1::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix)
 {
-	switch (_trigger.Main.mt1)
-	{
-	case FREE:
-	{
+	for (int i = 0; i < 4; i++) {
+		if (_trigger.Main[i].IsSelected) {
+			switch ( _trigger.Main[i].trigger)
+			{
+			case FREE:
+			{
 
-	}
-	case MOONBLADE:
-	{
+			}
+			case MOONBLADE:
+			{
+				IsLoaded(hBlade,_rightMatrix);
+				break;
+			}
+			case SHIELD:
+			{
+				IsLoaded(hShield,_rightMatrix);
+				break;
+			}
+			case ASTEROID:
+			{
+				IsLoaded(hAsteroid,_rightMatrix);
+				break;
+			}
+			default:
+				break;
+			}
+		}
 
-	}
-	case SHIELD:
-	{
+		if (_trigger.Sub[i].IsSelected) {
+			switch (_trigger.Sub[i].trigger)
+			{
+			case FREE:
+			{
 
-	}
-	case ASTEROID:
-	{
-
-	}
-	default:
-		break;
+			}
+			case MOONBLADE:
+			{
+				IsLoaded(hBlade, _leftMatrix);
+				break;
+			}
+			case SHIELD:
+			{
+				IsLoaded(hShield, _leftMatrix);
+				break;
+			}
+			case ASTEROID:
+			{
+				IsLoaded(hAsteroid, _leftMatrix);
+				break;
+			}
+			default:
+				break;
+			}
+		}
 	}
 }
-

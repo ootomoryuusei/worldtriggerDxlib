@@ -11,17 +11,14 @@ const int z = 11;
 const int x = 11;
 
 
-struct MainTrigger {
-	int mt1, mt2, mt3, mt4;
+struct TRIGGER {
+	int trigger;
+	bool IsSelected;
 };
 
-struct SubTrigger {
-	int st1, st2, st3, st4;
-};
-
-struct MyTrigger {
-	MainTrigger Main;
-	SubTrigger Sub;
+struct MYTRIGGER {
+	TRIGGER Main[4];
+	TRIGGER Sub[4];
 };
 
 struct SIZE_2D {

@@ -40,7 +40,8 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 	cY = 0;
 	compWay = false;
 
-	GetGraphSize(hPIcon, &PgraphSize.x,&PgraphSize.y);
+	//アイコンの画像サイズの取得とセット
+	GetGraphSize(hPIcon, &PgraphSize.x, &PgraphSize.y);
 	PgraphSize.halfX = PgraphSize.x / 2.0f;
 	PgraphSize.halfY = PgraphSize.y / 2.0f;
 	GetGraphSize(hMainCircle, &MCgraphSize.x, &MCgraphSize.y);
@@ -50,7 +51,9 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 	TgraphSize.halfX = TgraphSize.x / 2.0f;
 	TgraphSize.halfY = TgraphSize.y / 2.0f;
 
-	SetTrigger = { { MOONBLADE, SHIELD, FREE, FREE },{SHIELD,ASTEROID,FREE,FREE} };
+
+	SetTrigger = { { {ASTEROID,true},{FREE,false},{FREE,false},{SHIELD,false} }, //Mainの初期化,
+		{ {MOONBLADE,false},{FREE,false},{SHIELD,false},{ ASTEROID,true} } }; //Subの初期化
 }
 
 Icon::~Icon()
