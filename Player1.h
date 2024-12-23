@@ -49,6 +49,6 @@ private:
 	
 	MYTRIGGER Trigger;
 
-
+	
 };
 

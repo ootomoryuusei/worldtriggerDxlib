@@ -23,6 +23,7 @@ private:
 	int hSelectIcon;
 
 	int hMainCircle;
+	int hSubCircle;
 
 	int hATIcon;
 	int hDTIcon;
@@ -41,10 +42,16 @@ private:
 
 	CHARACTER_STATUS getStatus;
 
-	SIZE_2D PgraphSize;
-	SIZE_2D MCgraphSize;
-	SIZE_2D TgraphSize;
+	SIZE_2D PgraphSize; //プレイヤーアイコンの画像サイズ
+	SIZE_2D MCgraphSize; //メインサークルの画像サイズ
+	SIZE_2D SCgraphSize; //サブサークルの画像サイズ
+	SIZE_2D TgraphSize; //タイルの画像サイズ
 
 	MYTRIGGER SetTrigger;
+
+	int MouseX, MouseY;
+	int StringCr, BoxCr;
+
+	void KeyInput();
 };
 

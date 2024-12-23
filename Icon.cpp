@@ -17,6 +17,8 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 	assert(hSelectIcon >= 0);
 	hMainCircle = LoadGraph("Assets//Image//MainTriggerCircle.png");
 	assert(hMainCircle >= 0);
+	hSubCircle = LoadGraph("Assets//Image//SubTriggerCircle.png");
+	assert(hSubCircle >= 0);
 
 	int count = 0;
 	float xpos = 1100;
@@ -47,6 +49,9 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 	GetGraphSize(hMainCircle, &MCgraphSize.x, &MCgraphSize.y);
 	MCgraphSize.halfX = MCgraphSize.x / 2.0f;
 	MCgraphSize.halfY = MCgraphSize.y / 2.0f;
+	GetGraphSize(hSubCircle, &SCgraphSize.x, &SCgraphSize.y);
+	SCgraphSize.halfX = SCgraphSize.x / 2.0f;
+	SCgraphSize.halfY = SCgraphSize.y / 2.0f;
 	GetGraphSize(hTile, &TgraphSize.x, &TgraphSize.y);
 	TgraphSize.halfX = TgraphSize.x / 2.0f;
 	TgraphSize.halfY = TgraphSize.y / 2.0f;
@@ -70,9 +75,80 @@ Icon::~Icon()
 		DeleteGraph(hPIcon);
 		hPIcon = -1;
 	}
+	DEL(hSubCircle, 0);
 }
 
 void Icon::Update()
+{
+	SetMouseDispFlag(true);
+
+	GetMousePoint(&MouseX, &MouseY);
+
+	Player1* pl1 = GetParent()->FindGameObject<Player1>();
+	Tile* tile = GetParent()->FindGameObject<Tile>();
+	VECTOR Tpostion;
+	VECTOR Ppostion = pl1->GetPosition();
+
+	for (int i = 0; i < z; i++) {
+		for (int j = 0; j < x; j++) {
+			Tpostion.x = tile->GetTilesData(i, j).position.x;
+			Tpostion.y = tile->GetTilesData(i, j).position.y;
+			Tpostion.z = tile->GetTilesData(i, j).position.z;
+			if (Tpostion.x == Ppostion.x && Tpostion.y == Ppostion.y && Tpostion.z == Ppostion.z) {
+				POSITION MCircle;
+				POSITION SCircle;
+				MCircle.x = pTile[i][j].position.x;
+				MCircle.y = pTile[i][j].position.y;
+				SCircle.x = pTile[i][j].position.x;
+				SCircle.y = pTile[i][j].position.y;
+
+				POSITION MCVec = { (MCircle.x + TgraphSize.halfX - MCircle.x) ,(MCircle.y + TgraphSize.halfY - MCircle.y)};
+				POSITION SCVec = { (SCircle.x + TgraphSize.halfX - SCircle.x) ,(SCircle.y + TgraphSize.halfY - SCircle.y) };
+			}
+		}
+	}
+	
+
+	KeyInput();
+}
+
+void Icon::Draw()
+{
+	Player1* pl1 = GetParent()->FindGameObject<Player1>();
+	Tile* tile = GetParent()->FindGameObject<Tile>();
+	VECTOR Tpostion;
+	VECTOR Ppostion = pl1->GetPosition();
+
+	for (int i = 0; i < z; i++) {
+		for (int j = 0; j < x; j++) {
+			DrawGraph(pTile[i][j].position.x, pTile[i][j].position.y, hTile, TRUE);
+		}
+	}
+
+	for (int i = 0; i < z; i++) {
+		for (int j = 0; j < x; j++) {
+			Tpostion.x = tile->GetTilesData(i, j).position.x;
+			Tpostion.y = tile->GetTilesData(i, j).position.y;
+			Tpostion.z = tile->GetTilesData(i, j).position.z;
+			if (Tpostion.x == Ppostion.x && Tpostion.y == Ppostion.y && Tpostion.z == Ppostion.z) {
+				DrawCircleGauge(pTile[i][j].position.x + TgraphSize.halfX, pTile[i][j].position.y + TgraphSize.halfY, 15.0, hMainCircle, -15.0,1.0f);
+				DrawCircleGauge(pTile[i][j].position.x + TgraphSize.halfX, pTile[i][j].position.y + TgraphSize.halfY, 15.0, hSubCircle, -15.0, 1.0f);
+				DrawGraph(pTile[i][j].position.x + (TgraphSize.halfX - PgraphSize.halfX), pTile[i][j].position.y + (TgraphSize.halfY - PgraphSize.halfY), hPIcon, TRUE);
+				
+			}
+		}
+	}
+
+	
+
+	DrawGraph(pTile[cY][cX].position.x, pTile[cY][cX].position.y, hTileFrame, TRUE);
+
+	DrawGraph(0, 0, hSelectIcon, TRUE);
+
+	DrawGraph(0, 0, hATIcon, TRUE);
+}
+
+void Icon::KeyInput()
 {
 	Player1* pl1 = GetParent()->FindGameObject<Player1>();
 	getStatus = pl1->GetCStatus();
@@ -136,39 +212,4 @@ void Icon::Update()
 	}
 
 	pl1->SetMyTrigger(SetTrigger);
-}
-
-void Icon::Draw()
-{
-	Player1* pl1 = GetParent()->FindGameObject<Player1>();
-	Tile* tile = GetParent()->FindGameObject<Tile>();
-	VECTOR Tpostion;
-	VECTOR Ppostion = pl1->GetPosition();
-
-	for (int i = 0; i < z; i++) {
-		for (int j = 0; j < x; j++) {
-			DrawGraph(pTile[i][j].position.x, pTile[i][j].position.y, hTile, TRUE);
-		}
-	}
-
-	for (int i = 0; i < z; i++) {
-		for (int j = 0; j < x; j++) {
-			Tpostion.x = tile->GetTilesData(i, j).position.x;
-			Tpostion.y = tile->GetTilesData(i, j).position.y;
-			Tpostion.z = tile->GetTilesData(i, j).position.z;
-			if (Tpostion.x == Ppostion.x && Tpostion.y == Ppostion.y && Tpostion.z == Ppostion.z) {
-				DrawCircleGauge(pTile[i][j].position.x + TgraphSize.halfX, pTile[i][j].position.y + TgraphSize.halfY, 15.0, hMainCircle, -15.0,1.0f);
-				DrawGraph(pTile[i][j].position.x + (TgraphSize.halfX - PgraphSize.halfX), pTile[i][j].position.y + (TgraphSize.halfY - PgraphSize.halfY), hPIcon, TRUE);
-				
-			}
-		}
-	}
-
-	
-
-	DrawGraph(pTile[cY][cX].position.x, pTile[cY][cX].position.y, hTileFrame, TRUE);
-
-	DrawGraph(0, 0, hSelectIcon, TRUE);
-
-	DrawGraph(0, 0, hATIcon, TRUE);
 }
