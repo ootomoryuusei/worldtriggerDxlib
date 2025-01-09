@@ -57,8 +57,8 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 	TgraphSize.halfY = TgraphSize.y / 2.0f;
 
 
-	SetTrigger = { { {ASTEROID,true},{FREE,false},{FREE,false},{SHIELD,false} }, //Main‚Ì‰Šú‰»,
-		{ {MOONBLADE,false},{FREE,false},{SHIELD,false},{ ASTEROID,true} } }; //Sub‚Ì‰Šú‰»
+	SetTrigger = { { {ASTEROID,false},{MOONBLADE,true},{FREE,false},{SHIELD,false} }, //Main‚Ì‰Šú‰»,
+		{ {MOONBLADE,true},{FREE,false},{SHIELD,false},{ ASTEROID,false} } }; //Sub‚Ì‰Šú‰»
 }
 
 Icon::~Icon()
@@ -83,56 +83,58 @@ void Icon::Update()
 	SetMouseDispFlag(true);
 
 	GetMousePoint(&MouseX, &MouseY);
-	POSITION mousePos = { MouseX,MouseY };
+	POSITION_F mousePos = { MouseX,MouseY };
 
 	Player1* pl1 = GetParent()->FindGameObject<Player1>();
 	Tile* tile = GetParent()->FindGameObject<Tile>();
-	VECTOR Tpostion;
-	VECTOR Ppostion = pl1->GetPosition();
+	VECTOR Tposition;
+	VECTOR Pposition = pl1->GetPosition();
 
-	VECTOR p12,p24,p43,p31;
-
-	VECTOR p1m,p2m,p3m,p4m;
+	POSITION_F P1, P2, P3, P4;
+	VECTOR P1P2, P2P3, P3P4, P4P1;
+	VECTOR P1P, P2P, P3P, P4P;
 
 	for (int i = 0; i < z; i++) {
 		for (int j = 0; j < x; j++) {
-			Tpostion.x = tile->GetTilesData(i, j).position.x;
-			Tpostion.y = tile->GetTilesData(i, j).position.y;
-			Tpostion.z = tile->GetTilesData(i, j).position.z;
-			if (Tpostion.x == Ppostion.x && Tpostion.y == Ppostion.y && Tpostion.z == Ppostion.z) {
-				POSITION MCircle;
-				POSITION SCircle;
+			Tposition.x = tile->GetTilesData(i, j).position.x;
+			Tposition.y = tile->GetTilesData(i, j).position.y;
+			Tposition.z = tile->GetTilesData(i, j).position.z;
+			if (Tposition.x == Pposition.x && Tposition.y == Pposition.y && Tposition.z == Pposition.z) {
+				POSITION_F MCircle;
+				POSITION_F SCircle;
 				MCircle.x = pTile[i][j].position.x;
 				MCircle.y = pTile[i][j].position.y;
 				SCircle.x = pTile[i][j].position.x;
 				SCircle.y = pTile[i][j].position.y;
 
-				POSITION P1, P2, P3, P4;
-				P1 = { MCircle.x ,MCircle.y };
-				P2 = { (MCircle.x + TgraphSize.x) ,MCircle.y};
-				P3 = { (MCircle.x + TgraphSize.x) ,(MCircle.y + TgraphSize.y) };
-				P4 =  { MCircle.x, (MCircle.y + TgraphSize.y) };
-				p12 = { (float)P2.x - P1.x,(float)P2.y - P1.y ,1};
-				p24 = { (float)P4.x - P2.x,(float)P4.y - P2.y,1 };
-				p43 = { (float)P3.x - P4.x ,(float)P3.y - P4.y ,1};
-				p31 = { (float)P1.x - P3.x,(float)P1.y - P3.y,1 };
+				P1 = { MCircle.x,MCircle.y };
+				P2 = { MCircle.x + TgraphSize.x,MCircle.y };
+				P3 = { MCircle.x + TgraphSize.x,MCircle.y + TgraphSize.y};
+				P4 = { MCircle.x ,MCircle.y +TgraphSize.y};
 
-				p1m = { (float)mousePos.x - P1.x,(float)mousePos.y - P1.y ,1 };
-				p2m = { (float)mousePos.x - P2.x,(float)mousePos.y - P2.y ,1 };
-			    p3m = { (float)mousePos.x - P3.x,(float)mousePos.y - P3.y ,1 };
-			    p4m = { (float)mousePos.x - P4.x,(float)mousePos.y - P4.y ,1 };
-				
+				P1P2 = { P2.x - P1.x,P2.y - P1.y };
+				P2P3 = { P3.x - P2.x,P3.y - P2.y };
+				P3P4 = { P4.x - P3.x,P4.y - P3.y };
+				P4P1 = { P1.x - P4.x,P1.y - P4.y };
 
-				POSITION SCVec = { (SCircle.x + TgraphSize.halfX - SCircle.x) ,(SCircle.y + TgraphSize.halfY - SCircle.y) };
+				P1P = { mousePos.x - P1.x,mousePos.y - P1.y };
+				P2P = { mousePos.x - P2.x,mousePos.y - P2.y };
+				P3P = { mousePos.x - P3.x,mousePos.y - P3.y };
+				P4P = { mousePos.x - P4.x,mousePos.y - P4.y };
 			}
 		}
 	}
-
-	if (VCross(p12, p1m).z < 0 && VCross(p24, p2m).z < 0 && VCross(p43, p3m).z < 0 && VCross(p31, p4m).z < 0) {
-		
+	
+	if ((VCross(P1P2, P1P).x < 0 && VCross(P1P2, P1P).y < 0) && (VCross(P2P3, P2P).x < 0 && VCross(P2P3, P2P).y < 0)
+		&& (VCross(P3P4, P3P).x < 0 && VCross(P3P4, P3P).y < 0) && (VCross(P4P1, P4P).x < 0 && VCross(P4P1, P4P).y < 0)) 
+	{
+		CircleSelected = true;
 	}
 
-
+	ImGui::Begin("rotation");
+	ImGui::InputFloat("X", &mousePos.x);
+	ImGui::InputFloat("Y", &mousePos.y);
+	ImGui::End();
 	KeyInput();
 }
 
@@ -140,8 +142,8 @@ void Icon::Draw()
 {
 	Player1* pl1 = GetParent()->FindGameObject<Player1>();
 	Tile* tile = GetParent()->FindGameObject<Tile>();
-	VECTOR Tpostion;
-	VECTOR Ppostion = pl1->GetPosition();
+	VECTOR Tposition;
+	VECTOR Pposition = pl1->GetPosition();
 
 	for (int i = 0; i < z; i++) {
 		for (int j = 0; j < x; j++) {
@@ -151,10 +153,10 @@ void Icon::Draw()
 
 	for (int i = 0; i < z; i++) {
 		for (int j = 0; j < x; j++) {
-			Tpostion.x = tile->GetTilesData(i, j).position.x;
-			Tpostion.y = tile->GetTilesData(i, j).position.y;
-			Tpostion.z = tile->GetTilesData(i, j).position.z;
-			if (Tpostion.x == Ppostion.x && Tpostion.y == Ppostion.y && Tpostion.z == Ppostion.z) {
+			Tposition.x = tile->GetTilesData(i, j).position.x;
+			Tposition.y = tile->GetTilesData(i, j).position.y;
+			Tposition.z = tile->GetTilesData(i, j).position.z;
+			if (Tposition.x == Pposition.x && Tposition.y == Pposition.y && Tposition.z == Pposition.z) {
 				DrawCircleGauge(pTile[i][j].position.x + TgraphSize.halfX, pTile[i][j].position.y + TgraphSize.halfY, 15.0, hMainCircle, -15.0,1.0f);
 				DrawCircleGauge(pTile[i][j].position.x + TgraphSize.halfX, pTile[i][j].position.y + TgraphSize.halfY, 15.0, hSubCircle, -15.0, 1.0f);
 				DrawGraph(pTile[i][j].position.x + (TgraphSize.halfX - PgraphSize.halfX), pTile[i][j].position.y + (TgraphSize.halfY - PgraphSize.halfY), hPIcon, TRUE);
@@ -162,8 +164,6 @@ void Icon::Draw()
 			}
 		}
 	}
-
-	
 
 	DrawGraph(pTile[cY][cX].position.x, pTile[cY][cX].position.y, hTileFrame, TRUE);
 

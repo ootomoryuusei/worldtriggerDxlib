@@ -36,6 +36,8 @@ private:
 	bool prevKey;
 	bool compWay;
 
+	bool CircleSelected;
+
 	TILEDATA pTile[z][x];
 
 	std::vector<POSITION> way;
