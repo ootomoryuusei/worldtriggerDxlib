@@ -83,11 +83,16 @@ void Icon::Update()
 	SetMouseDispFlag(true);
 
 	GetMousePoint(&MouseX, &MouseY);
+	POSITION mousePos = { MouseX,MouseY };
 
 	Player1* pl1 = GetParent()->FindGameObject<Player1>();
 	Tile* tile = GetParent()->FindGameObject<Tile>();
 	VECTOR Tpostion;
 	VECTOR Ppostion = pl1->GetPosition();
+
+	VECTOR p12,p24,p43,p31;
+
+	VECTOR p1m,p2m,p3m,p4m;
 
 	for (int i = 0; i < z; i++) {
 		for (int j = 0; j < x; j++) {
@@ -102,12 +107,31 @@ void Icon::Update()
 				SCircle.x = pTile[i][j].position.x;
 				SCircle.y = pTile[i][j].position.y;
 
-				POSITION MCVec = { (MCircle.x + TgraphSize.halfX - MCircle.x) ,(MCircle.y + TgraphSize.halfY - MCircle.y)};
+				POSITION P1, P2, P3, P4;
+				P1 = { MCircle.x ,MCircle.y };
+				P2 = { (MCircle.x + TgraphSize.x) ,MCircle.y};
+				P3 = { (MCircle.x + TgraphSize.x) ,(MCircle.y + TgraphSize.y) };
+				P4 =  { MCircle.x, (MCircle.y + TgraphSize.y) };
+				p12 = { (float)P2.x - P1.x,(float)P2.y - P1.y ,1};
+				p24 = { (float)P4.x - P2.x,(float)P4.y - P2.y,1 };
+				p43 = { (float)P3.x - P4.x ,(float)P3.y - P4.y ,1};
+				p31 = { (float)P1.x - P3.x,(float)P1.y - P3.y,1 };
+
+				p1m = { (float)mousePos.x - P1.x,(float)mousePos.y - P1.y ,1 };
+				p2m = { (float)mousePos.x - P2.x,(float)mousePos.y - P2.y ,1 };
+			    p3m = { (float)mousePos.x - P3.x,(float)mousePos.y - P3.y ,1 };
+			    p4m = { (float)mousePos.x - P4.x,(float)mousePos.y - P4.y ,1 };
+				
+
 				POSITION SCVec = { (SCircle.x + TgraphSize.halfX - SCircle.x) ,(SCircle.y + TgraphSize.halfY - SCircle.y) };
 			}
 		}
 	}
-	
+
+	if (VCross(p12, p1m).z < 0 && VCross(p24, p2m).z < 0 && VCross(p43, p3m).z < 0 && VCross(p31, p4m).z < 0) {
+		
+	}
+
 
 	KeyInput();
 }
