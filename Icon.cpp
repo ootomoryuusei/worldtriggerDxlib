@@ -3,6 +3,17 @@
 #include"Player1.h"
 #include "ImGui/imgui.h"
 
+namespace {
+	POSITION_F MCircle;
+	POSITION_F SCircle;
+
+	POSITION_F P1, P2, P3, P4;
+	VECTOR P1P2, P2P3, P3P4, P4P1;
+	VECTOR P1P, P2P, P3P, P4P;
+
+	POSITION_F TCenter;
+}
+
 Icon::Icon(GameObject* parent) : Object3D(parent)
 {
 	hTile = LoadGraph("Assets//Image//Tile.png");
@@ -56,6 +67,8 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 	TgraphSize.halfX = TgraphSize.x / 2.0f;
 	TgraphSize.halfY = TgraphSize.y / 2.0f;
 
+	StartAngle = -15.0;
+	Angle = 15.0;
 
 	SetTrigger = { { {ASTEROID,false},{MOONBLADE,true},{FREE,false},{SHIELD,false} }, //Mainの初期化,
 		{ {MOONBLADE,true},{FREE,false},{SHIELD,false},{ ASTEROID,false} } }; //Subの初期化
@@ -80,7 +93,7 @@ Icon::~Icon()
 
 void Icon::Update()
 {
-	SetMouseDispFlag(true);
+	SetMouseDispFlag(true); //マウスを表示させるフラグ関数
 
 	GetMousePoint(&MouseX, &MouseY);
 	POSITION_F mousePos = { MouseX,MouseY };
@@ -90,9 +103,7 @@ void Icon::Update()
 	VECTOR Tposition;
 	VECTOR Pposition = pl1->GetPosition();
 
-	POSITION_F P1, P2, P3, P4;
-	VECTOR P1P2, P2P3, P3P4, P4P1;
-	VECTOR P1P, P2P, P3P, P4P;
+	
 
 	for (int i = 0; i < z; i++) {
 		for (int j = 0; j < x; j++) {
@@ -100,17 +111,16 @@ void Icon::Update()
 			Tposition.y = tile->GetTilesData(i, j).position.y;
 			Tposition.z = tile->GetTilesData(i, j).position.z;
 			if (Tposition.x == Pposition.x && Tposition.y == Pposition.y && Tposition.z == Pposition.z) {
-				POSITION_F MCircle;
-				POSITION_F SCircle;
+				
 				MCircle.x = pTile[i][j].position.x;
 				MCircle.y = pTile[i][j].position.y;
 				SCircle.x = pTile[i][j].position.x;
 				SCircle.y = pTile[i][j].position.y;
 
-				P1 = { MCircle.x,MCircle.y };
-				P2 = { MCircle.x + TgraphSize.x,MCircle.y };
-				P3 = { MCircle.x + TgraphSize.x,MCircle.y + TgraphSize.y};
-				P4 = { MCircle.x ,MCircle.y +TgraphSize.y};
+				P1 = { TCenter.x - MCgraphSize.halfX,  TCenter.y -MCgraphSize.halfY}; //左上
+				P2 = { TCenter.x + MCgraphSize.halfX, TCenter.y - MCgraphSize.halfY }; //右上
+				P3 = { TCenter.x + MCgraphSize.halfX , TCenter.y + MCgraphSize.halfY }; //右下
+				P4 = { TCenter.x - MCgraphSize.halfX,TCenter.y + MCgraphSize.halfY }; //左下
 
 				P1P2 = { P2.x - P1.x,P2.y - P1.y };
 				P2P3 = { P3.x - P2.x,P3.y - P2.y };
@@ -124,11 +134,17 @@ void Icon::Update()
 			}
 		}
 	}
-	
-	if ((VCross(P1P2, P1P).x < 0 && VCross(P1P2, P1P).y < 0) && (VCross(P2P3, P2P).x < 0 && VCross(P2P3, P2P).y < 0)
-		&& (VCross(P3P4, P3P).x < 0 && VCross(P3P4, P3P).y < 0) && (VCross(P4P1, P4P).x < 0 && VCross(P4P1, P4P).y < 0)) 
+
+	if (VCross(P1P2, P1P).z >= 0 && VCross(P2P3, P2P).z >= 0 && VCross(P3P4, P3P).z >= 0 && VCross(P4P1, P4P).z >= 0)
 	{
-		CircleSelected = true;
+		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+			StartAngle -= 0.1f;
+			Angle -= 0.1f;
+		}
+		if ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) {
+			StartAngle += 0.1f;
+			Angle += 0.1f;
+		}
 	}
 
 	ImGui::Begin("rotation");
@@ -136,6 +152,8 @@ void Icon::Update()
 	ImGui::InputFloat("Y", &mousePos.y);
 	ImGui::End();
 	KeyInput();
+
+	
 }
 
 void Icon::Draw()
@@ -157,10 +175,15 @@ void Icon::Draw()
 			Tposition.y = tile->GetTilesData(i, j).position.y;
 			Tposition.z = tile->GetTilesData(i, j).position.z;
 			if (Tposition.x == Pposition.x && Tposition.y == Pposition.y && Tposition.z == Pposition.z) {
-				DrawCircleGauge(pTile[i][j].position.x + TgraphSize.halfX, pTile[i][j].position.y + TgraphSize.halfY, 15.0, hMainCircle, -15.0,1.0f);
-				DrawCircleGauge(pTile[i][j].position.x + TgraphSize.halfX, pTile[i][j].position.y + TgraphSize.halfY, 15.0, hSubCircle, -15.0, 1.0f);
-				DrawGraph(pTile[i][j].position.x + (TgraphSize.halfX - PgraphSize.halfX), pTile[i][j].position.y + (TgraphSize.halfY - PgraphSize.halfY), hPIcon, TRUE);
+				TCenter = { pTile[i][j].position.x + TgraphSize.halfX, pTile[i][j].position.y + TgraphSize.halfY };
 				
+				DrawCircleGauge(TCenter.x,TCenter.y, Angle, hMainCircle, StartAngle,1.0f);
+				DrawCircleGauge(TCenter.x,TCenter.y, Angle, hSubCircle, StartAngle, 1.0f);
+				DrawGraph(pTile[i][j].position.x + (TgraphSize.halfX - PgraphSize.halfX), pTile[i][j].position.y + (TgraphSize.halfY - PgraphSize.halfY), hPIcon, TRUE);
+				DrawBoxAA(TCenter.x - MCgraphSize.halfX, TCenter.y -MCgraphSize.halfY,
+					TCenter.x + MCgraphSize.halfX, TCenter.y + MCgraphSize.halfY, GetColor(255, 0, 0), FALSE); //メインサークルのボックス
+				DrawBoxAA(TCenter.x - SCgraphSize.halfX, TCenter.y - SCgraphSize.halfY,
+					TCenter.x + SCgraphSize.halfX, TCenter.y + SCgraphSize.halfY, GetColor(255, 0, 0), FALSE); //サブサークルのボックス
 			}
 		}
 	}
@@ -170,6 +193,8 @@ void Icon::Draw()
 	DrawGraph(0, 0, hSelectIcon, TRUE);
 
 	DrawGraph(0, 0, hATIcon, TRUE);
+
+	
 }
 
 void Icon::KeyInput()

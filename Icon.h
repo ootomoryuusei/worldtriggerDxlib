@@ -36,7 +36,7 @@ private:
 	bool prevKey;
 	bool compWay;
 
-	bool CircleSelected;
+	float StartAngle, Angle;
 
 	TILEDATA pTile[z][x];
 
@@ -51,9 +51,10 @@ private:
 
 	MYTRIGGER SetTrigger;
 
-	int MouseX, MouseY;
-	int StringCr, BoxCr;
+	int MouseX, MouseY; //マウス座標
 
 	void KeyInput();
+
+	void MousePointInBox(POSITION_F _mousePoint);
 };
 
