@@ -138,7 +138,7 @@ void Player1::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _righ
 			{
 			case FREE:
 			{
-
+				break;
 			}
 			case MOONBLADE:
 			{
@@ -165,7 +165,7 @@ void Player1::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _righ
 			{
 			case FREE:
 			{
-
+				break;
 			}
 			case MOONBLADE:
 			{

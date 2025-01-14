@@ -71,8 +71,10 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 	StartAngle = -15.0;
 	Angle = 15.0;
 
-	SetTrigger = { { {ASTEROID,false},{MOONBLADE,true},{FREE,false},{SHIELD,false} }, //Mainの初期化,
-		{ {MOONBLADE,true},{FREE,false},{SHIELD,false},{ ASTEROID,false} } }; //Subの初期化
+	SetTrigger = { { {ASTEROID,false},{MOONBLADE,false},{FREE,false},{SHIELD,true} }, //Mainの初期化,
+		{ {MOONBLADE,false},{FREE,true},{SHIELD,false},{ ASTEROID,false} } }; //Subの初期化
+
+	SetTriggerParam(SetTrigger);
 }
 
 Icon::~Icon()
@@ -143,6 +145,9 @@ void Icon::Update()
 
 void Icon::Draw()
 {
+	int main, sub;
+	main = GetSelectedTrigger(SetTrigger).x;
+	sub = GetSelectedTrigger(SetTrigger).y;
 	Player1* pl1 = GetParent()->FindGameObject<Player1>();
 	Tile* tile = GetParent()->FindGameObject<Tile>();
 	VECTOR Tposition;
@@ -160,13 +165,14 @@ void Icon::Draw()
 			Tposition.y = tile->GetTilesData(i, j).position.y;
 			Tposition.z = tile->GetTilesData(i, j).position.z;
 			if (Tposition.x == Pposition.x && Tposition.y == Pposition.y && Tposition.z == Pposition.z) {
-				DrawCircleGauge(TCenter.x,TCenter.y, Angle, hMainCircle, StartAngle,1.0f);
-				DrawCircleGauge(TCenter.x,TCenter.y, Angle, hSubCircle, StartAngle, 1.0f);
+				
+				DrawCircleGauge(TCenter.x,TCenter.y,SetTrigger.Main[main].angle, hMainCircle,SetTrigger.Main[main].startAngle,SetTrigger.Main[main].rangeSize);
+				DrawCircleGauge(TCenter.x,TCenter.y, SetTrigger.Sub[sub].angle, hSubCircle, SetTrigger.Sub[sub].startAngle,SetTrigger.Sub[sub].rangeSize);
 				DrawGraph(pTile[i][j].position.x + (TgraphSize.halfX - PgraphSize.halfX), pTile[i][j].position.y + (TgraphSize.halfY - PgraphSize.halfY), hPIcon, TRUE);
-				DrawBoxAA(TCenter.x - MCgraphSize.halfX, TCenter.y -MCgraphSize.halfY,
-					TCenter.x + MCgraphSize.halfX, TCenter.y + MCgraphSize.halfY, GetColor(255, 0, 0), FALSE); //メインサークルのボックス
-				DrawBoxAA(TCenter.x - SCgraphSize.halfX, TCenter.y - SCgraphSize.halfY,
-					TCenter.x + SCgraphSize.halfX, TCenter.y + SCgraphSize.halfY, GetColor(255, 0, 0), FALSE); //サブサークルのボックス
+				DrawBoxAA(TCenter.x - MCgraphSize.halfX * SetTrigger.Main[main].rangeSize, TCenter.y - MCgraphSize.halfY * SetTrigger.Main[main].rangeSize,
+					TCenter.x + MCgraphSize.halfX * SetTrigger.Main[main].rangeSize, TCenter.y + MCgraphSize.halfY * SetTrigger.Main[main].rangeSize, GetColor(255, 0, 0), FALSE); //メインサークルのボックス
+				DrawBoxAA(TCenter.x - SCgraphSize.halfX * SetTrigger.Sub[sub].rangeSize, TCenter.y - SCgraphSize.halfY * SetTrigger.Sub[sub].rangeSize,
+					TCenter.x + SCgraphSize.halfX * SetTrigger.Sub[sub].rangeSize, TCenter.y + SCgraphSize.halfY *SetTrigger.Sub[sub].rangeSize, GetColor(0, 0, 255), FALSE); //サブサークルのボックス
 			}
 		}
 	}
@@ -263,4 +269,92 @@ bool Icon::MousePointInBox(POSITION_F _mousePoint, POSITION_F _leftUp, POSITION_
 		return true;
 	}
 	return false;
+}
+
+void Icon::SetTriggerParam(MYTRIGGER& _myTrigger)
+{
+	for (int i = 0; i < 4; i++) {
+		switch (_myTrigger.Main[i].trigger)
+		{
+		case FREE:
+		{
+			_myTrigger.Main[i].angle = 0;
+			_myTrigger.Main[i].startAngle = 0;
+			_myTrigger.Main[i].rangeSize = 0;
+			break;
+		}
+		case MOONBLADE:
+		{
+			_myTrigger.Main[i].angle = 15;
+			_myTrigger.Main[i].startAngle = -15;
+			_myTrigger.Main[i].rangeSize = 1;
+			break;
+		}
+		case SHIELD:
+		{
+			_myTrigger.Main[i].angle = 15;
+			_myTrigger.Main[i].startAngle = -15;
+			_myTrigger.Main[i].rangeSize = 1;
+			break;
+		}
+		case ASTEROID:
+		{
+			_myTrigger.Main[i].angle = 15;
+			_myTrigger.Main[i].startAngle = -15;
+			_myTrigger.Main[i].rangeSize = 1.5;
+			break;
+		}
+		default:
+			break;
+		}
+
+		switch (_myTrigger.Sub[i].trigger)
+		{
+		case FREE:
+		{
+			_myTrigger.Sub[i].angle = 0;
+			_myTrigger.Sub[i].startAngle = 0;
+			_myTrigger.Sub[i].rangeSize = 0;
+			break;
+		}
+		case MOONBLADE:
+		{
+			_myTrigger.Sub[i].angle = 15;
+			_myTrigger.Sub[i].startAngle = -15;
+			_myTrigger.Sub[i].rangeSize = 1;
+			break;
+		}
+		case SHIELD:
+		{
+			_myTrigger.Sub[i].angle = 15;
+			_myTrigger.Sub[i].startAngle = -15;
+			_myTrigger.Sub[i].rangeSize = 1;
+			break;
+		}
+		case ASTEROID:
+		{
+			_myTrigger.Sub[i].angle = 15;
+			_myTrigger.Sub[i].startAngle = -15;
+			_myTrigger.Sub[i].rangeSize = 1.5;
+			break;
+		}
+		default:
+			break;
+		}
+	}
+}
+
+XMINT2 Icon::GetSelectedTrigger(MYTRIGGER _myTrigger)
+{
+	int main, sub;
+	for (int i = 0; i < 4; i++) {
+		if (_myTrigger.Main[i].IsSelected) {
+			main = i;
+		}
+
+		if (_myTrigger.Sub[i].IsSelected) {
+			sub = i;
+		}
+	}
+	return XMINT2(main,sub);
 }

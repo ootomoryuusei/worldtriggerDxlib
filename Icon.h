@@ -56,5 +56,9 @@ private:
 	void KeyInput();
 
 	bool MousePointInBox(POSITION_F _mousePoint, POSITION_F _leftUp, POSITION_F _rightUp, POSITION_F _rightDown,POSITION_F _leftDown);
+
+	void SetTriggerParam(MYTRIGGER& _myTrigger);
+
+	XMINT2 GetSelectedTrigger(MYTRIGGER _myTrigger);
 };
 
