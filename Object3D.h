@@ -7,8 +7,8 @@ const int MOONBLADE = 501;
 const int SHIELD = 502;
 const int ASTEROID = 503;
 
-const int z = 11;
-const int x = 11;
+const int z = 21;
+const int x = 21;
 
 
 struct TRIGGER {

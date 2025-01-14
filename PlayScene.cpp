@@ -12,8 +12,6 @@ PlayScene::PlayScene(GameObject* parent)
 	Instantiate<Tile>(this);
 	Instantiate<Icon>(this);
 	Instantiate<Camera>(this); // Player‚æ‚èŒã‚É‘‚­
-	/*Instantiate<Ground>(this);*/
-	/*Instantiate<Goblin>(this);*/
 
 	// ‚Æ‚è‚ ‚¦‚¸ƒJƒƒ‰‚ğİ’è‚·‚é
 	/*SetCameraPositionAndTarget_UpVecY(VGet(0,0,0), VGet(0, 0, 0));*/

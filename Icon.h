@@ -55,6 +55,6 @@ private:
 
 	void KeyInput();
 
-	void MousePointInBox(POSITION_F _mousePoint);
+	bool MousePointInBox(POSITION_F _mousePoint, POSITION_F _leftUp, POSITION_F _rightUp, POSITION_F _rightDown,POSITION_F _leftDown);
 };
 

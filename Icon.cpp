@@ -7,7 +7,8 @@ namespace {
 	POSITION_F MCircle;
 	POSITION_F SCircle;
 
-	POSITION_F P1, P2, P3, P4;
+	POSITION_F mP1, mP2, mP3, mP4;
+	POSITION_F sP1, sP2, sP3, sP4;
 	VECTOR P1P2, P2P3, P3P4, P4P1;
 	VECTOR P1P, P2P, P3P, P4P;
 
@@ -103,40 +104,30 @@ void Icon::Update()
 	VECTOR Tposition;
 	VECTOR Pposition = pl1->GetPosition();
 
-	
-
 	for (int i = 0; i < z; i++) {
 		for (int j = 0; j < x; j++) {
 			Tposition.x = tile->GetTilesData(i, j).position.x;
 			Tposition.y = tile->GetTilesData(i, j).position.y;
 			Tposition.z = tile->GetTilesData(i, j).position.z;
 			if (Tposition.x == Pposition.x && Tposition.y == Pposition.y && Tposition.z == Pposition.z) {
-				
-				MCircle.x = pTile[i][j].position.x;
-				MCircle.y = pTile[i][j].position.y;
-				SCircle.x = pTile[i][j].position.x;
-				SCircle.y = pTile[i][j].position.y;
+				TCenter = { pTile[i][j].position.x + TgraphSize.halfX, pTile[i][j].position.y + TgraphSize.halfY };
 
-				P1 = { TCenter.x - MCgraphSize.halfX,  TCenter.y -MCgraphSize.halfY}; //左上
-				P2 = { TCenter.x + MCgraphSize.halfX, TCenter.y - MCgraphSize.halfY }; //右上
-				P3 = { TCenter.x + MCgraphSize.halfX , TCenter.y + MCgraphSize.halfY }; //右下
-				P4 = { TCenter.x - MCgraphSize.halfX,TCenter.y + MCgraphSize.halfY }; //左下
+				//maincircle
+				mP1 = { TCenter.x - MCgraphSize.halfX,  TCenter.y -MCgraphSize.halfY}; //左上
+				mP2 = { TCenter.x + MCgraphSize.halfX, TCenter.y - MCgraphSize.halfY }; //右上
+				mP3 = { TCenter.x + MCgraphSize.halfX , TCenter.y + MCgraphSize.halfY }; //右下
+				mP4 = { TCenter.x - MCgraphSize.halfX,TCenter.y + MCgraphSize.halfY }; //左下
 
-				P1P2 = { P2.x - P1.x,P2.y - P1.y };
-				P2P3 = { P3.x - P2.x,P3.y - P2.y };
-				P3P4 = { P4.x - P3.x,P4.y - P3.y };
-				P4P1 = { P1.x - P4.x,P1.y - P4.y };
-
-				P1P = { mousePos.x - P1.x,mousePos.y - P1.y };
-				P2P = { mousePos.x - P2.x,mousePos.y - P2.y };
-				P3P = { mousePos.x - P3.x,mousePos.y - P3.y };
-				P4P = { mousePos.x - P4.x,mousePos.y - P4.y };
+				//subcircle
+				sP1 = { TCenter.x - SCgraphSize.halfX,  TCenter.y - SCgraphSize.halfY }; //左上
+				sP2 = { TCenter.x + SCgraphSize.halfX, TCenter.y - SCgraphSize.halfY }; //右上
+				sP3 = { TCenter.x + SCgraphSize.halfX , TCenter.y + SCgraphSize.halfY }; //右下
+				sP4 = { TCenter.x - SCgraphSize.halfX,TCenter.y + SCgraphSize.halfY }; //左下
 			}
 		}
 	}
 
-	if (VCross(P1P2, P1P).z >= 0 && VCross(P2P3, P2P).z >= 0 && VCross(P3P4, P3P).z >= 0 && VCross(P4P1, P4P).z >= 0)
-	{
+	if (MousePointInBox(mousePos,mP1,mP2,mP3,mP4)) {
 		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 			StartAngle -= 0.1f;
 			Angle -= 0.1f;
@@ -147,13 +138,7 @@ void Icon::Update()
 		}
 	}
 
-	ImGui::Begin("rotation");
-	ImGui::InputFloat("X", &mousePos.x);
-	ImGui::InputFloat("Y", &mousePos.y);
-	ImGui::End();
 	KeyInput();
-
-	
 }
 
 void Icon::Draw()
@@ -175,8 +160,6 @@ void Icon::Draw()
 			Tposition.y = tile->GetTilesData(i, j).position.y;
 			Tposition.z = tile->GetTilesData(i, j).position.z;
 			if (Tposition.x == Pposition.x && Tposition.y == Pposition.y && Tposition.z == Pposition.z) {
-				TCenter = { pTile[i][j].position.x + TgraphSize.halfX, pTile[i][j].position.y + TgraphSize.halfY };
-				
 				DrawCircleGauge(TCenter.x,TCenter.y, Angle, hMainCircle, StartAngle,1.0f);
 				DrawCircleGauge(TCenter.x,TCenter.y, Angle, hSubCircle, StartAngle, 1.0f);
 				DrawGraph(pTile[i][j].position.x + (TgraphSize.halfX - PgraphSize.halfX), pTile[i][j].position.y + (TgraphSize.halfY - PgraphSize.halfY), hPIcon, TRUE);
@@ -190,9 +173,9 @@ void Icon::Draw()
 
 	DrawGraph(pTile[cY][cX].position.x, pTile[cY][cX].position.y, hTileFrame, TRUE);
 
-	DrawGraph(0, 0, hSelectIcon, TRUE);
+	/*DrawGraph(0, 0, hSelectIcon, TRUE);
 
-	DrawGraph(0, 0, hATIcon, TRUE);
+	DrawGraph(0, 0, hATIcon, TRUE);*/
 
 	
 }
@@ -261,4 +244,23 @@ void Icon::KeyInput()
 	}
 
 	pl1->SetMyTrigger(SetTrigger);
+}
+
+bool Icon::MousePointInBox(POSITION_F _mousePoint, POSITION_F _leftUp, POSITION_F _rightUp, POSITION_F _rightDown, POSITION_F _leftDown)
+{
+	P1P2 = { _rightUp.x - _leftUp.x,_rightUp.y - _leftUp.y };
+	P2P3 = { _rightDown.x - _rightUp.x,_rightDown.y - _rightUp.y };
+	P3P4 = { _leftDown.x - _rightDown.x,_leftDown.y - _rightDown.y };
+	P4P1 = { _leftUp.x - _leftDown.x,_leftUp.y - _leftDown.y };
+
+	P1P = { _mousePoint.x - _leftUp.x,_mousePoint.y - _leftUp.y };
+	P2P = { _mousePoint.x - _rightUp.x,_mousePoint.y - _rightUp.y };
+	P3P = { _mousePoint.x - _rightDown.x,_mousePoint.y - _rightDown.y };
+	P4P = { _mousePoint.x - _leftDown.x,_mousePoint.y - _leftDown.y };
+
+	if (VCross(P1P2, P1P).z >= 0 && VCross(P2P3, P2P).z >= 0 && VCross(P3P4, P3P).z >= 0 && VCross(P4P1, P4P).z >= 0)
+	{
+		return true;
+	}
+	return false;
 }
