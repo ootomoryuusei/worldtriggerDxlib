@@ -18,6 +18,7 @@ public:
 	void SetCompWay(bool _compWay) { compWay = _compWay; }
 private:
 	int hTile;
+	int hOnTile;
 	int hTileFrame;
 	int hPIcon;
 	int hSelectIcon;

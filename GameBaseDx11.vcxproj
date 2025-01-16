@@ -186,9 +186,13 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Player1.h" />
     <ClInclude Include="PlayScene.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TitleScene.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameBaseDx11.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

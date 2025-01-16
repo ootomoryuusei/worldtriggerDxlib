@@ -2,6 +2,8 @@
 #include "Camera.h"
 #include"Tile.h"
 #include"Icon.h"
+#include"resource.h"
+
 
 Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1),hShield(-1)
 {
@@ -188,3 +190,40 @@ void Player1::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _righ
 		}
 	}
 }
+
+//BOOL Player1::DialogProc(HWND hDlg, UINT msg, WPARAM wp, LPARAM lp)
+//{
+//	switch (msg)
+//	{
+//	case WM_INITDIALOG:
+//		/*SendMessage(GetDlgItem(hDlg, IDC_RADIO_RANGE), BM_SETCHECK, BST_CHECKED, 0);
+//
+//		SendMessage(GetDlgItem(hDlg, IDC_COMBO3), CB_ADDSTRING, 0, (LPARAM)L"デフォルト");
+//		SendMessage(GetDlgItem(hDlg, IDC_COMBO3), CB_ADDSTRING, 0, (LPARAM)L"レンガ");
+//		SendMessage(GetDlgItem(hDlg, IDC_COMBO3), CB_ADDSTRING, 0, (LPARAM)L"草");
+//		SendMessage(GetDlgItem(hDlg, IDC_COMBO3), CB_ADDSTRING, 0, (LPARAM)L"砂");
+//		SendMessage(GetDlgItem(hDlg, IDC_COMBO3), CB_ADDSTRING, 0, (LPARAM)L"水");*/
+//		break;
+//	case WM_COMMAND:
+//		switch (LOWORD(wp))
+//		{
+//		case IDC_RADIO_RANGE:
+//			selectMode = 0;
+//			break;
+//		case IDC_RADIO_ANGLE:
+//			selectMode = 1;
+//			break;
+//		case IDC_RADIO_CHANGE:
+//			selectMode = 2;
+//			break;
+//		case IDC_COMBO3:
+//			selectType = SendMessage(GetDlgItem(hDlg, IDC_COMBO3), CB_GETCURSEL, 0, 0);
+//			break;
+//		default:
+//			break;
+//		}
+//		break;
+//	}
+//
+//	return FALSE;
+//}

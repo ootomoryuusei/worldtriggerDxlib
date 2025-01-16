@@ -15,6 +15,8 @@ namespace Screen {
 	static const int WINDOW_MODE = 1;
 };
 
+//BOOL CALLBACK DialogProc(HWND hDlg, UINT msg, WPARAM wp, LPARAM lp);
+
 // エントリーポイント
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -101,3 +103,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	return 0;
 }
+
+////ダイアログプロシージャ
+//BOOL CALLBACK DialogProc(HWND hDlg, UINT msg, WPARAM wp, LPARAM lp) {
+//	return pStage->DialogProc(hDlg, msg, wp, lp);
+//}

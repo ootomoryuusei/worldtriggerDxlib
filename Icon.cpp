@@ -9,6 +9,7 @@ namespace {
 
 	POSITION_F mP1, mP2, mP3, mP4;
 	POSITION_F sP1, sP2, sP3, sP4;
+	POSITION_F pP1, pP2, pP3, pP4;
 	VECTOR P1P2, P2P3, P3P4, P4P1;
 	VECTOR P1P, P2P, P3P, P4P;
 
@@ -19,6 +20,8 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 {
 	hTile = LoadGraph("Assets//Image//Tile.png");
 	assert(hTile >= 0);
+	hOnTile = LoadGraph("Assets//Image//OnTile.png");
+	assert(hOnTile >= 0);
 	hTileFrame = LoadGraph("Assets//Image//TileSelectFrame.png");
 	assert(hTileFrame >= 0);
 	hPIcon = LoadGraph("Assets//Image//pIcon.png");
@@ -71,7 +74,7 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 	StartAngle = -15.0;
 	Angle = 15.0;
 
-	SetTrigger = { { {ASTEROID,false},{MOONBLADE,false},{FREE,false},{SHIELD,true} }, //Mainの初期化,
+	SetTrigger = { { {ASTEROID,false},{MOONBLADE,false},{FREE,true},{SHIELD,false} }, //Mainの初期化,
 		{ {MOONBLADE,false},{FREE,true},{SHIELD,false},{ ASTEROID,false} } }; //Subの初期化
 
 	SetTriggerParam(SetTrigger);
@@ -106,6 +109,8 @@ void Icon::Update()
 	VECTOR Tposition;
 	VECTOR Pposition = pl1->GetPosition();
 
+
+
 	for (int i = 0; i < z; i++) {
 		for (int j = 0; j < x; j++) {
 			Tposition.x = tile->GetTilesData(i, j).position.x;
@@ -125,6 +130,12 @@ void Icon::Update()
 				sP2 = { TCenter.x + SCgraphSize.halfX, TCenter.y - SCgraphSize.halfY }; //右上
 				sP3 = { TCenter.x + SCgraphSize.halfX , TCenter.y + SCgraphSize.halfY }; //右下
 				sP4 = { TCenter.x - SCgraphSize.halfX,TCenter.y + SCgraphSize.halfY }; //左下
+
+				//subcircle
+				pP1 = { TCenter.x - SCgraphSize.halfX,  TCenter.y - SCgraphSize.halfY }; //左上
+				pP2 = { TCenter.x + SCgraphSize.halfX, TCenter.y - SCgraphSize.halfY }; //右上
+				pP3 = { TCenter.x + SCgraphSize.halfX , TCenter.y + SCgraphSize.halfY }; //右下
+				pP4 = { TCenter.x - SCgraphSize.halfX,TCenter.y + SCgraphSize.halfY }; //左下
 			}
 		}
 	}
@@ -156,6 +167,10 @@ void Icon::Draw()
 	for (int i = 0; i < z; i++) {
 		for (int j = 0; j < x; j++) {
 			DrawGraph(pTile[i][j].position.x, pTile[i][j].position.y, hTile, TRUE);
+			if (z - i <= 2 || z - i >= 10) {
+				DrawGraph(pTile[i][j].position.x, pTile[i][j].position.y, hOnTile, TRUE);
+			}
+			
 		}
 	}
 

@@ -172,5 +172,11 @@
     <ClInclude Include="Player1.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Icon.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameBaseDx11.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

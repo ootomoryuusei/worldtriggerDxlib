@@ -22,6 +22,8 @@ public:
 	void SetMyTrigger(MYTRIGGER _trigger);
 
 	void DrawMyTrigger(MYTRIGGER _trigger,MATRIX _leftMatrix,MATRIX _rightMatrix);
+
+	/*BOOL DialogProc(HWND hDlg, UINT msg, WPARAM wp, LPARAM lp);*/
 private:
 	int hBlade; // サーベルモデルのデータ
 
