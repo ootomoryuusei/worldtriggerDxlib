@@ -14,6 +14,9 @@ namespace {
 	VECTOR P1P, P2P, P3P, P4P;
 
 	POSITION_F TCenter;
+
+	XMINT2 OtNum;
+
 }
 
 Icon::Icon(GameObject* parent) : Object3D(parent)
@@ -108,37 +111,20 @@ void Icon::Update()
 	Tile* tile = GetParent()->FindGameObject<Tile>();
 	VECTOR Tposition;
 	VECTOR Pposition = pl1->GetPosition();
+	OtNum = { GetPlayerOnTileNum() };
+	TCenter = { pTile[OtNum.x][OtNum.y].position.x + TgraphSize.halfX, pTile[OtNum.x][OtNum.y].position.y + TgraphSize.halfY };
 
+	//maincircle
+	mP1 = { TCenter.x - MCgraphSize.halfX,  TCenter.y - MCgraphSize.halfY }; //左上
+	mP2 = { TCenter.x + MCgraphSize.halfX, TCenter.y - MCgraphSize.halfY }; //右上
+	mP3 = { TCenter.x + MCgraphSize.halfX , TCenter.y + MCgraphSize.halfY }; //右下
+	mP4 = { TCenter.x - MCgraphSize.halfX,TCenter.y + MCgraphSize.halfY }; //左下
 
-
-	for (int i = 0; i < z; i++) {
-		for (int j = 0; j < x; j++) {
-			Tposition.x = tile->GetTilesData(i, j).position.x;
-			Tposition.y = tile->GetTilesData(i, j).position.y;
-			Tposition.z = tile->GetTilesData(i, j).position.z;
-			if (Tposition.x == Pposition.x && Tposition.y == Pposition.y && Tposition.z == Pposition.z) {
-				TCenter = { pTile[i][j].position.x + TgraphSize.halfX, pTile[i][j].position.y + TgraphSize.halfY };
-
-				//maincircle
-				mP1 = { TCenter.x - MCgraphSize.halfX,  TCenter.y -MCgraphSize.halfY}; //左上
-				mP2 = { TCenter.x + MCgraphSize.halfX, TCenter.y - MCgraphSize.halfY }; //右上
-				mP3 = { TCenter.x + MCgraphSize.halfX , TCenter.y + MCgraphSize.halfY }; //右下
-				mP4 = { TCenter.x - MCgraphSize.halfX,TCenter.y + MCgraphSize.halfY }; //左下
-
-				//subcircle
-				sP1 = { TCenter.x - SCgraphSize.halfX,  TCenter.y - SCgraphSize.halfY }; //左上
-				sP2 = { TCenter.x + SCgraphSize.halfX, TCenter.y - SCgraphSize.halfY }; //右上
-				sP3 = { TCenter.x + SCgraphSize.halfX , TCenter.y + SCgraphSize.halfY }; //右下
-				sP4 = { TCenter.x - SCgraphSize.halfX,TCenter.y + SCgraphSize.halfY }; //左下
-
-				//subcircle
-				pP1 = { TCenter.x - SCgraphSize.halfX,  TCenter.y - SCgraphSize.halfY }; //左上
-				pP2 = { TCenter.x + SCgraphSize.halfX, TCenter.y - SCgraphSize.halfY }; //右上
-				pP3 = { TCenter.x + SCgraphSize.halfX , TCenter.y + SCgraphSize.halfY }; //右下
-				pP4 = { TCenter.x - SCgraphSize.halfX,TCenter.y + SCgraphSize.halfY }; //左下
-			}
-		}
-	}
+	//subcircle
+	sP1 = { TCenter.x - SCgraphSize.halfX,  TCenter.y - SCgraphSize.halfY }; //左上
+	sP2 = { TCenter.x + SCgraphSize.halfX, TCenter.y - SCgraphSize.halfY }; //右上
+	sP3 = { TCenter.x + SCgraphSize.halfX , TCenter.y + SCgraphSize.halfY }; //右下
+	sP4 = { TCenter.x - SCgraphSize.halfX,TCenter.y + SCgraphSize.halfY }; //左下
 
 	if (MousePointInBox(mousePos,mP1,mP2,mP3,mP4)) {
 		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
@@ -170,28 +156,18 @@ void Icon::Draw()
 			if (z - i <= 2 || z - i >= 10) {
 				DrawGraph(pTile[i][j].position.x, pTile[i][j].position.y, hOnTile, TRUE);
 			}
-			
 		}
 	}
 
-	for (int i = 0; i < z; i++) {
-		for (int j = 0; j < x; j++) {
-			Tposition.x = tile->GetTilesData(i, j).position.x;
-			Tposition.y = tile->GetTilesData(i, j).position.y;
-			Tposition.z = tile->GetTilesData(i, j).position.z;
-			if (Tposition.x == Pposition.x && Tposition.y == Pposition.y && Tposition.z == Pposition.z) {
-				
-				DrawCircleGauge(TCenter.x,TCenter.y,SetTrigger.Main[main].angle, hMainCircle,SetTrigger.Main[main].startAngle,SetTrigger.Main[main].rangeSize);
-				DrawCircleGauge(TCenter.x,TCenter.y, SetTrigger.Sub[sub].angle, hSubCircle, SetTrigger.Sub[sub].startAngle,SetTrigger.Sub[sub].rangeSize);
-				DrawGraph(pTile[i][j].position.x + (TgraphSize.halfX - PgraphSize.halfX), pTile[i][j].position.y + (TgraphSize.halfY - PgraphSize.halfY), hPIcon, TRUE);
-				DrawBoxAA(TCenter.x - MCgraphSize.halfX * SetTrigger.Main[main].rangeSize, TCenter.y - MCgraphSize.halfY * SetTrigger.Main[main].rangeSize,
-					TCenter.x + MCgraphSize.halfX * SetTrigger.Main[main].rangeSize, TCenter.y + MCgraphSize.halfY * SetTrigger.Main[main].rangeSize, GetColor(255, 0, 0), FALSE); //メインサークルのボックス
-				DrawBoxAA(TCenter.x - SCgraphSize.halfX * SetTrigger.Sub[sub].rangeSize, TCenter.y - SCgraphSize.halfY * SetTrigger.Sub[sub].rangeSize,
-					TCenter.x + SCgraphSize.halfX * SetTrigger.Sub[sub].rangeSize, TCenter.y + SCgraphSize.halfY *SetTrigger.Sub[sub].rangeSize, GetColor(0, 0, 255), FALSE); //サブサークルのボックス
-			}
-		}
-	}
+	DrawGraph(TCenter.x - PgraphSize.halfX, TCenter.y - PgraphSize.halfY, hPIcon, TRUE);
+	DrawCircleGauge(TCenter.x, TCenter.y, SetTrigger.Main[main].angle, hMainCircle, SetTrigger.Main[main].startAngle, SetTrigger.Main[main].rangeSize);
+	DrawCircleGauge(TCenter.x, TCenter.y, SetTrigger.Sub[sub].angle, hSubCircle, SetTrigger.Sub[sub].startAngle, SetTrigger.Sub[sub].rangeSize);
+	DrawBoxAA(TCenter.x - MCgraphSize.halfX * SetTrigger.Main[main].rangeSize, TCenter.y - MCgraphSize.halfY * SetTrigger.Main[main].rangeSize,
+		TCenter.x + MCgraphSize.halfX * SetTrigger.Main[main].rangeSize, TCenter.y + MCgraphSize.halfY * SetTrigger.Main[main].rangeSize, GetColor(255, 0, 0), FALSE); //メインサークルのボックス
+	DrawBoxAA(TCenter.x - SCgraphSize.halfX * SetTrigger.Sub[sub].rangeSize, TCenter.y - SCgraphSize.halfY * SetTrigger.Sub[sub].rangeSize,
+		TCenter.x + SCgraphSize.halfX * SetTrigger.Sub[sub].rangeSize, TCenter.y + SCgraphSize.halfY * SetTrigger.Sub[sub].rangeSize, GetColor(0, 0, 255), FALSE); //サブサークルのボックス
 
+	
 	DrawGraph(pTile[cY][cX].position.x, pTile[cY][cX].position.y, hTileFrame, TRUE);
 
 	/*DrawGraph(0, 0, hSelectIcon, TRUE);
@@ -372,4 +348,25 @@ XMINT2 Icon::GetSelectedTrigger(MYTRIGGER _myTrigger)
 		}
 	}
 	return XMINT2(main,sub);
+}
+
+XMINT2 Icon::GetPlayerOnTileNum()
+{
+	Player1* pl1 = GetParent()->FindGameObject<Player1>();
+	Tile* tile = GetParent()->FindGameObject<Tile>();
+	VECTOR Tposition;
+	VECTOR Pposition = pl1->GetPosition();
+	XMINT2 XY = { 0,0};
+	for (int i = 0; i < z; i++) {
+		for (int j = 0; j < x; j++) {
+			Tposition.x = tile->GetTilesData(i, j).position.x;
+			Tposition.y = tile->GetTilesData(i, j).position.y;
+			Tposition.z = tile->GetTilesData(i, j).position.z;
+			if (Tposition.x == Pposition.x && Tposition.y == Pposition.y && Tposition.z == Pposition.z) {
+				XY.x = i;
+				XY.y = j;
+			}
+		}
+	}
+	return XMINT2(XY.x,XY.y);
 }

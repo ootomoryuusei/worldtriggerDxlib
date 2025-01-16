@@ -61,5 +61,7 @@ private:
 	void SetTriggerParam(MYTRIGGER& _myTrigger);
 
 	XMINT2 GetSelectedTrigger(MYTRIGGER _myTrigger);
+
+	XMINT2 GetPlayerOnTileNum();
 };
 

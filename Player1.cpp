@@ -3,6 +3,7 @@
 #include"Tile.h"
 #include"Icon.h"
 #include"resource.h"
+#include"ImGui/imgui.h"
 
 
 Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1),hShield(-1)
