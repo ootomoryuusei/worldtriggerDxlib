@@ -29,14 +29,6 @@ struct SIZE_2D {
 	int halfX, halfY;
 };
 
-struct POSITION {
-	int x, y;
-};
-
-struct POSITION_F {
-	float x, y;
-};
-
 struct TILEDATA {
 	VECTOR position;
 	int num;

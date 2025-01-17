@@ -63,7 +63,6 @@ Player1::~Player1()
 
 void Player1::Update()
 {
-	
 	// カメラの設定
 	MATRIX mRot = MGetRotY(rotation.y);  // 回転行列
 	// 回ってないとき、プレイヤーからどれぐらい後ろ？→ベクトル
@@ -76,33 +75,34 @@ void Player1::Update()
 	icon = GetParent()->FindGameObject<Icon>();
 	Tile* tile = GetParent()->FindGameObject<Tile>();
 
-	if (icon->GetCompWay()) {
-		time += flame;  // 時間を増加させる
-		if (time > movetime) {  // 一定の時間が経過した場合
-			static size_t index = 0;  // 現在処理しているイテレーターのインデックス
-			const auto& way = icon->GetWay();
+	//if (icon->GetCompWay()) {
+	//	time += flame;  // 時間を増加させる
+	//	if (time > movetime) {  // 一定の時間が経過した場合
+	//		static size_t index = 0;  // 現在処理しているイテレーターのインデックス
+	//		const auto& way = icon->GetWay();
 
-			// イテレーターが範囲内にある場合に処理
-			if (index < way.size()) {
-				// 現在の位置を取得
-				position = tile->GetTilesData(way[index].y, way[index].x).position;
-				// インデックスを次に進める
-				++index;
-			}
-			else {
-				// すべての処理が終わった場合、インデックスをリセット
-				icon->SetCompWay(false);
-				icon->GetWay().clear();
-			}
-			time = 0.0f;  // 時間リセット
-		}
-	}
+	//		// イテレーターが範囲内にある場合に処理
+	//		if (index < way.size()) {
+	//			// 現在の位置を取得
+	//			position = tile->GetTilesData(way[index].y, way[index].x).position;
+	//			// インデックスを次に進める
+	//			++index;
+	//		}
+	//		else {
+	//			// すべての処理が終わった場合、インデックスをリセット
+	//			icon->SetCompWay(false);
+	//			icon->GetWay().clear();
+	//		}
+	//		time = 0.0f;  // 時間リセット
+	//	}
+	//}
 	
 	
 }
 
 void Player1::Draw()
 {
+	position = { icon->GetPIconPos().x,0.0,icon->GetPIconPos().y };
 	//Object3D::Draw(); // 基底クラスの関数を呼ぶ→Playerキャラを描画する
 	MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position,rotation);
 	MV1SetMatrix(hModel,mModel);

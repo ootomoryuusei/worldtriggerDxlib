@@ -16,6 +16,8 @@ public:
 	bool GetCompWay() { return compWay; }
 
 	void SetCompWay(bool _compWay) { compWay = _compWay; }
+
+	XMFLOAT2 GetPIconPos();
 private:
 	int hTile;
 	int hOnTile;
@@ -41,7 +43,7 @@ private:
 
 	TILEDATA pTile[z][x];
 
-	std::vector<POSITION> way;
+	std::vector<XMINT2> way;
 
 	CHARACTER_STATUS getStatus;
 
@@ -50,13 +52,22 @@ private:
 	SIZE_2D SCgraphSize; //サブサークルの画像サイズ
 	SIZE_2D TgraphSize; //タイルの画像サイズ
 
+	XMFLOAT2 MCircle;
+	XMFLOAT2 SCircle;
+
+	XMFLOAT2 TCenter;
+
+	XMINT2 OtNum;
+
+	XMFLOAT2 PIpos;
+
 	MYTRIGGER SetTrigger;
 
 	int MouseX, MouseY; //マウス座標
 
 	void KeyInput();
 
-	bool MousePointInBox(POSITION_F _mousePoint, POSITION_F _leftUp, POSITION_F _rightUp, POSITION_F _rightDown,POSITION_F _leftDown);
+	bool MousePointInBox(XMFLOAT2 _mousePoint, XMFLOAT2 _leftUp,XMFLOAT2 _distance);
 
 	void SetTriggerParam(MYTRIGGER& _myTrigger);
 

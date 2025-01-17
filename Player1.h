@@ -38,7 +38,7 @@ private:
 
 	bool prevKey;
 	
-	POSITION cPos;
+	XMINT2 cPos;
 	int prevX, prevY;
 
 	float movetime;

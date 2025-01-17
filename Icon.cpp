@@ -3,21 +3,7 @@
 #include"Player1.h"
 #include "ImGui/imgui.h"
 
-namespace {
-	POSITION_F MCircle;
-	POSITION_F SCircle;
 
-	POSITION_F mP1, mP2, mP3, mP4;
-	POSITION_F sP1, sP2, sP3, sP4;
-	POSITION_F pP1, pP2, pP3, pP4;
-	VECTOR P1P2, P2P3, P3P4, P4P1;
-	VECTOR P1P, P2P, P3P, P4P;
-
-	POSITION_F TCenter;
-
-	XMINT2 OtNum;
-
-}
 
 Icon::Icon(GameObject* parent) : Object3D(parent)
 {
@@ -77,10 +63,12 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 	StartAngle = -15.0;
 	Angle = 15.0;
 
-	SetTrigger = { { {ASTEROID,false},{MOONBLADE,false},{FREE,true},{SHIELD,false} }, //Mainの初期化,
+	SetTrigger = { { {ASTEROID,false},{MOONBLADE,true},{FREE,false},{SHIELD,false} }, //Mainの初期化,
 		{ {MOONBLADE,false},{FREE,true},{SHIELD,false},{ ASTEROID,false} } }; //Subの初期化
 
 	SetTriggerParam(SetTrigger);
+
+	PIpos = { 0, 0 };
 }
 
 Icon::~Icon()
@@ -105,28 +93,19 @@ void Icon::Update()
 	SetMouseDispFlag(true); //マウスを表示させるフラグ関数
 
 	GetMousePoint(&MouseX, &MouseY);
-	POSITION_F mousePos = { MouseX,MouseY };
+	XMFLOAT2 mousePos = { (float)MouseX,(float)MouseY };
 
 	Player1* pl1 = GetParent()->FindGameObject<Player1>();
 	Tile* tile = GetParent()->FindGameObject<Tile>();
 	VECTOR Tposition;
 	VECTOR Pposition = pl1->GetPosition();
-	OtNum = { GetPlayerOnTileNum() };
-	TCenter = { pTile[OtNum.x][OtNum.y].position.x + TgraphSize.halfX, pTile[OtNum.x][OtNum.y].position.y + TgraphSize.halfY };
+	/*OtNum = { GetPlayerOnTileNum() };
+	TCenter = { pTile[OtNum.x][OtNum.y].position.x + TgraphSize.halfX, pTile[OtNum.x][OtNum.y].position.y + TgraphSize.halfY };*/
 
-	//maincircle
-	mP1 = { TCenter.x - MCgraphSize.halfX,  TCenter.y - MCgraphSize.halfY }; //左上
-	mP2 = { TCenter.x + MCgraphSize.halfX, TCenter.y - MCgraphSize.halfY }; //右上
-	mP3 = { TCenter.x + MCgraphSize.halfX , TCenter.y + MCgraphSize.halfY }; //右下
-	mP4 = { TCenter.x - MCgraphSize.halfX,TCenter.y + MCgraphSize.halfY }; //左下
+	
+	
 
-	//subcircle
-	sP1 = { TCenter.x - SCgraphSize.halfX,  TCenter.y - SCgraphSize.halfY }; //左上
-	sP2 = { TCenter.x + SCgraphSize.halfX, TCenter.y - SCgraphSize.halfY }; //右上
-	sP3 = { TCenter.x + SCgraphSize.halfX , TCenter.y + SCgraphSize.halfY }; //右下
-	sP4 = { TCenter.x - SCgraphSize.halfX,TCenter.y + SCgraphSize.halfY }; //左下
-
-	if (MousePointInBox(mousePos,mP1,mP2,mP3,mP4)) {
+	/*if (MousePointInBox(mousePos, PIpos, { (float)MCgraphSize.x, (float)MCgraphSize.y })) {
 		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 			StartAngle -= 0.1f;
 			Angle -= 0.1f;
@@ -135,9 +114,32 @@ void Icon::Update()
 			StartAngle += 0.1f;
 			Angle += 0.1f;
 		}
-	}
+	}*/
 
+	if (MousePointInBox(mousePos, PIpos, { (float)PgraphSize.x, (float)PgraphSize.y })){
+		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+			PIpos = { mousePos.x - PgraphSize.halfX,mousePos.y - PgraphSize.halfY};
+			//pl1->SetPosition(mousePos.x,0.0,mousePos.y);
+		}
+		else {
+			for (int i = 0; i < z; i++) {
+				for (int j = 0; j < x; j++) {
+					if (z - i <= 2 || z - i >= 10) {
+						if (MousePointInBox(mousePos, { pTile[i][j].position.x,pTile[i][j].position.y }
+							, { (float)TgraphSize.x,(float)TgraphSize.y })) {
+							PIpos = { pTile[i][j].position.x ,pTile[i][j].position.y  };
+						}
+					}
+				}
+			}
+		}
+	}
 	KeyInput();
+
+	ImGui::Begin("position");
+	ImGui::InputFloat("X", &PIpos.x);
+	ImGui::InputFloat("Y", &PIpos.y);
+	ImGui::End();
 }
 
 void Icon::Draw()
@@ -155,26 +157,45 @@ void Icon::Draw()
 			DrawGraph(pTile[i][j].position.x, pTile[i][j].position.y, hTile, TRUE);
 			if (z - i <= 2 || z - i >= 10) {
 				DrawGraph(pTile[i][j].position.x, pTile[i][j].position.y, hOnTile, TRUE);
+#if 0 
+				DrawBoxAA(pTile[i][j].position.x, pTile[i][j].position.y, pTile[i][j].position.x + TgraphSize.x, pTile[i][j].position.y + TgraphSize.y
+					, GetColor(0, 0, 255), FALSE); //tileのボックス
+#endif
 			}
 		}
 	}
-
-	DrawGraph(TCenter.x - PgraphSize.halfX, TCenter.y - PgraphSize.halfY, hPIcon, TRUE);
-	DrawCircleGauge(TCenter.x, TCenter.y, SetTrigger.Main[main].angle, hMainCircle, SetTrigger.Main[main].startAngle, SetTrigger.Main[main].rangeSize);
-	DrawCircleGauge(TCenter.x, TCenter.y, SetTrigger.Sub[sub].angle, hSubCircle, SetTrigger.Sub[sub].startAngle, SetTrigger.Sub[sub].rangeSize);
+	XMFLOAT2 PICenter = { PIpos.x + PgraphSize.halfX, PIpos.y + PgraphSize.halfY };
+	
+	DrawCircleGauge(PICenter.x + PgraphSize.halfX, PICenter.y + PgraphSize.halfY, SetTrigger.Main[main].angle, hMainCircle, SetTrigger.Main[main].startAngle, SetTrigger.Main[main].rangeSize);
+	DrawCircleGauge(PICenter.x + PgraphSize.halfX, PICenter.y + PgraphSize.halfY, SetTrigger.Sub[sub].angle, hSubCircle, SetTrigger.Sub[sub].startAngle, SetTrigger.Sub[sub].rangeSize);
+	/*DrawGraph(pTile[cY][cX].position.x, pTile[cY][cX].position.y, hTileFrame, TRUE);*/
+	/*DrawGraph(0, 0, hSelectIcon, TRUE);
+	DrawGraph(0, 0, hATIcon, TRUE);*/
+	DrawGraph(PICenter.x, PICenter.y, hPIcon, TRUE);
+#if 0 //ボックス
+	DrawBoxAA(PIpos.x, PIpos.y,
+		PIpos.x + PgraphSize.x, PIpos.y + PgraphSize.y, GetColor(0, 0, 255), FALSE); //playerIconのボックス
 	DrawBoxAA(TCenter.x - MCgraphSize.halfX * SetTrigger.Main[main].rangeSize, TCenter.y - MCgraphSize.halfY * SetTrigger.Main[main].rangeSize,
 		TCenter.x + MCgraphSize.halfX * SetTrigger.Main[main].rangeSize, TCenter.y + MCgraphSize.halfY * SetTrigger.Main[main].rangeSize, GetColor(255, 0, 0), FALSE); //メインサークルのボックス
 	DrawBoxAA(TCenter.x - SCgraphSize.halfX * SetTrigger.Sub[sub].rangeSize, TCenter.y - SCgraphSize.halfY * SetTrigger.Sub[sub].rangeSize,
 		TCenter.x + SCgraphSize.halfX * SetTrigger.Sub[sub].rangeSize, TCenter.y + SCgraphSize.halfY * SetTrigger.Sub[sub].rangeSize, GetColor(0, 0, 255), FALSE); //サブサークルのボックス
 
-	
-	DrawGraph(pTile[cY][cX].position.x, pTile[cY][cX].position.y, hTileFrame, TRUE);
+#endif
+}
 
-	/*DrawGraph(0, 0, hSelectIcon, TRUE);
-
-	DrawGraph(0, 0, hATIcon, TRUE);*/
-
-	
+XMFLOAT2 Icon::GetPIconPos()
+{
+	XMFLOAT2 tile3DPosition;
+	Tile* tile = GetParent()->FindGameObject<Tile>();
+	for (int i = 0; i < z; i++) {
+		for (int j = 0; j < x; j++) {
+			if (pTile[i][j].position.x == PIpos.x && pTile[i][j].position.y == PIpos.y) {
+				tile3DPosition = { tile->GetTilesData(i, j).position.x,tile->GetTilesData(i, j).position.z};
+				return tile3DPosition;
+			}
+		}
+	}
+	return XMFLOAT2(0,0);
 }
 
 void Icon::KeyInput()
@@ -243,17 +264,26 @@ void Icon::KeyInput()
 	pl1->SetMyTrigger(SetTrigger);
 }
 
-bool Icon::MousePointInBox(POSITION_F _mousePoint, POSITION_F _leftUp, POSITION_F _rightUp, POSITION_F _rightDown, POSITION_F _leftDown)
+bool Icon::MousePointInBox(XMFLOAT2 _mousePoint, XMFLOAT2 _LeftUp, XMFLOAT2 _distance)
 {
-	P1P2 = { _rightUp.x - _leftUp.x,_rightUp.y - _leftUp.y };
-	P2P3 = { _rightDown.x - _rightUp.x,_rightDown.y - _rightUp.y };
-	P3P4 = { _leftDown.x - _rightDown.x,_leftDown.y - _rightDown.y };
-	P4P1 = { _leftUp.x - _leftDown.x,_leftUp.y - _leftDown.y };
+	VECTOR P1P2, P2P3, P3P4, P4P1;
+	VECTOR P1P, P2P, P3P, P4P;
+	XMFLOAT2 P1, P2, P3, P4;
 
-	P1P = { _mousePoint.x - _leftUp.x,_mousePoint.y - _leftUp.y };
-	P2P = { _mousePoint.x - _rightUp.x,_mousePoint.y - _rightUp.y };
-	P3P = { _mousePoint.x - _rightDown.x,_mousePoint.y - _rightDown.y };
-	P4P = { _mousePoint.x - _leftDown.x,_mousePoint.y - _leftDown.y };
+	P1 = { _LeftUp.x,  _LeftUp.y }; //左上
+	P2 = { _LeftUp.x + _distance.x,  _LeftUp.y }; //右上
+	P3 = { _LeftUp.x + _distance.x,  _LeftUp.y + _distance.y}; //右下
+	P4 = { _LeftUp.x,  _LeftUp.y + _distance.y}; //左下
+
+	P1P2 = { P2.x - P1.x, P2.y - P1.y };
+	P2P3 = { P3.x - P2.x, P3.y - P2.y };
+	P3P4 = { P4.x - P3.x, P4.y - P3.y };
+	P4P1 = { P1.x - P4.x, P1.y - P4.y };
+
+	P1P = { _mousePoint.x - P1.x,_mousePoint.y - P1.y };
+	P2P = { _mousePoint.x - P2.x,_mousePoint.y - P2.y };
+	P3P = { _mousePoint.x - P3.x,_mousePoint.y - P3.y };
+	P4P = { _mousePoint.x - P4.x,_mousePoint.y - P4.y };
 
 	if (VCross(P1P2, P1P).z >= 0 && VCross(P2P3, P2P).z >= 0 && VCross(P3P4, P3P).z >= 0 && VCross(P4P1, P4P).z >= 0)
 	{
