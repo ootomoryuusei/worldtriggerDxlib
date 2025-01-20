@@ -5,10 +5,12 @@
 #include "Camera.h"
 #include"Tile.h"
 #include"Icon.h"
+#include"Character.h"
 PlayScene::PlayScene(GameObject* parent)
 {
 	/*Instantiate<Player>(this);*/
 	Instantiate<Player1>(this);
+	/*Instantiate<Character>(this);*/
 	Instantiate<Tile>(this);
 	Instantiate<Icon>(this);
 	Instantiate<Camera>(this); // Playerより後に書く
@@ -23,18 +25,18 @@ PlayScene::~PlayScene()
 
 void PlayScene::Update()
 {
-	if (CheckHitKey(KEY_INPUT_T)) {
+	/*if (CheckHitKey(KEY_INPUT_T)) {
 		SceneManager::Instance()->ChangeScene(SceneManager::SCENE_ID::SCENE_ID_TITLE);
-	}
+	}*/
 }
 
 void PlayScene::Draw()
 {
-	DrawString(0, 0, "PlayScene", GetColor(0, 0, 255));
+	//DrawString(0, 0, "PlayScene", GetColor(0, 0, 255));
 
-	// アナログの取り方
-	int x;
-	int y;
-	GetJoypadAnalogInput(&x, &y, DX_INPUT_PAD1);
-	DrawFormatString(100, 10, GetColor(255,255,255), "Analog %d,%d", x, y);
+	//// アナログの取り方
+	//int x;
+	//int y;
+	//GetJoypadAnalogInput(&x, &y, DX_INPUT_PAD1);
+	//DrawFormatString(100, 10, GetColor(255,255,255), "Analog %d,%d", x, y);
 }

@@ -20,6 +20,15 @@
     <Filter Include="10PlayScene">
       <UniqueIdentifier>{816aca37-0156-49d6-8e9b-8462f2b29676}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Character">
+      <UniqueIdentifier>{66ee13bc-cf61-4e1b-bf0d-8335a8e87b5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Character\Characters">
+      <UniqueIdentifier>{b8e0de91-cfdb-4013-a5a3-ec28e33d3128}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{59e8b294-6cba-41d9-a3c5-31f52d3bb429}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\GameObject.cpp">
@@ -40,7 +49,6 @@
     <ClCompile Include="Engine\Transform.cpp">
       <Filter>01Engine\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="ImGui\imgui.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
@@ -64,10 +72,6 @@
     </ClCompile>
     <ClCompile Include="ImGui\imgui_widgets.cpp">
       <Filter>ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleScene.cpp" />
-    <ClCompile Include="PlayScene.cpp">
-      <Filter>10PlayScene</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>10PlayScene</Filter>
@@ -93,6 +97,21 @@
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Icon.cpp" />
+    <ClCompile Include="Character.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Kuga.cpp">
+      <Filter>Character\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -113,7 +132,6 @@
     <ClInclude Include="Engine\Transform.h">
       <Filter>01Engine\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="TestScene.h" />
     <ClInclude Include="ImGui\imconfig.h">
       <Filter>ImGui</Filter>
     </ClInclude>
@@ -144,10 +162,6 @@
     <ClInclude Include="ImGui\imstb_truetype.h">
       <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="TitleScene.h" />
-    <ClInclude Include="PlayScene.h">
-      <Filter>10PlayScene</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>10PlayScene</Filter>
     </ClInclude>
@@ -173,6 +187,21 @@
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Icon.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Character.h">
+      <Filter>Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Kuga.h">
+      <Filter>Character\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc">

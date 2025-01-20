@@ -64,11 +64,11 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 	Angle = 15.0;
 
 	SetTrigger = { { {ASTEROID,false},{MOONBLADE,true},{FREE,false},{SHIELD,false} }, //Main‚Ì‰Šú‰»,
-		{ {MOONBLADE,false},{FREE,true},{SHIELD,false},{ ASTEROID,false} } }; //Sub‚Ì‰Šú‰»
+		{ {MOONBLADE,false},{FREE,false},{SHIELD,false},{ ASTEROID,true} } }; //Sub‚Ì‰Šú‰»
 
 	SetTriggerParam(SetTrigger);
 
-	PIpos = { 0, 0 };
+	PIpos = { 500, 500 };
 }
 
 Icon::~Icon()
@@ -136,10 +136,10 @@ void Icon::Update()
 	}
 	KeyInput();
 
-	ImGui::Begin("position");
+	/*ImGui::Begin("position");
 	ImGui::InputFloat("X", &PIpos.x);
 	ImGui::InputFloat("Y", &PIpos.y);
-	ImGui::End();
+	ImGui::End();*/
 }
 
 void Icon::Draw()

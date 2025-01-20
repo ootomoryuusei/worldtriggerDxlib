@@ -1,15 +1,14 @@
 #pragma once
 #include "Object3D.h"
 
-//class Tile;
 class Icon;
 
-class Player1 :
+class Character :
     public Object3D
 {
 public:
-	Player1(GameObject* parent);
-	~Player1();
+	Character(GameObject* parent);
+	~Character();
 	void Update() override;
 	void Draw() override;
 
@@ -17,11 +16,9 @@ public:
 
 	VECTOR GetPosition() { return position; }
 
-	void SetMyTrigger(MYTRIGGER _trigger);
+	void SetMyTrigger(MYTRIGGER _trigger) { Trigger = _trigger; }
 
-	void DrawMyTrigger(MYTRIGGER _trigger,MATRIX _leftMatrix,MATRIX _rightMatrix);
-
-	/*BOOL DialogProc(HWND hDlg, UINT msg, WPARAM wp, LPARAM lp);*/
+	void DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix);
 private:
 	int hBlade; // サーベルモデルのデータ
 
@@ -35,7 +32,7 @@ private:
 	int hPIcon;
 
 	bool prevKey;
-	
+
 	XMINT2 cPos;
 	int prevX, prevY;
 
@@ -46,9 +43,8 @@ private:
 	/*int nowNum;*/
 
 	CHARACTER_STATUS cStatus;
-	
+
 	MYTRIGGER Trigger;
 
-	
 };
 
