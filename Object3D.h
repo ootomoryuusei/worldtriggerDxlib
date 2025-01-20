@@ -2,10 +2,99 @@
 // GameObject→Object3D→Player/Groundの関係にする
 #include "Engine/GameObject.h"
 
+const int FREE = 500;
+const int MOONBLADE = 501;
+const int SHIELD = 502;
+const int ASTEROID = 503;
+
+const int z = 11;
+const int x = 11;
+
+
+struct TRIGGER {
+	int trigger;
+	bool IsSelected;
+	float angle;
+	float startAngle;
+	float rangeSize;
+};
+
+struct MYTRIGGER {
+	TRIGGER Main[4];
+	TRIGGER Sub[4];
+};
+
+struct SIZE_2D {
+	int x, y;
+	int halfX, halfY;
+};
+
+struct TILEDATA {
+	VECTOR position;
+	int num;
+};
+
 struct CHARACTER_STATUS
 {
 	int move, attack, speed, defense;
 };
+
+
+/// <summary>
+/// 
+/// </summary>
+/// <param name="_handle"> ハンドル </param>
+/// <param name="type"> graph : 0 , model : 1</param>
+inline void DEL(int _handle ,int type) {
+	switch (type) {
+	case 0:
+	{
+		if (_handle > 0) {
+			DeleteGraph(_handle);
+			_handle = -1;
+		}
+		break;
+	}
+	case 1: 
+	{
+		if (_handle > 0) {
+			MV1DeleteModel(_handle);
+			_handle = -1;
+		}
+		break;
+	}
+	default:
+		break;
+	}
+}
+
+/// <summary>
+/// モデルがロードされていれば
+/// </summary>
+/// <param name="_handle"> ハンドル</param>
+/// <param name="_matrix"> マトリクス </param>
+/// <param name="type"> graph : 0 , model : 1 </param>
+inline void IsLoaded(int _handle, MATRIX _matrix , int type = 1) {
+	switch (type) {
+	case 0:
+	{
+		if (_handle > 0) {
+		}
+		break;
+	}
+	case 1:
+	{
+		if (_handle > 0) {
+			MV1SetMatrix(_handle,_matrix);
+			MV1DrawModel(_handle);
+		}
+		break;
+	}
+	default:
+		break;
+	}
+}
+
 
 
 inline float ToRad(float deg) { return deg * XM_PI / 180.0f; }

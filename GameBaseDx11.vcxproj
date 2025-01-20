@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.2\include;C:\Program Files\Autodesk\FBX\FBX SDK\2020.2\include;C:\Program Files\Autodesk\FBX\FBX SDK\2019.5\include;$(IncludePath);D:\230641\DxLib_VC\プロジェクトに追加すべきファイル_VC用;C:\プログラムファイル\DxLib_VC\DxLib_VC\プロジェクトに追加すべきファイル_VC用</IncludePath>
-    <LibraryPath>C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.2\lib\vs2019\x64\debug;C:\Program Files\Autodesk\FBX\FBX SDK\2020.2\lib\vs2017\x64\debug;C:\Program Files\Autodesk\FBX\FBX SDK\2019.5\lib\vs2017\x64\debug;$(LibraryPath);D:\230641\DxLib_VC\プロジェクトに追加すべきファイル_VC用;C:\プログラムファイル\DxLib_VC\DxLib_VC\プロジェクトに追加すべきファイル_VC用</LibraryPath>
+    <IncludePath>C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.2\include;C:\Program Files\Autodesk\FBX\FBX SDK\2020.2\include;C:\Program Files\Autodesk\FBX\FBX SDK\2019.5\include;$(IncludePath);D:\230641\DxLib_VC\プロジェクトに追加すべきファイル_VC用;C:\プログラムファイル\DxLib_VC\DxLib_VC\プロジェクトに追加すべきファイル_VC用;D:\230641\チーム製作\DxLib_VC\DxLib_VC\プロジェクトに追加すべきファイル_VC用</IncludePath>
+    <LibraryPath>C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.2\lib\vs2019\x64\debug;C:\Program Files\Autodesk\FBX\FBX SDK\2020.2\lib\vs2017\x64\debug;C:\Program Files\Autodesk\FBX\FBX SDK\2019.5\lib\vs2017\x64\debug;$(LibraryPath);D:\230641\DxLib_VC\プロジェクトに追加すべきファイル_VC用;C:\プログラムファイル\DxLib_VC\DxLib_VC\プロジェクトに追加すべきファイル_VC用;D:\230641\チーム製作\DxLib_VC\DxLib_VC\プロジェクトに追加すべきファイル_VC用</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\include;C:\Program Files\Autodesk\FBX\FBX SDK\2019.5\include;C:\Program Files\Autodesk\FBX\FBX SDK\2020.0\include;$(IncludePath);D:\230641\DxLib_VC\プロジェクトに追加すべきファイル_VC用;C:\プログラムファイル\DxLib_VC\DxLib_VC\プロジェクトに追加すべきファイル_VC用</IncludePath>
-    <LibraryPath>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\lib\vs2017\x64\release;C:\Program Files\Autodesk\FBX\FBX SDK\2020.0\lib\vs2017\x64\release;C:\Program Files\Autodesk\FBX\FBX SDK\2019.5\lib\vs2017\x64\release;$(LibraryPath);D:\230641\DxLib_VC\プロジェクトに追加すべきファイル_VC用;C:\プログラムファイル\DxLib_VC\DxLib_VC\プロジェクトに追加すべきファイル_VC用</LibraryPath>
+    <IncludePath>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\include;C:\Program Files\Autodesk\FBX\FBX SDK\2019.5\include;C:\Program Files\Autodesk\FBX\FBX SDK\2020.0\include;$(IncludePath);D:\230641\DxLib_VC\プロジェクトに追加すべきファイル_VC用;C:\プログラムファイル\DxLib_VC\DxLib_VC\プロジェクトに追加すべきファイル_VC用;D:\230641\チーム製作\DxLib_VC\DxLib_VC\プロジェクトに追加すべきファイル_VC用</IncludePath>
+    <LibraryPath>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\lib\vs2017\x64\release;C:\Program Files\Autodesk\FBX\FBX SDK\2020.0\lib\vs2017\x64\release;C:\Program Files\Autodesk\FBX\FBX SDK\2019.5\lib\vs2017\x64\release;$(LibraryPath);D:\230641\DxLib_VC\プロジェクトに追加すべきファイル_VC用;C:\プログラムファイル\DxLib_VC\DxLib_VC\プロジェクトに追加すべきファイル_VC用;D:\230641\チーム製作\DxLib_VC\DxLib_VC\プロジェクトに追加すべきファイル_VC用</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -142,6 +142,7 @@
     <ClCompile Include="Engine\Transform.cpp" />
     <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="Icon.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_draw.cpp" />
     <ClCompile Include="ImGui\imgui_impl_dx11.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Engine\Transform.h" />
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="Icon.h" />
     <ClInclude Include="ImGui\imconfig.h" />
     <ClInclude Include="ImGui\imgui.h" />
     <ClInclude Include="ImGui\imgui_impl_dx11.h" />
@@ -184,10 +186,13 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Player1.h" />
     <ClInclude Include="PlayScene.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TitleScene.h" />
-    <ClInclude Include="ヘッダー.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameBaseDx11.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

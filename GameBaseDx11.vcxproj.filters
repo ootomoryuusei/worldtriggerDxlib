@@ -92,6 +92,7 @@
     </ClCompile>
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Icon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -170,6 +171,12 @@
     </ClInclude>
     <ClInclude Include="Player1.h" />
     <ClInclude Include="Tile.h" />
-    <ClInclude Include="ヘッダー.h" />
+    <ClInclude Include="Icon.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameBaseDx11.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

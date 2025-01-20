@@ -1,0 +1,5 @@
+WeaponName,Angle,StartAngle,RangeSize
+FREE,0,0,0
+MOONBLADE,15,-15,1
+SHIELD,15,-15,1
+ASTEROID,15,-15,1.5

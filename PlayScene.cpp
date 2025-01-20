@@ -2,18 +2,16 @@
 #include "Engine/SceneManager.h"
 #include "Player.h"
 #include"Player1.h"
-#include "Ground.h"
-#include "Goblin.h"
 #include "Camera.h"
 #include"Tile.h"
+#include"Icon.h"
 PlayScene::PlayScene(GameObject* parent)
 {
 	/*Instantiate<Player>(this);*/
 	Instantiate<Player1>(this);
 	Instantiate<Tile>(this);
+	Instantiate<Icon>(this);
 	Instantiate<Camera>(this); // Player‚æ‚èŒã‚É‘‚­
-	/*Instantiate<Ground>(this);*/
-	/*Instantiate<Goblin>(this);*/
 
 	// ‚Æ‚è‚ ‚¦‚¸ƒJƒƒ‰‚ğİ’è‚·‚é
 	/*SetCameraPositionAndTarget_UpVecY(VGet(0,0,0), VGet(0, 0, 0));*/
