@@ -17,7 +17,6 @@ public:
 	CHARACTER_STATUS GetCStatus() { return cStatus; }
 private:
 	int hBlade; // サーベルモデルのデータ
-	Tile* tile;
 
 	int hPIcon;
 

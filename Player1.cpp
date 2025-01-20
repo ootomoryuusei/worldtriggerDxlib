@@ -1,6 +1,7 @@
 #include "Player1.h"
 #include "Camera.h"
 #include"Tile.h"
+#include "ImGui/imgui.h"
 
 Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1)
 {
@@ -12,8 +13,8 @@ Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1)
 	assert(hPIcon >= 0);
 	position = VGet(0, 0, 0);
 	rotation = VGet(0, 0, 0);
-	tile = new Tile(this);
-	tile->Initialize();
+	/*tile = new Tile(this);
+	tile->Initialize();*/
 	cX = 0;
 	cY = 0;
 	prevX = 0;
@@ -95,7 +96,20 @@ void Player1::Update()
 	// これにプレイヤーの座標を足すと、カメラ位置が出る
 	VECTOR vRot = VGet(0,5,-5) * mRot;
 	SetCameraPositionAndTarget_UpVecY(position + pRot, position + vRot);
-	position = tile->GetTileData(cY, cX);
+	Tile* tile = GetParent()->FindGameObject<Tile>();
+	/*position = tile->GetTileData(cY, cX);*/
+	if (tile->GetWay().size() >= cStatus.move) {
+		for (auto itr : tile->GetWay()) {
+			Sleep(500);
+			position = tile->GetTileData(itr.first, itr.second);
+		}
+	}
+	
+	ImGui::Begin("position");
+	ImGui::InputFloat("X", &position.x);
+	ImGui::InputFloat("Y", &position.y);
+	ImGui::InputFloat("Z", &position.z);
+	ImGui::End();
 }
 
 void Player1::Draw()

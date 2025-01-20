@@ -18,6 +18,8 @@ public:
 	void Draw() override;
 
 	VECTOR GetTileData(int _h, int _w) { return Tiles[_h][_w].position; }
+
+	auto GetWay() { return way; }
 private:
 	struct TILEDATA {
 		VECTOR position;

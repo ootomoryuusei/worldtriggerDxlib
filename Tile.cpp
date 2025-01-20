@@ -120,7 +120,13 @@ void Tile::Update()
 		Player1* pl1 = GetParent()->FindGameObject<Player1>();
 		getStatus = pl1->GetCStatus();
 		int size = way.size();
-		way[size] = (cY, cX);
+		if (getStatus.move > size) {
+			way[size] = (cY, cX);
+		}
+		else {
+
+		}
+		
 	}
 }
 
