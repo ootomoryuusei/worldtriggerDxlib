@@ -6,6 +6,8 @@ class Icon;
 class Character :
     public Object3D
 {
+protected:
+
 public:
 	Character(GameObject* parent);
 	~Character();

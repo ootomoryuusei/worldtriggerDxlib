@@ -2,6 +2,8 @@
 #include "Object3D.h"
 #include<vector>
 
+class CsvReader;
+
 class Icon :
     public Object3D
 {
@@ -18,7 +20,16 @@ public:
 	void SetCompWay(bool _compWay) { compWay = _compWay; }
 
 	XMFLOAT2 GetPIconPos();
+
+	/*int GetWNLine() { return WNLine; }
+	int GetALine() { return ALine; }
+	int GetSALine() { return SALine; }
+	int GetRSLine() { return RSLine; }
+	XMINT2 GetCSVSize() { return XMINT2(width, height); }*/
 private:
+	int state_;
+	CsvReader* csv_;
+
 	int hTile;
 	int hOnTile;
 	int hTileFrame;
@@ -40,6 +51,9 @@ private:
 	bool compWay;
 
 	float StartAngle, Angle;
+
+	int WNLine, ALine, SALine, RSLine;
+	int width, height;
 
 	TILEDATA pTile[z][x];
 

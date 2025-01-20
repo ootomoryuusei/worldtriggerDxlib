@@ -1,8 +1,8 @@
 #pragma once
 #include "Object3D.h"
-
 //class Tile;
 class Icon;
+//class CsvReader;
 
 class Player1 :
     public Object3D
@@ -31,6 +31,7 @@ private:
 
 	/*Tile* tile;*/
 	Icon* icon;
+	/*CsvReader* csv_;*/
 
 	int hPIcon;
 

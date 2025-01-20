@@ -37,9 +37,6 @@
     <ClCompile Include="Engine\RootObject.cpp">
       <Filter>01Engine\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\CsvReader.cpp">
-      <Filter>01Engine\ResourceManager</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Main.cpp">
       <Filter>01Engine</Filter>
     </ClCompile>
@@ -100,9 +97,6 @@
     <ClCompile Include="Character.cpp">
       <Filter>Character</Filter>
     </ClCompile>
-    <ClCompile Include="Kuga.cpp">
-      <Filter>Character\Characters</Filter>
-    </ClCompile>
     <ClCompile Include="TitleScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -112,6 +106,18 @@
     <ClCompile Include="PlayScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Mikumo_Osamu.cpp">
+      <Filter>Character\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Kuga_Yuuma.cpp">
+      <Filter>Character\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Amatori_Chika.cpp">
+      <Filter>Character\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\CsvReader.cpp">
+      <Filter>01Engine\ResourceManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -119,9 +125,6 @@
     </ClInclude>
     <ClInclude Include="Engine\RootObject.h">
       <Filter>01Engine\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\CsvReader.h">
-      <Filter>01Engine\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Global.h">
       <Filter>01Engine</Filter>
@@ -190,9 +193,6 @@
     <ClInclude Include="Character.h">
       <Filter>Character</Filter>
     </ClInclude>
-    <ClInclude Include="Kuga.h">
-      <Filter>Character\Characters</Filter>
-    </ClInclude>
     <ClInclude Include="TitleScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -201,6 +201,18 @@
     </ClInclude>
     <ClInclude Include="PlayScene.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Mikumo_Osamu.h">
+      <Filter>Character\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Kuga_Yuuma.h">
+      <Filter>Character\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Amatori_Chika.h">
+      <Filter>Character\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CsvReader.h">
+      <Filter>01Engine\ResourceManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

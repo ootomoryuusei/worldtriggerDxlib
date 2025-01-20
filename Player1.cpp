@@ -2,9 +2,18 @@
 #include "Camera.h"
 #include"Tile.h"
 #include"Icon.h"
+#include"Engine/CsvReader.h"
 #include"resource.h"
 #include"ImGui/imgui.h"
 
+enum WEAPON {
+	NONE,
+	FREE,
+	MOONBLADE,
+	SHIELD,
+	ASTEROID,
+	MAX
+};
 
 Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1),hShield(-1)
 {
@@ -111,9 +120,10 @@ void Player1::SetMyTrigger(MYTRIGGER _trigger)
 
 void Player1::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix)
 {
+
 	for (int i = 0; i < 4; i++) {
 		if (_trigger.Main[i].IsSelected) {
-			switch ( _trigger.Main[i].trigger)
+			switch (_trigger.Main[i].tNum)
 			{
 			case FREE:
 			{
@@ -140,7 +150,7 @@ void Player1::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _righ
 		}
 
 		if (_trigger.Sub[i].IsSelected) {
-			switch (_trigger.Sub[i].trigger)
+			switch (_trigger.Sub[i].tNum)
 			{
 			case FREE:
 			{

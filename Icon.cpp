@@ -1,11 +1,17 @@
 #include "Icon.h"
 #include"Tile.h"
 #include"Player1.h"
+#include"Engine/CsvReader.h"
 #include "ImGui/imgui.h"
 
+enum STATE{
+	SELECT,
+	NONE,
+	MAX
+};
 
 
-Icon::Icon(GameObject* parent) : Object3D(parent)
+Icon::Icon(GameObject* parent) : Object3D(parent),state_(SELECT)
 {
 	hTile = LoadGraph("Assets//Image//Tile.png");
 	assert(hTile >= 0);
@@ -63,12 +69,16 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 	StartAngle = -15.0;
 	Angle = 15.0;
 
-	SetTrigger = { { {ASTEROID,false},{MOONBLADE,true},{FREE,false},{SHIELD,false} }, //Mainの初期化,
-		{ {MOONBLADE,false},{FREE,false},{SHIELD,false},{ ASTEROID,true} } }; //Subの初期化
+	SetTrigger = { { {"ASTEROID",true},{"MOONBLADE",false},{"FREE",false},{"SHIELD",false}}, //Mainの初期化,
+		{ {"MOONBLADE",false},{"FREE",false},{"SHIELD",false},{"ASTEROID",true}}}; //Subの初期化
+
+	csv_ = new CsvReader();
 
 	SetTriggerParam(SetTrigger);
 
 	PIpos = { 500, 500 };
+
+	
 }
 
 Icon::~Icon()
@@ -99,6 +109,18 @@ void Icon::Update()
 	Tile* tile = GetParent()->FindGameObject<Tile>();
 	VECTOR Tposition;
 	VECTOR Pposition = pl1->GetPosition();
+	switch (state_) {
+	case SELECT:
+	{
+		break;
+	}
+	case NONE:
+	{
+		break;
+	}
+	default:
+		break;
+	}
 	/*OtNum = { GetPlayerOnTileNum() };
 	TCenter = { pTile[OtNum.x][OtNum.y].position.x + TgraphSize.halfX, pTile[OtNum.x][OtNum.y].position.y + TgraphSize.halfY };*/
 
@@ -144,43 +166,58 @@ void Icon::Update()
 
 void Icon::Draw()
 {
-	int main, sub;
-	main = GetSelectedTrigger(SetTrigger).x;
-	sub = GetSelectedTrigger(SetTrigger).y;
 	Player1* pl1 = GetParent()->FindGameObject<Player1>();
 	Tile* tile = GetParent()->FindGameObject<Tile>();
 	VECTOR Tposition;
 	VECTOR Pposition = pl1->GetPosition();
+	switch (state_)
+	{
+	case SELECT:
+	{
+		break;
+	}
+	case NONE:
+	{
+		int main, sub;
+		main = GetSelectedTrigger(SetTrigger).x;
+		sub = GetSelectedTrigger(SetTrigger).y;
 
-	for (int i = 0; i < z; i++) {
-		for (int j = 0; j < x; j++) {
-			DrawGraph(pTile[i][j].position.x, pTile[i][j].position.y, hTile, TRUE);
-			if (z - i <= 2 || z - i >= 10) {
-				DrawGraph(pTile[i][j].position.x, pTile[i][j].position.y, hOnTile, TRUE);
+
+		for (int i = 0; i < z; i++) {
+			for (int j = 0; j < x; j++) {
+				DrawGraph(pTile[i][j].position.x, pTile[i][j].position.y, hTile, TRUE);
+				if (z - i <= 2 || z - i >= 10) {
+					DrawGraph(pTile[i][j].position.x, pTile[i][j].position.y, hOnTile, TRUE);
 #if 0 
-				DrawBoxAA(pTile[i][j].position.x, pTile[i][j].position.y, pTile[i][j].position.x + TgraphSize.x, pTile[i][j].position.y + TgraphSize.y
-					, GetColor(0, 0, 255), FALSE); //tileのボックス
+					DrawBoxAA(pTile[i][j].position.x, pTile[i][j].position.y, pTile[i][j].position.x + TgraphSize.x, pTile[i][j].position.y + TgraphSize.y
+						, GetColor(0, 0, 255), FALSE); //tileのボックス
 #endif
+				}
 			}
 		}
-	}
-	XMFLOAT2 PICenter = { PIpos.x + PgraphSize.halfX, PIpos.y + PgraphSize.halfY };
-	
-	DrawCircleGauge(PICenter.x + PgraphSize.halfX, PICenter.y + PgraphSize.halfY, SetTrigger.Main[main].angle, hMainCircle, SetTrigger.Main[main].startAngle, SetTrigger.Main[main].rangeSize);
-	DrawCircleGauge(PICenter.x + PgraphSize.halfX, PICenter.y + PgraphSize.halfY, SetTrigger.Sub[sub].angle, hSubCircle, SetTrigger.Sub[sub].startAngle, SetTrigger.Sub[sub].rangeSize);
-	/*DrawGraph(pTile[cY][cX].position.x, pTile[cY][cX].position.y, hTileFrame, TRUE);*/
-	/*DrawGraph(0, 0, hSelectIcon, TRUE);
-	DrawGraph(0, 0, hATIcon, TRUE);*/
-	DrawGraph(PICenter.x, PICenter.y, hPIcon, TRUE);
+		XMFLOAT2 PICenter = { PIpos.x + PgraphSize.halfX, PIpos.y + PgraphSize.halfY };
+
+		DrawCircleGauge(PICenter.x + PgraphSize.halfX, PICenter.y + PgraphSize.halfY, SetTrigger.Main[main].angle, hMainCircle, SetTrigger.Main[main].startAngle, SetTrigger.Main[main].rangeSize);
+		DrawCircleGauge(PICenter.x + PgraphSize.halfX, PICenter.y + PgraphSize.halfY, SetTrigger.Sub[sub].angle, hSubCircle, SetTrigger.Sub[sub].startAngle, SetTrigger.Sub[sub].rangeSize);
+		/*DrawGraph(pTile[cY][cX].position.x, pTile[cY][cX].position.y, hTileFrame, TRUE);*/
+		/*DrawGraph(0, 0, hSelectIcon, TRUE);
+		DrawGraph(0, 0, hATIcon, TRUE);*/
+		DrawGraph(PICenter.x, PICenter.y, hPIcon, TRUE);
 #if 0 //ボックス
-	DrawBoxAA(PIpos.x, PIpos.y,
-		PIpos.x + PgraphSize.x, PIpos.y + PgraphSize.y, GetColor(0, 0, 255), FALSE); //playerIconのボックス
-	DrawBoxAA(TCenter.x - MCgraphSize.halfX * SetTrigger.Main[main].rangeSize, TCenter.y - MCgraphSize.halfY * SetTrigger.Main[main].rangeSize,
-		TCenter.x + MCgraphSize.halfX * SetTrigger.Main[main].rangeSize, TCenter.y + MCgraphSize.halfY * SetTrigger.Main[main].rangeSize, GetColor(255, 0, 0), FALSE); //メインサークルのボックス
-	DrawBoxAA(TCenter.x - SCgraphSize.halfX * SetTrigger.Sub[sub].rangeSize, TCenter.y - SCgraphSize.halfY * SetTrigger.Sub[sub].rangeSize,
-		TCenter.x + SCgraphSize.halfX * SetTrigger.Sub[sub].rangeSize, TCenter.y + SCgraphSize.halfY * SetTrigger.Sub[sub].rangeSize, GetColor(0, 0, 255), FALSE); //サブサークルのボックス
+		DrawBoxAA(PIpos.x, PIpos.y,
+			PIpos.x + PgraphSize.x, PIpos.y + PgraphSize.y, GetColor(0, 0, 255), FALSE); //playerIconのボックス
+		DrawBoxAA(TCenter.x - MCgraphSize.halfX * SetTrigger.Main[main].rangeSize, TCenter.y - MCgraphSize.halfY * SetTrigger.Main[main].rangeSize,
+			TCenter.x + MCgraphSize.halfX * SetTrigger.Main[main].rangeSize, TCenter.y + MCgraphSize.halfY * SetTrigger.Main[main].rangeSize, GetColor(255, 0, 0), FALSE); //メインサークルのボックス
+		DrawBoxAA(TCenter.x - SCgraphSize.halfX * SetTrigger.Sub[sub].rangeSize, TCenter.y - SCgraphSize.halfY * SetTrigger.Sub[sub].rangeSize,
+			TCenter.x + SCgraphSize.halfX * SetTrigger.Sub[sub].rangeSize, TCenter.y + SCgraphSize.halfY * SetTrigger.Sub[sub].rangeSize, GetColor(0, 0, 255), FALSE); //サブサークルのボックス
 
 #endif
+		break;
+	}
+	default:
+		break;
+	}
+	
 }
 
 XMFLOAT2 Icon::GetPIconPos()
@@ -292,79 +329,120 @@ bool Icon::MousePointInBox(XMFLOAT2 _mousePoint, XMFLOAT2 _LeftUp, XMFLOAT2 _dis
 	return false;
 }
 
+//void Icon::SetTriggerParam(MYTRIGGER& _myTrigger)
+//{
+//	for (int i = 0; i < 4; i++) {
+//		switch (_myTrigger.Main[i].trigger)
+//		{
+//		case FREE:
+//		{
+//			_myTrigger.Main[i].angle = 0;
+//			_myTrigger.Main[i].startAngle = 0;
+//			_myTrigger.Main[i].rangeSize = 0;
+//			break;
+//		}
+//		case MOONBLADE:
+//		{
+//			_myTrigger.Main[i].angle = 15;
+//			_myTrigger.Main[i].startAngle = -15;
+//			_myTrigger.Main[i].rangeSize = 1;
+//			break;
+//		}
+//		case SHIELD:
+//		{
+//			_myTrigger.Main[i].angle = 15;
+//			_myTrigger.Main[i].startAngle = -15;
+//			_myTrigger.Main[i].rangeSize = 1;
+//			break;
+//		}
+//		case ASTEROID:
+//		{
+//			_myTrigger.Main[i].angle = 15;
+//			_myTrigger.Main[i].startAngle = -15;
+//			_myTrigger.Main[i].rangeSize = 1.5;
+//			break;
+//		}
+//		default:
+//			break;
+//		}
+//
+//		switch (_myTrigger.Sub[i].trigger)
+//		{
+//		case FREE:
+//		{
+//			_myTrigger.Sub[i].angle = 0;
+//			_myTrigger.Sub[i].startAngle = 0;
+//			_myTrigger.Sub[i].rangeSize = 0;
+//			break;
+//		}
+//		case MOONBLADE:
+//		{
+//			_myTrigger.Sub[i].angle = 15;
+//			_myTrigger.Sub[i].startAngle = -15;
+//			_myTrigger.Sub[i].rangeSize = 1;
+//			break;
+//		}
+//		case SHIELD:
+//		{
+//			_myTrigger.Sub[i].angle = 15;
+//			_myTrigger.Sub[i].startAngle = -15;
+//			_myTrigger.Sub[i].rangeSize = 1;
+//			break;
+//		}
+//		case ASTEROID:
+//		{
+//			_myTrigger.Sub[i].angle = 15;
+//			_myTrigger.Sub[i].startAngle = -15;
+//			_myTrigger.Sub[i].rangeSize = 1.5;
+//			break;
+//		}
+//		default:
+//			break;
+//		}
+//	}
+//}
+
 void Icon::SetTriggerParam(MYTRIGGER& _myTrigger)
 {
-	for (int i = 0; i < 4; i++) {
-		switch (_myTrigger.Main[i].trigger)
-		{
-		case FREE:
-		{
-			_myTrigger.Main[i].angle = 0;
-			_myTrigger.Main[i].startAngle = 0;
-			_myTrigger.Main[i].rangeSize = 0;
-			break;
-		}
-		case MOONBLADE:
-		{
-			_myTrigger.Main[i].angle = 15;
-			_myTrigger.Main[i].startAngle = -15;
-			_myTrigger.Main[i].rangeSize = 1;
-			break;
-		}
-		case SHIELD:
-		{
-			_myTrigger.Main[i].angle = 15;
-			_myTrigger.Main[i].startAngle = -15;
-			_myTrigger.Main[i].rangeSize = 1;
-			break;
-		}
-		case ASTEROID:
-		{
-			_myTrigger.Main[i].angle = 15;
-			_myTrigger.Main[i].startAngle = -15;
-			_myTrigger.Main[i].rangeSize = 1.5;
-			break;
-		}
-		default:
-			break;
+	if (csv_->Load("Assets//Weapon//DefaultWeaponStatus.csv")) {
+		width = csv_->GetWidth(0);
+		height = csv_->GetHeight();
+		for (int x = 0; x < width; x++) {
+			if (csv_->GetString(0, x) == "WeaponName") {
+				WNLine = x;
+			}
+			else if (csv_->GetString(0, x) == "Angle") {
+				ALine = x;
+			}
+			else if (csv_->GetString(0, x) == "StartAngle") {
+				SALine = x;
+			}
+			else if (csv_->GetString(0, x) == "RangeSize") {
+				RSLine = x;
+			}
 		}
 
-		switch (_myTrigger.Sub[i].trigger)
-		{
-		case FREE:
-		{
-			_myTrigger.Sub[i].angle = 0;
-			_myTrigger.Sub[i].startAngle = 0;
-			_myTrigger.Sub[i].rangeSize = 0;
-			break;
-		}
-		case MOONBLADE:
-		{
-			_myTrigger.Sub[i].angle = 15;
-			_myTrigger.Sub[i].startAngle = -15;
-			_myTrigger.Sub[i].rangeSize = 1;
-			break;
-		}
-		case SHIELD:
-		{
-			_myTrigger.Sub[i].angle = 15;
-			_myTrigger.Sub[i].startAngle = -15;
-			_myTrigger.Sub[i].rangeSize = 1;
-			break;
-		}
-		case ASTEROID:
-		{
-			_myTrigger.Sub[i].angle = 15;
-			_myTrigger.Sub[i].startAngle = -15;
-			_myTrigger.Sub[i].rangeSize = 1.5;
-			break;
-		}
-		default:
-			break;
+		for (int i = 0; i < 4; i++) {
+			for (int y = 1; y < height + 1; y++) {
+				if (_myTrigger.Main[i].trigger == csv_->GetString(x, y)) {
+					_myTrigger.Main[i].angle = csv_->GetInt(ALine, y);
+					_myTrigger.Main[i].startAngle = csv_->GetInt(SALine, y);
+					_myTrigger.Main[i].rangeSize = csv_->GetInt(RSLine, y);
+					_myTrigger.Main[i].tNum = y;
+				}
+			}
+
+			for (int y = 1; y < height + 1; y++) {
+				if (_myTrigger.Sub[i].trigger == csv_->GetString(x, y)) {
+					_myTrigger.Sub[i].angle = csv_->GetInt(ALine, y);
+					_myTrigger.Sub[i].startAngle = csv_->GetInt(SALine, y);
+					_myTrigger.Sub[i].rangeSize = csv_->GetInt(RSLine, y);
+					_myTrigger.Sub[i].tNum = y;
+				}
+			}
 		}
 	}
 }
-
 XMINT2 Icon::GetSelectedTrigger(MYTRIGGER _myTrigger)
 {
 	int main, sub;

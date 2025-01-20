@@ -6,9 +6,10 @@
 #include"Tile.h"
 #include"Icon.h"
 #include"Character.h"
+
+
 PlayScene::PlayScene(GameObject* parent)
 {
-	/*Instantiate<Player>(this);*/
 	Instantiate<Player1>(this);
 	/*Instantiate<Character>(this);*/
 	Instantiate<Tile>(this);
