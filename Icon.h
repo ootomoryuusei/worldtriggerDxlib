@@ -2,6 +2,8 @@
 #include "Object3D.h"
 #include<vector>
 
+using std::vector;
+
 class CsvReader;
 
 class Icon :
@@ -29,6 +31,8 @@ public:
 private:
 	int state_;
 	CsvReader* csv_;
+
+	vector<int> hChSlIcon_;
 
 	int hTile;
 	int hOnTile;

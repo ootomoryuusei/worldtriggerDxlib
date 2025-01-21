@@ -4,6 +4,15 @@
 class Icon;
 //class CsvReader;
 
+enum WEAPON {
+	NONE,
+	FREE,
+	MOONBLADE,
+	SHIELD,
+	ASTEROID,
+	MAX
+};
+
 class Player1 :
     public Object3D
 {
@@ -23,6 +32,8 @@ public:
 
 	/*BOOL DialogProc(HWND hDlg, UINT msg, WPARAM wp, LPARAM lp);*/
 private:
+	int state_;
+
 	int hBlade; // サーベルモデルのデータ
 
 	int hShield;
@@ -50,6 +61,5 @@ private:
 	
 	MYTRIGGER Trigger;
 
-	
 };
 

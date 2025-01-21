@@ -12,6 +12,11 @@ using std::string;
 const int z = 11;
 const int x = 11;
 
+enum PLAY_SCENE_STATE {
+	SELECT,
+	STEP1,
+	MAXS
+};
 
 struct TRIGGER {
 	string trigger;

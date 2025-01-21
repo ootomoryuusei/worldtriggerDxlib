@@ -6,15 +6,6 @@
 #include"resource.h"
 #include"ImGui/imgui.h"
 
-enum WEAPON {
-	NONE,
-	FREE,
-	MOONBLADE,
-	SHIELD,
-	ASTEROID,
-	MAX
-};
-
 Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1),hShield(-1)
 {
 	hModel = MV1LoadModel("Assets//human.mv1");
@@ -87,28 +78,42 @@ void Player1::Update()
 
 void Player1::Draw()
 {
-	position = { icon->GetPIconPos().x,0.0,icon->GetPIconPos().y };
-	//Object3D::Draw(); // 基底クラスの関数を呼ぶ→Playerキャラを描画する
-	MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position,rotation);
-	MV1SetMatrix(hModel,mModel);
-	MV1DrawModel(hModel);
+	switch (state_)
+	{
+	case SELECT:
+	{
+		break;
+	}
+	case STEP1:
+	{
+		position = { icon->GetPIconPos().x,0.0,icon->GetPIconPos().y };
+		//Object3D::Draw(); // 基底クラスの関数を呼ぶ→Playerキャラを描画する
+		MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);
+		MV1SetMatrix(hModel, mModel);
+		MV1DrawModel(hModel);
 
-	/*DrawCapsule3D(position, position + VGet(0, 160, 0), 30, 20, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);*/
+		/*DrawCapsule3D(position, position + VGet(0, 160, 0), 30, 20, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);*/
 
-	int RightHand = MV1SearchFrame(hModel, "RightHand");
-	assert(RightHand >= 0);
-	MATRIX mRightHand = MV1GetFrameLocalWorldMatrix(hModel, RightHand);
-	//MATRIX mBlade = MV1GetFrameLocalWorldMatrix(hModel, RightHand);
+		int RightHand = MV1SearchFrame(hModel, "RightHand");
+		assert(RightHand >= 0);
+		MATRIX mRightHand = MV1GetFrameLocalWorldMatrix(hModel, RightHand);
+		//MATRIX mBlade = MV1GetFrameLocalWorldMatrix(hModel, RightHand);
 
-	int LeftHand = MV1SearchFrame(hModel, "LeftHand");
-	assert(LeftHand >= 0);
-	MATRIX mLeftHand = MV1GetFrameLocalWorldMatrix(hModel, LeftHand);
-	MATRIX mAsteroid = Object3D::ChangeFLOAT3ToMATRIX(VGet(mLeftHand.m[3][0],mLeftHand.m[3][1] - 0.2f, mLeftHand.m[3][2]),rotation);
+		int LeftHand = MV1SearchFrame(hModel, "LeftHand");
+		assert(LeftHand >= 0);
+		MATRIX mLeftHand = MV1GetFrameLocalWorldMatrix(hModel, LeftHand);
+		MATRIX mAsteroid = Object3D::ChangeFLOAT3ToMATRIX(VGet(mLeftHand.m[3][0], mLeftHand.m[3][1] - 0.2f, mLeftHand.m[3][2]), rotation);
 
-	MATRIX mShield = Object3D::ChangeFLOAT3ToMATRIX({ position.x,position.y,position.z - 1.0f }, rotation);
+		MATRIX mShield = Object3D::ChangeFLOAT3ToMATRIX({ position.x,position.y,position.z - 1.0f }, rotation);
 
-	DrawMyTrigger(Trigger, mLeftHand, mRightHand);
+		DrawMyTrigger(Trigger, mLeftHand, mRightHand);
 
+		break;
+	}
+	default:
+		break;
+	}
+	
 	// サーベルの刃は、(0,0,0)～(0,-150,0)にある。これにmSabelをかけると、今の座標が手に入る
 	/*DrawLine3D(VGet(0, 0, 0) * hBlade, VGet(0, -150, 0) * hBlade, GetColor(255, 0, 0));*/
 }

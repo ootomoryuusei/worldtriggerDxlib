@@ -4,15 +4,15 @@
 #include"Engine/CsvReader.h"
 #include "ImGui/imgui.h"
 
-enum STATE{
-	SELECT,
-	NONE,
-	MAX
-};
-
 
 Icon::Icon(GameObject* parent) : Object3D(parent),state_(SELECT)
 {
+	csv_ = new CsvReader();
+	csv_->Load("Assets//Character//CharacterStatus.csv");
+	for (int y = 1; y < csv_->GetHeight() ; y++) {
+		hChSlIcon_.push_back(LoadGraph(csv_->GetString(0, y).c_str()));
+		//assert(hChSlIcon_ >= 0);
+	}
 	hTile = LoadGraph("Assets//Image//Tile.png");
 	assert(hTile >= 0);
 	hOnTile = LoadGraph("Assets//Image//OnTile.png");
@@ -72,7 +72,7 @@ Icon::Icon(GameObject* parent) : Object3D(parent),state_(SELECT)
 	SetTrigger = { { {"ASTEROID",true},{"MOONBLADE",false},{"FREE",false},{"SHIELD",false}}, //MainÇÃèâä˙âª,
 		{ {"MOONBLADE",false},{"FREE",false},{"SHIELD",false},{"ASTEROID",true}}}; //SubÇÃèâä˙âª
 
-	csv_ = new CsvReader();
+	
 
 	SetTriggerParam(SetTrigger);
 
@@ -114,7 +114,7 @@ void Icon::Update()
 	{
 		break;
 	}
-	case NONE:
+	case STEP1:
 	{
 		break;
 	}
@@ -174,9 +174,12 @@ void Icon::Draw()
 	{
 	case SELECT:
 	{
+		for (auto itr : hChSlIcon_) {
+			DrawGraph(0 + 32 * itr, 0 + 32 * itr, itr, TRUE);
+		}
 		break;
 	}
-	case NONE:
+	case STEP1:
 	{
 		int main, sub;
 		main = GetSelectedTrigger(SetTrigger).x;
@@ -329,102 +332,29 @@ bool Icon::MousePointInBox(XMFLOAT2 _mousePoint, XMFLOAT2 _LeftUp, XMFLOAT2 _dis
 	return false;
 }
 
-//void Icon::SetTriggerParam(MYTRIGGER& _myTrigger)
-//{
-//	for (int i = 0; i < 4; i++) {
-//		switch (_myTrigger.Main[i].trigger)
-//		{
-//		case FREE:
-//		{
-//			_myTrigger.Main[i].angle = 0;
-//			_myTrigger.Main[i].startAngle = 0;
-//			_myTrigger.Main[i].rangeSize = 0;
-//			break;
-//		}
-//		case MOONBLADE:
-//		{
-//			_myTrigger.Main[i].angle = 15;
-//			_myTrigger.Main[i].startAngle = -15;
-//			_myTrigger.Main[i].rangeSize = 1;
-//			break;
-//		}
-//		case SHIELD:
-//		{
-//			_myTrigger.Main[i].angle = 15;
-//			_myTrigger.Main[i].startAngle = -15;
-//			_myTrigger.Main[i].rangeSize = 1;
-//			break;
-//		}
-//		case ASTEROID:
-//		{
-//			_myTrigger.Main[i].angle = 15;
-//			_myTrigger.Main[i].startAngle = -15;
-//			_myTrigger.Main[i].rangeSize = 1.5;
-//			break;
-//		}
-//		default:
-//			break;
-//		}
-//
-//		switch (_myTrigger.Sub[i].trigger)
-//		{
-//		case FREE:
-//		{
-//			_myTrigger.Sub[i].angle = 0;
-//			_myTrigger.Sub[i].startAngle = 0;
-//			_myTrigger.Sub[i].rangeSize = 0;
-//			break;
-//		}
-//		case MOONBLADE:
-//		{
-//			_myTrigger.Sub[i].angle = 15;
-//			_myTrigger.Sub[i].startAngle = -15;
-//			_myTrigger.Sub[i].rangeSize = 1;
-//			break;
-//		}
-//		case SHIELD:
-//		{
-//			_myTrigger.Sub[i].angle = 15;
-//			_myTrigger.Sub[i].startAngle = -15;
-//			_myTrigger.Sub[i].rangeSize = 1;
-//			break;
-//		}
-//		case ASTEROID:
-//		{
-//			_myTrigger.Sub[i].angle = 15;
-//			_myTrigger.Sub[i].startAngle = -15;
-//			_myTrigger.Sub[i].rangeSize = 1.5;
-//			break;
-//		}
-//		default:
-//			break;
-//		}
-//	}
-//}
-
 void Icon::SetTriggerParam(MYTRIGGER& _myTrigger)
 {
 	if (csv_->Load("Assets//Weapon//DefaultWeaponStatus.csv")) {
 		width = csv_->GetWidth(0);
 		height = csv_->GetHeight();
 		for (int x = 0; x < width; x++) {
-			if (csv_->GetString(0, x) == "WeaponName") {
+			if (csv_->GetString(x,0) == "WeaponName") {
 				WNLine = x;
 			}
-			else if (csv_->GetString(0, x) == "Angle") {
+			else if (csv_->GetString(x,0) == "Angle") {
 				ALine = x;
 			}
-			else if (csv_->GetString(0, x) == "StartAngle") {
+			else if (csv_->GetString(x,0) == "StartAngle") {
 				SALine = x;
 			}
-			else if (csv_->GetString(0, x) == "RangeSize") {
+			else if (csv_->GetString(x,0) == "RangeSize") {
 				RSLine = x;
 			}
 		}
 
 		for (int i = 0; i < 4; i++) {
-			for (int y = 1; y < height + 1; y++) {
-				if (_myTrigger.Main[i].trigger == csv_->GetString(x, y)) {
+			for (int y = 1; y < height  ; y++) {
+				if (_myTrigger.Main[i].trigger == csv_->GetString(WNLine, y)) {
 					_myTrigger.Main[i].angle = csv_->GetInt(ALine, y);
 					_myTrigger.Main[i].startAngle = csv_->GetInt(SALine, y);
 					_myTrigger.Main[i].rangeSize = csv_->GetInt(RSLine, y);
@@ -432,8 +362,8 @@ void Icon::SetTriggerParam(MYTRIGGER& _myTrigger)
 				}
 			}
 
-			for (int y = 1; y < height + 1; y++) {
-				if (_myTrigger.Sub[i].trigger == csv_->GetString(x, y)) {
+			for (int y = 1; y < height ; y++) {
+				if (_myTrigger.Sub[i].trigger == csv_->GetString(WNLine, y)) {
 					_myTrigger.Sub[i].angle = csv_->GetInt(ALine, y);
 					_myTrigger.Sub[i].startAngle = csv_->GetInt(SALine, y);
 					_myTrigger.Sub[i].rangeSize = csv_->GetInt(RSLine, y);
