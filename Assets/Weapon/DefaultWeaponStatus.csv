@@ -1,5 +1,5 @@
-WeaponName,Angle,StartAngle,RangeSize
-FREE,0,0,0
-MOONBLADE,15,-15,1
-SHIELD,15,-15,1
-ASTEROID,15,-15,1.5
+WeaponName,FileName2D,FileName3D,Angle,StartAngle,RangeSize
+FREE,FreeTrigger.png,,0,0,0
+MOONBLADE,MoonBlade.png,blade.mv1,15,-15,1
+SHIELD,Sheald.png,SampleSheald.mv1,15,-15,1
+ASTEROID,Asteroid.png,SampleAsteroid.mv1,15,-15,1.5

@@ -33,6 +33,10 @@ private:
 	CsvReader* csv_;
 
 	vector<int> hChSlIcon_;
+	vector<SIZE_2D> hChSlGraphSize_;
+
+	vector<int> hWpSlIcon_;
+	vector<SIZE_2D> hWpSlGraphSize_;
 
 	int hTile;
 	int hOnTile;
@@ -40,14 +44,10 @@ private:
 	int hPIcon;
 	int hSelectIcon;
 
+	int hChSlUI_;
+
 	int hMainCircle;
 	int hSubCircle;
-
-	int hATIcon;
-	int hDTIcon;
-	int hOTIcon;
-	int hGTIcon;
-	int hSTIcon;
 
 	int prevX, prevY;
 	int cX, cY;
@@ -61,7 +61,7 @@ private:
 
 	TILEDATA pTile[z][x];
 
-	std::vector<XMINT2> way;
+	vector<XMINT2> way;
 
 	CHARACTER_STATUS getStatus;
 

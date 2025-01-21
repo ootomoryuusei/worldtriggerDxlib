@@ -7,12 +7,56 @@
 
 Icon::Icon(GameObject* parent) : Object3D(parent),state_(SELECT)
 {
+	std::string DLC = "Assets//Image//CharacterIcon//";
 	csv_ = new CsvReader();
 	csv_->Load("Assets//Character//CharacterStatus.csv");
-	for (int y = 1; y < csv_->GetHeight() ; y++) {
-		hChSlIcon_.push_back(LoadGraph(csv_->GetString(0, y).c_str()));
-		//assert(hChSlIcon_ >= 0);
+	int FN2DLine;
+	for (int x = 0; x < csv_->GetWidth(0); x++) {
+		if (csv_->GetString(x, 0) == "FileName2D") {
+			FN2DLine = x;
+		}
 	}
+	for (int y = 1; y < csv_->GetHeight() ; y++) {
+		std::string graphName;
+		graphName = csv_->GetString(FN2DLine, y);
+		std::string flPath;
+		flPath = DLC + graphName;
+		hChSlIcon_.push_back(LoadGraph(flPath.c_str()));
+	}
+	for (auto itr : hChSlIcon_) {
+		assert(itr >= 0);
+		SIZE_2D graphsize;
+		GetGraphSize(itr, &graphsize.x, &graphsize.y);
+		graphsize.halfX = graphsize.x / 2.0f;
+		graphsize.halfY = graphsize.y / 2.0f;
+		hChSlGraphSize_.push_back({ graphsize.x,graphsize.y,graphsize.halfX,graphsize.halfY});
+	}
+
+	csv_->Load("Assets//Weapon//DefaultWeaponStatus.csv");
+	FN2DLine = 0;
+	DLC = "Assets//Image//TriggerIcon//";
+	for (int x = 0; x < csv_->GetWidth(0); x++) {
+		if (csv_->GetString(x, 0) == "FileName2D") {
+			FN2DLine = x;
+		}
+	}
+	for (int y = 1; y < csv_->GetHeight(); y++) {
+		std::string graphName;
+		graphName = csv_->GetString(FN2DLine, y);
+		std::string flPath;
+		flPath = DLC + graphName;
+		hWpSlIcon_.push_back(LoadGraph(flPath.c_str()));
+	}
+	for (auto itr : hWpSlIcon_) {
+		assert(itr >= 0);
+		SIZE_2D graphsize;
+		GetGraphSize(itr, &graphsize.x, &graphsize.y);
+		graphsize.halfX = graphsize.x / 2.0f;
+		graphsize.halfY = graphsize.y / 2.0f;
+		hWpSlGraphSize_.push_back({ graphsize.x,graphsize.y,graphsize.halfX,graphsize.halfY });
+	}
+
+	
 	hTile = LoadGraph("Assets//Image//Tile.png");
 	assert(hTile >= 0);
 	hOnTile = LoadGraph("Assets//Image//OnTile.png");
@@ -21,8 +65,6 @@ Icon::Icon(GameObject* parent) : Object3D(parent),state_(SELECT)
 	assert(hTileFrame >= 0);
 	hPIcon = LoadGraph("Assets//Image//pIcon.png");
 	assert(hPIcon >= 0);
-	hATIcon = LoadGraph("Assets//Image//TriggerIcon//AttackerTrigger0.png");
-	assert(hATIcon >= 0);
 	hSelectIcon = LoadGraph("Assets//Image//TriggerSetUI.png");
 	assert(hSelectIcon >= 0);
 	hMainCircle = LoadGraph("Assets//Image//MainTriggerCircle.png");
@@ -174,9 +216,20 @@ void Icon::Draw()
 	{
 	case SELECT:
 	{
+		size_t index = 0;
 		for (auto itr : hChSlIcon_) {
-			DrawGraph(0 + 32 * itr, 0 + 32 * itr, itr, TRUE);
+			DrawGraph(0 + hChSlGraphSize_[index].x * index, 0, itr, TRUE);
+#if 0
+			DrawBoXAA()
+#endif
+			index++;
 		}
+		index = 0;
+		for (auto itr : hWpSlIcon_) {
+			DrawGraph(0 + hWpSlGraphSize_[index].x * index, 300, itr, TRUE);
+			index++;
+		}
+		index = 0;
 		break;
 	}
 	case STEP1:
