@@ -23,6 +23,7 @@ Icon::Icon(GameObject* parent) : Object3D(parent),state_(SELECT)
 		flPath = DLC + graphName;
 		hChSlIcon_.push_back(LoadGraph(flPath.c_str()));
 	}
+	static int i = 0;
 	for (auto itr : hChSlIcon_) {
 		assert(itr >= 0);
 		SIZE_2D graphsize;
@@ -30,7 +31,10 @@ Icon::Icon(GameObject* parent) : Object3D(parent),state_(SELECT)
 		graphsize.halfX = graphsize.x / 2.0f;
 		graphsize.halfY = graphsize.y / 2.0f;
 		hChSlGraphSize_.push_back({ graphsize.x,graphsize.y,graphsize.halfX,graphsize.halfY});
+		hChSlPos_.push_back({ 0 + (float)graphsize.x * i,0 });
+		i++;
 	}
+	i = 0;
 
 	csv_->Load("Assets//Weapon//DefaultWeaponStatus.csv");
 	FN2DLine = 0;
@@ -54,7 +58,10 @@ Icon::Icon(GameObject* parent) : Object3D(parent),state_(SELECT)
 		graphsize.halfX = graphsize.x / 2.0f;
 		graphsize.halfY = graphsize.y / 2.0f;
 		hWpSlGraphSize_.push_back({ graphsize.x,graphsize.y,graphsize.halfX,graphsize.halfY });
+		hWpSlPos_.push_back({ 0 + (float)graphsize.x * i,200 });
+		i++;
 	}
+	i = 0;
 
 	
 	hTile = LoadGraph("Assets//Image//Tile.png");
@@ -71,6 +78,8 @@ Icon::Icon(GameObject* parent) : Object3D(parent),state_(SELECT)
 	assert(hMainCircle >= 0);
 	hSubCircle = LoadGraph("Assets//Image//SubTriggerCircle.png");
 	assert(hSubCircle >= 0);
+	hChSlUI_ = LoadGraph("Assets//Image//CharacterSelectUI.png");
+	assert(hChSlUI_ >= 0);
 
 	int count = 0;
 	float xpos = 1100;
@@ -107,9 +116,9 @@ Icon::Icon(GameObject* parent) : Object3D(parent),state_(SELECT)
 	GetGraphSize(hTile, &TgraphSize.x, &TgraphSize.y);
 	TgraphSize.halfX = TgraphSize.x / 2.0f;
 	TgraphSize.halfY = TgraphSize.y / 2.0f;
-
-	StartAngle = -15.0;
-	Angle = 15.0;
+	GetGraphSize(hChSlUI_, &CSgraphSize.x, &CSgraphSize.y);
+	CSgraphSize.halfX = CSgraphSize.x / 2.0f;
+	CSgraphSize.halfY = CSgraphSize.y / 2.0f;
 
 	SetTrigger = { { {"ASTEROID",true},{"MOONBLADE",false},{"FREE",false},{"SHIELD",false}}, //Main‚Ì‰Šú‰»,
 		{ {"MOONBLADE",false},{"FREE",false},{"SHIELD",false},{"ASTEROID",true}}}; //Sub‚Ì‰Šú‰»
@@ -154,6 +163,28 @@ void Icon::Update()
 	switch (state_) {
 	case SELECT:
 	{
+		size_t index = 0;
+		for (auto itr : hChSlIcon_) {
+			if (PointInBox(mousePos, hChSlPos_[index], {(float)hChSlGraphSize_[index].x,(float)hChSlGraphSize_[index].y})) {
+				if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+					hChSlPos_[index] = { mousePos.x - hChSlGraphSize_[index].halfX,mousePos.y - hChSlGraphSize_[index].halfY };
+				}
+			}
+			index++;
+		}
+		index = 0;
+		for (auto itr : hWpSlIcon_) {
+			if (PointInBox(mousePos, hWpSlPos_[index], { (float)hWpSlGraphSize_[index].x,(float)hWpSlGraphSize_[index].y })) {
+				if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+					hWpSlPos_[index] = { mousePos.x - hWpSlGraphSize_[index].halfX,mousePos.y - hWpSlGraphSize_[index].halfY };
+				}
+			}
+			if (PointInBox(hWpSlPos_[index], { 750, 350, }, { (float)CSgraphSize.x, (float)CSgraphSize.y })) {
+
+			}
+			index++;
+		}
+		index = 0;
 		break;
 	}
 	case STEP1:
@@ -169,7 +200,7 @@ void Icon::Update()
 	
 	
 
-	/*if (MousePointInBox(mousePos, PIpos, { (float)MCgraphSize.x, (float)MCgraphSize.y })) {
+	/*if (PointInBox(mousePos, PIpos, { (float)MCgraphSize.x, (float)MCgraphSize.y })) {
 		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 			StartAngle -= 0.1f;
 			Angle -= 0.1f;
@@ -180,7 +211,7 @@ void Icon::Update()
 		}
 	}*/
 
-	if (MousePointInBox(mousePos, PIpos, { (float)PgraphSize.x, (float)PgraphSize.y })){
+	if (PointInBox(mousePos, PIpos, { (float)PgraphSize.x, (float)PgraphSize.y })){
 		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 			PIpos = { mousePos.x - PgraphSize.halfX,mousePos.y - PgraphSize.halfY};
 			//pl1->SetPosition(mousePos.x,0.0,mousePos.y);
@@ -189,7 +220,7 @@ void Icon::Update()
 			for (int i = 0; i < z; i++) {
 				for (int j = 0; j < x; j++) {
 					if (z - i <= 2 || z - i >= 10) {
-						if (MousePointInBox(mousePos, { pTile[i][j].position.x,pTile[i][j].position.y }
+						if (PointInBox(mousePos, { pTile[i][j].position.x,pTile[i][j].position.y }
 							, { (float)TgraphSize.x,(float)TgraphSize.y })) {
 							PIpos = { pTile[i][j].position.x ,pTile[i][j].position.y  };
 						}
@@ -216,17 +247,25 @@ void Icon::Draw()
 	{
 	case SELECT:
 	{
+		DrawGraph(750, 350, hChSlUI_, TRUE);
+
 		size_t index = 0;
 		for (auto itr : hChSlIcon_) {
-			DrawGraph(0 + hChSlGraphSize_[index].x * index, 0, itr, TRUE);
-#if 0
-			DrawBoXAA()
+			//hChSlPos = { 0 + hChSlGraphSize_[index].x * (float)index, 0 };
+			DrawGraph(hChSlPos_[index].x, hChSlPos_[index].y, itr, TRUE);
+#if 1
+			DrawBoxAA(hChSlPos_[index].x, hChSlPos_[index].y, hChSlPos_[index].x 
+				+ hChSlGraphSize_[index].x, hChSlPos_[index].y + hChSlGraphSize_[index].y, GetColor(255, 0, 0), FALSE);
 #endif
 			index++;
 		}
 		index = 0;
 		for (auto itr : hWpSlIcon_) {
-			DrawGraph(0 + hWpSlGraphSize_[index].x * index, 300, itr, TRUE);
+			DrawGraph(hWpSlPos_[index].x, hWpSlPos_[index].y, itr, TRUE);
+#if 1
+			DrawBoxAA(hWpSlPos_[index].x, hWpSlPos_[index].y, hWpSlPos_[index].x
+				+ hWpSlGraphSize_[index].x, hWpSlPos_[index].y + hWpSlGraphSize_[index].y, GetColor(255, 0, 0), FALSE);
+#endif
 			index++;
 		}
 		index = 0;
@@ -357,7 +396,7 @@ void Icon::KeyInput()
 	pl1->SetMyTrigger(SetTrigger);
 }
 
-bool Icon::MousePointInBox(XMFLOAT2 _mousePoint, XMFLOAT2 _LeftUp, XMFLOAT2 _distance)
+bool Icon::PointInBox(XMFLOAT2 _mousePoint, XMFLOAT2 _LeftUp, XMFLOAT2 _distance)
 {
 	VECTOR P1P2, P2P3, P3P4, P4P1;
 	VECTOR P1P, P2P, P3P, P4P;
