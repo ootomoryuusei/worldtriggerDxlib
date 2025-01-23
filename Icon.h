@@ -35,10 +35,12 @@ private:
 	vector<int> hChSlIcon_;
 	vector<SIZE_2D> hChSlGraphSize_;
 	vector<XMFLOAT2> hChSlPos_;
+	vector<XMFLOAT2> CSPosition_;
 
 	vector<int> hWpSlIcon_;
 	vector<SIZE_2D> hWpSlGraphSize_;
 	vector<XMFLOAT2> hWpSlPos_;
+	vector<XMFLOAT2> WSPosition_;
 
 	int hTile;
 	int hOnTile;

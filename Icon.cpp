@@ -63,6 +63,13 @@ Icon::Icon(GameObject* parent) : Object3D(parent),state_(SELECT)
 	}
 	i = 0;
 
+	for (auto itr : hChSlPos_) {
+		CSPosition_.push_back(itr);
+	}
+
+	for (auto itr : hWpSlPos_) {
+		WSPosition_.push_back(itr);
+	}
 	
 	hTile = LoadGraph("Assets//Image//Tile.png");
 	assert(hTile >= 0);
@@ -165,22 +172,26 @@ void Icon::Update()
 	{
 		size_t index = 0;
 		for (auto itr : hChSlIcon_) {
-			if (PointInBox(mousePos, hChSlPos_[index], {(float)hChSlGraphSize_[index].x,(float)hChSlGraphSize_[index].y})) {
+			if (PointInBox(mousePos, CSPosition_[index], {(float)hChSlGraphSize_[index].x,(float)hChSlGraphSize_[index].y})) {
 				if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-					hChSlPos_[index] = { mousePos.x - hChSlGraphSize_[index].halfX,mousePos.y - hChSlGraphSize_[index].halfY };
+					CSPosition_[index] = { mousePos.x - hChSlGraphSize_[index].halfX,mousePos.y - hChSlGraphSize_[index].halfY };
 				}
+			}
+
+			if (PointInBox(CSPosition_[index], { 750, 350, }, { (float)CSgraphSize.x, (float)CSgraphSize.y })) {
+				CSPosition_[index] = { 750,350 };
 			}
 			index++;
 		}
 		index = 0;
 		for (auto itr : hWpSlIcon_) {
-			if (PointInBox(mousePos, hWpSlPos_[index], { (float)hWpSlGraphSize_[index].x,(float)hWpSlGraphSize_[index].y })) {
+			if (PointInBox(mousePos, WSPosition_[index], { (float)hWpSlGraphSize_[index].x,(float)hWpSlGraphSize_[index].y })) {
 				if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-					hWpSlPos_[index] = { mousePos.x - hWpSlGraphSize_[index].halfX,mousePos.y - hWpSlGraphSize_[index].halfY };
+					WSPosition_[index] = { mousePos.x - hWpSlGraphSize_[index].halfX,mousePos.y - hWpSlGraphSize_[index].halfY };
 				}
 			}
-			if (PointInBox(hWpSlPos_[index], { 750, 350, }, { (float)CSgraphSize.x, (float)CSgraphSize.y })) {
-
+			if (PointInBox(WSPosition_[index], { 750, 350, }, { (float)CSgraphSize.x, (float)CSgraphSize.y })) {
+				WSPosition_[index] = { 750,350 };
 			}
 			index++;
 		}
@@ -196,10 +207,6 @@ void Icon::Update()
 	}
 	/*OtNum = { GetPlayerOnTileNum() };
 	TCenter = { pTile[OtNum.x][OtNum.y].position.x + TgraphSize.halfX, pTile[OtNum.x][OtNum.y].position.y + TgraphSize.halfY };*/
-
-	
-	
-
 	/*if (PointInBox(mousePos, PIpos, { (float)MCgraphSize.x, (float)MCgraphSize.y })) {
 		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 			StartAngle -= 0.1f;
@@ -251,20 +258,19 @@ void Icon::Draw()
 
 		size_t index = 0;
 		for (auto itr : hChSlIcon_) {
-			//hChSlPos = { 0 + hChSlGraphSize_[index].x * (float)index, 0 };
-			DrawGraph(hChSlPos_[index].x, hChSlPos_[index].y, itr, TRUE);
+			DrawGraph(CSPosition_[index].x, CSPosition_[index].y, itr, TRUE);
 #if 1
-			DrawBoxAA(hChSlPos_[index].x, hChSlPos_[index].y, hChSlPos_[index].x 
-				+ hChSlGraphSize_[index].x, hChSlPos_[index].y + hChSlGraphSize_[index].y, GetColor(255, 0, 0), FALSE);
+			DrawBoxAA(CSPosition_[index].x, CSPosition_[index].y, CSPosition_[index].x
+				+ hChSlGraphSize_[index].x, CSPosition_[index].y + hChSlGraphSize_[index].y, GetColor(255, 0, 0), FALSE);
 #endif
 			index++;
 		}
 		index = 0;
 		for (auto itr : hWpSlIcon_) {
-			DrawGraph(hWpSlPos_[index].x, hWpSlPos_[index].y, itr, TRUE);
+			DrawGraph(WSPosition_[index].x, WSPosition_[index].y, itr, TRUE);
 #if 1
-			DrawBoxAA(hWpSlPos_[index].x, hWpSlPos_[index].y, hWpSlPos_[index].x
-				+ hWpSlGraphSize_[index].x, hWpSlPos_[index].y + hWpSlGraphSize_[index].y, GetColor(255, 0, 0), FALSE);
+			DrawBoxAA(WSPosition_[index].x, WSPosition_[index].y, WSPosition_[index].x
+				+ hWpSlGraphSize_[index].x, WSPosition_[index].y + hWpSlGraphSize_[index].y, GetColor(255, 0, 0), FALSE);
 #endif
 			index++;
 		}
@@ -396,7 +402,7 @@ void Icon::KeyInput()
 	pl1->SetMyTrigger(SetTrigger);
 }
 
-bool Icon::PointInBox(XMFLOAT2 _mousePoint, XMFLOAT2 _LeftUp, XMFLOAT2 _distance)
+bool Icon::PointInBox(XMFLOAT2 _point, XMFLOAT2 _LeftUp, XMFLOAT2 _distance)
 {
 	VECTOR P1P2, P2P3, P3P4, P4P1;
 	VECTOR P1P, P2P, P3P, P4P;
@@ -412,10 +418,10 @@ bool Icon::PointInBox(XMFLOAT2 _mousePoint, XMFLOAT2 _LeftUp, XMFLOAT2 _distance
 	P3P4 = { P4.x - P3.x, P4.y - P3.y };
 	P4P1 = { P1.x - P4.x, P1.y - P4.y };
 
-	P1P = { _mousePoint.x - P1.x,_mousePoint.y - P1.y };
-	P2P = { _mousePoint.x - P2.x,_mousePoint.y - P2.y };
-	P3P = { _mousePoint.x - P3.x,_mousePoint.y - P3.y };
-	P4P = { _mousePoint.x - P4.x,_mousePoint.y - P4.y };
+	P1P = { _point.x - P1.x,_point.y - P1.y };
+	P2P = { _point.x - P2.x,_point.y - P2.y };
+	P3P = { _point.x - P3.x,_point.y - P3.y };
+	P4P = { _point.x - P4.x,_point.y - P4.y };
 
 	if (VCross(P1P2, P1P).z >= 0 && VCross(P2P3, P2P).z >= 0 && VCross(P3P4, P3P).z >= 0 && VCross(P4P1, P4P).z >= 0)
 	{
