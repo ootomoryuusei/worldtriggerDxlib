@@ -1,5 +1,6 @@
 #include "Tile.h"
 #include"Player1.h"
+#include"PlayScene.h"
 #include "ImGui/imgui.h"
 
 Tile::Tile(GameObject* parent) : Object3D(parent)
@@ -24,6 +25,8 @@ Tile::Tile(GameObject* parent) : Object3D(parent)
 			count++;
 		}
 	}
+
+	state_ = SELECT;
 }
 
 Tile::~Tile()
@@ -60,7 +63,7 @@ void Tile::Update()
 
 void Tile::Draw()
 {
-	/*Player1* pl1 = GetParent()->FindGameObject<Player1>();*/
+
 	switch (state_)
 	{
 	case SELECT:
@@ -80,8 +83,4 @@ void Tile::Draw()
 	default:
 		break;
 	}
-	/*MV1SetMatrix(hModel, Object3D::ChangeFLOAT3ToMATRIX(Tiles[0][1].position, rotation));
-	MV1DrawModel(hModel);*/
-
-	
 }

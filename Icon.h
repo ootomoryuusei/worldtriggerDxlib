@@ -29,7 +29,6 @@ public:
 	int GetRSLine() { return RSLine; }
 	XMINT2 GetCSVSize() { return XMINT2(width, height); }*/
 private:
-	int state_;
 	CsvReader* csv_;
 
 	vector<int> hChSlIcon_;
@@ -42,11 +41,14 @@ private:
 	vector<XMFLOAT2> hWpSlPos_;
 	vector<XMFLOAT2> WSPosition_;
 
+	vector<XMFLOAT2> SIUFPosition_;
+
 	int hTile;
 	int hOnTile;
 	int hTileFrame;
 	int hPIcon;
-	int hSelectIcon;;
+	int hSlIcUI_;
+	int hSlIcUIFrame_;
 
 	int hChSlUI_;
 
@@ -72,6 +74,7 @@ private:
 	SIZE_2D SCgraphSize; //サブサークルの画像サイズ
 	SIZE_2D TgraphSize; //タイルの画像サイズ
 	SIZE_2D CSgraphSize; //キャラクターセレクトUIの画像サイズ
+	SIZE_2D SIFgraphSize; //キャラクターセレクトUIの画像サイズ
 
 	XMFLOAT2 MCircle;
 	XMFLOAT2 SCircle;

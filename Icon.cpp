@@ -2,10 +2,11 @@
 #include"Tile.h"
 #include"Player1.h"
 #include"Engine/CsvReader.h"
+#include"PlayScene.h"
 #include "ImGui/imgui.h"
 
 
-Icon::Icon(GameObject* parent) : Object3D(parent),state_(SELECT)
+Icon::Icon(GameObject* parent) : Object3D(parent)
 {
 	std::string DLC = "Assets//Image//CharacterIcon//";
 	csv_ = new CsvReader();
@@ -70,6 +71,8 @@ Icon::Icon(GameObject* parent) : Object3D(parent),state_(SELECT)
 	for (auto itr : hWpSlPos_) {
 		WSPosition_.push_back(itr);
 	}
+
+	
 	
 	hTile = LoadGraph("Assets//Image//Tile.png");
 	assert(hTile >= 0);
@@ -79,8 +82,10 @@ Icon::Icon(GameObject* parent) : Object3D(parent),state_(SELECT)
 	assert(hTileFrame >= 0);
 	hPIcon = LoadGraph("Assets//Image//pIcon.png");
 	assert(hPIcon >= 0);
-	hSelectIcon = LoadGraph("Assets//Image//TriggerSetUI.png");
-	assert(hSelectIcon >= 0);
+	hSlIcUI_ = LoadGraph("Assets//Image//TriggerSetUI.png");
+	assert(hSlIcUI_ >= 0);
+	hSlIcUIFrame_ = LoadGraph("Assets//Image//TriggerSetUIFrame.png");
+	assert(hSlIcUIFrame_ >= 0);
 	hMainCircle = LoadGraph("Assets//Image//MainTriggerCircle.png");
 	assert(hMainCircle >= 0);
 	hSubCircle = LoadGraph("Assets//Image//SubTriggerCircle.png");
@@ -126,6 +131,15 @@ Icon::Icon(GameObject* parent) : Object3D(parent),state_(SELECT)
 	GetGraphSize(hChSlUI_, &CSgraphSize.x, &CSgraphSize.y);
 	CSgraphSize.halfX = CSgraphSize.x / 2.0f;
 	CSgraphSize.halfY = CSgraphSize.y / 2.0f;
+	GetGraphSize(hSlIcUIFrame_, &SIFgraphSize.x, &SIFgraphSize.y);
+	SIFgraphSize.halfX = SIFgraphSize.x / 2.0f;
+	SIFgraphSize.halfY = SIFgraphSize.y / 2.0f;
+
+	for (int x = 0; x < 2; x++) {
+		for (int y = 0; y < 4; y++) {
+			SIUFPosition_.push_back({ 780.0f + 330.0f * x, 50 + (float)(SIFgraphSize.y + 10) * y });
+		}
+	}
 
 	SetTrigger = { { {"ASTEROID",true},{"MOONBLADE",false},{"FREE",false},{"SHIELD",false}}, //Main‚Ì‰Šú‰»,
 		{ {"MOONBLADE",false},{"FREE",false},{"SHIELD",false},{"ASTEROID",true}}}; //Sub‚Ì‰Šú‰»
@@ -136,7 +150,7 @@ Icon::Icon(GameObject* parent) : Object3D(parent),state_(SELECT)
 
 	PIpos = { 500, 500 };
 
-	
+	state_ = SELECT;
 }
 
 Icon::~Icon()
@@ -189,13 +203,30 @@ void Icon::Update()
 				if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 					WSPosition_[index] = { mousePos.x - hWpSlGraphSize_[index].halfX,mousePos.y - hWpSlGraphSize_[index].halfY };
 				}
+				else {
+					for (auto itr : SIUFPosition_) {
+						int i = 0;
+						if (PointInBox(WSPosition_[index], itr, { (float)SIFgraphSize.x,(float)SIFgraphSize.y })) {
+							WSPosition_[index] = itr;
+						}
+						i++;
+					}
+				}
 			}
-			if (PointInBox(WSPosition_[index], { 750, 350, }, { (float)CSgraphSize.x, (float)CSgraphSize.y })) {
-				WSPosition_[index] = { 750,350 };
-			}
+			
+			
 			index++;
 		}
 		index = 0;
+
+		if (CheckHitKey(KEY_INPUT_RETURN)) {
+			pl1 = GetParent()->FindGameObject<Player1>();
+			/*icon = GetParent()->FindGameObject<Icon>();*/
+			pl1->SetMyTrigger(SetTrigger);
+			pl1->SetState_(STEP1);
+			tile->SetState_(STEP1);
+			this->SetState_(STEP1);
+		}
 		break;
 	}
 	case STEP1:
@@ -236,7 +267,12 @@ void Icon::Update()
 			}
 		}
 	}
+
+	
+	
 	KeyInput();
+
+	
 
 	/*ImGui::Begin("position");
 	ImGui::InputFloat("X", &PIpos.x);
@@ -254,12 +290,13 @@ void Icon::Draw()
 	{
 	case SELECT:
 	{
+		DrawGraph(750, 0, hSlIcUI_, TRUE);
 		DrawGraph(750, 350, hChSlUI_, TRUE);
 
 		size_t index = 0;
 		for (auto itr : hChSlIcon_) {
 			DrawGraph(CSPosition_[index].x, CSPosition_[index].y, itr, TRUE);
-#if 1
+#if 0
 			DrawBoxAA(CSPosition_[index].x, CSPosition_[index].y, CSPosition_[index].x
 				+ hChSlGraphSize_[index].x, CSPosition_[index].y + hChSlGraphSize_[index].y, GetColor(255, 0, 0), FALSE);
 #endif
@@ -268,13 +305,17 @@ void Icon::Draw()
 		index = 0;
 		for (auto itr : hWpSlIcon_) {
 			DrawGraph(WSPosition_[index].x, WSPosition_[index].y, itr, TRUE);
-#if 1
+#if 0
 			DrawBoxAA(WSPosition_[index].x, WSPosition_[index].y, WSPosition_[index].x
 				+ hWpSlGraphSize_[index].x, WSPosition_[index].y + hWpSlGraphSize_[index].y, GetColor(255, 0, 0), FALSE);
 #endif
 			index++;
 		}
 		index = 0;
+		
+		for (auto itr : SIUFPosition_) {
+			DrawGraph(itr.x, itr.y, hSlIcUIFrame_, TRUE);
+		}
 		break;
 	}
 	case STEP1:
@@ -399,7 +440,7 @@ void Icon::KeyInput()
 		compWay = true;
 	}
 
-	pl1->SetMyTrigger(SetTrigger);
+	
 }
 
 bool Icon::PointInBox(XMFLOAT2 _point, XMFLOAT2 _LeftUp, XMFLOAT2 _distance)

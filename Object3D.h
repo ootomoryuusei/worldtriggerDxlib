@@ -12,11 +12,11 @@ using std::string;
 const int z = 11;
 const int x = 11;
 
-enum PLAY_SCENE_STATE {
-	SELECT,
-	STEP1,
-	MAXS
-};
+//enum PLAY_SCENE_STATE {
+//	SELECT,
+//	STEP1,
+//	MAXS
+//};
 
 struct TRIGGER {
 	string trigger;
@@ -174,8 +174,11 @@ public:
 	void MoveTo(VECTOR vec, float speed);
 
 	MATRIX ChangeFLOAT3ToMATRIX(FLOAT3 pos, FLOAT3 rot);
+
+	void SetState_(int _state) { state_ = _state; }
 protected:
 	int hModel;  // モデルデータ
 	VECTOR position; // 座標
 	VECTOR rotation; // 回転
+	int state_;
 };

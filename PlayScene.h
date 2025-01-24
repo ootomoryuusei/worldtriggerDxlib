@@ -1,6 +1,15 @@
 #pragma once
 #include "Engine/GameObject.h"
 
+class Player1;
+class Tile;
+class Icon;
+
+enum SCENE {
+	SELECT,
+	STEP1
+};
+
 class PlayScene : public GameObject
 {
 public:
@@ -8,4 +17,8 @@ public:
 	~PlayScene();
 	void Update() override;
 	void Draw() override;
+private:
+	Player1* pl1;
+	Tile* tile;
+	Icon* icon;
 };

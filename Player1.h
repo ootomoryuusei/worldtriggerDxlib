@@ -30,6 +30,8 @@ public:
 
 	void DrawMyTrigger(MYTRIGGER _trigger,MATRIX _leftMatrix,MATRIX _rightMatrix);
 
+	void SetState_(int _state) { state_ = _state; }
+
 	/*BOOL DialogProc(HWND hDlg, UINT msg, WPARAM wp, LPARAM lp);*/
 private:
 	int state_;

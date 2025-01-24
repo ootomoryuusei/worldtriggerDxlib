@@ -6,6 +6,7 @@
 
 Player::Player(GameObject* parent) : Object3D(parent)
 {
+	
 	/*static const std::string folder = "Assets/Character/Player/";*/
 	hModel = MV1LoadModel("Assets//human.mv1");
 	assert(hModel > 0);
