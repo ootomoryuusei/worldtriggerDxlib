@@ -8,7 +8,7 @@
 
 Icon::Icon(GameObject* parent) : Object3D(parent)
 {
-	std::string DLC = "Assets//Image//CharacterIcon//";
+	/*std::string DLC = "Assets//Image//CharacterIcon//";
 	csv_ = new CsvReader();
 	csv_->Load("Assets//Character//CharacterStatus.csv");
 	int FN2DLine;
@@ -70,7 +70,7 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 
 	for (auto itr : hWpSlPos_) {
 		WSPosition_.push_back(itr);
-	}
+	}*/
 
 	
 	
@@ -82,10 +82,6 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 	assert(hTileFrame >= 0);
 	hPIcon = LoadGraph("Assets//Image//pIcon.png");
 	assert(hPIcon >= 0);
-	hSlIcUI_ = LoadGraph("Assets//Image//TriggerSetUI.png");
-	assert(hSlIcUI_ >= 0);
-	hSlIcUIFrame_ = LoadGraph("Assets//Image//TriggerSetUIFrame.png");
-	assert(hSlIcUIFrame_ >= 0);
 	hMainCircle = LoadGraph("Assets//Image//MainTriggerCircle.png");
 	assert(hMainCircle >= 0);
 	hSubCircle = LoadGraph("Assets//Image//SubTriggerCircle.png");
@@ -131,15 +127,9 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 	GetGraphSize(hChSlUI_, &CSgraphSize.x, &CSgraphSize.y);
 	CSgraphSize.halfX = CSgraphSize.x / 2.0f;
 	CSgraphSize.halfY = CSgraphSize.y / 2.0f;
-	GetGraphSize(hSlIcUIFrame_, &SIFgraphSize.x, &SIFgraphSize.y);
-	SIFgraphSize.halfX = SIFgraphSize.x / 2.0f;
-	SIFgraphSize.halfY = SIFgraphSize.y / 2.0f;
+	
 
-	for (int x = 0; x < 2; x++) {
-		for (int y = 0; y < 4; y++) {
-			SIUFPosition_.push_back({ 780.0f + 330.0f * x, 50 + (float)(SIFgraphSize.y + 10) * y });
-		}
-	}
+	
 
 	SetTrigger = { { {"ASTEROID",true},{"MOONBLADE",false},{"FREE",false},{"SHIELD",false}}, //Mainの初期化,
 		{ {"MOONBLADE",false},{"FREE",false},{"SHIELD",false},{"ASTEROID",true}}}; //Subの初期化
@@ -172,10 +162,7 @@ Icon::~Icon()
 
 void Icon::Update()
 {
-	SetMouseDispFlag(true); //マウスを表示させるフラグ関数
-
-	GetMousePoint(&MouseX, &MouseY);
-	XMFLOAT2 mousePos = { (float)MouseX,(float)MouseY };
+	
 
 	Player1* pl1 = GetParent()->FindGameObject<Player1>();
 	Tile* tile = GetParent()->FindGameObject<Tile>();
@@ -184,7 +171,7 @@ void Icon::Update()
 	switch (state_) {
 	case SELECT:
 	{
-		size_t index = 0;
+		/*size_t index = 0;
 		for (auto itr : hChSlIcon_) {
 			if (PointInBox(mousePos, CSPosition_[index], {(float)hChSlGraphSize_[index].x,(float)hChSlGraphSize_[index].y})) {
 				if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
@@ -217,7 +204,7 @@ void Icon::Update()
 			
 			index++;
 		}
-		index = 0;
+		index = 0;*/
 
 		if (CheckHitKey(KEY_INPUT_RETURN)) {
 			pl1 = GetParent()->FindGameObject<Player1>();
@@ -293,7 +280,7 @@ void Icon::Draw()
 		DrawGraph(750, 0, hSlIcUI_, TRUE);
 		DrawGraph(750, 350, hChSlUI_, TRUE);
 
-		size_t index = 0;
+		/*size_t index = 0;
 		for (auto itr : hChSlIcon_) {
 			DrawGraph(CSPosition_[index].x, CSPosition_[index].y, itr, TRUE);
 #if 0
@@ -315,7 +302,7 @@ void Icon::Draw()
 		
 		for (auto itr : SIUFPosition_) {
 			DrawGraph(itr.x, itr.y, hSlIcUIFrame_, TRUE);
-		}
+		}*/
 		break;
 	}
 	case STEP1:
@@ -443,33 +430,7 @@ void Icon::KeyInput()
 	
 }
 
-bool Icon::PointInBox(XMFLOAT2 _point, XMFLOAT2 _LeftUp, XMFLOAT2 _distance)
-{
-	VECTOR P1P2, P2P3, P3P4, P4P1;
-	VECTOR P1P, P2P, P3P, P4P;
-	XMFLOAT2 P1, P2, P3, P4;
 
-	P1 = { _LeftUp.x,  _LeftUp.y }; //左上
-	P2 = { _LeftUp.x + _distance.x,  _LeftUp.y }; //右上
-	P3 = { _LeftUp.x + _distance.x,  _LeftUp.y + _distance.y}; //右下
-	P4 = { _LeftUp.x,  _LeftUp.y + _distance.y}; //左下
-
-	P1P2 = { P2.x - P1.x, P2.y - P1.y };
-	P2P3 = { P3.x - P2.x, P3.y - P2.y };
-	P3P4 = { P4.x - P3.x, P4.y - P3.y };
-	P4P1 = { P1.x - P4.x, P1.y - P4.y };
-
-	P1P = { _point.x - P1.x,_point.y - P1.y };
-	P2P = { _point.x - P2.x,_point.y - P2.y };
-	P3P = { _point.x - P3.x,_point.y - P3.y };
-	P4P = { _point.x - P4.x,_point.y - P4.y };
-
-	if (VCross(P1P2, P1P).z >= 0 && VCross(P2P3, P2P).z >= 0 && VCross(P3P4, P3P).z >= 0 && VCross(P4P1, P4P).z >= 0)
-	{
-		return true;
-	}
-	return false;
-}
 
 void Icon::SetTriggerParam(MYTRIGGER& _myTrigger)
 {

@@ -175,6 +175,15 @@ public:
 
 	MATRIX ChangeFLOAT3ToMATRIX(FLOAT3 pos, FLOAT3 rot);
 
+	/// <summary>
+	/// 点と短形の当たり判定
+	/// </summary>
+	/// <param name="_point"> 点 </param>
+	/// <param name="_leftUp"> 短形の左上座標 </param>
+	/// <param name="_distance"> 短形の幅(x)と高さ(y) </param>
+	/// <returns></returns>
+	bool PointInBox(XMFLOAT2 point, XMFLOAT2 _leftUp, XMFLOAT2 _distance);
+
 	void SetState_(int _state) { state_ = _state; }
 protected:
 	int hModel;  // モデルデータ

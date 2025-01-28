@@ -29,6 +29,9 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{59e8b294-6cba-41d9-a3c5-31f52d3bb429}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Icon">
+      <UniqueIdentifier>{2894f51d-329c-438d-b9ba-eec66ea188db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\GameObject.cpp">
@@ -93,7 +96,6 @@
     </ClCompile>
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="Tile.cpp" />
-    <ClCompile Include="Icon.cpp" />
     <ClCompile Include="Character.cpp">
       <Filter>Character</Filter>
     </ClCompile>
@@ -117,6 +119,15 @@
     </ClCompile>
     <ClCompile Include="Engine\CsvReader.cpp">
       <Filter>01Engine\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Icon.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="ShealdIcon.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="TriggerSetUI.cpp">
+      <Filter>Icon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -188,7 +199,6 @@
     </ClInclude>
     <ClInclude Include="Player1.h" />
     <ClInclude Include="Tile.h" />
-    <ClInclude Include="Icon.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Character.h">
       <Filter>Character</Filter>
@@ -213,6 +223,15 @@
     </ClInclude>
     <ClInclude Include="Engine\CsvReader.h">
       <Filter>01Engine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Icon.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="ShealdIcon.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerSetUI.h">
+      <Filter>Icon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -41,14 +41,14 @@ private:
 	vector<XMFLOAT2> hWpSlPos_;
 	vector<XMFLOAT2> WSPosition_;
 
-	vector<XMFLOAT2> SIUFPosition_;
+	
 
 	int hTile;
 	int hOnTile;
 	int hTileFrame;
 	int hPIcon;
 	int hSlIcUI_;
-	int hSlIcUIFrame_;
+	
 
 	int hChSlUI_;
 
@@ -74,7 +74,7 @@ private:
 	SIZE_2D SCgraphSize; //サブサークルの画像サイズ
 	SIZE_2D TgraphSize; //タイルの画像サイズ
 	SIZE_2D CSgraphSize; //キャラクターセレクトUIの画像サイズ
-	SIZE_2D SIFgraphSize; //キャラクターセレクトUIの画像サイズ
+	
 
 	XMFLOAT2 MCircle;
 	XMFLOAT2 SCircle;
@@ -87,18 +87,8 @@ private:
 
 	MYTRIGGER SetTrigger;
 
-	int MouseX, MouseY; //マウス座標
-
+	
 	void KeyInput();
-
-	/// <summary>
-	/// 点と短形の当たり判定
-	/// </summary>
-	/// <param name="_point"> 点 </param>
-	/// <param name="_leftUp"> 短形の左上座標 </param>
-	/// <param name="_distance"> 短形の幅(x)と高さ(y) </param>
-	/// <returns></returns>
-	bool PointInBox(XMFLOAT2 point, XMFLOAT2 _leftUp,XMFLOAT2 _distance);
 
 	void SetTriggerParam(MYTRIGGER& _myTrigger);
 

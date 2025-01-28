@@ -66,6 +66,11 @@ Player1::~Player1()
 
 void Player1::Update()
 {
+	SetMouseDispFlag(true); //マウスを表示させるフラグ関数
+
+	GetMousePoint(&MouseX, &MouseY);
+	mousePos = { (float)MouseX,(float)MouseY };
+
 	// カメラの設定
 	MATRIX mRot = MGetRotY(rotation.y);  // 回転行列
 	// 回ってないとき、プレイヤーからどれぐらい後ろ？→ベクトル

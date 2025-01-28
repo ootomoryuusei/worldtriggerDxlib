@@ -32,6 +32,8 @@ public:
 
 	void SetState_(int _state) { state_ = _state; }
 
+	XMFLOAT2 GetMousePos() { return mousePos; }
+
 	/*BOOL DialogProc(HWND hDlg, UINT msg, WPARAM wp, LPARAM lp);*/
 private:
 	int state_;
@@ -56,6 +58,9 @@ private:
 	float movetime;
 	float flame;
 	float time;
+
+	int MouseX, MouseY; //マウス座標
+	XMFLOAT2 mousePos;
 
 	/*int nowNum;*/
 
