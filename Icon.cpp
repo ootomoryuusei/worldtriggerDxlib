@@ -236,24 +236,24 @@ void Icon::Update()
 		}
 	}*/
 
-	if (PointInBox(mousePos, PIpos, { (float)PgraphSize.x, (float)PgraphSize.y })){
-		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-			PIpos = { mousePos.x - PgraphSize.halfX,mousePos.y - PgraphSize.halfY};
-			//pl1->SetPosition(mousePos.x,0.0,mousePos.y);
-		}
-		else {
-			for (int i = 0; i < z; i++) {
-				for (int j = 0; j < x; j++) {
-					if (z - i <= 2 || z - i >= 10) {
-						if (PointInBox(mousePos, { pTile[i][j].position.x,pTile[i][j].position.y }
-							, { (float)TgraphSize.x,(float)TgraphSize.y })) {
-							PIpos = { pTile[i][j].position.x ,pTile[i][j].position.y  };
-						}
-					}
-				}
-			}
-		}
-	}
+	//if (PointInBox(mousePos, PIpos, { (float)PgraphSize.x, (float)PgraphSize.y })){
+	//	if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+	//		PIpos = { mousePos.x - PgraphSize.halfX,mousePos.y - PgraphSize.halfY};
+	//		//pl1->SetPosition(mousePos.x,0.0,mousePos.y);
+	//	}
+	//	else {
+	//		for (int i = 0; i < z; i++) {
+	//			for (int j = 0; j < x; j++) {
+	//				if (z - i <= 2 || z - i >= 10) {
+	//					if (PointInBox(mousePos, { pTile[i][j].position.x,pTile[i][j].position.y }
+	//						, { (float)TgraphSize.x,(float)TgraphSize.y })) {
+	//						PIpos = { pTile[i][j].position.x ,pTile[i][j].position.y  };
+	//					}
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
 
 	
 	

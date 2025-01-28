@@ -1,21 +1,21 @@
-#include "ShealdIcon.h"
+#include "TriggerIcon.h"
 #include"Player1.h"
 #include"TriggerSetUIFrame.h"
 
-ShealdIcon::ShealdIcon(GameObject* parent) : Object3D(parent)
+TriggerIcon::TriggerIcon(GameObject* parent) : Object3D(parent)
 {
-	hModel = LoadGraph("Assets//Image//TriggerIcon//Sheald.png");
+	hModel = LoadGraph(fileName_.c_str());
 	assert(hModel >= 0);
 	GetGraphSize(hModel, &graphSize_.x, &graphSize_.y);
 	graphSize_.halfX = graphSize_.x / 2.0f;
 	graphSize_.halfY = graphSize_.y / 2.0f;
 }
 
-ShealdIcon::~ShealdIcon()
+TriggerIcon::~TriggerIcon()
 {
 }
 
-void ShealdIcon::Update()
+void TriggerIcon::Update()
 {
 	Player1* pPl1 = GetParent()->FindGameObject<Player1>();
 	XMFLOAT2 mousePos = pPl1->GetMousePos();
@@ -26,7 +26,7 @@ void ShealdIcon::Update()
 		}
 		else {
 			for (auto itr : pTSUF->GetSIFPosition()) {
-				if (PointInBox({ position.x,position.z },itr,pTSUF->GetSIFGraphSize())) {
+				if (PointInBox({ position.x,position.z }, itr, pTSUF->GetSIFGraphSize())) {
 					position = { itr.x,0.0f,itr.y };
 				}
 			}
@@ -34,7 +34,7 @@ void ShealdIcon::Update()
 	}
 }
 
-void ShealdIcon::Draw()
+void TriggerIcon::Draw()
 {
-	DrawGraph(position.x,position.z , hModel, TRUE);
+	DrawGraph(position.x, position.z, hModel, TRUE);
 }

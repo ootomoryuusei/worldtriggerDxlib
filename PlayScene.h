@@ -4,6 +4,7 @@
 class Player1;
 class Tile;
 class Icon;
+class CsvReader;
 
 enum SCENE {
 	SELECT,
@@ -21,4 +22,5 @@ private:
 	Player1* pl1;
 	Tile* tile;
 	Icon* icon;
+	CsvReader* csv_;
 };

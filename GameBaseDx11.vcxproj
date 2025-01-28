@@ -163,7 +163,9 @@
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="TriggerIcon.cpp" />
     <ClCompile Include="TriggerSetUI.cpp" />
+    <ClCompile Include="TriggerSetUIFrame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Amatori_Chika.h" />
@@ -201,7 +203,9 @@
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="TriggerIcon.h" />
     <ClInclude Include="TriggerSetUI.h" />
+    <ClInclude Include="TriggerSetUIFrame.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc" />
