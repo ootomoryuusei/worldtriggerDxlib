@@ -4,15 +4,24 @@
 
 TriggerIcon::TriggerIcon(GameObject* parent) : Object3D(parent)
 {
+	/*hModel = LoadGraph(fileName_.c_str());
+	assert(hModel >= 0);
+	GetGraphSize(hModel, &graphSize_.x, &graphSize_.y);
+	graphSize_.halfX = graphSize_.x / 2.0f;
+	graphSize_.halfY = graphSize_.y / 2.0f;*/
+}
+
+TriggerIcon::~TriggerIcon()
+{
+}
+
+void TriggerIcon::Initialize()
+{
 	hModel = LoadGraph(fileName_.c_str());
 	assert(hModel >= 0);
 	GetGraphSize(hModel, &graphSize_.x, &graphSize_.y);
 	graphSize_.halfX = graphSize_.x / 2.0f;
 	graphSize_.halfY = graphSize_.y / 2.0f;
-}
-
-TriggerIcon::~TriggerIcon()
-{
 }
 
 void TriggerIcon::Update()

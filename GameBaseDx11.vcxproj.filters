@@ -132,7 +132,9 @@
     <ClCompile Include="TriggerSetUIFrame.cpp">
       <Filter>Icon</Filter>
     </ClCompile>
-    <ClCompile Include="TriggerIcon.cpp" />
+    <ClCompile Include="TriggerIcon.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -240,7 +242,9 @@
     <ClInclude Include="TriggerSetUIFrame.h">
       <Filter>Icon</Filter>
     </ClInclude>
-    <ClInclude Include="TriggerIcon.h" />
+    <ClInclude Include="TriggerIcon.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc">

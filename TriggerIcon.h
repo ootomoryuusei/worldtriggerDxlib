@@ -6,6 +6,7 @@ class TriggerIcon :
 public:
     TriggerIcon(GameObject* parent);
     ~TriggerIcon();
+    void Initialize() override;
     void Update() override;
     void Draw() override;
 

@@ -33,11 +33,9 @@ PlayScene::PlayScene(GameObject* parent)
 		graphName = csv_->GetString(FN2DLine, y);
 		std::string flPath;
 		flPath = DLC + graphName;
-		/*TriggerIcon* pTI = new TriggerIcon();
-		pTI->SetFileName(flPath);
-		Instantiate<TriggerIcon>(this);*/
 	}
-	/*Instantiate<ShealdIcon>(this);*/
+
+	Instantiate<ShealdIcon>(this);
 	Instantiate<TriggerSetUIFrame>(this);
 	
 
