@@ -20,6 +20,18 @@
     <Filter Include="10PlayScene">
       <UniqueIdentifier>{816aca37-0156-49d6-8e9b-8462f2b29676}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Character">
+      <UniqueIdentifier>{66ee13bc-cf61-4e1b-bf0d-8335a8e87b5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Character\Characters">
+      <UniqueIdentifier>{b8e0de91-cfdb-4013-a5a3-ec28e33d3128}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{59e8b294-6cba-41d9-a3c5-31f52d3bb429}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Icon">
+      <UniqueIdentifier>{2894f51d-329c-438d-b9ba-eec66ea188db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\GameObject.cpp">
@@ -27,9 +39,6 @@
     </ClCompile>
     <ClCompile Include="Engine\RootObject.cpp">
       <Filter>01Engine\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\CsvReader.cpp">
-      <Filter>01Engine\ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Main.cpp">
       <Filter>01Engine</Filter>
@@ -40,7 +49,6 @@
     <ClCompile Include="Engine\Transform.cpp">
       <Filter>01Engine\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="ImGui\imgui.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
@@ -65,10 +73,6 @@
     <ClCompile Include="ImGui\imgui_widgets.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="TitleScene.cpp" />
-    <ClCompile Include="PlayScene.cpp">
-      <Filter>10PlayScene</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>10PlayScene</Filter>
     </ClCompile>
@@ -92,7 +96,45 @@
     </ClCompile>
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="Tile.cpp" />
-    <ClCompile Include="Icon.cpp" />
+    <ClCompile Include="Character.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Mikumo_Osamu.cpp">
+      <Filter>Character\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Kuga_Yuuma.cpp">
+      <Filter>Character\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Amatori_Chika.cpp">
+      <Filter>Character\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\CsvReader.cpp">
+      <Filter>01Engine\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Icon.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="ShealdIcon.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="TriggerSetUI.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="TriggerSetUIFrame.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="TriggerIcon.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -100,9 +142,6 @@
     </ClInclude>
     <ClInclude Include="Engine\RootObject.h">
       <Filter>01Engine\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\CsvReader.h">
-      <Filter>01Engine\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Global.h">
       <Filter>01Engine</Filter>
@@ -113,7 +152,6 @@
     <ClInclude Include="Engine\Transform.h">
       <Filter>01Engine\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="TestScene.h" />
     <ClInclude Include="ImGui\imconfig.h">
       <Filter>ImGui</Filter>
     </ClInclude>
@@ -144,10 +182,6 @@
     <ClInclude Include="ImGui\imstb_truetype.h">
       <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="TitleScene.h" />
-    <ClInclude Include="PlayScene.h">
-      <Filter>10PlayScene</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>10PlayScene</Filter>
     </ClInclude>
@@ -171,8 +205,46 @@
     </ClInclude>
     <ClInclude Include="Player1.h" />
     <ClInclude Include="Tile.h" />
-    <ClInclude Include="Icon.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Character.h">
+      <Filter>Character</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Mikumo_Osamu.h">
+      <Filter>Character\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Kuga_Yuuma.h">
+      <Filter>Character\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Amatori_Chika.h">
+      <Filter>Character\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CsvReader.h">
+      <Filter>01Engine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Icon.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="ShealdIcon.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerSetUI.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerSetUIFrame.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerIcon.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc">

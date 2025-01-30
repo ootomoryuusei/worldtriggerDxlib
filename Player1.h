@@ -1,10 +1,17 @@
 #pragma once
 #include "Object3D.h"
-
-
-
 //class Tile;
 class Icon;
+//class CsvReader;
+
+enum WEAPON {
+	NONE,
+	FREE,
+	MOONBLADE,
+	SHIELD,
+	ASTEROID,
+	MAX
+};
 
 class Player1 :
     public Object3D
@@ -23,8 +30,14 @@ public:
 
 	void DrawMyTrigger(MYTRIGGER _trigger,MATRIX _leftMatrix,MATRIX _rightMatrix);
 
+	void SetState_(int _state) { state_ = _state; }
+
+	XMFLOAT2 GetMousePos() { return mousePos; }
+
 	/*BOOL DialogProc(HWND hDlg, UINT msg, WPARAM wp, LPARAM lp);*/
 private:
+	int state_;
+
 	int hBlade; // サーベルモデルのデータ
 
 	int hShield;
@@ -33,6 +46,7 @@ private:
 
 	/*Tile* tile;*/
 	Icon* icon;
+	/*CsvReader* csv_;*/
 
 	int hPIcon;
 
@@ -45,12 +59,14 @@ private:
 	float flame;
 	float time;
 
+	int MouseX, MouseY; //マウス座標
+	XMFLOAT2 mousePos;
+
 	/*int nowNum;*/
 
 	CHARACTER_STATUS cStatus;
 	
 	MYTRIGGER Trigger;
 
-	
 };
 

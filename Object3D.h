@@ -2,21 +2,29 @@
 // GameObject→Object3D→Player/Groundの関係にする
 #include "Engine/GameObject.h"
 
-const int FREE = 500;
-const int MOONBLADE = 501;
-const int SHIELD = 502;
-const int ASTEROID = 503;
+using std::string;
+
+//const int FREE = 500;
+//const int MOONBLADE = 501;
+//const int SHIELD = 502;
+//const int ASTEROID = 503;
 
 const int z = 11;
 const int x = 11;
 
+//enum PLAY_SCENE_STATE {
+//	SELECT,
+//	STEP1,
+//	MAXS
+//};
 
 struct TRIGGER {
-	int trigger;
+	string trigger;
 	bool IsSelected;
 	float angle;
 	float startAngle;
 	float rangeSize;
+	int tNum;
 };
 
 struct MYTRIGGER {
@@ -166,8 +174,20 @@ public:
 	void MoveTo(VECTOR vec, float speed);
 
 	MATRIX ChangeFLOAT3ToMATRIX(FLOAT3 pos, FLOAT3 rot);
+
+	/// <summary>
+	/// 点と短形の当たり判定
+	/// </summary>
+	/// <param name="_point"> 点 </param>
+	/// <param name="_leftUp"> 短形の左上座標 </param>
+	/// <param name="_distance"> 短形の幅(x)と高さ(y) </param>
+	/// <returns></returns>
+	bool PointInBox(XMFLOAT2 point, XMFLOAT2 _leftUp, XMFLOAT2 _distance);
+
+	void SetState_(int _state) { state_ = _state; }
 protected:
 	int hModel;  // モデルデータ
 	VECTOR position; // 座標
 	VECTOR rotation; // 回転
+	int state_;
 };

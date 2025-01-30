@@ -21,7 +21,7 @@ public:
 	const int GetTileX() { return x; }
 	const int GetTileZ() { return z; }
 private:
-	
+
 	int hTile;
 	int hTileFrame;
 	int hPIcon;

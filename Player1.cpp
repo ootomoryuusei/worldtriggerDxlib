@@ -2,9 +2,10 @@
 #include "Camera.h"
 #include"Tile.h"
 #include"Icon.h"
+#include"Engine/CsvReader.h"
+#include"PlayScene.h"
 #include"resource.h"
 #include"ImGui/imgui.h"
-
 
 Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1),hShield(-1)
 {
@@ -35,6 +36,8 @@ Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1),hShield(-1)
 	time = 0.0f;
 
 	Trigger = {};
+
+	state_ = SELECT;
 }
 
 Player1::~Player1()
@@ -63,6 +66,11 @@ Player1::~Player1()
 
 void Player1::Update()
 {
+	SetMouseDispFlag(true); //マウスを表示させるフラグ関数
+
+	GetMousePoint(&MouseX, &MouseY);
+	mousePos = { (float)MouseX,(float)MouseY };
+
 	// カメラの設定
 	MATRIX mRot = MGetRotY(rotation.y);  // 回転行列
 	// 回ってないとき、プレイヤーからどれぐらい後ろ？→ベクトル
@@ -74,56 +82,46 @@ void Player1::Update()
 	SetCameraPositionAndTarget_UpVecY(position + pRot, position + vRot);
 	icon = GetParent()->FindGameObject<Icon>();
 	Tile* tile = GetParent()->FindGameObject<Tile>();
-
-	//if (icon->GetCompWay()) {
-	//	time += flame;  // 時間を増加させる
-	//	if (time > movetime) {  // 一定の時間が経過した場合
-	//		static size_t index = 0;  // 現在処理しているイテレーターのインデックス
-	//		const auto& way = icon->GetWay();
-
-	//		// イテレーターが範囲内にある場合に処理
-	//		if (index < way.size()) {
-	//			// 現在の位置を取得
-	//			position = tile->GetTilesData(way[index].y, way[index].x).position;
-	//			// インデックスを次に進める
-	//			++index;
-	//		}
-	//		else {
-	//			// すべての処理が終わった場合、インデックスをリセット
-	//			icon->SetCompWay(false);
-	//			icon->GetWay().clear();
-	//		}
-	//		time = 0.0f;  // 時間リセット
-	//	}
-	//}
-	
-	
 }
 
 void Player1::Draw()
 {
-	position = { icon->GetPIconPos().x,0.0,icon->GetPIconPos().y };
-	//Object3D::Draw(); // 基底クラスの関数を呼ぶ→Playerキャラを描画する
-	MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position,rotation);
-	MV1SetMatrix(hModel,mModel);
-	MV1DrawModel(hModel);
+	switch (state_)
+	{
+	case SELECT:
+	{
+		break;
+	}
+	case STEP1:
+	{
+		position = { icon->GetPIconPos().x,0.0,icon->GetPIconPos().y };
+		//Object3D::Draw(); // 基底クラスの関数を呼ぶ→Playerキャラを描画する
+		MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);
+		MV1SetMatrix(hModel, mModel);
+		MV1DrawModel(hModel);
 
-	/*DrawCapsule3D(position, position + VGet(0, 160, 0), 30, 20, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);*/
+		/*DrawCapsule3D(position, position + VGet(0, 160, 0), 30, 20, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);*/
 
-	int RightHand = MV1SearchFrame(hModel, "RightHand");
-	assert(RightHand >= 0);
-	MATRIX mRightHand = MV1GetFrameLocalWorldMatrix(hModel, RightHand);
-	//MATRIX mBlade = MV1GetFrameLocalWorldMatrix(hModel, RightHand);
+		int RightHand = MV1SearchFrame(hModel, "RightHand");
+		assert(RightHand >= 0);
+		MATRIX mRightHand = MV1GetFrameLocalWorldMatrix(hModel, RightHand);
+		//MATRIX mBlade = MV1GetFrameLocalWorldMatrix(hModel, RightHand);
 
-	int LeftHand = MV1SearchFrame(hModel, "LeftHand");
-	assert(LeftHand >= 0);
-	MATRIX mLeftHand = MV1GetFrameLocalWorldMatrix(hModel, LeftHand);
-	MATRIX mAsteroid = Object3D::ChangeFLOAT3ToMATRIX(VGet(mLeftHand.m[3][0],mLeftHand.m[3][1] - 0.2f, mLeftHand.m[3][2]),rotation);
+		int LeftHand = MV1SearchFrame(hModel, "LeftHand");
+		assert(LeftHand >= 0);
+		MATRIX mLeftHand = MV1GetFrameLocalWorldMatrix(hModel, LeftHand);
+		MATRIX mAsteroid = Object3D::ChangeFLOAT3ToMATRIX(VGet(mLeftHand.m[3][0], mLeftHand.m[3][1] - 0.2f, mLeftHand.m[3][2]), rotation);
 
-	MATRIX mShield = Object3D::ChangeFLOAT3ToMATRIX({ position.x,position.y,position.z - 1.0f }, rotation);
+		MATRIX mShield = Object3D::ChangeFLOAT3ToMATRIX({ position.x,position.y,position.z - 1.0f }, rotation);
 
-	DrawMyTrigger(Trigger, mLeftHand, mRightHand);
+		DrawMyTrigger(Trigger, mLeftHand, mRightHand);
 
+		break;
+	}
+	default:
+		break;
+	}
+	
 	// サーベルの刃は、(0,0,0)～(0,-150,0)にある。これにmSabelをかけると、今の座標が手に入る
 	/*DrawLine3D(VGet(0, 0, 0) * hBlade, VGet(0, -150, 0) * hBlade, GetColor(255, 0, 0));*/
 }
@@ -135,9 +133,10 @@ void Player1::SetMyTrigger(MYTRIGGER _trigger)
 
 void Player1::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix)
 {
+
 	for (int i = 0; i < 4; i++) {
 		if (_trigger.Main[i].IsSelected) {
-			switch ( _trigger.Main[i].trigger)
+			switch (_trigger.Main[i].tNum)
 			{
 			case FREE:
 			{
@@ -164,7 +163,7 @@ void Player1::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _righ
 		}
 
 		if (_trigger.Sub[i].IsSelected) {
-			switch (_trigger.Sub[i].trigger)
+			switch (_trigger.Sub[i].tNum)
 			{
 			case FREE:
 			{

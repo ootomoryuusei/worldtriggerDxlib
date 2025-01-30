@@ -2,6 +2,10 @@
 #include "Object3D.h"
 #include<vector>
 
+using std::vector;
+
+class CsvReader;
+
 class Icon :
     public Object3D
 {
@@ -18,32 +22,50 @@ public:
 	void SetCompWay(bool _compWay) { compWay = _compWay; }
 
 	XMFLOAT2 GetPIconPos();
+
+	/*int GetWNLine() { return WNLine; }
+	int GetALine() { return ALine; }
+	int GetSALine() { return SALine; }
+	int GetRSLine() { return RSLine; }
+	XMINT2 GetCSVSize() { return XMINT2(width, height); }*/
 private:
+	CsvReader* csv_;
+
+	vector<int> hChSlIcon_;
+	vector<SIZE_2D> hChSlGraphSize_;
+	vector<XMFLOAT2> hChSlPos_;
+	vector<XMFLOAT2> CSPosition_;
+
+	vector<int> hWpSlIcon_;
+	vector<SIZE_2D> hWpSlGraphSize_;
+	vector<XMFLOAT2> hWpSlPos_;
+	vector<XMFLOAT2> WSPosition_;
+
+	
+
 	int hTile;
 	int hOnTile;
 	int hTileFrame;
 	int hPIcon;
-	int hSelectIcon;
+	int hSlIcUI_;
+	
+
+	int hChSlUI_;
 
 	int hMainCircle;
 	int hSubCircle;
-
-	int hATIcon;
-	int hDTIcon;
-	int hOTIcon;
-	int hGTIcon;
-	int hSTIcon;
 
 	int prevX, prevY;
 	int cX, cY;
 	bool prevKey;
 	bool compWay;
 
-	float StartAngle, Angle;
+	int WNLine, ALine, SALine, RSLine;
+	int width, height;
 
 	TILEDATA pTile[z][x];
 
-	std::vector<XMINT2> way;
+	vector<XMINT2> way;
 
 	CHARACTER_STATUS getStatus;
 
@@ -51,6 +73,8 @@ private:
 	SIZE_2D MCgraphSize; //メインサークルの画像サイズ
 	SIZE_2D SCgraphSize; //サブサークルの画像サイズ
 	SIZE_2D TgraphSize; //タイルの画像サイズ
+	SIZE_2D CSgraphSize; //キャラクターセレクトUIの画像サイズ
+	
 
 	XMFLOAT2 MCircle;
 	XMFLOAT2 SCircle;
@@ -63,11 +87,8 @@ private:
 
 	MYTRIGGER SetTrigger;
 
-	int MouseX, MouseY; //マウス座標
-
+	
 	void KeyInput();
-
-	bool MousePointInBox(XMFLOAT2 _mousePoint, XMFLOAT2 _leftUp,XMFLOAT2 _distance);
 
 	void SetTriggerParam(MYTRIGGER& _myTrigger);
 
