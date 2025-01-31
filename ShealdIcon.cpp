@@ -4,15 +4,20 @@
 
 ShealdIcon::ShealdIcon(GameObject* parent) : Object3D(parent)
 {
-	hModel = LoadGraph("Assets//Image//TriggerIcon//Sheald.png");
-	assert(hModel >= 0);
-	GetGraphSize(hModel, &graphSize_.x, &graphSize_.y);
-	graphSize_.halfX = graphSize_.x / 2.0f;
-	graphSize_.halfY = graphSize_.y / 2.0f;
+	position = { 0,0,0 };
 }
 
 ShealdIcon::~ShealdIcon()
 {
+}
+
+void ShealdIcon::Load(const std::string& _fileName)
+{
+	hModel = LoadGraph(_fileName.c_str());
+	assert(hModel >= 0);
+	GetGraphSize(hModel, &graphSize_.x, &graphSize_.y);
+	graphSize_.halfX = graphSize_.x / 2.0f;
+	graphSize_.halfY = graphSize_.y / 2.0f;
 }
 
 void ShealdIcon::Update()

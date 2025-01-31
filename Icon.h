@@ -23,6 +23,7 @@ public:
 
 	XMFLOAT2 GetPIconPos();
 
+	std::string GetFilePath(CsvReader* _csv, std::string _DLC, std::string _wontLineName, int _y);
 	/*int GetWNLine() { return WNLine; }
 	int GetALine() { return ALine; }
 	int GetSALine() { return SALine; }
@@ -95,5 +96,7 @@ private:
 	XMINT2 GetSelectedTrigger(MYTRIGGER _myTrigger);
 
 	XMINT2 GetPlayerOnTileNum();
+	
+	
 };
 

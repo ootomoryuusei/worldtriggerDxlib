@@ -508,3 +508,18 @@ XMINT2 Icon::GetPlayerOnTileNum()
 	}
 	return XMINT2(XY.x,XY.y);
 }
+
+std::string Icon::GetFilePath(CsvReader* _csv,std::string _DLC,std::string _wontLineName ,int _y)
+{
+	int WontLineNum = 0;
+	for (int x = 0; x < _csv->GetWidth(0); x++) {
+		if (_csv->GetString(x, 0) == _wontLineName) {
+			WontLineNum = x;
+		}
+	}
+	std::string graphName;
+	graphName = _csv->GetString(WontLineNum, _y);
+	std::string flPath;
+	flPath = _DLC + graphName;
+	return flPath;
+}
