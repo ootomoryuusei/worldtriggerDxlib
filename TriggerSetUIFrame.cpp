@@ -26,7 +26,7 @@ void TriggerSetUIFrame::Update()
 void TriggerSetUIFrame::Draw()
 {
 	for (auto itr : SIUFPosition_) {
-		position = { itr.x, 0.0f,itr.y };
-		DrawGraph(position.x,position.z,hModel, TRUE);
+		position = { itr.x,itr.y, 0.0f };
+		DrawGraph(position.x,position.y,hModel, TRUE);
 	}
 }

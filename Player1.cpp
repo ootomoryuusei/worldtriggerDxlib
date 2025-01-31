@@ -94,7 +94,7 @@ void Player1::Draw()
 	}
 	case STEP1:
 	{
-		position = { icon->GetPIconPos().x,0.0,icon->GetPIconPos().y };
+		position = { icon->GetPIconPos().x,icon->GetPIconPos().y,0.0 };
 		//Object3D::Draw(); // Šî’êƒNƒ‰ƒX‚ÌŠÖ”‚ğŒÄ‚Ô¨PlayerƒLƒƒƒ‰‚ğ•`‰æ‚·‚é
 		MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);
 		MV1SetMatrix(hModel, mModel);

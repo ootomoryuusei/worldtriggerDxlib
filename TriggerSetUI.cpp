@@ -22,6 +22,6 @@ void TriggerSetUI::Update()
 
 void TriggerSetUI::Draw()
 {
-	DrawGraph(position.x, position.z, hModel, TRUE);
+	DrawGraph(position.x, position.y, hModel, TRUE);
 	
 }

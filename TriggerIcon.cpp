@@ -29,14 +29,14 @@ void TriggerIcon::Update()
 	Player1* pPl1 = GetParent()->FindGameObject<Player1>();
 	XMFLOAT2 mousePos = pPl1->GetMousePos();
 	TriggerSetUIFrame* pTSUF = GetParent()->FindGameObject<TriggerSetUIFrame>();
-	if (PointInBox(mousePos, { position.x,position.z }, { (float)graphSize_.x, (float)graphSize_.y })) {
+	if (PointInBox(mousePos, { position.x,position.y }, { (float)graphSize_.x, (float)graphSize_.y })) {
 		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-			position = { mousePos.x - graphSize_.halfX,0.0f,mousePos.y - graphSize_.halfY };
+			position = { mousePos.x - graphSize_.halfX,mousePos.y - graphSize_.halfY ,0.0f };
 		}
 		else {
 			for (auto itr : pTSUF->GetSIFPosition()) {
-				if (PointInBox({ position.x,position.z }, itr, pTSUF->GetSIFGraphSize())) {
-					position = { itr.x,0.0f,itr.y };
+				if (PointInBox({ position.x,position.y }, itr, pTSUF->GetSIFGraphSize())) {
+					position = { itr.x,itr.y ,0.0f };
 				}
 			}
 		}
@@ -45,5 +45,5 @@ void TriggerIcon::Update()
 
 void TriggerIcon::Draw()
 {
-	DrawGraph(position.x, position.z, hModel, TRUE);
+	DrawGraph(position.x, position.y, hModel, TRUE);
 }
