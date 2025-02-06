@@ -11,7 +11,7 @@ ShealdIcon::~ShealdIcon()
 {
 }
 
-void ShealdIcon::Load(const std::string& _fileName)
+void ShealdIcon::Load(const std::string _fileName)
 {
 	hModel = LoadGraph(_fileName.c_str());
 	assert(hModel >= 0);

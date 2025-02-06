@@ -35,7 +35,8 @@ PlayScene::PlayScene(GameObject* parent)
 		flPath = DLC + graphName;
 		ShealdIcon* pSheald = Instantiate<ShealdIcon>(this);
 		pSheald->Load(flPath);
-		pSheald->SetPosition(32 * y, 0, 0);
+		pSheald->SetPosition(0, 32 * y, 0);
+		pSheald->GetPosition();
 	}
 
 	/*Instantiate<ShealdIcon>(this);*/
