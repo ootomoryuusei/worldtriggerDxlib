@@ -8,8 +8,8 @@
 #include"Character.h"
 #include"TriggerSetUI.h"
 #include"TriggerSetUIFrame.h"
-#include"ShealdIcon.h"
 #include"TriggerIcon.h"
+#include"TriggerIcons.h"
 #include"Engine/CsvReader.h"
 
 PlayScene::PlayScene(GameObject* parent)
@@ -18,8 +18,9 @@ PlayScene::PlayScene(GameObject* parent)
 	Instantiate<Player1>(this);
 	/*Instantiate<Character>(this);*/
 	Instantiate<Tile>(this);
+	Instantiate<TriggerIcons>(this);
 	/*Instantiate<Icon>(this);*/
-	Instantiate<TriggerSetUI>(this);
+	/*Instantiate<TriggerSetUI>(this);
 	csv_->Load("Assets//Weapon//DefaultWeaponStatus.csv");
 	int FN2DLine = 0;
 	string DLC = "Assets//Image//TriggerIcon//";
@@ -33,14 +34,14 @@ PlayScene::PlayScene(GameObject* parent)
 		graphName = csv_->GetString(FN2DLine, y);
 		std::string flPath;
 		flPath = DLC + graphName;
-		ShealdIcon* pSheald = Instantiate<ShealdIcon>(this);
-		pSheald->Load(flPath);
-		pSheald->SetPosition(32 * y, 0, 0);
+		TriggerIcon* pTIcon = Instantiate<TriggerIcon>(this);
+		pTIcon->Load(flPath);
+		SIZE_2D IconSize = pTIcon->GerGraphSize();
+		VECTOR graphPos = { 0,IconSize.y * (y - 1) ,0 };
+		pTIcon->SetInitialPosition(graphPos);
+		pTIcon->Set3DPosition(graphPos);
 	}
-
-	/*Instantiate<ShealdIcon>(this);*/
-	Instantiate<TriggerSetUIFrame>(this);
-	
+	TriggerSetUIFrame* pTSUF = Instantiate<TriggerSetUIFrame>(this);*/
 
 	Instantiate<Camera>(this); // Player‚æ‚èŒã‚É‘‚­
 	// ‚Æ‚è‚ ‚¦‚¸ƒJƒƒ‰‚ğİ’è‚·‚é
