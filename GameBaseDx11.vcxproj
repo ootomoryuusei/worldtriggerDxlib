@@ -159,11 +159,11 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="PlayScene.cpp" />
-    <ClCompile Include="ShealdIcon.cpp" />
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="TriggerIcon.cpp" />
+    <ClCompile Include="TriggerIcons.cpp" />
     <ClCompile Include="TriggerSetUI.cpp" />
     <ClCompile Include="TriggerSetUIFrame.cpp" />
   </ItemGroup>
@@ -199,11 +199,11 @@
     <ClInclude Include="Player1.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="ShealdIcon.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="TriggerIcon.h" />
+    <ClInclude Include="TriggerIcons.h" />
     <ClInclude Include="TriggerSetUI.h" />
     <ClInclude Include="TriggerSetUIFrame.h" />
   </ItemGroup>

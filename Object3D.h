@@ -185,6 +185,9 @@ public:
 	bool PointInBox(XMFLOAT2 point, XMFLOAT2 _leftUp, XMFLOAT2 _distance);
 
 	void SetState_(int _state) { state_ = _state; }
+
+	VECTOR Get3DPosition() { return position; }
+	void Set3DPosition(VECTOR _position) { position = _position; }
 protected:
 	int hModel;  // モデルデータ
 	VECTOR position; // 座標
