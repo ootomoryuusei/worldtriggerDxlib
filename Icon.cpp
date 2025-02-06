@@ -86,8 +86,6 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 	assert(hMainCircle >= 0);
 	hSubCircle = LoadGraph("Assets//Image//SubTriggerCircle.png");
 	assert(hSubCircle >= 0);
-	hChSlUI_ = LoadGraph("Assets//Image//CharacterSelectUI.png");
-	assert(hChSlUI_ >= 0);
 
 	int count = 0;
 	float xpos = 1100;
@@ -277,9 +275,6 @@ void Icon::Draw()
 	{
 	case SELECT:
 	{
-		DrawGraph(750, 0, hSlIcUI_, TRUE);
-		DrawGraph(750, 350, hChSlUI_, TRUE);
-
 		/*size_t index = 0;
 		for (auto itr : hChSlIcon_) {
 			DrawGraph(CSPosition_[index].x, CSPosition_[index].y, itr, TRUE);

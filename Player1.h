@@ -34,7 +34,6 @@ public:
 
 	XMFLOAT2 GetMousePos() { return mousePos; }
 
-	/*BOOL DialogProc(HWND hDlg, UINT msg, WPARAM wp, LPARAM lp);*/
 private:
 	int state_;
 

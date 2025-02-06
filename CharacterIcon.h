@@ -1,11 +1,11 @@
 #pragma once
 #include"Object3D.h"
-class TriggerIcon :
-    public Object3D
+class CharacterIcon
+    :public Object3D
 {
 public:
-    TriggerIcon(GameObject* parent);
-    ~TriggerIcon();
+    CharacterIcon(GameObject* parent);
+    ~CharacterIcon();
     void Update() override;
     void Draw() override;
 
