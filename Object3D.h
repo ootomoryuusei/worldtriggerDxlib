@@ -19,12 +19,12 @@ const int x = 11;
 //};
 
 struct TRIGGER {
-	string trigger;
-	bool IsSelected;
-	float angle;
-	float startAngle;
-	float rangeSize;
-	int tNum;
+	string trigger; //トリガー名
+	bool IsSelected; //選択されているかどうか
+	float angle; //アングル
+	float startAngle; //はじめのアングル
+	float rangeSize; //射程や警戒範囲の長さ
+	int tNum; //triggerナンバー
 };
 
 struct MYTRIGGER {
@@ -33,8 +33,11 @@ struct MYTRIGGER {
 };
 
 struct SIZE_2D {
-	int x, y;
-	int halfX, halfY;
+	int x, y, halfX, halfY;
+};
+
+struct SIZE_F_2D {
+	float x, y, halfX, halfY;
 };
 
 struct TILEDATA {
@@ -46,7 +49,6 @@ struct CHARACTER_STATUS
 {
 	int move, attack, speed, defense;
 };
-
 
 /// <summary>
 /// 

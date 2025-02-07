@@ -4,7 +4,6 @@
 #include"Icon.h"
 #include"Engine/CsvReader.h"
 #include"PlayScene.h"
-#include"resource.h"
 #include"ImGui/imgui.h"
 
 Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1),hShield(-1)
@@ -94,7 +93,7 @@ void Player1::Draw()
 	}
 	case STEP1:
 	{
-		position = { icon->GetPIconPos().x,icon->GetPIconPos().y,0.0 };
+		/*position = { icon->GetPIconPos().x,icon->GetPIconPos().y,0.0 };*/
 		//Object3D::Draw(); // Šî’êƒNƒ‰ƒX‚ÌŠÖ”‚ğŒÄ‚Ô¨PlayerƒLƒƒƒ‰‚ğ•`‰æ‚·‚é
 		MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);
 		MV1SetMatrix(hModel, mModel);

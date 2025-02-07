@@ -1,6 +1,6 @@
 #include "CharacterIcon.h"
 #include"Player1.h"
-#include"TriggerSetUIFrame.h"
+#include"CharacterSetUIFrame.h"
 
 CharacterIcon::CharacterIcon(GameObject* parent) : Object3D(parent)
 {
@@ -18,15 +18,15 @@ void CharacterIcon::Update()
 {
 	Player1* pPl1 = GetParent()->GetParent()->FindGameObject<Player1>();
 	XMFLOAT2 mousePos = pPl1->GetMousePos();
-	TriggerSetUIFrame* pTSUF = GetParent()->FindGameObject<TriggerSetUIFrame>();
-	if (PointInBox(mousePos, { position.x,position.y }, { (float)graphSize_.x, (float)graphSize_.y })) {
+	CharacterSetUIFrame* pFrame = GetParent()->FindGameObject<CharacterSetUIFrame>();
+	if (PointInBox(mousePos , { position.x,position.y }, { (float)graphSize_.x, (float)graphSize_.y })) {
 		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 			position = { mousePos.x - graphSize_.halfX,mousePos.y - graphSize_.halfY ,0.0f };
 		}
 		else {
 			int num = 0;
-			for (auto itr : pTSUF->GetSIFPosition()) {
-				if (PointInBox({ position.x,position.y }, itr, pTSUF->GetSIFGraphSize())) {
+			for (auto itr : pFrame->GetFramePosition()) {
+				if (PointInBox({ position.x,position.y }, itr, pFrame->GetSIFGraphSize())) {
 					position = { itr.x,itr.y ,0.0f };
 					settingNum_ = num;
 

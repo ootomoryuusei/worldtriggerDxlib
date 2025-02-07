@@ -3,100 +3,31 @@
 #include<vector>
 
 using std::vector;
-
-class CsvReader;
+using std::string;
 
 class Icon :
     public Object3D
 {
+protected:
+    SIZE_F_2D graphSizeF_; //アイコンの画像サイズ(float)
+    SIZE_2D graphSize_; //アイコンの画像サイズ
+    string fileName_; //ファイル名
+   /* VECTOR initialPosition_;
+    bool alreadySet_;
+    int settingNum_;*/
 public:
-	Icon(GameObject* parent);
-	~Icon();
-	void Update() override;
-	void Draw() override;
+    Icon(GameObject* parent);
+    ~Icon();
+    virtual void Update() override;
+    virtual void Draw() override;
 
-	auto GetWay() { return way; }
+    void Load(const std::string& _fileName);
 
-	bool GetCompWay() { return compWay; }
-
-	void SetCompWay(bool _compWay) { compWay = _compWay; }
-
-	XMFLOAT2 GetPIconPos();
-
-	std::string GetFilePath(CsvReader* _csv, std::string _DLC, std::string _wontLineName, int _y);
-	/*int GetWNLine() { return WNLine; }
-	int GetALine() { return ALine; }
-	int GetSALine() { return SALine; }
-	int GetRSLine() { return RSLine; }
-	XMINT2 GetCSVSize() { return XMINT2(width, height); }*/
+    string GetFileName() { return fileName_; }
+    SIZE_F_2D GetGraphSizeF_2D() { return graphSizeF_; }
+    SIZE_2D GetGraphSize_2D() { return graphSize_; }
+    /*void SetInitialPosition(VECTOR _initialPosition) { initialPosition_ = _initialPosition; }
+    int GetSettingNum() { return settingNum_; }*/
+   
 private:
-	CsvReader* csv_;
-
-	vector<int> hChSlIcon_;
-	vector<SIZE_2D> hChSlGraphSize_;
-	vector<XMFLOAT2> hChSlPos_;
-	vector<XMFLOAT2> CSPosition_;
-
-	vector<int> hWpSlIcon_;
-	vector<SIZE_2D> hWpSlGraphSize_;
-	vector<XMFLOAT2> hWpSlPos_;
-	vector<XMFLOAT2> WSPosition_;
-
-	
-
-	int hTile;
-	int hOnTile;
-	int hTileFrame;
-	int hPIcon;
-	int hSlIcUI_;
-	
-
-	int hChSlUI_;
-
-	int hMainCircle;
-	int hSubCircle;
-
-	int prevX, prevY;
-	int cX, cY;
-	bool prevKey;
-	bool compWay;
-
-	int WNLine, ALine, SALine, RSLine;
-	int width, height;
-
-	TILEDATA pTile[z][x];
-
-	vector<XMINT2> way;
-
-	CHARACTER_STATUS getStatus;
-
-	SIZE_2D PgraphSize; //プレイヤーアイコンの画像サイズ
-	SIZE_2D MCgraphSize; //メインサークルの画像サイズ
-	SIZE_2D SCgraphSize; //サブサークルの画像サイズ
-	SIZE_2D TgraphSize; //タイルの画像サイズ
-	SIZE_2D CSgraphSize; //キャラクターセレクトUIの画像サイズ
-	
-
-	XMFLOAT2 MCircle;
-	XMFLOAT2 SCircle;
-
-	XMFLOAT2 TCenter;
-
-	XMINT2 OtNum;
-
-	XMFLOAT2 PIpos;
-
-	MYTRIGGER SetTrigger;
-
-	
-	void KeyInput();
-
-	void SetTriggerParam(MYTRIGGER& _myTrigger);
-
-	XMINT2 GetSelectedTrigger(MYTRIGGER _myTrigger);
-
-	XMINT2 GetPlayerOnTileNum();
-	
-	
 };
-
