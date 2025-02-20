@@ -1,11 +1,11 @@
 #pragma once
-#include "Object3D.h"
+#include "Icon.h"
 #include<vector>
 
 using std::vector;
 
 class TriggerSetUIFrame :
-    public Object3D
+    public Icon
 {
 public:
     TriggerSetUIFrame(GameObject* parent);
@@ -13,10 +13,10 @@ public:
     void Update() override;
     void Draw() override;
 
-    vector<XMFLOAT2> GetSIFPosition() { return SIUFPosition_; }
-    XMFLOAT2 GetSIFGraphSize() { return { (float)graphSize_.x,(float)graphSize_.y }; }
+    /*vector<XMFLOAT2> GetSIFPosition() { return SIUFPosition_; }
+    XMFLOAT2 GetSIFGraphSize() { return { (float)graphSize_.x,(float)graphSize_.y }; }*/
 private:
-    SIZE_2D graphSize_; //アイコンの画像サイズ
-    vector<XMFLOAT2> SIUFPosition_;
+    //SIZE_2D graphSize_; //アイコンの画像サイズ
+    //vector<XMFLOAT2> SIUFPosition_;
 };
 

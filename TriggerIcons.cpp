@@ -1,10 +1,8 @@
 #include "TriggerIcons.h"
-#include"TriggerIcon.h"
-#include"CharacterIcon.h"
+
 #include"TriggerSetUI.h"
 #include"CharacterSelectUI.h"
-#include"TriggerSetUIFrame.h"
-#include"CharacterSetUIFrame.h"
+
 #include"TriggerSetButton.h"
 #include"Engine/CsvReader.h"
 
@@ -55,8 +53,22 @@ TriggerIcons::TriggerIcons(GameObject* parent) : Object3D(parent)
 		pCIcon->Set3DPosition(graphPos);
 		pCIcons_.push_back(pCIcon);
 	}
-	Instantiate<TriggerSetUIFrame>(this);
-	Instantiate<CharacterSetUIFrame>(this);
+	for (int x = 0; x < 2; x++) {
+		for (int y = 0; y < 4; y++) {
+			TriggerSetUIFrame* pTsuif = Instantiate<TriggerSetUIFrame>(this);;
+			VECTOR graphPos = {  780.0f + 330.0f * x, 50.0f + (pTsuif->GetGraphSizeF_2D().y + 10) * y,0};
+			pTsuif->Set3DPosition(graphPos);
+			pTSUIFrames_.push_back(pTsuif);
+		}
+	}
+	
+	for (int x = 0; x < 3; x++) {
+		CharacterSetUIFrame* pCsuif = Instantiate<CharacterSetUIFrame>(this);
+		VECTOR graphPos = { 780.0f + (pCsuif->GetGraphSizeF_2D().x + 30.0f) * x, 500 ,0 };
+		pCsuif->Set3DPosition(graphPos);
+		pCSUIFrames_.push_back(pCsuif);
+	}
+	
 	Instantiate<TriggerSetButton>(this);
 }
 
