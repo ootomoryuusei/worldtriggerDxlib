@@ -67,9 +67,10 @@ TriggerIcons::TriggerIcons(GameObject* parent) : Object3D(parent)
 		VECTOR graphPos = { 780.0f + (pCsuif->GetGraphSizeF_2D().x + 30.0f) * x, 500 ,0 };
 		pCsuif->Set3DPosition(graphPos);
 		pCSUIFrames_.push_back(pCsuif);
+		TriggerSetButton* pTsb = Instantiate<TriggerSetButton>(this);
+		VECTOR ButtonPos = { graphPos.x + 10,graphPos.y + pTsb->GetGraphSizeF_2D().y + 10 };
+		pTsb->Set3DPosition(ButtonPos);
 	}
-	
-	Instantiate<TriggerSetButton>(this);
 }
 
 TriggerIcons::~TriggerIcons()
