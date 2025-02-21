@@ -1,7 +1,7 @@
 #pragma once
-#include"Object3D.h"
+#include"Icon.h"
 class TriggerIcon :
-    public Object3D
+    public Icon
 {
 public:
     TriggerIcon(GameObject* parent);

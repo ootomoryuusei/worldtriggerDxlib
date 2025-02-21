@@ -14,9 +14,14 @@ public:
 	~TriggerSetButton();
 	void Update() override;
 	void Draw() override;
+
+	bool GetClicked() { return clicked_; }
 private:
 	//SIZE_2D graphSize_; //アイコンの画像サイズ
 	/*vector<XMFLOAT2> ButtonPosition_;
 	CharacterSetUIFrame* pCFrame_;*/
+
+	bool clicked_;
+	bool prevClicked_;
 };
 

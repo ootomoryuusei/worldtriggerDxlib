@@ -11,6 +11,9 @@ using std::string;
 
 const int z = 11;
 const int x = 11;
+const int MAX_SELECT_CHARACTER = 3;
+const int MAX_TRIGGER_HANDS = 2;
+const int MAX_CAN_SET_TRIGGER = 4;
 
 //enum PLAY_SCENE_STATE {
 //	SELECT,

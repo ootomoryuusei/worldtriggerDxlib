@@ -1,13 +1,17 @@
 #include "TriggerIcons.h"
-
 #include"TriggerSetUI.h"
 #include"CharacterSelectUI.h"
-
 #include"TriggerSetButton.h"
 #include"Engine/CsvReader.h"
 
 TriggerIcons::TriggerIcons(GameObject* parent) : Object3D(parent)
 {
+	for (int i = 0; i < MAX_SELECT_CHARACTER; i++) {
+		TriggerSetUI* pTSUI = Instantiate<TriggerSetUI>(this);
+		pTSUIs_.push_back(pTSUI);
+	}
+	Instantiate<CharacterSelectUI>(this);
+
 	csv_ = new CsvReader();
 	csv_->Load("Assets//Weapon//DefaultWeaponStatus.csv");
 	FN2DLine = 0;
@@ -17,8 +21,6 @@ TriggerIcons::TriggerIcons(GameObject* parent) : Object3D(parent)
 			FN2DLine = x;
 		}
 	}
-	Instantiate<TriggerSetUI>(this);
-	Instantiate<CharacterSelectUI>(this);
 	for (int y = 1; y < csv_->GetHeight(); y++) {
 		std::string graphName;
 		graphName = csv_->GetString(FN2DLine, y);
@@ -32,6 +34,7 @@ TriggerIcons::TriggerIcons(GameObject* parent) : Object3D(parent)
 		pTIcon->Set3DPosition(graphPos);
 		pTIcons_.push_back(pTIcon);
 	}
+
 	csv_->Load("Assets//Character//CharacterStatus.csv");
 	FN2DLine = 0;
 	DLC = "Assets//Image//CharacterIcon//selectCIcon//";
@@ -53,16 +56,8 @@ TriggerIcons::TriggerIcons(GameObject* parent) : Object3D(parent)
 		pCIcon->Set3DPosition(graphPos);
 		pCIcons_.push_back(pCIcon);
 	}
-	for (int x = 0; x < 2; x++) {
-		for (int y = 0; y < 4; y++) {
-			TriggerSetUIFrame* pTsuif = Instantiate<TriggerSetUIFrame>(this);;
-			VECTOR graphPos = {  780.0f + 330.0f * x, 50.0f + (pTsuif->GetGraphSizeF_2D().y + 10) * y,0};
-			pTsuif->Set3DPosition(graphPos);
-			pTSUIFrames_.push_back(pTsuif);
-		}
-	}
-	
-	for (int x = 0; x < 3; x++) {
+
+	for (int x = 0; x < MAX_SELECT_CHARACTER; x++) { //CharacerSetのフレームの位置決め
 		CharacterSetUIFrame* pCsuif = Instantiate<CharacterSetUIFrame>(this);
 		VECTOR graphPos = { 780.0f + (pCsuif->GetGraphSizeF_2D().x + 30.0f) * x, 500 ,0 };
 		pCsuif->Set3DPosition(graphPos);
@@ -70,6 +65,16 @@ TriggerIcons::TriggerIcons(GameObject* parent) : Object3D(parent)
 		TriggerSetButton* pTsb = Instantiate<TriggerSetButton>(this);
 		VECTOR ButtonPos = { graphPos.x + 10,graphPos.y + pCsuif->GetGraphSizeF_2D().y + 10 };
 		pTsb->Set3DPosition(ButtonPos);
+		pTSButtons_.push_back(pTsb);
+	}
+
+	for (int x = 0; x < MAX_TRIGGER_HANDS; x++) { //TriggerSetのフレームの位置決め
+		for (int y = 0; y < MAX_CAN_SET_TRIGGER; y++) {
+			TriggerSetUIFrame* pTsuif = Instantiate<TriggerSetUIFrame>(this);;
+			VECTOR graphPos = { 780.0f + 330.0f * x, 50.0f + (pTsuif->GetGraphSizeF_2D().y + 10) * y,0 };
+			pTsuif->Set3DPosition(graphPos);
+			pTSUIFrames_.push_back(pTsuif);
+		}
 	}
 }
 
@@ -89,8 +94,8 @@ void TriggerIcons::Update()
 					TriggerNameNum = y;
 				}
 			}
-			if (itr->GetSettingNum() > 3) {
-				int mainNum = itr->GetSettingNum() - 4;
+			if (itr->GetSettingNum() > MAX_CAN_SET_TRIGGER -1) {
+				int mainNum = itr->GetSettingNum() - MAX_CAN_SET_TRIGGER;
 				trigger.Main[mainNum].trigger = csv_->GetString(0, TriggerNameNum);
 			}
 			else {
@@ -101,7 +106,26 @@ void TriggerIcons::Update()
 
 		}
 	}
-	
+
+	size_t index = 0;
+	for (auto itr : pTSButtons_) {
+		if (itr->GetClicked()) {
+			pTSUIs_[index]->SetCanVisible(true);
+		}
+		else {
+			pTSUIs_[index]->SetCanVisible(false);
+		}
+		index++;
+	}
+
+	for (auto itr : pCIcons_) {
+		if (itr->GetAlreadySet()) {
+			pTSButtons_[itr->GetSettingNum()]->SetCanVisible(true);
+		}
+		else {
+			pTSButtons_[itr->GetSettingNum()]->SetCanVisible(false);
+		}
+	}
 }
 
 void TriggerIcons::Draw()

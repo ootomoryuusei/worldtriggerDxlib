@@ -12,9 +12,7 @@ protected:
     SIZE_F_2D graphSizeF_; //アイコンの画像サイズ(float)
     SIZE_2D graphSize_; //アイコンの画像サイズ
     string fileName_; //ファイル名
-   /* VECTOR initialPosition_;
-    bool alreadySet_;
-    int settingNum_;*/
+    bool canVisible_; //iconを表示するかしないか
 public:
     Icon(GameObject* parent);
     ~Icon();
@@ -26,8 +24,8 @@ public:
     string GetFileName() { return fileName_; }
     SIZE_F_2D GetGraphSizeF_2D() { return graphSizeF_; }
     SIZE_2D GetGraphSize_2D() { return graphSize_; }
-    /*void SetInitialPosition(VECTOR _initialPosition) { initialPosition_ = _initialPosition; }
-    int GetSettingNum() { return settingNum_; }*/
-   
+
+    void SetCanVisible(bool _canVisible) { canVisible_ = _canVisible; }
+    bool GetCanVisible() { return canVisible_; }
 private:
 };

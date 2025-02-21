@@ -2,12 +2,13 @@
 #include"Player1.h"
 #include"TriggerIcons.h"
 
-TriggerIcon::TriggerIcon(GameObject* parent) : Object3D(parent)
+TriggerIcon::TriggerIcon(GameObject* parent) : Icon(parent)
 {
 	position = { 0,0,0 };
 	initialPosition_ = { 0,0,0 };
 	alreadySet_ = false;
 	settingNum_ = 0;
+	canVisible_ = false;
 }
 
 TriggerIcon::~TriggerIcon()
@@ -43,7 +44,9 @@ void TriggerIcon::Update()
 
 void TriggerIcon::Draw()
 {
-	DrawGraph(position.x, position.y, hModel, TRUE);
+	if (canVisible_) {
+		DrawGraph(position.x, position.y, hModel, TRUE);
+	}
 }
 
 void TriggerIcon::Load(const std::string& _fileName)

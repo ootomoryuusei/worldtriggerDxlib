@@ -1,19 +1,14 @@
 #include "TriggerSetButton.h"
 #include"CharacterSetUIFrame.h"
+#include"Player1.h"
 
 TriggerSetButton::TriggerSetButton(GameObject* parent) : Icon(parent)
 {
-	hModel = LoadGraph("Assets//Image//TriggerSetButton.png");
-	assert(hModel >= 0);
-	GetGraphSize(hModel, &graphSize_.x, &graphSize_.y);
-	graphSize_.halfX = graphSize_.x / 2.0f;
-	graphSize_.halfY = graphSize_.y / 2.0f;
-
-	/*pCFrame_ = GetParent()->FindGameObject<CharacterSetUIFrame>();
-	for (auto itr : pCFrame_->GetFramePosition()) {
-		ButtonPosition_.push_back({ itr.x + 10,itr.y + pCFrame_->GetSIFGraphSize().y + 10 });
-	}*/
+	Load("Assets//Image//TriggerSetButton.png");
 	position = { 0 ,0, 0 };
+	canVisible_ = false;
+	clicked_ = false;
+	prevClicked_ = false;
 }
 
 TriggerSetButton::~TriggerSetButton()
@@ -22,10 +17,26 @@ TriggerSetButton::~TriggerSetButton()
 
 void TriggerSetButton::Update()
 {
-	/*if()*/
+	if (canVisible_) {
+		Player1* pPlayer = GetParent()->GetParent()->FindGameObject<Player1>();
+		if (PointInBox(pPlayer->GetMousePos(), { position.x,position.y }, { graphSizeF_.x,graphSizeF_.y })) {
+			if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+				if (!prevClicked_) {
+					clicked_ = !clicked_;
+					prevClicked_ = true;
+				}
+			}
+			else {
+				prevClicked_ = false;
+			}
+
+		}
+	}
 }
 
 void TriggerSetButton::Draw()
 {
+	if (canVisible_) {
 		DrawGraph(position.x, position.y, hModel, TRUE);
+	}
 }

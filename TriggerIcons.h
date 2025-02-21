@@ -1,10 +1,12 @@
 #pragma once
 #include "Object3D.h"
 #include<vector>
+#include"TriggerSetUI.h"
 #include"TriggerSetUIFrame.h"
 #include"CharacterSetUIFrame.h"
 #include"TriggerIcon.h"
 #include"CharacterIcon.h"
+#include"TriggerSetButton.h";
 
 class CsvReader;
 
@@ -34,6 +36,8 @@ private:
     vector<CharacterIcon*> pCIcons_;
     vector<TriggerSetUIFrame*> pTSUIFrames_;
     vector<CharacterSetUIFrame*> pCSUIFrames_;
+    vector<TriggerSetUI*> pTSUIs_;
+    vector<TriggerSetButton*> pTSButtons_;
     CsvReader* csv_;
     int FN2DLine;
     MYTRIGGER trigger;
