@@ -57,7 +57,7 @@ TriggerIcons::TriggerIcons(GameObject* parent) : Object3D(parent)
 		pCIcons_.push_back(pCIcon);
 	}
 
-	for (int x = 0; x < MAX_SELECT_CHARACTER; x++) { //CharacerSetのフレームの位置決め
+	for (int x = 0; x < MAX_SELECT_CHARACTER; x++) { //CharacerSetのフレームの位置決めとButtonの位置決め
 		CharacterSetUIFrame* pCsuif = Instantiate<CharacterSetUIFrame>(this);
 		VECTOR graphPos = { 780.0f + (pCsuif->GetGraphSizeF_2D().x + 30.0f) * x, 500 ,0 };
 		pCsuif->Set3DPosition(graphPos);
@@ -84,46 +84,50 @@ TriggerIcons::~TriggerIcons()
 
 void TriggerIcons::Update()
 {
-	if (CheckHitKey(KEY_INPUT_RETURN)) { //Enterを押すとiconを置いた場所にtriggerがセットされる
-		for (auto itr : pTIcons_) {
-			int TriggerNameNum = 0;
-			for (int y = 1; y < csv_->GetHeight(); y++) {
-				int num = itr->GetFileName().find(DLC);
-				std::string fOnlyName = itr->GetFileName().erase(num, DLC.size());
-				if (fOnlyName == csv_->GetString(FN2DLine, y)) {
-					TriggerNameNum = y;
-				}
-			}
-			if (itr->GetSettingNum() > MAX_CAN_SET_TRIGGER -1) {
-				int mainNum = itr->GetSettingNum() - MAX_CAN_SET_TRIGGER;
-				trigger.Main[mainNum].trigger = csv_->GetString(0, TriggerNameNum);
-			}
-			else {
-				int subNum = itr->GetSettingNum();
-				trigger.Sub[subNum].trigger = csv_->GetString(0, TriggerNameNum);
-			}
+	//if (CheckHitKey(KEY_INPUT_RETURN)) { //Enterを押すとiconを置いた場所にtriggerがセットされる
+	//	for (auto itr : pTIcons_) {
+	//		int TriggerNameNum = 0;
+	//		for (int y = 1; y < csv_->GetHeight(); y++) {
+	//			int num = itr->GetFileName().find(DLC);
+	//			std::string fOnlyName = itr->GetFileName().erase(num, DLC.size());
+	//			if (fOnlyName == csv_->GetString(FN2DLine, y)) {
+	//				TriggerNameNum = y;
+	//			}
+	//		}
+	//		if (itr->GetSettingNum() > MAX_CAN_SET_TRIGGER -1) {
+	//			int mainNum = itr->GetSettingNum() - MAX_CAN_SET_TRIGGER;
+	//			trigger.Main[mainNum].trigger = csv_->GetString(0, TriggerNameNum);
+	//		}
+	//		else {
+	//			int subNum = itr->GetSettingNum();
+	//			trigger.Sub[subNum].trigger = csv_->GetString(0, TriggerNameNum);
+	//		}
 
 
-		}
-	}
+	//	}
+	//}
 
 	size_t index = 0;
-	for (auto itr : pTSButtons_) {
+	for (auto itr : pTSButtons_) { //ボタンをクリックしたらトリガーセットできるようにフラグを立てる
 		if (itr->GetClicked()) {
 			pTSUIs_[index]->SetCanVisible(true);
+			pTSUIFrames_[index]->SetCanVisible(true);
 		}
 		else {
 			pTSUIs_[index]->SetCanVisible(false);
+			pTSUIFrames_[index]->SetCanVisible(false);
 		}
 		index++;
 	}
 
-	for (auto itr : pCIcons_) {
-		if (itr->GetAlreadySet()) {
-			pTSButtons_[itr->GetSettingNum()]->SetCanVisible(true);
-		}
-		else {
-			pTSButtons_[itr->GetSettingNum()]->SetCanVisible(false);
+	for (auto itr : pCIcons_) { //キャラクターがフレームにセットされたらボタンが見えるようにフラグを立てる
+		for (int i = 0; i < MAX_SELECT_CHARACTER; i++) {
+			if (itr->GetAlreadySet(i)) {
+				pTSButtons_[itr->GetSettingNum()]->SetCanVisible(true);
+			}
+			else {
+				pTSButtons_[itr->GetSettingNum()]->SetCanVisible(false);
+			}
 		}
 	}
 }

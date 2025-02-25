@@ -6,8 +6,11 @@ CharacterIcon::CharacterIcon(GameObject* parent) : Icon(parent)
 {
 	position = { 0,0,0 };
 	initialPosition_ = { 0,0,0 };
-	alreadySet_ = false;
 	settingNum_ = 0;
+	for (int i = 0; i < MAX_SELECT_CHARACTER; i++) {
+		alreadySet_[i] = false;
+	}
+	
 }
 
 CharacterIcon::~CharacterIcon()
@@ -31,11 +34,11 @@ void CharacterIcon::Update()
 				if (PointInBox({ position.x,position.y }, leftUp,graphSize)) {
 					position = { itr->Get3DPosition()};
 					settingNum_ = num;
-					alreadySet_ = true;
+					alreadySet_[num] = true;
 				}
-				/*else {
-					alreadySet_ = false;
-				}*/
+				else {
+					alreadySet_[num] = false;
+				}
 				num++;
 			}
 		}

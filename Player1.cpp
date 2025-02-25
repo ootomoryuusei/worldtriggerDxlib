@@ -81,6 +81,11 @@ void Player1::Update()
 	SetCameraPositionAndTarget_UpVecY(position + pRot, position + vRot);
 	icon = GetParent()->FindGameObject<Icon>();
 	Tile* tile = GetParent()->FindGameObject<Tile>();
+
+	/*if (CheckHitKey(KEY_INPUT_RETURN)) {
+		state_ = STEP1;
+		tile->SetState_(STEP1);
+	}*/
 }
 
 void Player1::Draw()
