@@ -28,7 +28,7 @@ void CharacterIcon::Update()
 		}
 		else {
 			int num = 0;
-			for (auto itr : pTIcons->GetpCSUIFrames()) {
+			for (auto itr : pTIcons->GetpCSUIFrames()) { //character‚ÆƒtƒŒ[ƒ€‚Ì“–‚½‚è”»’è
 				XMFLOAT2 leftUp = { itr->Get3DPosition().x, itr->Get3DPosition().y};
 				XMFLOAT2 graphSize = { itr->GetGraphSizeF_2D().x,itr->GetGraphSizeF_2D().y};
 				if (PointInBox({ position.x,position.y }, leftUp,graphSize)) {

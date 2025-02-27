@@ -76,6 +76,15 @@ TriggerIcons::TriggerIcons(GameObject* parent) : Object3D(parent)
 			pTSUIFrames_.push_back(pTsuif);
 		}
 	}
+
+
+	for (int y = 0; y < pCIcons_.size(); y++) { //button_の初期化
+		std::vector<bool> CsSize;  
+		for (int x = 0; x < MAX_SELECT_CHARACTER; x++) {
+			CsSize.push_back(false);  
+		}
+		button_.push_back(CsSize); 
+	}
 }
 
 TriggerIcons::~TriggerIcons()
@@ -120,13 +129,27 @@ void TriggerIcons::Update()
 		index++;
 	}
 
+	index = 0;
 	for (auto itr : pCIcons_) { //キャラクターがフレームにセットされたらボタンが見えるようにフラグを立てる
 		for (int i = 0; i < MAX_SELECT_CHARACTER; i++) {
 			if (itr->GetAlreadySet(i)) {
-				pTSButtons_[itr->GetSettingNum()]->SetCanVisible(true);
+				button_[index][i] = true;
 			}
 			else {
-				pTSButtons_[itr->GetSettingNum()]->SetCanVisible(false);
+				button_[index][i] = false;
+			}
+		}
+		index++;
+	}
+
+	for (int x = 0; x < MAX_SELECT_CHARACTER; x++) {
+		for (int y = 0; y < pCIcons_.size(); y++) {
+			if (button_[y][x]) {
+				pTSButtons_[x]->SetCanVisible(true);
+				return;
+			}
+			else if(!button_[y][x]) {
+				pTSButtons_[x]->SetCanVisible(false);
 			}
 		}
 	}

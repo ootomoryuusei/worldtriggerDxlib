@@ -42,5 +42,7 @@ private:
     int FN2DLine;
     MYTRIGGER trigger;
     string DLC; //ディレクトリ
+    vector<vector<bool>> button_;
+    /*bool button[][MAX_SELECT_CHARACTER];*/
 };
 
