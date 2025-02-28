@@ -32,6 +32,12 @@
     <Filter Include="Icon">
       <UniqueIdentifier>{2894f51d-329c-438d-b9ba-eec66ea188db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Icon\CharacterIcon">
+      <UniqueIdentifier>{23254e2a-bf8b-4ebc-bb64-2b14b141c49c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Icon\TriggerIcon">
+      <UniqueIdentifier>{4ea67eef-9d62-41a4-86ba-b9c6a8302c65}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\GameObject.cpp">
@@ -123,28 +129,31 @@
     <ClCompile Include="Icon.cpp">
       <Filter>Icon</Filter>
     </ClCompile>
-    <ClCompile Include="TriggerSetUI.cpp">
-      <Filter>Icon</Filter>
-    </ClCompile>
-    <ClCompile Include="TriggerSetUIFrame.cpp">
-      <Filter>Icon</Filter>
-    </ClCompile>
-    <ClCompile Include="TriggerIcon.cpp">
-      <Filter>Icon</Filter>
-    </ClCompile>
-    <ClCompile Include="TriggerIcons.cpp">
-      <Filter>Icon</Filter>
-    </ClCompile>
     <ClCompile Include="CharacterIcon.cpp">
-      <Filter>Icon</Filter>
+      <Filter>Icon\CharacterIcon</Filter>
     </ClCompile>
     <ClCompile Include="CharacterSelectUI.cpp">
-      <Filter>Icon</Filter>
+      <Filter>Icon\CharacterIcon</Filter>
     </ClCompile>
     <ClCompile Include="CharacterSetUIFrame.cpp">
-      <Filter>Icon</Filter>
+      <Filter>Icon\CharacterIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="TriggerIcon.cpp">
+      <Filter>Icon\TriggerIcon</Filter>
     </ClCompile>
     <ClCompile Include="TriggerSetButton.cpp">
+      <Filter>Icon\TriggerIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="TriggerSetUI.cpp">
+      <Filter>Icon\TriggerIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="TriggerSetUIFrame.cpp">
+      <Filter>Icon\TriggerIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="TriggerSetUIFrames.cpp">
+      <Filter>Icon\TriggerIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="TriggerIcons.cpp">
       <Filter>Icon</Filter>
     </ClCompile>
   </ItemGroup>
@@ -244,31 +253,34 @@
     <ClInclude Include="Icon.h">
       <Filter>Icon</Filter>
     </ClInclude>
-    <ClInclude Include="TriggerSetUI.h">
-      <Filter>Icon</Filter>
+    <ClInclude Include="globals.h" />
+    <ClInclude Include="CharacterIcon.h">
+      <Filter>Icon\CharacterIcon</Filter>
     </ClInclude>
-    <ClInclude Include="TriggerSetUIFrame.h">
-      <Filter>Icon</Filter>
+    <ClInclude Include="CharacterSelectUI.h">
+      <Filter>Icon\CharacterIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterSetUIFrame.h">
+      <Filter>Icon\CharacterIcon</Filter>
     </ClInclude>
     <ClInclude Include="TriggerIcon.h">
-      <Filter>Icon</Filter>
+      <Filter>Icon\TriggerIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerSetButton.h">
+      <Filter>Icon\TriggerIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerSetUI.h">
+      <Filter>Icon\TriggerIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerSetUIFrame.h">
+      <Filter>Icon\TriggerIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerSetUIFrames.h">
+      <Filter>Icon\TriggerIcon</Filter>
     </ClInclude>
     <ClInclude Include="TriggerIcons.h">
       <Filter>Icon</Filter>
     </ClInclude>
-    <ClInclude Include="CharacterIcon.h">
-      <Filter>Icon</Filter>
-    </ClInclude>
-    <ClInclude Include="CharacterSelectUI.h">
-      <Filter>Icon</Filter>
-    </ClInclude>
-    <ClInclude Include="CharacterSetUIFrame.h">
-      <Filter>Icon</Filter>
-    </ClInclude>
-    <ClInclude Include="TriggerSetButton.h">
-      <Filter>Icon</Filter>
-    </ClInclude>
-    <ClInclude Include="globals.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc">

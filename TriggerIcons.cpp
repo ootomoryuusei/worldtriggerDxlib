@@ -1,5 +1,4 @@
 #include "TriggerIcons.h"
-#include"TriggerSetUI.h"
 #include"CharacterSelectUI.h"
 #include"TriggerSetButton.h"
 #include"Engine/CsvReader.h"
@@ -9,6 +8,8 @@ TriggerIcons::TriggerIcons(GameObject* parent) : Object3D(parent)
 	for (int i = 0; i < MAX_SELECT_CHARACTER; i++) {
 		TriggerSetUI* pTSUI = Instantiate<TriggerSetUI>(this);
 		pTSUIs_.push_back(pTSUI);
+		TriggerSetUIFrames* pTSUIFs = Instantiate<TriggerSetUIFrames>(this);
+		pTSUIFSs_.push_back(pTSUIFs);
 	}
 	Instantiate<CharacterSelectUI>(this);
 
@@ -68,14 +69,14 @@ TriggerIcons::TriggerIcons(GameObject* parent) : Object3D(parent)
 		pTSButtons_.push_back(pTsb);
 	}
 
-	for (int x = 0; x < MAX_TRIGGER_HANDS; x++) { //TriggerSetのフレームの位置決め
-		for (int y = 0; y < MAX_CAN_SET_TRIGGER; y++) {
-			TriggerSetUIFrame* pTsuif = Instantiate<TriggerSetUIFrame>(this);;
-			VECTOR graphPos = { 780.0f + 330.0f * x, 50.0f + (pTsuif->GetGraphSizeF_2D().y + 10) * y,0 };
-			pTsuif->Set3DPosition(graphPos);
-			pTSUIFrames_.push_back(pTsuif);
-		}
-	}
+	//for (int x = 0; x < MAX_TRIGGER_HANDS; x++) { //TriggerSetのフレームの位置決め
+	//	for (int y = 0; y < MAX_CAN_SET_TRIGGER; y++) {
+	//		TriggerSetUIFrame* pTsuif = Instantiate<TriggerSetUIFrame>(this);;
+	//		VECTOR graphPos = { 780.0f + 330.0f * x, 50.0f + (pTsuif->GetGraphSizeF_2D().y + 10) * y,0 };
+	//		pTsuif->Set3DPosition(graphPos);
+	//		pTSUIFrames_.push_back(pTsuif);
+	//	}
+	//}
 
 
 	for (int y = 0; y < pCIcons_.size(); y++) { //button_の初期化
@@ -120,11 +121,18 @@ void TriggerIcons::Update()
 	for (auto itr : pTSButtons_) { //ボタンをクリックしたらトリガーセットできるようにフラグを立てる
 		if (itr->GetClicked()) {
 			pTSUIs_[index]->SetCanVisible(true);
-			pTSUIFrames_[index]->SetCanVisible(true);
+			for (auto itr : pTSUIFSs_[index]->GetpTSUIFrames()) {
+				itr->SetCanVisible(true);
+			}
+			for (auto itr : pTIcons_) {
+				itr->SetCanVisible(true);
+			}
 		}
 		else {
 			pTSUIs_[index]->SetCanVisible(false);
-			pTSUIFrames_[index]->SetCanVisible(false);
+			for (auto itr : pTSUIFSs_[index]->GetpTSUIFrames()) {
+				itr->SetCanVisible(false);
+			}
 		}
 		index++;
 	}

@@ -170,6 +170,7 @@
     <ClCompile Include="TriggerSetButton.cpp" />
     <ClCompile Include="TriggerSetUI.cpp" />
     <ClCompile Include="TriggerSetUIFrame.cpp" />
+    <ClCompile Include="TriggerSetUIFrames.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Amatori_Chika.h" />
@@ -214,6 +215,7 @@
     <ClInclude Include="TriggerSetUI.h" />
     <ClInclude Include="TriggerSetUIFrame.h" />
     <ClInclude Include="globals.h" />
+    <ClInclude Include="TriggerSetUIFrames.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc" />
