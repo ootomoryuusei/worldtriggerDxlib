@@ -15,6 +15,7 @@ public:
     void SetInitialPosition(VECTOR _initialPosition) { initialPosition_ = _initialPosition; }
     int GetSettingNum() { return settingNum_; }
     string GetFileName() { return fileName_; }
+    bool GetAlreadySet() { return alreadySet_; }
 private:
     SIZE_2D graphSize_; //アイコンの画像サイズ
     std::string fileName_;

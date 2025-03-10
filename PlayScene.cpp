@@ -5,6 +5,7 @@
 #include "Camera.h"
 #include"Tile.h"
 #include"Icon.h"
+#include"Icons.h"
 #include"Character.h"
 #include"TriggerSetUI.h"
 #include"TriggerSetUIFrame.h"
@@ -18,7 +19,8 @@ PlayScene::PlayScene(GameObject* parent)
 	Instantiate<Player1>(this);
 	/*Instantiate<Character>(this);*/
 	Instantiate<Tile>(this);
-	Instantiate<TriggerIcons>(this);
+	/*Instantiate<TriggerIcons>(this);*/
+	Instantiate<Icons>(this);
 	/*Instantiate<Icon>(this);*/
 	/*Instantiate<TriggerSetUI>(this);
 	csv_->Load("Assets//Weapon//DefaultWeaponStatus.csv");
@@ -54,9 +56,12 @@ PlayScene::~PlayScene()
 
 void PlayScene::Update()
 {
-	/*if (CheckHitKey(KEY_INPUT_T)) {
-		SceneManager::Instance()->ChangeScene(SceneManager::SCENE_ID::SCENE_ID_TITLE);
-	}*/
+	if (CheckHitKey(KEY_INPUT_RETURN)) {
+		Player1* pPlayer = FindGameObject<Player1>();
+		pPlayer->SetState_(STEP1);
+		Tile* pTile = FindGameObject<Tile>();
+		pTile->SetState_(STEP1);
+	}
 }
 
 void PlayScene::Draw()

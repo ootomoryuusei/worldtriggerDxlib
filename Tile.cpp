@@ -39,26 +39,6 @@ Tile::~Tile()
 
 void Tile::Update()
 {
-	//// カメラの設定
-	//MATRIX mRot = MGetRotY(rotation.y);  // 回転行列
-	//// 回ってないとき、プレイヤーからどれぐらい後ろ？→ベクトル
-	//VECTOR tmpP = VGet(0, 200, -300);
-	//// これに回転行列をかける
-	//VECTOR pRot = tmpP * mRot;
-	//// これにプレイヤーの座標を足すと、カメラ位置が出る
-	//VECTOR vRot = VGet(0, 200, -300) * mRot;
-	//SetCameraPositionAndTarget_UpVecY(position + pRot, position + vRot);
-	/*rotation.y += 0.01;
-
-	ImGui::Begin("rotation");
-	ImGui::InputFloat("X", &rotation.x);
-	ImGui::InputFloat("Y", &rotation.y);
-	ImGui::InputFloat("Z", &rotation.z);
-	ImGui::End();*/
-
-	
-
-	
 }
 
 void Tile::Draw()
