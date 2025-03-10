@@ -11,6 +11,9 @@ using std::string;
 
 const int z = 11;
 const int x = 11;
+const int MAX_SELECT_CHARACTER = 3;
+const int MAX_TRIGGER_HANDS = 2;
+const int MAX_CAN_SET_TRIGGER = 4;
 
 //enum PLAY_SCENE_STATE {
 //	SELECT,
@@ -19,12 +22,12 @@ const int x = 11;
 //};
 
 struct TRIGGER {
-	string trigger;
-	bool IsSelected;
-	float angle;
-	float startAngle;
-	float rangeSize;
-	int tNum;
+	string trigger; //トリガー名
+	bool IsSelected; //選択されているかどうか
+	float angle; //アングル
+	float startAngle; //はじめのアングル
+	float rangeSize; //射程や警戒範囲の長さ
+	int tNum; //triggerナンバー
 };
 
 struct MYTRIGGER {
@@ -33,8 +36,11 @@ struct MYTRIGGER {
 };
 
 struct SIZE_2D {
-	int x, y;
-	int halfX, halfY;
+	int x, y, halfX, halfY;
+};
+
+struct SIZE_F_2D {
+	float x, y, halfX, halfY;
 };
 
 struct TILEDATA {
@@ -46,7 +52,6 @@ struct CHARACTER_STATUS
 {
 	int move, attack, speed, defense;
 };
-
 
 /// <summary>
 /// 
@@ -185,6 +190,9 @@ public:
 	bool PointInBox(XMFLOAT2 point, XMFLOAT2 _leftUp, XMFLOAT2 _distance);
 
 	void SetState_(int _state) { state_ = _state; }
+
+	VECTOR Get3DPosition() { return position; }
+	void Set3DPosition(VECTOR _position) { position = _position; }
 protected:
 	int hModel;  // モデルデータ
 	VECTOR position; // 座標

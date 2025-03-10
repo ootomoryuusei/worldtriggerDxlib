@@ -19,8 +19,8 @@ public:
 	void Update() override;
 	void Draw() override;
 private:
-	Player1* pl1;
+	/*Player1* pl1;
 	Tile* tile;
-	Icon* icon;
+	Icon* icon;*/
 	CsvReader* csv_;
 };

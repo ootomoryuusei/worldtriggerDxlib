@@ -4,12 +4,12 @@
 
 using std::vector;
 
-class TriggerSetUIFrame :
+class CharacterSetUIFrame :
     public Icon
 {
 public:
-    TriggerSetUIFrame(GameObject* parent);
-    ~TriggerSetUIFrame();
+    CharacterSetUIFrame(GameObject* parent);
+    ~CharacterSetUIFrame();
     void Update() override;
     void Draw() override;
 private:

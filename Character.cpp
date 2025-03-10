@@ -2,7 +2,6 @@
 #include "Camera.h"
 #include"Tile.h"
 #include"Icon.h"
-#include"resource.h"
 #include"ImGui/imgui.h"
 
 Character::Character(GameObject* parent) : Object3D(parent),hBlade(-1), hShield(-1),hAsteroid(-1)
@@ -94,7 +93,7 @@ void Character::Update()
 
 void Character::Draw()
 {
-	position = { icon->GetPIconPos().x,0.0,icon->GetPIconPos().y };
+	/*position = { icon->GetPIconPos().x,0.0,icon->GetPIconPos().y };*/
 	//Object3D::Draw(); // Šî’êƒNƒ‰ƒX‚ÌŠÖ”‚ğŒÄ‚Ô¨PlayerƒLƒƒƒ‰‚ğ•`‰æ‚·‚é
 	MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);
 	MV1SetMatrix(hModel, mModel);

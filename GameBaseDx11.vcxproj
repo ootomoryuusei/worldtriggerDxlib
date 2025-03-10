@@ -135,6 +135,9 @@
     <ClCompile Include="animator.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="CharacterIcon.cpp" />
+    <ClCompile Include="CharacterSelectUI.cpp" />
+    <ClCompile Include="CharacterSetUIFrame.cpp" />
     <ClCompile Include="Engine\CsvReader.cpp" />
     <ClCompile Include="Engine\GameObject.cpp" />
     <ClCompile Include="Engine\Main.cpp" />
@@ -159,19 +162,24 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="PlayScene.cpp" />
-    <ClCompile Include="ShealdIcon.cpp" />
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="TriggerIcon.cpp" />
+    <ClCompile Include="TriggerIcons.cpp" />
+    <ClCompile Include="TriggerSetButton.cpp" />
     <ClCompile Include="TriggerSetUI.cpp" />
     <ClCompile Include="TriggerSetUIFrame.cpp" />
+    <ClCompile Include="TriggerSetUIFrames.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Amatori_Chika.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="CharacterIcon.h" />
+    <ClInclude Include="CharacterSelectUI.h" />
+    <ClInclude Include="CharacterSetUIFrame.h" />
     <ClInclude Include="Engine\CsvReader.h" />
     <ClInclude Include="Engine\GameObject.h" />
     <ClInclude Include="Engine\Global.h" />
@@ -198,14 +206,16 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Player1.h" />
     <ClInclude Include="PlayScene.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="ShealdIcon.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="TriggerIcon.h" />
+    <ClInclude Include="TriggerIcons.h" />
+    <ClInclude Include="TriggerSetButton.h" />
     <ClInclude Include="TriggerSetUI.h" />
     <ClInclude Include="TriggerSetUIFrame.h" />
+    <ClInclude Include="globals.h" />
+    <ClInclude Include="TriggerSetUIFrames.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc" />
