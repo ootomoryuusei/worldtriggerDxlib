@@ -18,7 +18,10 @@ void Icon::Update()
 
 void Icon::Draw()
 {
-	DrawGraph(position.x, position.y, hModel, TRUE);
+	if (canVisible_) {
+		DrawGraph(position.x, position.y, hModel, TRUE);
+	}
+
 }
 
 void Icon::Load(const std::string& _fileName)

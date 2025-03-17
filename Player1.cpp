@@ -96,7 +96,7 @@ void Player1::Draw()
 	{
 		break;
 	}
-	case STEP1:
+	case SET:
 	{
 		/*position = { icon->GetPIconPos().x,icon->GetPIconPos().y,0.0 };*/
 		//Object3D::Draw(); // Šî’êƒNƒ‰ƒX‚ÌŠÖ”‚ğŒÄ‚Ô¨PlayerƒLƒƒƒ‰‚ğ•`‰æ‚·‚é

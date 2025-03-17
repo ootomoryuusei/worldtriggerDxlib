@@ -9,6 +9,15 @@
 
 using namespace DirectX;
 
+enum ICON_STATE
+{
+	SELECT = 0,
+	SET
+};
+
+const int MAX_MAP_HIGHT = 15;
+const int MAX_MAP_WIDTH = 15;
+
 //-----------------------------------------------------------
 //全てのゲームオブジェクト（シーンも含めて）が継承するインターフェース
 // ゲームオブジェクトは、親子構造になっていて、

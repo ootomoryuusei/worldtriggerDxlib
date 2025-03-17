@@ -9,8 +9,6 @@ using std::string;
 //const int SHIELD = 502;
 //const int ASTEROID = 503;
 
-const int z = 11;
-const int x = 11;
 const int MAX_SELECT_CHARACTER = 3;
 const int MAX_TRIGGER_HANDS = 2;
 const int MAX_CAN_SET_TRIGGER = 4;
@@ -189,7 +187,7 @@ public:
 	/// <returns></returns>
 	bool PointInBox(XMFLOAT2 point, XMFLOAT2 _leftUp, XMFLOAT2 _distance);
 
-	void SetState_(int _state) { state_ = _state; }
+	void SetState(int _state) { state_ = _state; }
 
 	VECTOR Get3DPosition() { return position; }
 	void Set3DPosition(VECTOR _position) { position = _position; }

@@ -133,11 +133,15 @@
   <ItemGroup>
     <ClCompile Include="Amatori_Chika.cpp" />
     <ClCompile Include="animator.cpp" />
+    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CharacterIcon.cpp" />
+    <ClCompile Include="CharacterIcons.cpp" />
     <ClCompile Include="CharacterSelectUI.cpp" />
     <ClCompile Include="CharacterSetUIFrame.cpp" />
+    <ClCompile Include="CharacterSetUIFrames.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Engine\CsvReader.cpp" />
     <ClCompile Include="Engine\GameObject.cpp" />
     <ClCompile Include="Engine\Main.cpp" />
@@ -158,13 +162,23 @@
     <ClCompile Include="ImGui\imgui_tables.cpp" />
     <ClCompile Include="ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Kuga_Yuuma.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mikumo_Osamu.cpp" />
     <ClCompile Include="Object3D.cpp" />
+    <ClCompile Include="OkButton.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="PlayScene.cpp" />
+    <ClCompile Include="rader.cpp" />
+    <ClCompile Include="SelectIcons.cpp" />
+    <ClCompile Include="SelectScene.cpp" />
+    <ClCompile Include="SetIcons.cpp" />
+    <ClCompile Include="SetScene.cpp" />
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileIcon.cpp" />
+    <ClCompile Include="TileIcons.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="TriggerIcon.cpp" />
     <ClCompile Include="TriggerIcons.cpp" />
@@ -172,15 +186,23 @@
     <ClCompile Include="TriggerSetUI.cpp" />
     <ClCompile Include="TriggerSetUIFrame.cpp" />
     <ClCompile Include="TriggerSetUIFrames.cpp" />
+    <ClCompile Include="TriggerSetUIs.cpp" />
+    <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="UnitIcon.cpp" />
+    <ClCompile Include="UnitIcons.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Amatori_Chika.h" />
     <ClInclude Include="Animator.h" />
+    <ClInclude Include="BackGround.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterIcon.h" />
+    <ClInclude Include="CharacterIcons.h" />
     <ClInclude Include="CharacterSelectUI.h" />
     <ClInclude Include="CharacterSetUIFrame.h" />
+    <ClInclude Include="CharacterSetUIFrames.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Engine\CsvReader.h" />
     <ClInclude Include="Engine\GameObject.h" />
     <ClInclude Include="Engine\Global.h" />
@@ -203,13 +225,23 @@
     <ClInclude Include="ImGui\imstb_textedit.h" />
     <ClInclude Include="ImGui\imstb_truetype.h" />
     <ClInclude Include="Kuga_Yuuma.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="Mikumo_Osamu.h" />
     <ClInclude Include="Object3D.h" />
+    <ClInclude Include="OkButton.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Player1.h" />
     <ClInclude Include="PlayScene.h" />
+    <ClInclude Include="rader.h" />
+    <ClInclude Include="SelectIcons.h" />
+    <ClInclude Include="SelectScene.h" />
+    <ClInclude Include="SetIcons.h" />
+    <ClInclude Include="SetScene.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileIcon.h" />
+    <ClInclude Include="TileIcons.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="TriggerIcon.h" />
     <ClInclude Include="TriggerIcons.h" />
@@ -218,6 +250,10 @@
     <ClInclude Include="TriggerSetUIFrame.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="TriggerSetUIFrames.h" />
+    <ClInclude Include="TriggerSetUIs.h" />
+    <ClInclude Include="Unit.h" />
+    <ClInclude Include="UnitIcon.h" />
+    <ClInclude Include="UnitIcons.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc" />

@@ -2,6 +2,8 @@
 
 #include "../TestScene.h"
 #include "../TitleScene.h"
+#include"../SelectScene.h"
+#include"../SetScene.h"
 #include "../PlayScene.h"
 #include "time.h"
 
@@ -16,9 +18,12 @@ void SceneManager::Initialize()
 {
 	Time::Init();
 	//ç≈èâÇÃÉVÅ[ÉìÇèÄîı
-	currentSceneID_ = SCENE_ID_TEST;
+	/*currentSceneID_ = SCENE_ID_PLAY;*/
+	currentSceneID_ = SCENE_ID_SELECT;
 	nextSceneID_ = currentSceneID_;
-	Instantiate<TestScene>(this);
+	/*Instantiate<TestScene>(this);*/
+	Instantiate<SelectScene>(this);
+	/*Instantiate<PlayScene>(this);*/
 
 }
 
@@ -36,6 +41,8 @@ void SceneManager::Update()
 		{
 		case SCENE_ID_TEST: Instantiate<TestScene>(this); break;
 		case SCENE_ID_TITLE: Instantiate<TitleScene>(this); break;
+		case SCENE_ID_SELECT: Instantiate<SelectScene>(this); break;
+		case SCENE_ID_SET: Instantiate<SetScene>(this); break;
 		case SCENE_ID_PLAY: Instantiate<PlayScene>(this); break;
 
 		}

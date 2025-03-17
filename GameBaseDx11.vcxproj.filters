@@ -38,6 +38,9 @@
     <Filter Include="Icon\TriggerIcon">
       <UniqueIdentifier>{4ea67eef-9d62-41a4-86ba-b9c6a8302c65}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Icon\MiniMap">
+      <UniqueIdentifier>{5e07570e-4f84-42d0-a971-99763011afc9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\GameObject.cpp">
@@ -153,8 +156,63 @@
     <ClCompile Include="TriggerSetUIFrames.cpp">
       <Filter>Icon\TriggerIcon</Filter>
     </ClCompile>
-    <ClCompile Include="TriggerIcons.cpp">
+    <ClCompile Include="OkButton.cpp">
       <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="TriggerIcons.cpp">
+      <Filter>Icon\TriggerIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="Icons.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterSetUIFrames.cpp">
+      <Filter>Icon\CharacterIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SetScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterIcons.cpp">
+      <Filter>Icon\CharacterIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="SetIcons.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectIcons.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="rader.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Icon\MiniMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TileIcon.cpp">
+      <Filter>Icon\MiniMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TileIcons.cpp">
+      <Filter>Icon\MiniMap</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitIcon.cpp">
+      <Filter>Icon\MiniMap</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitIcons.cpp">
+      <Filter>Icon\MiniMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="TriggerSetUIs.cpp">
+      <Filter>Icon\TriggerIcon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -278,8 +336,63 @@
     <ClInclude Include="TriggerSetUIFrames.h">
       <Filter>Icon\TriggerIcon</Filter>
     </ClInclude>
-    <ClInclude Include="TriggerIcons.h">
+    <ClInclude Include="OkButton.h">
       <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerIcons.h">
+      <Filter>Icon\TriggerIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="Icons.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterSetUIFrames.h">
+      <Filter>Icon\CharacterIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SetScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterIcons.h">
+      <Filter>Icon\CharacterIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="SetIcons.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectIcons.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="rader.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Icon\MiniMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TileIcon.h">
+      <Filter>Icon\MiniMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TileIcons.h">
+      <Filter>Icon\MiniMap</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitIcon.h">
+      <Filter>Icon\MiniMap</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitIcons.h">
+      <Filter>Icon\MiniMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="TriggerSetUIs.h">
+      <Filter>Icon\TriggerIcon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

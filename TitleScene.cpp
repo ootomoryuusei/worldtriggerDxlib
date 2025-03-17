@@ -12,7 +12,7 @@ TitleScene::~TitleScene()
 void TitleScene::Update()
 {
 	if (CheckHitKey(KEY_INPUT_P)) {
-		SceneManager::Instance()->ChangeScene(SceneManager::SCENE_ID::SCENE_ID_PLAY);
+		SceneManager::Instance()->ChangeScene(SceneManager::SCENE_ID::SCENE_ID_SELECT);
 	}
 }
 

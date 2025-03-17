@@ -18,15 +18,15 @@ public:
 
 	TILEDATA GetTilesData(int _h, int _w) { return Tiles[_h][_w]; }
 
-	const int GetTileX() { return x; }
-	const int GetTileZ() { return z; }
+	const int GetTileX() { return MAX_MAP_WIDTH; }
+	const int GetTileZ() { return MAX_MAP_HIGHT; }
 private:
 
 	int hTile;
 	int hTileFrame;
 	int hPIcon;
 
-	TILEDATA Tiles[z][x];
+	TILEDATA Tiles[MAX_MAP_HIGHT][MAX_MAP_WIDTH];
 
 	float tWSize, tHSize;
 };

@@ -12,6 +12,10 @@ public:
     ~CharacterSetUIFrame();
     void Update() override;
     void Draw() override;
+
+    void SetIsSet(bool _isSet) { isSet_ = _isSet; }
+    bool GetIsSet() { return isSet_; }
 private:
+    bool isSet_;
 };
 

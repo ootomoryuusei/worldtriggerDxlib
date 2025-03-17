@@ -6,11 +6,6 @@ class Tile;
 class Icon;
 class CsvReader;
 
-enum SCENE {
-	SELECT,
-	STEP1
-};
-
 class PlayScene : public GameObject
 {
 public:
@@ -22,5 +17,5 @@ private:
 	/*Player1* pl1;
 	Tile* tile;
 	Icon* icon;*/
-	CsvReader* csv_;
+	/*CsvReader* csv_;*/
 };

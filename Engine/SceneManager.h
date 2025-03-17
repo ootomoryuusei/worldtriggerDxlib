@@ -30,6 +30,8 @@ public:
 	{
 		SCENE_ID_TEST = 0,
 		SCENE_ID_TITLE,
+		SCENE_ID_SELECT,
+		SCENE_ID_SET,
 		SCENE_ID_PLAY,
 	};
 	void ChangeScene(SCENE_ID next);
