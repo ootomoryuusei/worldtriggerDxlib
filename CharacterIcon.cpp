@@ -4,6 +4,7 @@
 #include"TriggerSetUIs.h"
 #include"TriggerSetUIFrames.h"
 #include"SetIcons.h"
+#include"TriggerSetUIs.h"
 
 CharacterIcon::CharacterIcon(GameObject* parent) : Icon(parent),inFrame_(MAX_SELECT_CHARACTER,false)
 {
@@ -68,8 +69,11 @@ void CharacterIcon::Update()
 		if (PointInBox(mousePos, { position.x,position.y }, { (float)graphSize_.x, (float)graphSize_.y })) {
 			if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 				SetIcons* pSIcons = GetParent()->GetParent()->FindGameObject<SetIcons>();
+				TriggerSetUIs* pTSUIs = GetParent()->FindGameObject<TriggerSetUIs>();
 				pSIcons->GetFrames()[createNum_]->SetCanVisible(true);
 				pSIcons->GetIcons()[createNum_]->SetCanVisible(true);
+				pTSUIs->GetpTSUIS()[createNum_]->SetCanVisible(true);
+
 			}
 		}
 		break;

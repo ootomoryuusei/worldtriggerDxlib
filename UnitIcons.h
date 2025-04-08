@@ -16,7 +16,7 @@ public:
 	/*void Draw() override;*/
 
 private:
-	vector<UnitIcon> pUIcons_;
+	vector<UnitIcon*> pUIcons_;
 	vector<int> selectCharNum_;
 	CsvReader* csv_;
 	int FNSCNLine;

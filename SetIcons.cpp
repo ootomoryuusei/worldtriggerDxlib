@@ -1,6 +1,6 @@
 #include "SetIcons.h"
 #include"BackGround.h"
-#include"TriggerSetUI.h"
+#include"TriggerSetUIs.h"
 
 SetIcons::SetIcons(GameObject* parent) 
 	: GameObject(parent),selectCharNum_(MAX_SELECT_CHARACTER,-1)
@@ -49,6 +49,7 @@ SetIcons::SetIcons(GameObject* parent)
 			num++;
 		}
 	}
+	Instantiate<TriggerSetUIs>(this);
 	for (int i = 0; i < MAX_SELECT_CHARACTER * 2; i++) { //キャラクター分のトリガーアイコンを実体化
 		TriggerIcons* pTIcons = Instantiate<TriggerIcons>(this);
 		pTIcons_.push_back(pTIcons);

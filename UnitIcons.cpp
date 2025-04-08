@@ -34,16 +34,30 @@ UnitIcons::UnitIcons(GameObject* parent) : GameObject(parent),selectCharNum_(MAX
 		std::string flPath;
 		DLC = "Assets//Image//CharacterIcon//CIcon//";
 		flPath = DLC + graphName;
+		VECTOR pos;
 		for (int j = 0; j < 2; j++) {
+			bool isSeted = false;
 			UnitIcon* pUIcon = Instantiate<UnitIcon>(this);
 			pUIcon->Load(flPath);
-			int randX = GetRand(MAX_MAP_WIDTH - 1);
-			int randY = GetRand(1);
-			VECTOR pos = pTIcons->GetpTIcon()[randX + 1 * randY]->Get3DPosition();
-			VECTOR center;
-			/*center = { pos.x + pUIcon->GetGraphSizeF_2D().halfX,pos.y + pUIcon->GetGraphSizeF_2D().halfY,pos.z };*/
+		    while (!isSeted) {
+				int randX = GetRand(MAX_MAP_WIDTH - 1);
+				int randY = GetRand(0);
+				pos = pTIcons->GetpTIcon()[randX + 1 * randY]->Get3DPosition();
+
+				bool isOk = false;
+				for (auto& itr : pUIcons_) {
+					if (itr->Get3DPosition().x == pos.x && itr->Get3DPosition().y == pos.y && itr->Get3DPosition().z == pos.z) {
+						isOk = true;
+						break;
+					}
+				}
+				if (!isOk) {
+					isSeted = true;
+				}
+			}
 			pUIcon->Set3DPosition(pos);
 			pUIcons_.push_back(pUIcon);
+			
 		}
 	}
 }

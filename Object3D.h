@@ -185,7 +185,7 @@ public:
 	/// <param name="_leftUp"> íZå`ÇÃç∂è„ç¿ïW </param>
 	/// <param name="_distance"> íZå`ÇÃïù(x)Ç∆çÇÇ≥(y) </param>
 	/// <returns></returns>
-	bool PointInBox(XMFLOAT2 point, XMFLOAT2 _leftUp, XMFLOAT2 _distance);
+	bool PointInBox(XMFLOAT2 point, XMFLOAT2 _leftUp,  XMFLOAT2 _distance);
 
 	void SetState(int _state) { state_ = _state; }
 

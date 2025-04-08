@@ -22,6 +22,9 @@ void TileIcon::Draw()
 	string num = std::to_string(tile_.num);
 	if (canVisible_) {
 		DrawGraph(position.x, position.y, hModel, TRUE);
-		/*DrawString(position.x + GetGraphSizeF_2D().halfX, position.y + GetGraphSizeF_2D().halfY, num.c_str(), GetColor(255, 255, 255));*/
+#if 1
+		DrawString(position.x + GetGraphSizeF_2D().halfX, position.y + GetGraphSizeF_2D().halfY, num.c_str(), GetColor(255, 255, 255));
+		DrawBoxAA(position.x + GetGraphSizeF_2D().x/4, position.y, position.x + (GetGraphSizeF_2D().x/4 * 3), position.y + GetGraphSizeF_2D().y, GetColor(255, 255, 255), FALSE);
+#endif
 	}
 }

@@ -27,7 +27,7 @@ OkButton::OkButton(GameObject* parent) : Icon(parent)
 			file << "SelectCharacterNum" << std::endl;
 		}
 		else {
-			file << "NONE" << std::endl;
+			file << "-1" << std::endl;
 		}
 	}
 	// ƒtƒ@ƒCƒ‹‚ð•Â‚¶‚é
@@ -58,7 +58,7 @@ void OkButton::Update()
 					}
 				
 				}
-				SceneManager::Instance()->ChangeScene(SceneManager::SCENE_ID::SCENE_ID_PLAY);
+				SceneManager::Instance()->ChangeScene(SceneManager::SCENE_ID::SCENE_ID_SET);
 			}
 		}
 	}

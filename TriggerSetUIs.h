@@ -14,7 +14,7 @@ public:
     void Update() override;
     void Draw() override;
 
-    auto GetpTSUIFrames() { return pTSUIs; }
+    auto GetpTSUIS() { return pTSUIs; }
 private:
     vector<TriggerSetUI*> pTSUIs;
 

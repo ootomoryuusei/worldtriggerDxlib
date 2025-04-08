@@ -33,12 +33,9 @@ PlayScene::~PlayScene()
 
 void PlayScene::Update()
 {
-	/*if (CheckHitKey(KEY_INPUT_RETURN)) {
-		Player1* pPlayer = FindGameObject<Player1>();
-		pPlayer->SetState_(STEP1);
-		Tile* pTile = FindGameObject<Tile>();
-		pTile->SetState_(STEP1);
-	}*/
+	if (CheckHitKey(KEY_INPUT_P)) {
+		SceneManager::Instance()->ChangeScene(SceneManager::SCENE_ID::SCENE_ID_SELECT);
+	}
 }
 
 void PlayScene::Draw()
