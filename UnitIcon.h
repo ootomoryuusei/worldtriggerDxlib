@@ -8,7 +8,6 @@ public:
 	~UnitIcon();
 	void Update() override;
 	void Draw() override;
-
 private:
 	bool prevMouse;
 	bool currentMouse;

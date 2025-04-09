@@ -18,12 +18,12 @@ void SceneManager::Initialize()
 {
 	Time::Init();
 	//Å‰‚ÌƒV[ƒ“‚ğ€”õ
-	currentSceneID_ = SCENE_ID_PLAY;
-	//currentSceneID_ = SCENE_ID_SELECT;
+	//currentSceneID_ = SCENE_ID_PLAY;
+	currentSceneID_ = SCENE_ID_SELECT;
 	nextSceneID_ = currentSceneID_;
 	/*Instantiate<TestScene>(this);*/
-	/*Instantiate<SelectScene>(this);*/
-	Instantiate<PlayScene>(this);
+	Instantiate<SelectScene>(this);
+	/*Instantiate<PlayScene>(this);*/
 
 }
 

@@ -214,6 +214,18 @@
     <ClCompile Include="TriggerSetUIs.cpp">
       <Filter>Icon\TriggerIcon</Filter>
     </ClCompile>
+    <ClCompile Include="MoveSetIcon.cpp">
+      <Filter>Icon\MiniMap</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveSetIcons.cpp">
+      <Filter>Icon\MiniMap</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveTypesIcon.cpp">
+      <Filter>Icon\MiniMap</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveTypesIcons.cpp">
+      <Filter>Icon\MiniMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -393,6 +405,18 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="TriggerSetUIs.h">
       <Filter>Icon\TriggerIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveSetIcon.h">
+      <Filter>Icon\MiniMap</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveSetIcons.h">
+      <Filter>Icon\MiniMap</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveTypesIcon.h">
+      <Filter>Icon\MiniMap</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveTypesIcons.h">
+      <Filter>Icon\MiniMap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

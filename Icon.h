@@ -14,7 +14,10 @@ protected:
     string fileName_; //ファイル名
     bool canVisible_; //iconを表示するかしないか
     int num_;
-    int createNum_;
+    int createNum_; //作成番号
+    VECTOR scale_; //スケール
+    int fontHandle_; //フォントのハンドル
+    XMFLOAT2 prevMousePos_;
 public:
     Icon(GameObject* parent);
     ~Icon();
@@ -33,5 +36,8 @@ public:
     int GetNum() { return num_; }
     void SetCreateNum(int _createNum) { createNum_ = _createNum; }
     int GetCreateNum() { return createNum_; }
+    void SetScale(VECTOR _scale) { scale_ = _scale; }
+    VECTOR GetScale() { return scale_; }
+    void SetFontHandle(int _fontHandle) { fontHandle_ = _fontHandle; }
 private:
 };

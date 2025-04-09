@@ -1,6 +1,8 @@
 #include "UnitIcon.h"
 #include"Player1.h"
 #include"TileIcons.h"
+#include"MoveSetIcons.h"
+#include"MoveTypesIcons.h"
 
 UnitIcon::UnitIcon(GameObject* parent) : Icon(parent)
 {
@@ -14,6 +16,8 @@ UnitIcon::UnitIcon(GameObject* parent) : Icon(parent)
 	prevMouse = false;
 	currentMouse = false;
 	now = 0;
+
+	createNum_ = -1;
 }
 
 UnitIcon::~UnitIcon()
@@ -22,35 +26,6 @@ UnitIcon::~UnitIcon()
 
 void UnitIcon::Update()
 {
-	//Player1* pPl1 = GetParent()->GetParent()->FindGameObject<Player1>();
-	//XMFLOAT2 mousePos = pPl1->GetMousePos();
-	//TileIcons* pTileIcons = GetParent()->GetParent()->FindGameObject<TileIcons>();
-	//if (PointInBox(mousePos, { position.x,position.y }, { graphSizeF_.x,graphSizeF_.y })) {
-	//	if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-	//		position = { mousePos.x - graphSize_.halfX,mousePos.y - graphSize_.halfY ,0.0f };
-	//	}
-	//	else {
-	//		for (auto itr : pTileIcons->GetpTIcon()) { //characterとフレームの当たり判定
-	//			XMFLOAT2 leftUp = { itr->Get3DPosition().x + itr->GetGraphSizeF_2D().x / 4, itr->Get3DPosition().y };
-	//			XMFLOAT2 graphSize = { itr->GetGraphSizeF_2D().x / 4 * 2,itr->GetGraphSizeF_2D().y };
-	//			if (PointInBox({ position.x,position.y }, leftUp, graphSize)) {
-	//				position = { itr->Get3DPosition() };
-	//			}
-	//		}
-	//	}
-
-	//	if (currentMouse && !prevMouse) {
-	//		
-	//		now = GetNowCount();
-	//		if (now - lastClickTime <= doubleClickTime) {
-	//			canVisible_ = false;
-	//		}
-	//		else {
-	//			lastClickTime = now;
-	//		}
-	//		prevMouse = currentMouse;
-	//	}
-	//}
 	Player1* pPl1 = GetParent()->GetParent()->FindGameObject<Player1>();
 	XMFLOAT2 mousePos = pPl1->GetMousePos();
 	TileIcons* pTileIcons = GetParent()->GetParent()->FindGameObject<TileIcons>();
@@ -60,7 +35,8 @@ void UnitIcon::Update()
 
 	if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x, graphSizeF_.y })) {
 		if (currentMouse) {
-			position = { mousePos.x - graphSize_.halfX, mousePos.y - graphSize_.halfY, 0.0f };
+			XMFLOAT2 mouseVariation = { mousePos.x - prevMousePos_.x,mousePos.y - prevMousePos_.y };
+			position = { position.x + mouseVariation.x, position.y + mouseVariation.y, 0.0f };
 		}
 		else {
 			for (auto itr : pTileIcons->GetpTIcon()) {
@@ -73,14 +49,20 @@ void UnitIcon::Update()
 		}
 
 		if (currentMouse && !prevMouse) { //ダブルクリックの処理
+			MoveSetIcons* pMoveSetIcons = GetParent()->GetParent()->FindGameObject<MoveSetIcons>();
+			MoveTypesIcons* pMoveTypesIcons = GetParent()->GetParent()->FindGameObject<MoveTypesIcons>();
 			now = GetNowCount();
-			if (now - lastClickTime <= doubleClickTime) {
-				canVisible_ = false;
+			if (now - lastClickTime <= doubleClickTime) { //ダブルクリックした
+				pMoveSetIcons->GetpMoveSetIcons()[createNum_]->SetCanVisible(true);
+				pMoveTypesIcons->GetpMoveTypesIcons()[createNum_]->SetCanVisible(true);
 			}
-			else {
+			else { //シングルクリック
 				lastClickTime = now;
+				pMoveSetIcons->GetpMoveSetIcons()[createNum_]->SetCanVisible(false);
+				pMoveTypesIcons->GetpMoveTypesIcons()[createNum_]->SetCanVisible(false);
 			}
 		}
+		prevMousePos_ = mousePos;
 	}
 }
 

@@ -22,9 +22,12 @@ void TriggerIcon::Update()
 		Player1* pPl1 = GetParent()->GetParent()->GetParent()->FindGameObject<Player1>();
 		XMFLOAT2 mousePos = pPl1->GetMousePos();
 		TriggerSetUIFrames* pTSUIFs = GetParent()->GetParent()->FindGameObject<TriggerSetUIFrames>();
-		if (PointInBox(mousePos, { position.x,position.y }, { (float)graphSize_.x, (float)graphSize_.y })) {
+		if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x, graphSizeF_.y })) {
 			if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-				position = { mousePos.x - graphSize_.halfX,mousePos.y - graphSize_.halfY ,0.0f };
+
+				XMFLOAT2 mouseVariation = { mousePos.x - prevMousePos_.x,mousePos.y - prevMousePos_.y };
+				position = { position.x + mouseVariation.x, position.y + mouseVariation.y, 0.0f };
+
 			}
 			else {
 				int num = 0;
@@ -43,7 +46,14 @@ void TriggerIcon::Update()
 					num++;
 				}
 			}
+			prevMousePos_ = mousePos;
 		}
+		//if (PointInBox(mousePos, { position.x,position.y }, { (float)graphSize_.x, (float)graphSize_.y })) {
+		//	if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+		//		position = { mousePos.x - graphSize_.halfX,mousePos.y - graphSize_.halfY ,0.0f };
+		//	}
+		//	
+		//}
 	}
 	
 	/*if (position.x != initialPosition_.x && position.x != initialPosition_.y) {

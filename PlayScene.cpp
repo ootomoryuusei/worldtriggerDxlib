@@ -10,6 +10,8 @@
 #include"Timer.h"
 #include"TileIcons.h"
 #include"UnitIcons.h"
+#include"MoveSetIcons.h"
+#include"MoveTypesIcons.h"
 
 PlayScene::PlayScene(GameObject* parent)
 {
@@ -20,6 +22,8 @@ PlayScene::PlayScene(GameObject* parent)
 	Instantiate<Timer>(this);
 	Instantiate<TileIcons>(this);
 	Instantiate<UnitIcons>(this);
+	Instantiate<MoveSetIcons>(this);
+	Instantiate<MoveTypesIcons>(this);
 	Instantiate<Player1>(this);
 	Instantiate<Tile>(this);
 	Instantiate<Camera>(this); // Player‚æ‚èŒã‚É‘‚­

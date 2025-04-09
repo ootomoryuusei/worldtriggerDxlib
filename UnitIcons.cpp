@@ -27,7 +27,7 @@ UnitIcons::UnitIcons(GameObject* parent) : GameObject(parent),selectCharNum_(MAX
 		}
 	}
 
-
+	int num = 0;
 	for (int y = 0; y < MAX_SELECT_CHARACTER; y++) {
 		std::string graphName;
 		graphName = csv_->GetString(FN2DLine, selectCharNum_[y]);
@@ -56,8 +56,9 @@ UnitIcons::UnitIcons(GameObject* parent) : GameObject(parent),selectCharNum_(MAX
 				}
 			}
 			pUIcon->Set3DPosition(pos);
+			pUIcon->SetCreateNum(num);
 			pUIcons_.push_back(pUIcon);
-			
+			num++;
 		}
 	}
 }
