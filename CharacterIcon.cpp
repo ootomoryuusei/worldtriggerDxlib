@@ -45,7 +45,8 @@ void CharacterIcon::Update()
 				for (auto itr : pCSetUIFrames->GetpCSUIFrames()) { //character‚ÆƒtƒŒ[ƒ€‚Ì“–‚½‚è”»’è
 					XMFLOAT2 leftUp = { itr->Get3DPosition().x, itr->Get3DPosition().y };
 					XMFLOAT2 graphSize = { itr->GetGraphSizeF_2D().x,itr->GetGraphSizeF_2D().y };
-					if (PointInBox({ position.x,position.y }, leftUp, graphSize)) {
+					XMFLOAT2 graphCenter = { position.x + graphSizeF_.halfX,position.y + graphSizeF_.halfY };
+					if (PointInBox({ graphCenter.x,graphCenter.y }, leftUp, graphSize)) { 
 						position = { itr->Get3DPosition() };
 						settingNum_ = num;
 						alreadySet_[num] = true;

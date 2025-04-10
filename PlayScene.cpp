@@ -11,18 +11,20 @@
 #include"TileIcons.h"
 #include"UnitIcons.h"
 #include"MoveSetIcons.h"
+#include"MoveSelectIcons.h"
 #include"MoveTypesIcons.h"
 
 PlayScene::PlayScene(GameObject* parent)
 {
 	Instantiate<BackGround>(this);
-	Instantiate<Map>(this);
-	Instantiate<rader>(this);
-	Instantiate<Unit>(this);
-	Instantiate<Timer>(this);
+	//Instantiate<Map>(this);
+	//Instantiate<rader>(this);
+	//Instantiate<Unit>(this);
+	//Instantiate<Timer>(this);
 	Instantiate<TileIcons>(this);
 	Instantiate<UnitIcons>(this);
 	Instantiate<MoveSetIcons>(this);
+	Instantiate<MoveSelectIcons>(this);
 	Instantiate<MoveTypesIcons>(this);
 	Instantiate<Player1>(this);
 	Instantiate<Tile>(this);

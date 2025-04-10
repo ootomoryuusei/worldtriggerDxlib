@@ -1,30 +1,32 @@
-#include "MoveSetIcon.h"
-#include"player1.h"
+#include "MoveTypeIcon.h"
+#include"Player1.h"
+#include"MoveSelectIcons.h"
 
-MoveSetIcon::MoveSetIcon(GameObject* parent) : Icon(parent)
+MoveTypeIcon::MoveTypeIcon(GameObject* parent) : Icon(parent)
 {
-	Load("Assets/Image/moveSetIcon.png");
+	Load("Assets//Image//MoveTypeButton.png");
 	position = { 0, 0, 0 };
 	canVisible_ = false;
 	fontHandle_ = -1;
-	iconName = "s“®Ý’è";
+	iconName = "";
 }
 
-MoveSetIcon::~MoveSetIcon()
+MoveTypeIcon::~MoveTypeIcon()
 {
 }
 
-void MoveSetIcon::Update()
+void MoveTypeIcon::Update()
 {
 	if (canVisible_) {
-		XMFLOAT2 graphSize = { GetGraphSizeF_2D().x,GetGraphSizeF_2D().y };
+		/*MoveSelectIcons* pMoveSelectIcons = GetParent()->GetParent()->FindGameObject<MoveSelectIcons>();
+		position = pMoveSelectIcons->GetpMoveSelectIcons()[0]->Get3DPosition();*/
 		XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
-		space = { (graphSize.x - strSize.x) / 2,(graphSize.y / 2 - strSize.y) / 2 };
+		space = { (graphSizeF_.x - strSize.x) / 2,(graphSizeF_.y- strSize.y) /2};
 
 		Player1* pPl1 = GetParent()->GetParent()->FindGameObject<Player1>();
 		XMFLOAT2 mousePos = pPl1->GetMousePos();
 
-		if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x, graphSizeF_.y })) {
+		if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x,graphSizeF_.y })) {
 			if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 
 				XMFLOAT2 mouseVariation = { mousePos.x - prevMousePos_.x,mousePos.y - prevMousePos_.y };
@@ -36,16 +38,14 @@ void MoveSetIcon::Update()
 	}
 }
 
-void MoveSetIcon::Draw()
+void MoveTypeIcon::Draw()
 {
 	if (canVisible_) {
 		DrawGraph(position.x, position.y, hModel, TRUE);
 		VECTOR fontPos = { position.x + space.x, position.y + space.y,position.z };
 		DrawStringToHandle(fontPos.x, fontPos.y, iconName.c_str(), GetColor(0, 0, 0), fontHandle_);
-		DrawLineAA(position.x, position.y + GetGraphSizeF_2D().y / 2
-			, position.x + GetGraphSizeF_2D().x, position.y + GetGraphSizeF_2D().y / 2, GetColor(0, 0, 0),2.0);
-#if 1
-		DrawBoxAA(position.x, position.y, position.x + GetGraphSizeF_2D().x, position.y + GetGraphSizeF_2D().y, GetColor(255, 0, 0), FALSE);
+#if 0
+		DrawBoxAA(position.x, position.y, position.x + graphSizeF_.x, position.y + graphSizeF_.y, GetColor(255, 0, 0), FALSE);
 #endif
 	}
 }

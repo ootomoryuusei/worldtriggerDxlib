@@ -1,15 +1,10 @@
 #include "MoveTypesIcons.h"
 
-MoveTypesIcons::MoveTypesIcons(GameObject* parent) : GameObject(parent,"MoveTypesIcons")
+MoveTypesIcons::MoveTypesIcons(GameObject* parent)
 {
-	int fontSize = 32;
-	int fontThickness = 5;
-	int fontHandle = CreateFontToHandle("行動タイプフォント", fontSize, fontThickness, DX_FONTTYPE_NORMAL);
-
 	for (int i = 0; i < MAX_SELECT_CHARACTER * 2; i++) {
-		MoveTypesIcon* pMoveTypesIcons = Instantiate<MoveTypesIcon>(this);
-		pMoveTypesIcons->SetFontHandle(fontHandle);
-		pMoveTypesIcons_.push_back(pMoveTypesIcons);
+		MoveTypeIcons* pMoveTypeIcons = Instantiate<MoveTypeIcons>(this);
+		pMoveTypesIcons_.push_back(pMoveTypeIcons);
 	}
 }
 
@@ -18,9 +13,5 @@ MoveTypesIcons::~MoveTypesIcons()
 }
 
 void MoveTypesIcons::Update()
-{
-}
-
-void MoveTypesIcons::Draw()
 {
 }

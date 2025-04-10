@@ -32,14 +32,17 @@
     <Filter Include="Icon">
       <UniqueIdentifier>{2894f51d-329c-438d-b9ba-eec66ea188db}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Icon\CharacterIcon">
-      <UniqueIdentifier>{23254e2a-bf8b-4ebc-bb64-2b14b141c49c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Icon\TriggerIcon">
-      <UniqueIdentifier>{4ea67eef-9d62-41a4-86ba-b9c6a8302c65}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Icon\MiniMap">
       <UniqueIdentifier>{5e07570e-4f84-42d0-a971-99763011afc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Icon\MovementIcons">
+      <UniqueIdentifier>{3747389e-fb79-41fe-9e53-a35a98cf0500}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Icon\TriggerIcons">
+      <UniqueIdentifier>{4ea67eef-9d62-41a4-86ba-b9c6a8302c65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Icon\CharacterIcons">
+      <UniqueIdentifier>{23254e2a-bf8b-4ebc-bb64-2b14b141c49c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -129,44 +132,35 @@
     <ClCompile Include="Engine\CsvReader.cpp">
       <Filter>01Engine\ResourceManager</Filter>
     </ClCompile>
-    <ClCompile Include="Icon.cpp">
-      <Filter>Icon</Filter>
-    </ClCompile>
     <ClCompile Include="CharacterIcon.cpp">
-      <Filter>Icon\CharacterIcon</Filter>
+      <Filter>Icon\CharacterIcons</Filter>
     </ClCompile>
     <ClCompile Include="CharacterSelectUI.cpp">
-      <Filter>Icon\CharacterIcon</Filter>
+      <Filter>Icon\CharacterIcons</Filter>
     </ClCompile>
     <ClCompile Include="CharacterSetUIFrame.cpp">
-      <Filter>Icon\CharacterIcon</Filter>
+      <Filter>Icon\CharacterIcons</Filter>
     </ClCompile>
     <ClCompile Include="TriggerIcon.cpp">
-      <Filter>Icon\TriggerIcon</Filter>
+      <Filter>Icon\TriggerIcons</Filter>
     </ClCompile>
     <ClCompile Include="TriggerSetButton.cpp">
-      <Filter>Icon\TriggerIcon</Filter>
+      <Filter>Icon\TriggerIcons</Filter>
     </ClCompile>
     <ClCompile Include="TriggerSetUI.cpp">
-      <Filter>Icon\TriggerIcon</Filter>
+      <Filter>Icon\TriggerIcons</Filter>
     </ClCompile>
     <ClCompile Include="TriggerSetUIFrame.cpp">
-      <Filter>Icon\TriggerIcon</Filter>
+      <Filter>Icon\TriggerIcons</Filter>
     </ClCompile>
     <ClCompile Include="TriggerSetUIFrames.cpp">
-      <Filter>Icon\TriggerIcon</Filter>
-    </ClCompile>
-    <ClCompile Include="OkButton.cpp">
-      <Filter>Icon</Filter>
+      <Filter>Icon\TriggerIcons</Filter>
     </ClCompile>
     <ClCompile Include="TriggerIcons.cpp">
-      <Filter>Icon\TriggerIcon</Filter>
-    </ClCompile>
-    <ClCompile Include="Icons.cpp">
-      <Filter>Icon</Filter>
+      <Filter>Icon\TriggerIcons</Filter>
     </ClCompile>
     <ClCompile Include="CharacterSetUIFrames.cpp">
-      <Filter>Icon\CharacterIcon</Filter>
+      <Filter>Icon\CharacterIcons</Filter>
     </ClCompile>
     <ClCompile Include="SelectScene.cpp">
       <Filter>Scene</Filter>
@@ -175,21 +169,9 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="CharacterIcons.cpp">
-      <Filter>Icon\CharacterIcon</Filter>
-    </ClCompile>
-    <ClCompile Include="SetIcons.cpp">
-      <Filter>Icon</Filter>
-    </ClCompile>
-    <ClCompile Include="SelectIcons.cpp">
-      <Filter>Icon</Filter>
-    </ClCompile>
-    <ClCompile Include="BackGround.cpp">
-      <Filter>Icon</Filter>
+      <Filter>Icon\CharacterIcons</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">
-      <Filter>Icon</Filter>
-    </ClCompile>
-    <ClCompile Include="rader.cpp">
       <Filter>Icon</Filter>
     </ClCompile>
     <ClCompile Include="Unit.cpp">
@@ -212,19 +194,49 @@
     </ClCompile>
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="TriggerSetUIs.cpp">
-      <Filter>Icon\TriggerIcon</Filter>
+      <Filter>Icon\TriggerIcons</Filter>
     </ClCompile>
     <ClCompile Include="MoveSetIcon.cpp">
-      <Filter>Icon\MiniMap</Filter>
+      <Filter>Icon\MovementIcons</Filter>
     </ClCompile>
     <ClCompile Include="MoveSetIcons.cpp">
-      <Filter>Icon\MiniMap</Filter>
+      <Filter>Icon\MovementIcons</Filter>
     </ClCompile>
-    <ClCompile Include="MoveTypesIcon.cpp">
-      <Filter>Icon\MiniMap</Filter>
+    <ClCompile Include="MoveSelectIcon.cpp">
+      <Filter>Icon\MovementIcons</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveSelectIcons.cpp">
+      <Filter>Icon\MovementIcons</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveTypeIcon.cpp">
+      <Filter>Icon\MovementIcons</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveTypeIcons.cpp">
+      <Filter>Icon\MovementIcons</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="Icon.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="Icons.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="OkButton.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="rader.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectIcons.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="SetIcons.cpp">
+      <Filter>Icon</Filter>
     </ClCompile>
     <ClCompile Include="MoveTypesIcons.cpp">
-      <Filter>Icon\MiniMap</Filter>
+      <Filter>Icon\MovementIcons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -320,45 +332,36 @@
     <ClInclude Include="Engine\CsvReader.h">
       <Filter>01Engine\ResourceManager</Filter>
     </ClInclude>
-    <ClInclude Include="Icon.h">
-      <Filter>Icon</Filter>
-    </ClInclude>
     <ClInclude Include="globals.h" />
     <ClInclude Include="CharacterIcon.h">
-      <Filter>Icon\CharacterIcon</Filter>
+      <Filter>Icon\CharacterIcons</Filter>
     </ClInclude>
     <ClInclude Include="CharacterSelectUI.h">
-      <Filter>Icon\CharacterIcon</Filter>
+      <Filter>Icon\CharacterIcons</Filter>
     </ClInclude>
     <ClInclude Include="CharacterSetUIFrame.h">
-      <Filter>Icon\CharacterIcon</Filter>
+      <Filter>Icon\CharacterIcons</Filter>
     </ClInclude>
     <ClInclude Include="TriggerIcon.h">
-      <Filter>Icon\TriggerIcon</Filter>
+      <Filter>Icon\TriggerIcons</Filter>
     </ClInclude>
     <ClInclude Include="TriggerSetButton.h">
-      <Filter>Icon\TriggerIcon</Filter>
+      <Filter>Icon\TriggerIcons</Filter>
     </ClInclude>
     <ClInclude Include="TriggerSetUI.h">
-      <Filter>Icon\TriggerIcon</Filter>
+      <Filter>Icon\TriggerIcons</Filter>
     </ClInclude>
     <ClInclude Include="TriggerSetUIFrame.h">
-      <Filter>Icon\TriggerIcon</Filter>
+      <Filter>Icon\TriggerIcons</Filter>
     </ClInclude>
     <ClInclude Include="TriggerSetUIFrames.h">
-      <Filter>Icon\TriggerIcon</Filter>
-    </ClInclude>
-    <ClInclude Include="OkButton.h">
-      <Filter>Icon</Filter>
+      <Filter>Icon\TriggerIcons</Filter>
     </ClInclude>
     <ClInclude Include="TriggerIcons.h">
-      <Filter>Icon\TriggerIcon</Filter>
-    </ClInclude>
-    <ClInclude Include="Icons.h">
-      <Filter>Icon</Filter>
+      <Filter>Icon\TriggerIcons</Filter>
     </ClInclude>
     <ClInclude Include="CharacterSetUIFrames.h">
-      <Filter>Icon\CharacterIcon</Filter>
+      <Filter>Icon\CharacterIcons</Filter>
     </ClInclude>
     <ClInclude Include="SelectScene.h">
       <Filter>Scene</Filter>
@@ -367,21 +370,9 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="CharacterIcons.h">
-      <Filter>Icon\CharacterIcon</Filter>
-    </ClInclude>
-    <ClInclude Include="SetIcons.h">
-      <Filter>Icon</Filter>
-    </ClInclude>
-    <ClInclude Include="SelectIcons.h">
-      <Filter>Icon</Filter>
-    </ClInclude>
-    <ClInclude Include="BackGround.h">
-      <Filter>Icon</Filter>
+      <Filter>Icon\CharacterIcons</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
-      <Filter>Icon</Filter>
-    </ClInclude>
-    <ClInclude Include="rader.h">
       <Filter>Icon</Filter>
     </ClInclude>
     <ClInclude Include="Unit.h">
@@ -404,19 +395,49 @@
     </ClInclude>
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="TriggerSetUIs.h">
-      <Filter>Icon\TriggerIcon</Filter>
+      <Filter>Icon\TriggerIcons</Filter>
     </ClInclude>
     <ClInclude Include="MoveSetIcon.h">
-      <Filter>Icon\MiniMap</Filter>
+      <Filter>Icon\MovementIcons</Filter>
     </ClInclude>
     <ClInclude Include="MoveSetIcons.h">
-      <Filter>Icon\MiniMap</Filter>
+      <Filter>Icon\MovementIcons</Filter>
     </ClInclude>
-    <ClInclude Include="MoveTypesIcon.h">
-      <Filter>Icon\MiniMap</Filter>
+    <ClInclude Include="MoveSelectIcon.h">
+      <Filter>Icon\MovementIcons</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveSelectIcons.h">
+      <Filter>Icon\MovementIcons</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveTypeIcon.h">
+      <Filter>Icon\MovementIcons</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveTypeIcons.h">
+      <Filter>Icon\MovementIcons</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="Icon.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="Icons.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="OkButton.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="rader.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectIcons.h">
+      <Filter>Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="SetIcons.h">
+      <Filter>Icon</Filter>
     </ClInclude>
     <ClInclude Include="MoveTypesIcons.h">
-      <Filter>Icon\MiniMap</Filter>
+      <Filter>Icon\MovementIcons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

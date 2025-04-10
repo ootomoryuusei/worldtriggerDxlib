@@ -1,7 +1,7 @@
-#include "MoveTypesIcon.h"
+#include "MoveSelectIcon.h"
 #include"Player1.h"
 
-MoveTypesIcon::MoveTypesIcon(GameObject* parent) : Icon(parent)
+MoveSelectIcon::MoveSelectIcon(GameObject* parent) : Icon(parent)
 {
 	Load("Assets/Image/moveTypesIcon.png");
 	position = { 100, 0, 0 };
@@ -10,11 +10,11 @@ MoveTypesIcon::MoveTypesIcon(GameObject* parent) : Icon(parent)
 	iconName = "行動タイプ";
 }
 
-MoveTypesIcon::~MoveTypesIcon()
+MoveSelectIcon::~MoveSelectIcon()
 {
 }
 
-void MoveTypesIcon::Update()
+void MoveSelectIcon::Update()
 {
 	if (canVisible_) {
 		XMFLOAT2 graphSize = { GetGraphSizeF_2D().x,GetGraphSizeF_2D().y };
@@ -36,7 +36,7 @@ void MoveTypesIcon::Update()
 	}
 }
 
-void MoveTypesIcon::Draw()
+void MoveSelectIcon::Draw()
 {
 	if (canVisible_) {
 		DrawGraph(position.x, position.y, hModel, TRUE);
@@ -44,7 +44,7 @@ void MoveTypesIcon::Draw()
 		DrawStringToHandle(fontPos.x, fontPos.y, iconName.c_str(), GetColor(0, 0, 0), fontHandle_);
 		DrawLineAA(position.x, position.y + GetGraphSizeF_2D().y / 2
 			, position.x + GetGraphSizeF_2D().x, position.y + GetGraphSizeF_2D().y / 2, GetColor(0, 0, 0), 2.0);
-#if 0
+#if 1
 		DrawBoxAA(position.x, position.y, position.x + GetGraphSizeF_2D().x, position.y + GetGraphSizeF_2D().y, GetColor(255, 0, 0), FALSE);
 #endif
 	}
