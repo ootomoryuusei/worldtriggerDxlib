@@ -8,6 +8,7 @@ class MoveTypesIcons :
 public:
 	MoveTypesIcons(GameObject* parent);
 	~MoveTypesIcons();
+	void Initialize() override;
 	void Update() override;
 
 	auto GetpMoveTypesIcons() { return pMoveTypesIcons_; }

@@ -7,10 +7,7 @@
 
 UnitIcon::UnitIcon(GameObject* parent) : Icon(parent)
 {
-	/*Load("Assets//Image//tile.png");*/
-	/*position = { 1000, 20, 0 };*/
 	canVisible_ = true;
-	/*position = tile_.position;*/
 	doubleClicked = false;
 	lastClickTime = 0;
 	doubleClickTime = 200;
@@ -67,6 +64,9 @@ void UnitIcon::Update()
 				lastClickTime = now;
 				pMoveSetIcons->GetpMoveSetIcons()[createNum_]->SetCanVisible(false);
 				pMoveSelectIcons->GetpMoveSelectIcons()[createNum_]->SetCanVisible(false);
+				for (auto& itr : pMoveTypesIcons->GetpMoveTypesIcons()[createNum_]->GetpMoveTypeIcons()) {
+					itr->SetCanVisible(false);
+				}
 			}
 		}
 		prevMousePos_ = mousePos;

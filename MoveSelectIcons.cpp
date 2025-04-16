@@ -1,6 +1,15 @@
 #include "MoveSelectIcons.h"
 
-MoveSelectIcons::MoveSelectIcons(GameObject* parent) : GameObject(parent,"MoveTypesIcons")
+MoveSelectIcons::MoveSelectIcons(GameObject* parent) : GameObject(parent,"MoveSelectIcons")
+{
+	
+}
+
+MoveSelectIcons::~MoveSelectIcons()
+{
+}
+
+void MoveSelectIcons::Initialize()
 {
 	int fontSize = 32;
 	int fontThickness = 5;
@@ -11,10 +20,6 @@ MoveSelectIcons::MoveSelectIcons(GameObject* parent) : GameObject(parent,"MoveTy
 		pMoveSelectIcon->SetFontHandle(fontHandle);
 		pMoveSelectIcons_.push_back(pMoveSelectIcon);
 	}
-}
-
-MoveSelectIcons::~MoveSelectIcons()
-{
 }
 
 void MoveSelectIcons::Update()

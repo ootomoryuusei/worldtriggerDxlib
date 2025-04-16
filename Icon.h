@@ -12,12 +12,13 @@ protected:
     SIZE_F_2D graphSizeF_; //アイコンの画像サイズ(float)
     SIZE_2D graphSize_; //アイコンの画像サイズ
     string fileName_; //ファイル名
+    string iconName_; //iconの名前
     bool canVisible_; //iconを表示するかしないか
     int num_;
     int createNum_; //作成番号
     VECTOR scale_; //スケール
     int fontHandle_; //フォントのハンドル
-    XMFLOAT2 prevMousePos_;
+    XMFLOAT2 prevMousePos_; 
 public:
     Icon(GameObject* parent);
     ~Icon();
@@ -32,12 +33,19 @@ public:
 
     void SetCanVisible(bool _canVisible) { canVisible_ = _canVisible; }
     bool GetCanVisible() { return canVisible_; }
+
     void SetNum(int _num) { num_ = _num; }
     int GetNum() { return num_; }
-    void SetCreateNum(int _createNum) { createNum_ = _createNum; }
+
+    void SetCreateNum(int _createNum) { createNum_ = _createNum; } 
     int GetCreateNum() { return createNum_; }
+
     void SetScale(VECTOR _scale) { scale_ = _scale; }
     VECTOR GetScale() { return scale_; }
+
+    void SetIconName(string _iconName) { iconName_ = _iconName; }
+    string GetIconName() { return iconName_; }
+
     void SetFontHandle(int _fontHandle) { fontHandle_ = _fontHandle; }
 private:
 };

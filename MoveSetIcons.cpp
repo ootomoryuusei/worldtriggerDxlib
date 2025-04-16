@@ -9,6 +9,7 @@ MoveSetIcons::MoveSetIcons(GameObject* parent) : GameObject(parent,"MoveSetIcons
 	for (int i = 0; i < MAX_SELECT_CHARACTER * 2; i++) {
 		MoveSetIcon* pMoveSetIcon = Instantiate<MoveSetIcon>(this);
 		pMoveSetIcon->SetFontHandle(fontHandle);
+		pMoveSetIcon->SetCreateNum(i);
 		pMoveSetIcons_.push_back(pMoveSetIcon);
 
 	}

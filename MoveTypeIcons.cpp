@@ -1,7 +1,15 @@
 #include "MoveTypeIcons.h"
 #include"MoveSelectIcons.h"
 
-MoveTypeIcons::MoveTypeIcons(GameObject* parent) : /*GameObject(parent,"MoveTypeIcons")*/ Icon(parent)
+MoveTypeIcons::MoveTypeIcons(GameObject* parent) : Icon(parent)
+{
+}
+
+MoveTypeIcons::~MoveTypeIcons()
+{
+}
+
+void MoveTypeIcons::Initialize()
 {
 	int fontSize = 32;
 	int fontThickness = 5;
@@ -21,19 +29,21 @@ MoveTypeIcons::MoveTypeIcons(GameObject* parent) : /*GameObject(parent,"MoveType
 		typeName = csv_->GetString(FNMTLine, y);
 		MoveTypeIcon* pMoveTypeIcon = Instantiate<MoveTypeIcon>(this);
 		MoveSelectIcons* pMoveSelectIcons = GetParent()->GetParent()->FindGameObject<MoveSelectIcons>();
-		VECTOR pos = pMoveSelectIcons->GetpMoveSelectIcons()[0]->Get3DPosition();
-		XMFLOAT2 graphSize = { pMoveSelectIcons->GetpMoveSelectIcons()[0]->GetGraphSizeF_2D().x, pMoveSelectIcons->GetpMoveSelectIcons()[0]->GetGraphSizeF_2D().y };
-		pMoveTypeIcon->Set3DPosition({pos.x, pos.y + (graphSize.y/2) * y, pos.z});
+		VECTOR pos = pMoveSelectIcons->GetpMoveSelectIcons()[createNum_]->Get3DPosition();
+		XMFLOAT2 graphSize = { pMoveSelectIcons->GetpMoveSelectIcons()[createNum_]->GetGraphSizeF_2D().x, pMoveSelectIcons->GetpMoveSelectIcons()[0]->GetGraphSizeF_2D().y };
+		pMoveTypeIcon->Set3DPosition({ pos.x, pos.y + (graphSize.y / 2) * y, pos.z });
 		pMoveTypeIcon->SetIconName(typeName);
 		pMoveTypeIcon->SetFontHandle(fontHandle);
 		pMoveTypeIcons_.push_back(pMoveTypeIcon);
 	}
 }
 
-MoveTypeIcons::~MoveTypeIcons()
-{
-}
-
 void MoveTypeIcons::Update()
 {
+	for (int y = 1; y < csv_->GetHeight(); y++) {
+		MoveSelectIcons* pMoveSelectIcons = GetParent()->GetParent()->FindGameObject<MoveSelectIcons>();
+		VECTOR pos = pMoveSelectIcons->GetpMoveSelectIcons()[createNum_]->Get3DPosition();
+		XMFLOAT2 graphSize = { pMoveSelectIcons->GetpMoveSelectIcons()[createNum_]->GetGraphSizeF_2D().x, pMoveSelectIcons->GetpMoveSelectIcons()[0]->GetGraphSizeF_2D().y };
+		pMoveTypeIcons_[y-1]->Set3DPosition({pos.x, pos.y + (graphSize.y / 2) * y, pos.z});
+	}
 }

@@ -10,9 +10,13 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	void SetIconName(string _iconName) { iconName = _iconName; }
+	/*void SetIconName(string _iconName) { iconName = _iconName; }
+	string GetIconName() { return iconName; }*/
+	bool GetClicked() { return clicked; }
+	void SetClicked(bool _clicked) { clicked = _clicked; }
 private:
-	string iconName;
+	/*string iconName;*/
 	XMFLOAT2 space;
+	bool clicked;
 };
 

@@ -7,11 +7,12 @@
 using std::vector;
 
 class MoveTypeIcons :
-    public/* GameObject*/ Icon
+    public Icon
 {
 public:
 	MoveTypeIcons(GameObject* parent);
 	~MoveTypeIcons();
+	void Initialize() override;
 	void Update() override;
 
 	auto GetpMoveTypeIcons() { return pMoveTypeIcons_; }

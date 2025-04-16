@@ -24,11 +24,15 @@ PlayScene::PlayScene(GameObject* parent)
 	Instantiate<TileIcons>(this);
 	Instantiate<UnitIcons>(this);
 	Instantiate<MoveSetIcons>(this);
+
 	Instantiate<MoveSelectIcons>(this);
+
 	Instantiate<MoveTypesIcons>(this);
+	
 	Instantiate<Player1>(this);
 	Instantiate<Tile>(this);
 	Instantiate<Camera>(this); // Player‚æ‚èŒã‚É‘‚­
+	
 	// ‚Æ‚è‚ ‚¦‚¸ƒJƒƒ‰‚ğİ’è‚·‚é
 	/*SetCameraPositionAndTarget_UpVecY(VGet(0,0,0), VGet(0, 0, 0));*/
 }

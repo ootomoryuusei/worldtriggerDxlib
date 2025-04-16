@@ -11,6 +11,7 @@ class MoveSelectIcons :
 public:
 	MoveSelectIcons(GameObject* parent);
 	~MoveSelectIcons();
+	void Initialize() override;
 	void Update() override;
 	void Draw() override;
 

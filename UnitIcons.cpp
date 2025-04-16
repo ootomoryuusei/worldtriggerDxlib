@@ -55,6 +55,8 @@ UnitIcons::UnitIcons(GameObject* parent) : GameObject(parent),selectCharNum_(MAX
 					isSeted = true;
 				}
 			}
+			string IconName = graphName;
+			pUIcon->SetIconName(IconName);
 			pUIcon->Set3DPosition(pos);
 			pUIcon->SetCreateNum(num);
 			pUIcons_.push_back(pUIcon);

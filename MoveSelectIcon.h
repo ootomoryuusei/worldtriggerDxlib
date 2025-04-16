@@ -9,7 +9,7 @@ public:
 	void Update() override;
 	void Draw() override;
 private:
-	string iconName;
+	/*string iconName;*/
 	XMFLOAT2 space;
 	float scale;
 };
