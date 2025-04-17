@@ -11,9 +11,15 @@ UnitIcon::UnitIcon(GameObject* parent) : Icon(parent)
 	canVisible_ = true;
 
 	createNum_ = -1;
+
+	/*firstSet = false;*/
 }
 
 UnitIcon::~UnitIcon()
+{
+}
+
+void UnitIcon::Initialize()
 {
 }
 
@@ -27,7 +33,10 @@ void UnitIcon::Update()
 	MoveSelectIcons* pMoveSelectIcons = GetParent()->GetParent()->FindGameObject<MoveSelectIcons>();
 	MoveTypesIcons* pMoveTypesIcons = GetParent()->GetParent()->FindGameObject<MoveTypesIcons>();
 
+	
 	if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x, graphSizeF_.y })) {
+
+		//unitIconの移動処理
 		if (pMouse->IsPressed(Mouse::LEFT)) {
 			XMFLOAT2 mouseVariation = { mousePos.x - prevMousePos_.x,mousePos.y - prevMousePos_.y };
 			position = { position.x + mouseVariation.x, position.y + mouseVariation.y, 0.0f };
@@ -43,7 +52,7 @@ void UnitIcon::Update()
 			}
 		}
 
-		
+		//unitIconの選択処理
 		if (pMouse->IsDoubleClicked(Mouse::LEFT)) { //ダブルクリックの処理
 			
 			pMoveSetIcons->GetpMoveSetIcons()[createNum_]->SetCanVisible(true);

@@ -32,6 +32,7 @@ void MoveTypeIcons::Initialize()
 		VECTOR pos = pMoveSelectIcons->GetpMoveSelectIcons()[createNum_]->Get3DPosition();
 		XMFLOAT2 graphSize = { pMoveSelectIcons->GetpMoveSelectIcons()[createNum_]->GetGraphSizeF_2D().x, pMoveSelectIcons->GetpMoveSelectIcons()[0]->GetGraphSizeF_2D().y };
 		pMoveTypeIcon->Set3DPosition({ pos.x, pos.y + (graphSize.y / 2) * y, pos.z });
+		/*pMoveTypeIcon->SetCreateNum(y);*/
 		pMoveTypeIcon->SetIconName(typeName);
 		pMoveTypeIcon->SetFontHandle(fontHandle);
 		pMoveTypeIcons_.push_back(pMoveTypeIcon);

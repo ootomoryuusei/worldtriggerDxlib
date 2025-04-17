@@ -10,15 +10,22 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	/*void SetIconName(string _iconName) { iconName = _iconName; }
-	string GetIconName() { return iconName; }*/
 	bool GetClicked() { return clicked; }
 	void SetClicked(bool _clicked) { clicked = _clicked; }
+
+	auto GetSerchResult() { return serchAroundTileNum; }
+
+	vector<int> SerchAroundTileNum(int _CenterNum, int _renge);
 private:
 	bool prevMouse;
 	bool currentMouse;
 	/*string iconName;*/
 	XMFLOAT2 space;
 	bool clicked;
+
+	void TypeMove();
+	void SimpleMove();
+
+	vector<int> serchAroundTileNum;
 };
 
