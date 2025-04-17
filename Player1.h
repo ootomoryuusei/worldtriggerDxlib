@@ -32,8 +32,6 @@ public:
 
 	void SetState_(int _state) { state_ = _state; }
 
-	XMFLOAT2 GetMousePos() { return mousePos; }
-
 private:
 	int state_;
 
@@ -43,9 +41,8 @@ private:
 
 	int hAsteroid;
 
-	/*Tile* tile;*/
+	
 	Icon* icon;
-	/*CsvReader* csv_;*/
 
 	int hPIcon;
 
@@ -57,11 +54,6 @@ private:
 	float movetime;
 	float flame;
 	float time;
-
-	int MouseX, MouseY; //マウス座標
-	XMFLOAT2 mousePos;
-
-	/*int nowNum;*/
 
 	CHARACTER_STATUS cStatus;
 	

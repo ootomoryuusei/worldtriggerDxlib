@@ -1,4 +1,5 @@
 #include "TileIcon.h"
+#include"Mouse.h"
 
 TileIcon::TileIcon(GameObject* parent) : Icon(parent)
 {
@@ -15,7 +16,16 @@ TileIcon::~TileIcon()
 
 void TileIcon::Update()
 {
+	Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
+	XMFLOAT2 mousePos = pMouse->GetMousePos();
+
+	if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x, graphSizeF_.y})) {
+		if (pMouse->IsDoubleClicked(Mouse::LEFT)) {
+		}
+		prevMousePos_ = mousePos;
+	}
 }
+
 
 void TileIcon::Draw()
 {

@@ -164,6 +164,7 @@
     <ClCompile Include="Kuga_Yuuma.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mikumo_Osamu.cpp" />
+    <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="MoveSetIcon.cpp" />
     <ClCompile Include="MoveSetIcons.cpp" />
     <ClCompile Include="MoveSelectIcon.cpp" />
@@ -234,6 +235,7 @@
     <ClInclude Include="Kuga_Yuuma.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mikumo_Osamu.h" />
+    <ClInclude Include="Mouse.h" />
     <ClInclude Include="MoveSetIcon.h" />
     <ClInclude Include="MoveSetIcons.h" />
     <ClInclude Include="MoveSelectIcon.h" />

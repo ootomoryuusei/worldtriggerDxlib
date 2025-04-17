@@ -1,6 +1,7 @@
 #include "TriggerSetButton.h"
 #include"CharacterSetUIFrame.h"
 #include"Player1.h"
+#include "Mouse.h"
 
 TriggerSetButton::TriggerSetButton(GameObject* parent) : Icon(parent)
 {
@@ -18,8 +19,9 @@ TriggerSetButton::~TriggerSetButton()
 void TriggerSetButton::Update()
 {
 	if (canVisible_) {
-		Player1* pPlayer = GetParent()->GetParent()->FindGameObject<Player1>();
-		if (PointInBox(pPlayer->GetMousePos(), { position.x,position.y }, { graphSizeF_.x,graphSizeF_.y })) {
+		Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
+		XMFLOAT2 mousePos = pMouse->GetMousePos();
+		if (PointInBox(mousePos, { position.x,position.y }, { graphSizeF_.x,graphSizeF_.y })) {
 			if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 				if (!prevClicked_) {
 					clicked_ = !clicked_;

@@ -1,5 +1,5 @@
 #include "CharacterIcon.h"
-#include"Player1.h"
+#include"Mouse.h"
 #include "CharacterSetUIFrames.h"
 #include"TriggerSetUIs.h"
 #include"TriggerSetUIFrames.h"
@@ -30,8 +30,8 @@ void CharacterIcon::Update()
 	{
 	case SELECT:
 	{
-		Player1* pPl1 = GetParent()->GetParent()->GetParent()->FindGameObject<Player1>();
-		XMFLOAT2 mousePos = pPl1->GetMousePos();
+		Mouse* pMouse = GetParent()->FindGameObject<Mouse>();
+		XMFLOAT2 mousePos = pMouse->GetMousePos();
 		CharacterSetUIFrames* pCSetUIFrames = GetParent()->GetParent()->FindGameObject<CharacterSetUIFrames>();
 		if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x, graphSizeF_.y })) {
 			if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
@@ -74,8 +74,8 @@ void CharacterIcon::Update()
 	}
 	case SET:
 	{
-		Player1* pPl1 = GetParent()->GetParent()->FindGameObject<Player1>();
-		XMFLOAT2 mousePos = pPl1->GetMousePos();
+		Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
+		XMFLOAT2 mousePos = pMouse->GetMousePos();
 		if (PointInBox(mousePos, { position.x,position.y }, { (float)graphSize_.x, (float)graphSize_.y })) {
 			if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 				SetIcons* pSIcons = GetParent()->GetParent()->FindGameObject<SetIcons>();

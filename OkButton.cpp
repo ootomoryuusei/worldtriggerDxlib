@@ -4,6 +4,7 @@
 #include"CharacterIcons.h"
 #include<fstream>
 #include<sstream>
+#include "Mouse.h"
 
 using std::ifstream;
 using std::ofstream;
@@ -41,8 +42,8 @@ OkButton::~OkButton()
 void OkButton::Update()
 {
 	if (canVisible_) {
-		Player1* pPl1 = GetParent()->GetParent()->FindGameObject<Player1>();
-		XMFLOAT2 mousePos = pPl1->GetMousePos();
+		Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
+		XMFLOAT2 mousePos = pMouse->GetMousePos();
 		if (PointInBox(mousePos, { position.x,position.y }, { graphSizeF_.x,graphSizeF_.y })) {
 			if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 				for (int i = 0; i < MAX_SELECT_CHARACTER; i++) {

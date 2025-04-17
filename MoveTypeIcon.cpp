@@ -1,6 +1,7 @@
 #include "MoveTypeIcon.h"
 #include"Player1.h"
 #include"MoveSelectIcons.h"
+#include"Mouse.h"
 
 MoveTypeIcon::MoveTypeIcon(GameObject* parent) : Icon(parent)
 {
@@ -21,17 +22,16 @@ void MoveTypeIcon::Update()
 		XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
 		space = { (graphSizeF_.x - strSize.x) / 2,(graphSizeF_.y- strSize.y) /2};
 
-		Player1* pPl1 = GetParent()->GetParent()->GetParent()->FindGameObject<Player1>();
-		XMFLOAT2 mousePos = pPl1->GetMousePos();
+		Mouse* pMouse = GetParent()->GetParent()->GetParent()->FindGameObject<Mouse>();
+		XMFLOAT2 mousePos = pMouse->GetMousePos();
 
-		if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x,graphSizeF_.y })) {
-			if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-
-				XMFLOAT2 mouseVariation = { mousePos.x - prevMousePos_.x,mousePos.y - prevMousePos_.y };
-				position = { position.x + mouseVariation.x, position.y + mouseVariation.y, 0.0f };
+		if (pMouse->IsDoubleClicked(Mouse::LEFT)) {
+			if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x,graphSizeF_.y })) {
 				clicked = true;
 			}
-			prevMousePos_ = mousePos;
+		}
+		else {
+			clicked = false;
 		}
 	}
 }

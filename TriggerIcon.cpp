@@ -2,6 +2,7 @@
 #include"Player1.h"
 //#include"TriggerIcons.h"
 #include"TriggerSetUIFrames.h"
+#include "Mouse.h"
 
 TriggerIcon::TriggerIcon(GameObject* parent) : Icon(parent)
 {
@@ -19,8 +20,8 @@ TriggerIcon::~TriggerIcon()
 void TriggerIcon::Update()
 {
 	if (canVisible_) {
-		Player1* pPl1 = GetParent()->GetParent()->GetParent()->FindGameObject<Player1>();
-		XMFLOAT2 mousePos = pPl1->GetMousePos();
+		Mouse* pMouse = GetParent()->GetParent()->GetParent()->FindGameObject<Mouse>();
+		XMFLOAT2 mousePos = pMouse->GetMousePos();
 		TriggerSetUIFrames* pTSUIFs = GetParent()->GetParent()->FindGameObject<TriggerSetUIFrames>();
 		if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x, graphSizeF_.y })) {
 			if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {

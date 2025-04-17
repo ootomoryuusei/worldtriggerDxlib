@@ -4,6 +4,7 @@
 #include"Icon.h"
 #include"Engine/CsvReader.h"
 #include"PlayScene.h"
+#include"Mouse.h"
 #include"ImGui/imgui.h"
 
 Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1),hShield(-1)
@@ -65,10 +66,7 @@ Player1::~Player1()
 
 void Player1::Update()
 {
-	SetMouseDispFlag(true); //マウスを表示させるフラグ関数
-
-	GetMousePoint(&MouseX, &MouseY);
-	mousePos = { (float)MouseX,(float)MouseY };
+	
 
 	// カメラの設定
 	MATRIX mRot = MGetRotY(rotation.y);  // 回転行列

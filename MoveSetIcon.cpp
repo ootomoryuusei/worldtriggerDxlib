@@ -2,6 +2,7 @@
 #include"player1.h"
 #include"MoveTypesIcons.h"
 #include"UnitIcons.h"
+#include "Mouse.h"
 
 MoveSetIcon::MoveSetIcon(GameObject* parent) : Icon(parent)
 {
@@ -22,8 +23,8 @@ void MoveSetIcon::Initialize()
 	string WhoIcon = pUnitIcons->GetpUnitIcons()[createNum_]->GetIconName();
 	csv_ = new CsvReader();
 	csv_->Load("Assets/Character/CharacterStatus.csv");
-	int num;
-	int moveNum;
+	int num = 0;
+	int moveNum = 0;
 	for (int x = 0; x < csv_->GetWidth(0); x++) {
 		if ("s“®—Í" == csv_->GetString(x, 0)) {
 			moveNum = x;
@@ -43,12 +44,11 @@ void MoveSetIcon::Update()
 		XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
 		space = { (graphSizeF_.x - strSize.x) / 2,(graphSizeF_.y / 2 - strSize.y) / 2 };
 
-		Player1* pPl1 = GetParent()->GetParent()->FindGameObject<Player1>();
-		XMFLOAT2 mousePos = pPl1->GetMousePos();
+		Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
+		XMFLOAT2 mousePos = pMouse->GetMousePos();
 
-		if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x, graphSizeF_.y })) {
-			if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-
+		if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x * scale_.x, graphSizeF_.y * scale_.y})) {
+			if (pMouse->IsPressed(Mouse::LEFT)) {
 				XMFLOAT2 mouseVariation = { mousePos.x - prevMousePos_.x,mousePos.y - prevMousePos_.y };
 				position = { position.x + mouseVariation.x, position.y + mouseVariation.y, 0.0f };
 
@@ -64,12 +64,13 @@ void MoveSetIcon::Update()
 			}
 		}
 	}
+	scale_ = { 1.0f,1.0f + moveName.size() * 0.5f };
 }
 
 void MoveSetIcon::Draw()
 {
 	if (canVisible_) {
-		DrawGraph(position.x, position.y, hModel, TRUE);
+		DrawRotaGraph3(position.x, position.y,0,0, scale_.x, scale_.y, 0.0, hModel, TRUE, FALSE);
 		VECTOR fontPos = { position.x + space.x, position.y + space.y,position.z };
 		DrawStringToHandle(fontPos.x, fontPos.y, iconName_.c_str(), GetColor(0, 0, 0), fontHandle_);
 		DrawLineAA(position.x, position.y + GetGraphSizeF_2D().y / 2
@@ -85,7 +86,7 @@ void MoveSetIcon::Draw()
 			num++;
 		}
 #if 1
-		DrawBoxAA(position.x, position.y, position.x + GetGraphSizeF_2D().x, position.y + GetGraphSizeF_2D().y, GetColor(255, 0, 0), FALSE);
+		DrawBoxAA(position.x, position.y, position.x + graphSizeF_.x * scale_.x, position.y + graphSizeF_.y * scale_.y, GetColor(255, 0, 0), FALSE);
 #endif
 	}
 }

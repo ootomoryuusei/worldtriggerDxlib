@@ -238,6 +238,9 @@
     <ClCompile Include="MoveTypesIcons.cpp">
       <Filter>Icon\MovementIcons</Filter>
     </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>01Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -438,6 +441,9 @@
     </ClInclude>
     <ClInclude Include="MoveTypesIcons.h">
       <Filter>Icon\MovementIcons</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>01Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -9,11 +9,5 @@ public:
 	void Update() override;
 	void Draw() override;
 private:
-	bool prevMouse;
-	bool currentMouse;
-	bool doubleClicked;
-	int lastClickTime;
-	int doubleClickTime;
-	int now;
 };
 

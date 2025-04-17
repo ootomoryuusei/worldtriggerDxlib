@@ -17,6 +17,7 @@ void MoveSelectIcons::Initialize()
 
 	for (int i = 0; i < MAX_SELECT_CHARACTER * 2; i++) {
 		MoveSelectIcon* pMoveSelectIcon = Instantiate<MoveSelectIcon>(this);
+		pMoveSelectIcon->SetCreateNum(i);
 		pMoveSelectIcon->SetFontHandle(fontHandle);
 		pMoveSelectIcons_.push_back(pMoveSelectIcon);
 	}

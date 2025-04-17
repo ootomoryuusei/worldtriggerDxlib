@@ -13,6 +13,7 @@
 #include"MoveSetIcons.h"
 #include"MoveSelectIcons.h"
 #include"MoveTypesIcons.h"
+#include "Mouse.h"
 
 PlayScene::PlayScene(GameObject* parent)
 {
@@ -32,7 +33,7 @@ PlayScene::PlayScene(GameObject* parent)
 	Instantiate<Player1>(this);
 	Instantiate<Tile>(this);
 	Instantiate<Camera>(this); // Player‚æ‚èŒã‚É‘‚­
-	
+	Instantiate<Mouse>(this);
 	// ‚Æ‚è‚ ‚¦‚¸ƒJƒƒ‰‚ğİ’è‚·‚é
 	/*SetCameraPositionAndTarget_UpVecY(VGet(0,0,0), VGet(0, 0, 0));*/
 }

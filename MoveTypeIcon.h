@@ -15,6 +15,8 @@ public:
 	bool GetClicked() { return clicked; }
 	void SetClicked(bool _clicked) { clicked = _clicked; }
 private:
+	bool prevMouse;
+	bool currentMouse;
 	/*string iconName;*/
 	XMFLOAT2 space;
 	bool clicked;
