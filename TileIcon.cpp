@@ -1,5 +1,8 @@
 #include "TileIcon.h"
 #include"Mouse.h"
+#include"MoveTypesIcons.h"
+#include"UnitIcons.h"
+
 
 TileIcon::TileIcon(GameObject* parent) : Icon(parent)
 {
@@ -22,9 +25,19 @@ void TileIcon::Update()
 		Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
 		XMFLOAT2 mousePos = pMouse->GetMousePos();
 
+		int num = 0;
 		if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x, graphSizeF_.y })) {
 			if (pMouse->IsDoubleClicked(Mouse::LEFT)) {
+				MoveTypesIcons* pMoveTypesIcons = GetParent()->GetParent()->FindGameObject<MoveTypesIcons>();
+				for (auto& itr : pMoveTypesIcons->GetpMoveTypesIcons()) {
+					if (itr->GetCanVisible()) {
+						num = itr->GetCreateNum();
+					}
+				}
 
+				UnitIcons* pUnitIcons = GetParent()->GetParent()->FindGameObject<UnitIcons>();
+				pUnitIcons->GetpUnitIcons()[num]->SetMoveMent(tile_.num);
+				select = false;
 			}
 		}
 	}

@@ -14,7 +14,10 @@ public:
 	void Update() override;
 	void Draw() override;
 
+	auto GetMoveMent() { return moveMent; }
+	void SetMoveMent(int _moveMent) { moveMent.push_back(_moveMent); }
 private:
 
+	vector<int> moveMent;
 };
 

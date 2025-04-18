@@ -18,11 +18,7 @@ TileIcons::TileIcons(GameObject* parent) : GameObject(parent)
 			tile.num = num;
 			pTIcon->SetTileData(tile);
 			pTIcon->Set3DPosition({ tile.position.x, tile.position.y,tile.position.z });
-			pTIcons_.push_back(pTIcon)
-				
-				
-				
-				;
+			pTIcons_.push_back(pTIcon);
 			num++;
 		}
 	}

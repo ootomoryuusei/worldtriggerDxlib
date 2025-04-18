@@ -5,6 +5,8 @@
 #include"UnitIcons.h"
 #include"TileIcons.h"
 #include<algorithm>
+#include <queue>
+#include <set>
 
 MoveTypeIcon::MoveTypeIcon(GameObject* parent) : Icon(parent)
 {
@@ -68,22 +70,54 @@ void MoveTypeIcon::Draw()
 	}
 }
 
-vector<int> MoveTypeIcon::SerchAroundTileNum(int _CenterNum, int _renge)
+vector<int> MoveTypeIcon::SerchAroundTileNum(int _CenterNum, int _range)
 {
+	const int even_directions[6][2] = {
+		{+1,  0}, {0, +1}, {-1, 0},
+		{-1, -1}, {0, -1}, {+1, -1}
+	};
+
+	// x ‚ªŠï” (odd)‚Ì‚Æ‚«
+	const int odd_directions[6][2] = {
+		{+1, +1}, {0, +1}, {-1, +1},
+		{-1, 0}, {0, -1}, {+1, 0}
+	};
 	std::vector<int> result;
 	int cx = _CenterNum % MAX_MAP_WIDTH;
 	int cy = _CenterNum / MAX_MAP_WIDTH;
 
-	for (int dx = -_renge; dx <= _renge; ++dx) {
-		for (int dy = max(-_renge, -dx - _renge); dy <= min(_renge, -dx + _renge); ++dy) {
-			int x = cx + dx;
-			int y = cy + dy;
+	std::queue<std::pair<int, int>> open;
+	std::set<std::pair<int, int>> visited;
 
-			if (x >= 0 && x < MAX_MAP_WIDTH && y >= 0 && y < MAX_MAP_HIGHT) {
-				int num = y * MAX_MAP_WIDTH + x;
-				result.push_back(num);
+	open.push({ cx, cy });
+	visited.insert({ cx, cy });
+
+	for (int r = 0; r < _range; ++r) {
+		int size = open.size();
+		for (int i = 0; i < size; ++i) {
+			auto [x, y] = open.front(); open.pop();
+
+			const int(*dirs)[2] = (x % 2 == 0) ? even_directions : odd_directions;
+
+			for (int d = 0; d < 6; ++d) {
+				int nx = x + dirs[d][0];
+				int ny = y + dirs[d][1];
+
+				if (nx >= 0 && nx < MAX_MAP_WIDTH && ny >= 0 && ny < MAX_MAP_HIGHT) {
+					std::pair<int, int> np = { nx, ny };
+					if (visited.count(np) == 0) {
+						open.push(np);
+						visited.insert(np);
+					}
+				}
 			}
 		}
+	}
+
+	for (auto& [x, y] : visited) {
+		if (x == cx && y == cy) continue; // ’†S‚ğœ‚­
+		int num = y * MAX_MAP_WIDTH + x;
+		result.push_back(num);
 	}
 
 	return result;
@@ -91,41 +125,6 @@ vector<int> MoveTypeIcon::SerchAroundTileNum(int _CenterNum, int _renge)
 
 void MoveTypeIcon::TypeMove()
 {
-	//	int nowPosnum = -1;
-	//	UnitIcons* pUnitIcons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
-	//	VECTOR UnitPos = pUnitIcons->GetpUnitIcons()[createNum_]->Get3DPosition();
-	//	TileIcons* pTileIcons = GetParent()->GetParent()->GetParent()->FindGameObject<TileIcons>();
-	//	for (auto& itr : pTileIcons->GetpTIcon()) {
-	//		if (itr->Get3DPosition().x == UnitPos.x && itr->Get3DPosition().y == UnitPos.y && itr->Get3DPosition().z == UnitPos.z) {
-	//			nowPosnum = itr->GetTileData().num;
-	//		}
-	//	}
-	//	vector<int> aroundNum;
-	//	if (nowPosnum % 2 == 0) { //‹ô”
-	//		aroundNum.push_back(nowPosnum + MAX_MAP_WIDTH - 1);
-	//		aroundNum.push_back(nowPosnum + MAX_MAP_WIDTH);
-	//		aroundNum.push_back(nowPosnum + MAX_MAP_WIDTH + 1);
-	//		aroundNum.push_back(nowPosnum + 1);
-	//		aroundNum.push_back(nowPosnum - MAX_MAP_WIDTH);
-	//		aroundNum.push_back(nowPosnum - 1);
-	//	}
-	//	else { //Šï”
-	//		aroundNum.push_back(nowPosnum - 1);
-	//		aroundNum.push_back(nowPosnum + MAX_MAP_WIDTH);
-	//		aroundNum.push_back(nowPosnum + 1);
-	//		aroundNum.push_back(nowPosnum - MAX_MAP_WIDTH - 1);
-	//		aroundNum.push_back(nowPosnum - MAX_MAP_WIDTH);
-	//		aroundNum.push_back(nowPosnum - MAX_MAP_WIDTH + 1);
-	//	}
-	//	
-	//	for (auto& itrs : aroundNum) {
-	//		for (auto& itr : pTileIcons->GetpTIcon()) {
-	//			if (itr->GetTileData().num == itrs) {
-	//				itr->SetSelect(true);
-	//			}
-	//		}
-	//	}
-
 }
 
 void MoveTypeIcon::SimpleMove()
