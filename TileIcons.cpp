@@ -31,4 +31,13 @@ TileIcons::~TileIcons()
 
 void TileIcons::Update()
 {
+	for (auto& itr : pTIcons_) {
+		if (itr->GetSelected()) {
+			itr->SetSelected(false);
+			for (auto& itr : pTIcons_) {
+				itr->SetSelect(false);
+
+			}
+		}
+	}
 }

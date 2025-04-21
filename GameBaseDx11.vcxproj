@@ -165,6 +165,8 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mikumo_Osamu.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="MoveMentsLoad.cpp" />
+    <ClCompile Include="MoveMentsLoads.cpp" />
     <ClCompile Include="MoveSetIcon.cpp" />
     <ClCompile Include="MoveSetIcons.cpp" />
     <ClCompile Include="MoveSelectIcon.cpp" />
@@ -236,6 +238,8 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mikumo_Osamu.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="MoveMentsLoad.h" />
+    <ClInclude Include="MoveMentsLoads.h" />
     <ClInclude Include="MoveSetIcon.h" />
     <ClInclude Include="MoveSetIcons.h" />
     <ClInclude Include="MoveSelectIcon.h" />

@@ -241,6 +241,12 @@
     <ClCompile Include="Mouse.cpp">
       <Filter>01Engine</Filter>
     </ClCompile>
+    <ClCompile Include="MoveMentsLoad.cpp">
+      <Filter>Icon\MiniMap</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveMentsLoads.cpp">
+      <Filter>Icon\MiniMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -444,6 +450,12 @@
     </ClInclude>
     <ClInclude Include="Mouse.h">
       <Filter>01Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveMentsLoad.h">
+      <Filter>Icon\MiniMap</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveMentsLoads.h">
+      <Filter>Icon\MiniMap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

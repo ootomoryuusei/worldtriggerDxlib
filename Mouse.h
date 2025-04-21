@@ -46,12 +46,12 @@ public:
 private:
     std::array<int, BUTTON_NUM> m_now{};
     std::array<int, BUTTON_NUM> m_prev{};
-    std::array<int, BUTTON_NUM> m_pressStartFrame{};
-    std::array<int, BUTTON_NUM> m_lastClickFrame{};
+    std::array<int, BUTTON_NUM> m_pressStartTime{};
+    std::array<int, BUTTON_NUM> m_lastClickTime{};
     std::array<bool, BUTTON_NUM> m_doubleClickFlag{};
 
-    int m_frame = 0;
-    const int DOUBLE_CLICK_SPAN = 20; // フレーム数でダブルクリック判定
+    float m_time = 0.0;
+    const float DOUBLE_CLICK_SPAN = 0.7; // 経過時間でダブルクリック判定
 
     int MouseX, MouseY; //マウス座標
 

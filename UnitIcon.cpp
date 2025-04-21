@@ -21,6 +21,14 @@ UnitIcon::~UnitIcon()
 
 void UnitIcon::Initialize()
 {
+	TileIcons* pTileIcons = GetParent()->GetParent()->FindGameObject<TileIcons>();
+		for (auto& itr : pTileIcons->GetpTIcon()) {
+			VECTOR t_pos = itr->Get3DPosition();
+			if (t_pos.x == position.x && t_pos.y == position.y && t_pos.z == position.z) {
+				moveMent.push_back(itr->GetCreateNum());
+				break;
+			}
+		}
 }
 
 void UnitIcon::Update()

@@ -13,10 +13,13 @@ public:
 	TILEDATA GetTileData() { return tile_; }
 
 	void SetSelect(bool _select) { select = _select; }
+	void SetSelected(bool _selected) { selected = _selected; }
+	bool GetSelected() { return selected; }
 private:
 	TILEDATA tile_;
 
 	bool select;
+	bool selected;
 
 	int hImage;
 };

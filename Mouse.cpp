@@ -29,21 +29,21 @@ void Mouse::Update()
     for (int i = 0; i < BUTTON_NUM; ++i) {
         // ‰Ÿ‚µŽn‚ß
         if (m_now[i] && !m_prev[i]) {
-            if (m_frame - m_lastClickFrame[i] <= DOUBLE_CLICK_SPAN) {
+            if (m_time - m_lastClickTime[i] <= DOUBLE_CLICK_SPAN) {
                 m_doubleClickFlag[i] = true;
             }
             else {
                 m_doubleClickFlag[i] = false;
             }
 
-            m_lastClickFrame[i] = m_frame;
-            m_pressStartFrame[i] = m_frame;
+            m_lastClickTime[i] = m_time;
+            m_pressStartTime[i] = m_time;
         }
 
         // ƒ{ƒ^ƒ“—£‚µ‚½‚Æ‚«‚Ìˆ—‚ð“ü‚ê‚½‚¢ê‡‚Í‚±‚±‚É
     }
-
-    ++m_frame;
+    
+    m_time += Time::DeltaTime();
 }
 
 bool Mouse::IsPressed(Button btn) const

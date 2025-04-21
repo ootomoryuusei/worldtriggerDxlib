@@ -12,6 +12,7 @@ TileIcon::TileIcon(GameObject* parent) : Icon(parent)
 	tile_.position = { 0,0,0 };
 	tile_.num = -1;
 	select = false;
+	selected = false;
 	hImage = LoadGraph("Assets//Image//OnTile.png");
 }
 
@@ -38,6 +39,7 @@ void TileIcon::Update()
 				UnitIcons* pUnitIcons = GetParent()->GetParent()->FindGameObject<UnitIcons>();
 				pUnitIcons->GetpUnitIcons()[num]->SetMoveMent(tile_.num);
 				select = false;
+				selected = true;
 			}
 		}
 	}
