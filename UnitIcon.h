@@ -2,6 +2,12 @@
 #include "Icon.h"
 #include<vector>
 
+class Mouse;
+class TileIcons;
+class MoveSetIcons;
+class MoveSelectIcons;
+class MoveTypesIcons;
+
 using std::vector;
 
 class UnitIcon :
@@ -14,10 +20,16 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	auto GetMoveMent() { return moveMent; }
+	const auto& GetMoveMent() const{ return moveMent; }
 	void SetMoveMent(int _moveMent) { moveMent.push_back(_moveMent); }
 private:
 
 	vector<int> moveMent;
+
+	Mouse* pMouse_;
+	TileIcons* pTileIcons_;
+	MoveSetIcons* pMoveSetIcons_;
+	MoveSelectIcons* pMoveSelectIcons_;
+	MoveTypesIcons* pMoveTypesIcons_;
 };
 

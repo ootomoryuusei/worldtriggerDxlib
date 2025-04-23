@@ -1,5 +1,7 @@
 #pragma once
 #include "Icon.h"
+
+
 class MoveMentsLoad :
     public Icon
 {
@@ -9,8 +11,7 @@ public:
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
-
 private:
-
+	void DrawMoveLine();
 };
 

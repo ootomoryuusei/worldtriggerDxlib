@@ -44,6 +44,7 @@ void UnitIcons::Initialize()
 		DLC = "Assets//Image//CharacterIcon//CIcon//";
 		flPath = DLC + graphName;
 		VECTOR pos;
+		int tilenum;
 		for (int j = 0; j < 2; j++) {
 			bool isSeted = false;
 			UnitIcon* pUIcon = Instantiate<UnitIcon>(this);
@@ -51,7 +52,8 @@ void UnitIcons::Initialize()
 			while (!isSeted) {
 				int randX = GetRand(MAX_MAP_WIDTH - 1);
 				int randY = GetRand(0);
-				pos = pTIcons->GetpTIcon()[randX + 1 * randY]->Get3DPosition();
+				tilenum = randX + 1 * randY;
+				pos = pTIcons->GetpTIcon()[tilenum]->Get3DPosition();
 
 				bool isOk = false;
 				for (auto& itr : pUIcons_) {
@@ -68,6 +70,7 @@ void UnitIcons::Initialize()
 			pUIcon->SetIconName(IconName);
 			pUIcon->Set3DPosition(pos);
 			pUIcon->SetCreateNum(num);
+			pUIcon->SetMoveMent(tilenum);
 			pUIcons_.push_back(pUIcon);
 			num++;
 		}

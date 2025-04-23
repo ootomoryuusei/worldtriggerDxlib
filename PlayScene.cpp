@@ -18,19 +18,24 @@
 
 PlayScene::PlayScene(GameObject* parent)
 {
+	
+
 	Instantiate<BackGround>(this);
 	//Instantiate<Map>(this);
 	//Instantiate<rader>(this);
 	//Instantiate<Unit>(this);
 	//Instantiate<Timer>(this);
+	
 	Instantiate<TileIcons>(this);
+
 	Instantiate<UnitIcons>(this);
+	
 	Instantiate<MoveSetIcons>(this);
 
 	Instantiate<MoveSelectIcons>(this);
 
 	Instantiate<MoveTypesIcons>(this);
-	
+
 	Instantiate<MoveMentsLoads>(this);
 
 	Instantiate<Player1>(this);

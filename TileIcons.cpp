@@ -22,7 +22,6 @@ TileIcons::TileIcons(GameObject* parent) : GameObject(parent)
 			num++;
 		}
 	}
-	
 }
 
 TileIcons::~TileIcons()

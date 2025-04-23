@@ -16,7 +16,7 @@ public:
 	void Update() override;
 	/*void Draw() override;*/
 
-	auto GetpUnitIcons() { return pUIcons_; }
+	const auto& GetpUnitIcons() const { return pUIcons_; }
 private:
 	vector<UnitIcon*> pUIcons_;
 	vector<int> selectCharNum_;
