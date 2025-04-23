@@ -41,10 +41,20 @@ void MoveTypeIcons::Initialize()
 
 void MoveTypeIcons::Update()
 {
-	for (int y = 1; y < csv_->GetHeight(); y++) {
-		MoveSelectIcons* pMoveSelectIcons = GetParent()->GetParent()->FindGameObject<MoveSelectIcons>();
-		VECTOR pos = pMoveSelectIcons->GetpMoveSelectIcons()[createNum_]->Get3DPosition();
-		XMFLOAT2 graphSize = { pMoveSelectIcons->GetpMoveSelectIcons()[createNum_]->GetGraphSizeF_2D().x, pMoveSelectIcons->GetpMoveSelectIcons()[0]->GetGraphSizeF_2D().y };
-		pMoveTypeIcons_[y-1]->Set3DPosition({pos.x, pos.y + (graphSize.y / 2) * y, pos.z});
+	if (canVisible_) {
+		for (auto& itr : pMoveTypeIcons_) {
+			itr->SetCanVisible(true);
+		}
+		for (int y = 1; y < csv_->GetHeight(); y++) {
+			MoveSelectIcons* pMoveSelectIcons = GetParent()->GetParent()->FindGameObject<MoveSelectIcons>();
+			VECTOR pos = pMoveSelectIcons->GetpMoveSelectIcons()[createNum_]->Get3DPosition();
+			XMFLOAT2 graphSize = { pMoveSelectIcons->GetpMoveSelectIcons()[createNum_]->GetGraphSizeF_2D().x, pMoveSelectIcons->GetpMoveSelectIcons()[0]->GetGraphSizeF_2D().y };
+			pMoveTypeIcons_[y - 1]->Set3DPosition({ pos.x, pos.y + (graphSize.y / 2) * y, pos.z });
+		}
+	}
+	else {
+		for (auto& itr : pMoveTypeIcons_) {
+			itr->SetCanVisible(false);
+		}
 	}
 }

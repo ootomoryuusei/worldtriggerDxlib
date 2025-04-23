@@ -12,6 +12,7 @@ class UnitIcons :
 public:
 	UnitIcons(GameObject* parent);
 	~UnitIcons();
+	void Initialize() override;
 	void Update() override;
 	/*void Draw() override;*/
 

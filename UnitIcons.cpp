@@ -3,6 +3,15 @@
 
 UnitIcons::UnitIcons(GameObject* parent) : GameObject(parent),selectCharNum_(MAX_SELECT_CHARACTER,-1)
 {
+
+}
+
+UnitIcons::~UnitIcons()
+{
+}
+
+void UnitIcons::Initialize()
+{
 	TileIcons* pTIcons = GetParent()->FindGameObject<TileIcons>();
 
 	csv_ = new CsvReader();
@@ -39,7 +48,7 @@ UnitIcons::UnitIcons(GameObject* parent) : GameObject(parent),selectCharNum_(MAX
 			bool isSeted = false;
 			UnitIcon* pUIcon = Instantiate<UnitIcon>(this);
 			pUIcon->Load(flPath);
-		    while (!isSeted) {
+			while (!isSeted) {
 				int randX = GetRand(MAX_MAP_WIDTH - 1);
 				int randY = GetRand(0);
 				pos = pTIcons->GetpTIcon()[randX + 1 * randY]->Get3DPosition();
@@ -63,10 +72,6 @@ UnitIcons::UnitIcons(GameObject* parent) : GameObject(parent),selectCharNum_(MAX
 			num++;
 		}
 	}
-}
-
-UnitIcons::~UnitIcons()
-{
 }
 
 void UnitIcons::Update()

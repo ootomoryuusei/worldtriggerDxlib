@@ -6,6 +6,7 @@
 #include"MoveTypesIcons.h"
 #include "Mouse.h"
 
+
 UnitIcon::UnitIcon(GameObject* parent) : Icon(parent)
 {
 	canVisible_ = true;
@@ -65,16 +66,12 @@ void UnitIcon::Update()
 			
 			pMoveSetIcons->GetpMoveSetIcons()[createNum_]->SetCanVisible(true);
 			pMoveSelectIcons->GetpMoveSelectIcons()[createNum_]->SetCanVisible(true);
-			for (auto& itr : pMoveTypesIcons->GetpMoveTypesIcons()[createNum_]->GetpMoveTypeIcons()) {
-				itr->SetCanVisible(true);
-			}
+			pMoveTypesIcons->GetpMoveTypesIcons()[createNum_]->SetCanVisible(true);
 		}
 		else if (pMouse->IsClicked(Mouse::LEFT)) { //シングルクリック
 			pMoveSetIcons->GetpMoveSetIcons()[createNum_]->SetCanVisible(false);
 			pMoveSelectIcons->GetpMoveSelectIcons()[createNum_]->SetCanVisible(false);
-			for (auto& itr : pMoveTypesIcons->GetpMoveTypesIcons()[createNum_]->GetpMoveTypeIcons()) {
-				itr->SetCanVisible(false);
-			}
+			pMoveTypesIcons->GetpMoveTypesIcons()[createNum_]->SetCanVisible(false);
 		}
 		prevMousePos_ = mousePos;
 	}
