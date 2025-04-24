@@ -12,6 +12,7 @@ MoveMentsLoad::~MoveMentsLoad()
 
 void MoveMentsLoad::Initialize()
 {
+	
 }
 
 void MoveMentsLoad::Update()
@@ -90,8 +91,13 @@ void MoveMentsLoad::DrawMoveLine()
 	//	startPoint = endPoint;
 	//}
 
+	
+
 	const auto& movement = pUnitIcons->GetpUnitIcons()[createNum_]->GetMoveMent();
 	if (movement.size() < 2) return; // 開始点 + 1点以上の移動が必要
+
+	float alpha;
+	float value;
 
 	XMFLOAT2 half_t_IconSize = {
 		pTileIcons->GetpTIcon()[0]->GetGraphSizeF_2D().halfX,
@@ -130,14 +136,21 @@ void MoveMentsLoad::DrawMoveLine()
 		int num = pointNum + spaceNum;
 		float interval = maxlength / (num - 1);
 
+		
+		value = 1.0f/(movement.size() * pointNum);
+
+		int point = 0;
 		for (int j = 0; j < num; ++j) {
 			if (j % 2 == 0) {
 				XMFLOAT2 pos = {
 					startPoint.x + dir.x * interval * j + half_t_IconSize.x,
 					startPoint.y + dir.y * interval * j + half_t_IconSize.y
 				};
-
-				DrawCircleAA(pos.x, pos.y, interval / 2.0f, 20, GetColor(255, 0, 0), TRUE);
+				alpha = 1.0f - (value * point) * (movement.size() - 1);
+				SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 * alpha);
+				DrawCircleAA(pos.x, pos.y, interval / 2.0f, 20,GetColor(255,0,0), TRUE);
+				SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
+				point++;
 			}
 		}
 

@@ -78,9 +78,11 @@ void UnitIcon::Draw()
 	TileIcons* pTileIcons = GetParent()->GetParent()->FindGameObject<TileIcons>();
 	XMFLOAT2 TileSize = { pTileIcons->GetpTIcon()[0]->GetGraphSizeF_2D().x,pTileIcons->GetpTIcon()[0]->GetGraphSizeF_2D().y };
 	if (canVisible_) {
-		if (moveMent.size() > 2) {
-			VECTOR pos = 
-			DrawGraph(position.x + (TileSize.x / 2 - graphSizeF_.halfX), position.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
+		if (moveMent.size() > 1) {
+			VECTOR pos = pTileIcons->GetpTIcon()[moveMent.front()]->Get3DPosition();
+			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 / 2);
+			DrawGraph(pos.x + (TileSize.x / 2 - graphSizeF_.halfX), pos.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
+			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 		}
 		DrawGraph(position.x + (TileSize.x / 2 - graphSizeF_.halfX), position.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
 	}
