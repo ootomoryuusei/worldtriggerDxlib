@@ -31,91 +31,33 @@ void MoveMentsLoad::DrawMoveLine()
 	UnitIcons* pUnitIcons = GetParent()->GetParent()->FindGameObject<UnitIcons>();
 	TileIcons* pTileIcons = GetParent()->GetParent()->FindGameObject<TileIcons>();
 
-	//const auto& movement = pUnitIcons->GetpUnitIcons()[createNum_]->GetMoveMent();
-	//if (movement.empty()) return;
-
-	//XMFLOAT2 half_t_IconSize = {
-	//	pTileIcons->GetpTIcon()[0]->GetGraphSizeF_2D().halfX,
-	//	pTileIcons->GetpTIcon()[0]->GetGraphSizeF_2D().halfY
-	//};
-
-	//// 最初のスタートは現在位置
-	//XMFLOAT2 startPoint = {
-	//	pUnitIcons->GetpUnitIcons()[createNum_]->Get3DPosition().x,
-	//	pUnitIcons->GetpUnitIcons()[createNum_]->Get3DPosition().y
-	//};
-
-	//for (size_t i = 0; i < movement.size(); ++i) {
-	//	int nextTileNum = movement[i];
-
-	//	XMFLOAT2 endPoint = {
-	//		pTileIcons->GetpTIcon()[nextTileNum]->Get3DPosition().x,
-	//		pTileIcons->GetpTIcon()[nextTileNum]->Get3DPosition().y
-	//	};
-
-	//	XMFLOAT2 vec = {
-	//		endPoint.x - startPoint.x,
-	//		endPoint.y - startPoint.y
-	//	};
-
-	//	float maxlength = sqrt(vec.x * vec.x + vec.y * vec.y);
-	//	if (maxlength == 0) {
-	//		// スタートとエンドが同じならスキップ
-	//		continue;
-	//	}
-
-	//	XMFLOAT2 dir = {
-	//		vec.x / maxlength,
-	//		vec.y / maxlength
-	//	};
-
-	//	int pointNum = 5;
-	//	int spaceNum = pointNum - 1;
-	//	int num = pointNum + spaceNum;
-
-	//	float interval = maxlength / (num - 1);
-
-	//	for (int j = 0; j < num; ++j) {
-	//		// すべての点を描画してみる
-	//		if (j % 2 == 0) {
-	//			XMFLOAT2 pos = {
-	//		startPoint.x + dir.x * interval * j + half_t_IconSize.x,
-	//		startPoint.y + dir.y * interval * j + half_t_IconSize.y
-	//			};
-
-	//			DrawCircleAA(pos.x, pos.y, interval / 2.0f, 20, GetColor(255, 0, 0), TRUE);
-	//		}
-	//	}
-
-	//	// 次の始点に更新
-	//	startPoint = endPoint;
-	//}
-
-	
-
 	const auto& movement = pUnitIcons->GetpUnitIcons()[createNum_]->GetMoveMent();
-	if (movement.size() < 2) return; // 開始点 + 1点以上の移動が必要
-
-	float alpha;
-	float value;
+	if (movement.empty()) return;
 
 	XMFLOAT2 half_t_IconSize = {
 		pTileIcons->GetpTIcon()[0]->GetGraphSizeF_2D().halfX,
 		pTileIcons->GetpTIcon()[0]->GetGraphSizeF_2D().halfY
 	};
 
-	// スタートは movement[0] にあるタイル位置
-	XMFLOAT2 startPoint = {
-		pTileIcons->GetpTIcon()[movement[0]]->Get3DPosition().x,
-		pTileIcons->GetpTIcon()[movement[0]]->Get3DPosition().y
-	};
+	int pointNum = 5;
+	int spaceNum = pointNum - 1;
+	int num = pointNum + spaceNum;
 
-	for (size_t i = 1; i < movement.size(); ++i) {
-		int nextTileNum = movement[i];
+	int totalPoints = (movement.size() - 1) * pointNum;
+	int pointIndex = 0; // 最後の点が pointIndex = 0
+
+	for (int i = static_cast<int>(movement.size()) - 1; i > 0; --i) {
+		int prevTileNum = movement[i - 1];
+		int currTileNum = movement[i];
+
+		XMFLOAT2 startPoint = {
+			pTileIcons->GetpTIcon()[currTileNum]->Get3DPosition().x,
+			pTileIcons->GetpTIcon()[currTileNum]->Get3DPosition().y
+		};
 
 		XMFLOAT2 endPoint = {
-			pTileIcons->GetpTIcon()[nextTileNum]->Get3DPosition().x,
-			pTileIcons->GetpTIcon()[nextTileNum]->Get3DPosition().y
+			pTileIcons->GetpTIcon()[prevTileNum]->Get3DPosition().x,
+			pTileIcons->GetpTIcon()[prevTileNum]->Get3DPosition().y
 		};
 
 		XMFLOAT2 vec = {
@@ -131,29 +73,25 @@ void MoveMentsLoad::DrawMoveLine()
 			vec.y / maxlength
 		};
 
-		int pointNum = 5;
-		int spaceNum = pointNum - 1;
-		int num = pointNum + spaceNum;
+
 		float interval = maxlength / (num - 1);
 
-		
-		value = 1.0f/(movement.size() * pointNum);
-
-		int point = 0;
 		for (int j = 0; j < num; ++j) {
 			if (j % 2 == 0) {
 				XMFLOAT2 pos = {
 					startPoint.x + dir.x * interval * j + half_t_IconSize.x,
 					startPoint.y + dir.y * interval * j + half_t_IconSize.y
 				};
-				alpha = 1.0f - (value * point) * (movement.size() - 1);
+
+				// 最後が1.0, 最初が0.0に近くなるように透明度を計算
+				float alpha = 1.0f - static_cast<float>(pointIndex) / totalPoints;
+
 				SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 * alpha);
-				DrawCircleAA(pos.x, pos.y, interval / 2.0f, 20,GetColor(255,0,0), TRUE);
+				DrawCircleAA(pos.x, pos.y, interval / 2.0f, 20, GetColor(255, 0, 0), TRUE);
 				SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
-				point++;
+
+				pointIndex++;
 			}
 		}
-
-		startPoint = endPoint;
 	}
 }
