@@ -34,7 +34,7 @@ void UnitIcon::Update()
 	
 	XMFLOAT2 mousePos = pMouse_->GetMousePos();
 
-	if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x, graphSizeF_.y })) {
+	if (IsInMousePoint(mousePos)) {
 
 		//unitIcon‚ÌˆÚ“®ˆ—
 		if (pMouse_->IsPressed(Mouse::LEFT)) {

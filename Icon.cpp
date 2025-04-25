@@ -2,10 +2,6 @@
 
 Icon::Icon(GameObject* parent) : Object3D(parent)
 {
-	/*hModel = LoadGraph(fileName_.c_str());
-	assert(hModel >= 0);
-	GetGraphSize(hModel, &graphSize_.x, &graphSize_.y);
-	graphSizeF_ = { (float)graphSizeF_.x,(float)graphSizeF_.y, (float)graphSizeF_.halfX, (float)graphSizeF_.halfY };*/
 }
 
 Icon::~Icon()
@@ -36,4 +32,12 @@ void Icon::Load(const std::string& _fileName)
 	graphSize_.halfX = graphSize_.x / 2;
 	graphSize_.halfY = graphSize_.y / 2;
 	graphSizeF_ = {(float)graphSize_.x,(float)graphSize_.y, (float)graphSize_.halfX, (float)graphSize_.halfY};
+}
+
+bool Icon::IsInMousePoint(XMFLOAT2 m_pos)
+{
+	if (PointInBox(m_pos, { position.x, position.y }, { graphSizeF_.x,graphSizeF_.y })) {
+		return true;
+	}
+	return false;
 }

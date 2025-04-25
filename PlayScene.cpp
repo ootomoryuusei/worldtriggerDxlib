@@ -15,6 +15,7 @@
 #include"MoveTypesIcons.h"
 #include"MoveMentsLoads.h"
 #include "Mouse.h"
+#include"TriggersArcIcons.h"
 
 PlayScene::PlayScene(GameObject* parent)
 {
@@ -26,6 +27,8 @@ PlayScene::PlayScene(GameObject* parent)
 	
 	Instantiate<TileIcons>(this);
 
+	
+
 	Instantiate<UnitIcons>(this);
 	
 	Instantiate<MoveSetIcons>(this);
@@ -35,6 +38,8 @@ PlayScene::PlayScene(GameObject* parent)
 	Instantiate<MoveTypesIcons>(this);
 
 	Instantiate<MoveMentsLoads>(this);
+
+	Instantiate<TriggersArcIcons>(this);
 
 	Instantiate<Player1>(this);
 	Instantiate<Tile>(this);

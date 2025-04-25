@@ -190,8 +190,11 @@
     <ClCompile Include="TileIcons.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="TriggerArcIcon.cpp" />
     <ClCompile Include="TriggerIcon.cpp" />
     <ClCompile Include="TriggerIcons.cpp" />
+    <ClCompile Include="TriggersArcIcon.cpp" />
+    <ClCompile Include="TriggersArcIcons.cpp" />
     <ClCompile Include="TriggerSetButton.cpp" />
     <ClCompile Include="TriggerSetUI.cpp" />
     <ClCompile Include="TriggerSetUIFrame.cpp" />
@@ -263,8 +266,11 @@
     <ClInclude Include="TileIcons.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="TriggerArcIcon.h" />
     <ClInclude Include="TriggerIcon.h" />
     <ClInclude Include="TriggerIcons.h" />
+    <ClInclude Include="TriggersArcIcon.h" />
+    <ClInclude Include="TriggersArcIcons.h" />
     <ClInclude Include="TriggerSetButton.h" />
     <ClInclude Include="TriggerSetUI.h" />
     <ClInclude Include="TriggerSetUIFrame.h" />

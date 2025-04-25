@@ -31,7 +31,7 @@ void MoveTypeIcon::Update()
 		XMFLOAT2 mousePos = pMouse->GetMousePos();
 
 		if (pMouse->IsDoubleClicked(Mouse::LEFT)) {
-			if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x,graphSizeF_.y })) {
+			if (IsInMousePoint(mousePos)) {
 				int CenterNum = -1;
 				UnitIcons* pUnitIcons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
 				VECTOR UnitPos = pUnitIcons->GetpUnitIcons()[createNum_]->Get3DPosition();

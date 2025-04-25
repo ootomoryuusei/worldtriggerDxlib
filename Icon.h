@@ -47,5 +47,12 @@ public:
     string GetIconName() { return iconName_; }
 
     void SetFontHandle(int _fontHandle) { fontHandle_ = _fontHandle; }
+
+    /// <summary>
+    /// アイコンのエリア内にマウスのポイントがあるかどうか
+    /// </summary>
+    /// <param name="m_pos"> マウスの位置 </param>
+    /// <returns></returns>
+    bool IsInMousePoint(XMFLOAT2 m_pos);
 private:
 };

@@ -2,11 +2,11 @@
 #include "Icon.h"
 #include<vector>
 
-class Mouse;
-class TileIcons;
-class MoveSetIcons;
-class MoveSelectIcons;
-class MoveTypesIcons;
+//class Mouse;
+//class TileIcons;
+//class MoveSetIcons;
+//class MoveSelectIcons;
+//class MoveTypesIcons;
 
 using std::vector;
 
@@ -26,10 +26,10 @@ private:
 
 	vector<int> moveMent;
 
-	Mouse* pMouse_;
+	/*Mouse* pMouse_;
 	TileIcons* pTileIcons_;
 	MoveSetIcons* pMoveSetIcons_;
 	MoveSelectIcons* pMoveSelectIcons_;
-	MoveTypesIcons* pMoveTypesIcons_;
+	MoveTypesIcons* pMoveTypesIcons_;*/
 };
 
