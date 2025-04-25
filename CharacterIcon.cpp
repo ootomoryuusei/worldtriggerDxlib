@@ -30,11 +30,11 @@ void CharacterIcon::Update()
 	{
 	case SELECT:
 	{
-		Mouse* pMouse = GetParent()->FindGameObject<Mouse>();
+		Mouse* pMouse = GetParent()->GetParent()->GetParent()->FindGameObject<Mouse>();
 		XMFLOAT2 mousePos = pMouse->GetMousePos();
 		CharacterSetUIFrames* pCSetUIFrames = GetParent()->GetParent()->FindGameObject<CharacterSetUIFrames>();
 		if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x, graphSizeF_.y })) {
-			if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+			if (pMouse->IsPressed(Mouse::LEFT)) {
 
 				XMFLOAT2 mouseVariation = { mousePos.x - prevMousePos_.x,mousePos.y - prevMousePos_.y };
 				position = { position.x + mouseVariation.x, position.y + mouseVariation.y, 0.0f };
@@ -77,7 +77,7 @@ void CharacterIcon::Update()
 		Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
 		XMFLOAT2 mousePos = pMouse->GetMousePos();
 		if (PointInBox(mousePos, { position.x,position.y }, { (float)graphSize_.x, (float)graphSize_.y })) {
-			if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+			if (pMouse->IsPressed(Mouse::LEFT)) {
 				SetIcons* pSIcons = GetParent()->GetParent()->FindGameObject<SetIcons>();
 				TriggerSetUIs* pTSUIs = GetParent()->FindGameObject<TriggerSetUIs>();
 				pSIcons->GetFrames()[createNum_]->SetCanVisible(true);

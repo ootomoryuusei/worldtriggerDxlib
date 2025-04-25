@@ -3,6 +3,7 @@
 #include"Icons.h"
 #include"Player1.h"
 #include"Camera.h"
+#include"Mouse.h"
 
 SelectScene::SelectScene(GameObject* parent) 
 	: GameObject(parent)
@@ -11,6 +12,7 @@ SelectScene::SelectScene(GameObject* parent)
 	Instantiate<Player1>(this);
 	////Instantiate<Tile>(this);
 	Instantiate<Camera>(this); // Player‚æ‚èŒã‚É‘‚­
+	Instantiate<Mouse>(this);
 }
 
 SelectScene::~SelectScene()

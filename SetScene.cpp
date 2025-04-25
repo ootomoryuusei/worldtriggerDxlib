@@ -4,6 +4,7 @@
 #include"Icons.h"
 #include"Player1.h"
 #include"Camera.h"
+#include"Mouse.h"
 
 SetScene::SetScene(GameObject* parent)
 	: GameObject(parent)
@@ -12,6 +13,7 @@ SetScene::SetScene(GameObject* parent)
 	Instantiate<SetIcons>(this);
 	Instantiate<Player1>(this);
 	Instantiate<Camera>(this);
+	Instantiate<Mouse>(this);
 }
 
 SetScene::~SetScene()

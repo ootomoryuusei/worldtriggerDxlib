@@ -18,13 +18,11 @@
 
 PlayScene::PlayScene(GameObject* parent)
 {
-	
-
 	Instantiate<BackGround>(this);
-	//Instantiate<Map>(this);
-	//Instantiate<rader>(this);
-	//Instantiate<Unit>(this);
-	//Instantiate<Timer>(this);
+	Instantiate<Map>(this);
+	Instantiate<rader>(this);
+	Instantiate<Unit>(this);
+	Instantiate<Timer>(this);
 	
 	Instantiate<TileIcons>(this);
 
@@ -52,9 +50,9 @@ PlayScene::~PlayScene()
 
 void PlayScene::Update()
 {
-	if (CheckHitKey(KEY_INPUT_P)) {
+	/*if (CheckHitKey(KEY_INPUT_P)) {
 		SceneManager::Instance()->ChangeScene(SceneManager::SCENE_ID::SCENE_ID_SELECT);
-	}
+	}*/
 }
 
 void PlayScene::Draw()

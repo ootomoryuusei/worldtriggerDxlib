@@ -20,7 +20,7 @@ void Icon::Draw()
 {
 	if (canVisible_) {
 		DrawGraph(position.x, position.y, hModel, TRUE);
-#if 1
+#if 0
 		DrawBoxAA(position.x, position.y, position.x + GetGraphSizeF_2D().x, position.y + GetGraphSizeF_2D().y, GetColor(255, 0, 0), FALSE);
 #endif
 	}
