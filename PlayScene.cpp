@@ -27,7 +27,7 @@ PlayScene::PlayScene(GameObject* parent)
 	
 	Instantiate<TileIcons>(this);
 
-	
+	Instantiate<TriggersArcIcons>(this);
 
 	Instantiate<UnitIcons>(this);
 	
@@ -39,7 +39,7 @@ PlayScene::PlayScene(GameObject* parent)
 
 	Instantiate<MoveMentsLoads>(this);
 
-	Instantiate<TriggersArcIcons>(this);
+	
 
 	Instantiate<Player1>(this);
 	Instantiate<Tile>(this);

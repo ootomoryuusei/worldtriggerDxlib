@@ -11,13 +11,9 @@ TriggersArcIcons::~TriggersArcIcons()
 
 void TriggersArcIcons::Initialize()
 {
-	UnitIcons* pUnitIcons = /*GetParent()->GetParent()->*/GetParent()->FindGameObject<UnitIcons>();
-	
 	for (int i = 0;i < MAX_SELECT_CHARACTER * 2;i++) {
 		TriggersArcIcon* pTriggersArcIcon = Instantiate<TriggersArcIcon>(this);
-		VECTOR UnitPos = pUnitIcons->GetpUnitIcons()[i]->Get3DPosition();
-		pTriggersArcIcon->GetpTriggerArcIcon().pMainArc->Set3DPosition(UnitPos);
-		pTriggersArcIcon->GetpTriggerArcIcon().pSubArc->Set3DPosition(UnitPos);
+		pTriggersArcIcon->SetCreateNum(i);
 		pTriggersArcIcon_.push_back(pTriggersArcIcon);
 	}
 }

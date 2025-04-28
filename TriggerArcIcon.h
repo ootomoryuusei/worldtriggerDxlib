@@ -11,6 +11,7 @@ public:
 	void Draw() override;
 
 private:
-
+	float percent;
+	float startPercent;
 };
 
