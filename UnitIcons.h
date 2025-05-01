@@ -1,5 +1,5 @@
 #pragma once
-#include "Engine/GameObject.h"
+#include "Icon.h"
 #include"UnitIcon.h"
 #include"Engine/CsvReader.h"
 #include<vector>
@@ -7,7 +7,7 @@
 using std::vector;
 
 class UnitIcons :
-    public GameObject
+    public Icon
 {
 public:
 	UnitIcons(GameObject* parent);
@@ -19,6 +19,7 @@ public:
 	const auto& GetpUnitIcons() const { return pUIcons_; }
 private:
 	vector<UnitIcon*> pUIcons_;
+	UnitIcon* pSelecting_ptr;
 	vector<int> selectCharNum_;
 	CsvReader* csv_;
 	int FNSCNLine;

@@ -14,6 +14,7 @@ protected:
     string fileName_; //ファイル名
     string iconName_; //iconの名前
     bool canVisible_; //iconを表示するかしないか
+    bool selecting_; //セレクトされているかどうか
     int num_;
     int createNum_; //作成番号
     VECTOR scale_; //スケール
@@ -33,6 +34,9 @@ public:
 
     void SetCanVisible(bool _canVisible) { canVisible_ = _canVisible; }
     bool GetCanVisible() { return canVisible_; }
+
+    void SetSelecting(bool _selecting) { selecting_ = _selecting; }
+    bool GetSelecting() { return selecting_; }
 
     void SetNum(int _num) { num_ = _num; }
     int GetNum() { return num_; }

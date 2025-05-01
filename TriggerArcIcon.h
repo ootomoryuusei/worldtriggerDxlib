@@ -1,5 +1,9 @@
 #pragma once
 #include "Icon.h"
+#include<array>
+
+using std::array;
+
 class TriggerArcIcon :
     public Icon
 {
@@ -10,8 +14,13 @@ public:
 	void Update() override;
 	void Draw() override;
 
+	
+	const auto& GetBoxCorners() const { return boxCorners; }
 private:
 	float percent;
 	float startPercent;
+	VECTOR prevVec;
+	XMFLOAT2 center;
+	array<XMFLOAT2, 4> boxCorners{};
 };
 

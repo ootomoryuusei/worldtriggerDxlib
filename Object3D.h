@@ -1,8 +1,10 @@
 #pragma once
 // GameObject→Object3D→Player/Groundの関係にする
 #include "Engine/GameObject.h"
+#include<array>
 
 using std::string;
+using std::array;
 
 //const int FREE = 500;
 //const int MOONBLADE = 501;
@@ -107,14 +109,24 @@ inline void IsLoaded(int _handle, MATRIX _matrix , int type = 1) {
 }
 
 
-
+/// <summary>
+/// 度に変換
+/// </summary>
+/// <param name="deg"></param>
+/// <returns></returns>
 inline float ToRad(float deg) { return deg * XM_PI / 180.0f; }
 
 inline VECTOR operator +(const VECTOR& a, const VECTOR& b) {
 	return VAdd(a, b);
 }
 
-inline VECTOR operator -(const VECTOR& a, const VECTOR& b) {
+/// <summary>
+///　ベクトル同士の引き算
+/// </summary>
+/// <param name="a"></param>
+/// <param name="b"></param>
+/// <returns></returns>
+inline VECTOR operator -(const VECTOR& a, const VECTOR& b) { 
 	return VSub(a, b);
 }
 
@@ -185,7 +197,9 @@ public:
 	/// <param name="_leftUp"> 短形の左上座標 </param>
 	/// <param name="_distance"> 短形の幅(x)と高さ(y) </param>
 	/// <returns></returns>
-	bool PointInBox(XMFLOAT2 point, XMFLOAT2 _leftUp,  XMFLOAT2 _distance);
+	bool PointInBox(XMFLOAT2 point, XMFLOAT2 _leftUp, XMFLOAT2 _distance);
+
+	bool PointInQuad(XMFLOAT2 point, const array<XMFLOAT2, 4>& corners);
 
 	void SetState(int _state) { state_ = _state; }
 

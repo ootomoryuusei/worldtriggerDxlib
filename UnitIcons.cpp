@@ -1,13 +1,15 @@
 #include "UnitIcons.h"
 #include"TileIcons.h"
+#include"Mouse.h"
 
-UnitIcons::UnitIcons(GameObject* parent) : GameObject(parent),selectCharNum_(MAX_SELECT_CHARACTER,-1)
+UnitIcons::UnitIcons(GameObject* parent) : Icon(parent),selectCharNum_(MAX_SELECT_CHARACTER,-1)
 {
 
 }
 
 UnitIcons::~UnitIcons()
 {
+	delete (pSelecting_ptr);
 }
 
 void UnitIcons::Initialize()
@@ -75,8 +77,50 @@ void UnitIcons::Initialize()
 			num++;
 		}
 	}
+
+	canVisible_ = true;
 }
 
 void UnitIcons::Update()
 {
+	Mouse* pMouse = GetParent()->FindGameObject<Mouse>();
+	XMFLOAT2 mousePos = pMouse->GetMousePos();
+
+	if (canVisible_) {
+		// 全アイコンを初期化（表示ON・選択解除）
+		for (auto& itr : pUIcons_) {
+			if (!itr->GetCanVisible()) {
+				itr->SetCanVisible(true);
+			}
+			itr->SetSelecting(false); // まず全て非選択にする
+		}
+
+		// 1つだけ選択処理
+		if (pSelecting_ptr != nullptr) {
+			if (pMouse->IsPressed(Mouse::LEFT)) {
+				pSelecting_ptr->SetSelecting(true);
+				return;
+			}
+			else {
+				pSelecting_ptr = nullptr;
+			}
+		}
+
+
+		for (auto itr = pUIcons_.rbegin();itr != pUIcons_.rend();++itr) {
+			XMFLOAT2 leftUp = { (*itr)->Get3DPosition().x,(*itr)->Get3DPosition().y };
+			XMFLOAT2 distance = { (*itr)->GetGraphSizeF_2D().x,(*itr)->GetGraphSizeF_2D().y };
+			if (PointInBox(mousePos, leftUp, distance)) {
+				pSelecting_ptr = *itr;
+				pSelecting_ptr->SetSelecting(true);
+				break;
+			}
+			
+		}
+	}
+	else {
+		for (auto& itr : pUIcons_) {
+			itr->SetCanVisible(false);
+		}
+	}
 }

@@ -36,18 +36,20 @@ void UnitIcon::Update()
 
 	if (IsInMousePoint(mousePos)) {
 
-		//unitIconの移動処理
-		if (pMouse_->IsPressed(Mouse::LEFT)) {
-			XMFLOAT2 mouseVariation = { mousePos.x - prevMousePos_.x,mousePos.y - prevMousePos_.y };
-			position = { position.x + mouseVariation.x, position.y + mouseVariation.y, 0.0f };
-		}
-		else {
-			for (auto itr : pTileIcons_->GetpTIcon()) { //タイルとの当たり判定
-				XMFLOAT2 leftUp = { itr->Get3DPosition().x + itr->GetGraphSizeF_2D().x / 4, itr->Get3DPosition().y };
-				XMFLOAT2 graphSize = { itr->GetGraphSizeF_2D().x / 4 * 2, itr->GetGraphSizeF_2D().y };
-				XMFLOAT2 graphCenter = { position.x + graphSizeF_.halfX,position.y + graphSizeF_.halfY };
-				if (PointInBox({ graphCenter.x, graphCenter.y }, leftUp, graphSize)) { 
-					position = { itr->Get3DPosition() };
+		if (selecting_) {
+			//unitIconの移動処理
+			if (pMouse_->IsPressed(Mouse::LEFT)) {
+				XMFLOAT2 mouseVariation = { mousePos.x - prevMousePos_.x,mousePos.y - prevMousePos_.y };
+				position = { position.x + mouseVariation.x, position.y + mouseVariation.y, 0.0f };
+			}
+			else {
+				for (auto itr : pTileIcons_->GetpTIcon()) { //タイルとの当たり判定
+					XMFLOAT2 leftUp = { itr->Get3DPosition().x + itr->GetGraphSizeF_2D().x / 4, itr->Get3DPosition().y };
+					XMFLOAT2 graphSize = { itr->GetGraphSizeF_2D().x / 4 * 2, itr->GetGraphSizeF_2D().y };
+					XMFLOAT2 graphCenter = { position.x + graphSizeF_.halfX,position.y + graphSizeF_.halfY };
+					if (PointInBox({ graphCenter.x, graphCenter.y }, leftUp, graphSize)) {
+						position = { itr->Get3DPosition() };
+					}
 				}
 			}
 		}
@@ -67,10 +69,10 @@ void UnitIcon::Update()
 		prevMousePos_ = mousePos;
 	}
 	
-	if (!moveMent.empty()) {
+	/*if (!moveMent.empty()) {
 		VECTOR pos = pTileIcons_->GetpTIcon()[moveMent.back()]->Get3DPosition();
 		position = pos;
-	}
+	}*/
 }
 
 void UnitIcon::Draw()

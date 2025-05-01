@@ -100,3 +100,19 @@ bool Object3D::PointInBox(XMFLOAT2 _point, XMFLOAT2 _LeftUp, XMFLOAT2 _distance)
 	}
 	return false;
 }
+
+bool Object3D::PointInQuad(XMFLOAT2 point, const array<XMFLOAT2, 4>& corners) {
+	// 4つの三角形に分けて、それぞれの符号を確認（外積ベース）
+	for (int i = 0; i < 4; i++) {
+		int j = (i + 1) % 4;
+		float dx1 = corners[j].x - corners[i].x;
+		float dy1 = corners[j].y - corners[i].y;
+		float dx2 = point.x - corners[i].x;
+		float dy2 = point.y - corners[i].y;
+		VECTOR In1, In2;
+		In1 = { dx1,dy1 };
+		In2 = { dx2,dy2 };
+		if (VCross(In1,In2).z < 0) return false;
+	}
+	return true;
+}

@@ -23,6 +23,8 @@ private:
 	XMFLOAT2 space;
 	bool clicked;
 
+	int hImage;
+
 	void TypeMove();
 	void SimpleMove();
 

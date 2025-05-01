@@ -15,6 +15,8 @@ MoveTypeIcon::MoveTypeIcon(GameObject* parent) : Icon(parent)
 	canVisible_ = false;
 	fontHandle_ = -1;
 	iconName_ = "";
+	hImage = LoadGraph("Assets//Image//MoveTypeDownButton.png");
+	assert(hImage >= 0);
 }
 
 MoveTypeIcon::~MoveTypeIcon()
@@ -60,10 +62,19 @@ void MoveTypeIcon::Update()
 
 void MoveTypeIcon::Draw()
 {
+	Mouse* pMouse = GetParent()->GetParent()->GetParent()->FindGameObject<Mouse>();
+	XMFLOAT2 mousePos = pMouse->GetMousePos();
+
 	if (canVisible_) {
-		DrawGraph(position.x, position.y, hModel, TRUE);
+		if (IsInMousePoint(mousePos)) {
+			DrawGraph(position.x, position.y, hImage, TRUE);
+		}
+		else {
+			DrawGraph(position.x, position.y, hModel, TRUE);
+		}
 		VECTOR fontPos = { position.x + space.x, position.y + space.y,position.z };
 		DrawStringToHandle(fontPos.x, fontPos.y, iconName_.c_str(), GetColor(0, 0, 0), fontHandle_);
+	
 #if 0
 		DrawBoxAA(position.x, position.y, position.x + graphSizeF_.x, position.y + graphSizeF_.y, GetColor(255, 0, 0), FALSE);
 #endif

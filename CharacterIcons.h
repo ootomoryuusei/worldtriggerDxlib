@@ -1,11 +1,11 @@
 #pragma once
-#include "Engine/GameObject.h"
+#include "Icon.h"
 #include<vector>
 #include"CharacterIcon.h"
 #include"Engine/CsvReader.h"
 
 class CharacterIcons :
-    public GameObject
+    public Icon
 {
 public:
     CharacterIcons(GameObject* parent);
