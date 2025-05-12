@@ -22,5 +22,7 @@ private:
 	VECTOR prevVec;
 	XMFLOAT2 center;
 	array<XMFLOAT2, 4> boxCorners{};
+
+	void calculateArc();
 };
 

@@ -9,6 +9,13 @@ class Icon :
     public Object3D
 {
 protected:
+    enum STEP {
+        FIRST = 0,
+        SECONDE,
+        THIRD,
+        MAX
+    };
+
     SIZE_F_2D graphSizeF_; //アイコンの画像サイズ(float)
     SIZE_2D graphSize_; //アイコンの画像サイズ
     string fileName_; //ファイル名
@@ -20,6 +27,9 @@ protected:
     VECTOR scale_; //スケール
     int fontHandle_; //フォントのハンドル
     XMFLOAT2 prevMousePos_; 
+
+    STEP step_;
+
 public:
     Icon(GameObject* parent);
     ~Icon();
@@ -58,5 +68,8 @@ public:
     /// <param name="m_pos"> マウスの位置 </param>
     /// <returns></returns>
     bool IsInMousePoint(XMFLOAT2 m_pos);
+
+    void SetStep(STEP _step) { step_ = _step; }
+    int GetStep() { return step_; }
 private:
 };

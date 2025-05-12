@@ -13,6 +13,8 @@ UnitIcon::UnitIcon(GameObject* parent) : Icon(parent)
 	canVisible_ = true;
 
 	createNum_ = -1;
+
+	step_ = FIRST;
 }
 
 UnitIcon::~UnitIcon()
@@ -35,38 +37,55 @@ void UnitIcon::Update()
 	XMFLOAT2 mousePos = pMouse_->GetMousePos();
 
 	if (IsInMousePoint(mousePos)) {
-
-		if (selecting_) {
-			//unitIconの移動処理
-			if (pMouse_->IsPressed(Mouse::LEFT)) {
-				XMFLOAT2 mouseVariation = { mousePos.x - prevMousePos_.x,mousePos.y - prevMousePos_.y };
-				position = { position.x + mouseVariation.x, position.y + mouseVariation.y, 0.0f };
-			}
-			else {
-				for (auto itr : pTileIcons_->GetpTIcon()) { //タイルとの当たり判定
-					XMFLOAT2 leftUp = { itr->Get3DPosition().x + itr->GetGraphSizeF_2D().x / 4, itr->Get3DPosition().y };
-					XMFLOAT2 graphSize = { itr->GetGraphSizeF_2D().x / 4 * 2, itr->GetGraphSizeF_2D().y };
-					XMFLOAT2 graphCenter = { position.x + graphSizeF_.halfX,position.y + graphSizeF_.halfY };
-					if (PointInBox({ graphCenter.x, graphCenter.y }, leftUp, graphSize)) {
-						position = { itr->Get3DPosition() };
+		switch (step_)
+		{
+		case Icon::FIRST:
+		{
+			if (selecting_) {
+				//unitIconの移動処理
+				if (pMouse_->IsPressed(Mouse::LEFT)) {
+					XMFLOAT2 mouseVariation = { mousePos.x - prevMousePos_.x,mousePos.y - prevMousePos_.y };
+					position = { position.x + mouseVariation.x, position.y + mouseVariation.y, 0.0f };
+				}
+				else {
+					for (auto itr : pTileIcons_->GetpTIcon()) { //タイルとの当たり判定
+						XMFLOAT2 leftUp = { itr->Get3DPosition().x + itr->GetGraphSizeF_2D().x / 4, itr->Get3DPosition().y };
+						XMFLOAT2 graphSize = { itr->GetGraphSizeF_2D().x / 4 * 2, itr->GetGraphSizeF_2D().y };
+						XMFLOAT2 graphCenter = { position.x + graphSizeF_.halfX,position.y + graphSizeF_.halfY };
+						if (PointInBox({ graphCenter.x, graphCenter.y }, leftUp, graphSize)) {
+							position = { itr->Get3DPosition() };
+						}
 					}
 				}
+				
 			}
+			prevMousePos_ = mousePos;
+			break;
 		}
+		case Icon::SECONDE:
+		{
+			//unitIconの選択処理
+			if (pMouse_->IsDoubleClicked(Mouse::LEFT)) { //ダブルクリックの処理
 
-		//unitIconの選択処理
-		if (pMouse_->IsDoubleClicked(Mouse::LEFT)) { //ダブルクリックの処理
-			
-			pMoveSetIcons_->GetpMoveSetIcons()[createNum_]->SetCanVisible(true);
-			pMoveSelectIcons_->GetpMoveSelectIcons()[createNum_]->SetCanVisible(true);
-			pMoveTypesIcons_->GetpMoveTypesIcons()[createNum_]->SetCanVisible(true);
+				pMoveSetIcons_->GetpMoveSetIcons()[createNum_]->SetCanVisible(true);
+				pMoveSelectIcons_->GetpMoveSelectIcons()[createNum_]->SetCanVisible(true);
+				pMoveTypesIcons_->GetpMoveTypesIcons()[createNum_]->SetCanVisible(true);
+			}
+			else if (pMouse_->IsClicked(Mouse::LEFT)) { //シングルクリック
+				pMoveSetIcons_->GetpMoveSetIcons()[createNum_]->SetCanVisible(false);
+				pMoveSelectIcons_->GetpMoveSelectIcons()[createNum_]->SetCanVisible(false);
+				pMoveTypesIcons_->GetpMoveTypesIcons()[createNum_]->SetCanVisible(false);
+			}
+			break;
 		}
-		else if (pMouse_->IsClicked(Mouse::LEFT)) { //シングルクリック
-			pMoveSetIcons_->GetpMoveSetIcons()[createNum_]->SetCanVisible(false);
-			pMoveSelectIcons_->GetpMoveSelectIcons()[createNum_]->SetCanVisible(false);
-			pMoveTypesIcons_->GetpMoveTypesIcons()[createNum_]->SetCanVisible(false);
+		case Icon::THIRD:
+			break;
+		default:
+			break;
 		}
-		prevMousePos_ = mousePos;
+		
+
+		
 	}
 	
 	/*if (!moveMent.empty()) {
