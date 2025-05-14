@@ -6,8 +6,10 @@ class Timer :
 public:
 	Timer(GameObject* parent);
 	~Timer();
+	void Initialize() override;
 	void Update() override;
+	void Draw() override;
 private:
-
+	XMFLOAT2 boxSize;
 };
 

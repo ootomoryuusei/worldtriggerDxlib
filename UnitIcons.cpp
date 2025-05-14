@@ -79,6 +79,7 @@ void UnitIcons::Initialize()
 	}
 
 	canVisible_ = true;
+	moveMentSet = false;
 }
 
 void UnitIcons::Update()
@@ -116,6 +117,13 @@ void UnitIcons::Update()
 				break;
 			}
 			
+		}
+
+		if (moveMentSet) {
+			for (auto& itr : pUIcons_) {
+				itr->SetStep(THIRD);
+				moveMentSet = false;
+			}
 		}
 	}
 	else {

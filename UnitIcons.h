@@ -7,7 +7,7 @@
 using std::vector;
 
 class UnitIcons :
-    public Icon
+	public Icon
 {
 public:
 	UnitIcons(GameObject* parent);
@@ -17,6 +17,8 @@ public:
 	/*void Draw() override;*/
 
 	const auto& GetpUnitIcons() const { return pUIcons_; }
+
+	void SetMoveMentSet(bool _moveMentSet) { moveMentSet = _moveMentSet; }
 private:
 	vector<UnitIcon*> pUIcons_;
 	UnitIcon* pSelecting_ptr;
@@ -25,5 +27,7 @@ private:
 	int FNSCNLine;
 	int FN2DLine;
 	string DLC;
+
+	bool moveMentSet;
 };
 

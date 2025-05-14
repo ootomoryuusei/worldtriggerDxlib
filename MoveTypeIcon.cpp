@@ -43,7 +43,7 @@ void MoveTypeIcon::Update()
 						CenterNum = itr->GetTileData().num;
 					}
 				}
-				serchAroundTileNum = SerchAroundTileNum(CenterNum,1);
+				serchAroundTileNum = SerchAroundTileNum(CenterNum,2);
 				for (auto& itrs : serchAroundTileNum) {
 					for (auto& itr : pTileIcons->GetpTIcon()) {
 						if (itr->GetTileData().num == itrs) {

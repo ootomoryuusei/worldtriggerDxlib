@@ -5,7 +5,7 @@
 
 TriggerArcIcon::TriggerArcIcon(GameObject* parent) : Icon(parent)
 {
-	step_ = FIRST;
+	step_ = SECONDE;
 }
 
 TriggerArcIcon::~TriggerArcIcon()
