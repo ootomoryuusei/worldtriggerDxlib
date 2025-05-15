@@ -32,6 +32,7 @@ void MoveMentsLoad::DrawMoveLine()
 	TileIcons* pTileIcons = GetParent()->GetParent()->FindGameObject<TileIcons>();
 
 	const auto& movement = pUnitIcons->GetpUnitIcons()[createNum_]->GetMoveMent();
+
 	if (movement.empty()) return;
 
 	XMFLOAT2 half_t_IconSize = {

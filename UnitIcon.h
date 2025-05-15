@@ -1,7 +1,6 @@
 #pragma once
 #include "Icon.h"
-#include<stack>
-#include<queue>
+#include<deque>
 
 //class Mouse;
 //class TileIcons;
@@ -9,8 +8,7 @@
 //class MoveSelectIcons;
 //class MoveTypesIcons;
 
-using std::stack;
-using std::queue;
+using std::deque;
 
 class UnitIcon :
     public Icon
@@ -22,8 +20,8 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	const auto& GetMoveMent() const{ return s_moveMent; }
-	void SetMoveMent(int _moveMent) { s_moveMent.push(_moveMent); }
+	const auto& GetMoveMent() const{ return moveMent; }
+	void SetMoveMent(int _moveMent) { moveMent.push_back(_moveMent); }
 private:
 
 	/*struct UNIT_DATA {
@@ -32,8 +30,9 @@ private:
 		float percent;
 		int moveType;
 	};*/
-	stack<int> s_moveMent;
-	queue<int> q_moveMent;
+
+	vector<int> moveMent;
+	deque<int> dq_moveMent;
 
 	bool firstSet;
 	bool moveing;

@@ -100,30 +100,34 @@ void UnitIcon::Update()
 		}
 		case Icon::THIRD:
 		{
+			
 			if (!firstSet) {
-				position = pTileIcons_->GetpTIcon()[s_moveMent.front()]->Get3DPosition();
+				for (auto& itr : moveMent) {
+					dq_moveMent.push_back(itr);
+				}
+
+				position = pTileIcons_->GetpTIcon()[dq_moveMent.front()]->Get3DPosition();
 				firstSet = true;
 				moveing = true;
 			}
 			if (moveing) {
-				if (std::distance(s_moveMent.begin(), s_moveMent.end()) >= 2) {
-					auto it = s_moveMent.begin();
-					auto itNext = std::next(it);
+				if (dq_moveMent.size() >= 2) {
+					auto startIndex = dq_moveMent.front();
+					auto targetIndex = *std::next(&dq_moveMent.front());
+					dq_moveMent.pop_back();
 
-					int startIndex = *it;
-					int goalIndex = *itNext;
 					VECTOR start = pTileIcons_->GetpTIcon()[startIndex]->Get3DPosition();
-					VECTOR goal = pTileIcons_->GetpTIcon()[goalIndex]->Get3DPosition();
+					VECTOR target = pTileIcons_->GetpTIcon()[targetIndex]->Get3DPosition();
 					float percent = elapsedTime / totalTime;
 					percent = clamp(percent, 0.0f, 1.0f);
-					position = Lerp3D(start, goal, percent);
+					position = Lerp3D(start, target, percent);
 					if (percent >= 1.0f) {
 						// ˆÚ“®Š®—¹ ¨ Ÿ‚Ì‹æŠÔ‚Ö
 						elapsedTime = 0.0f;
 					}
 				}
 
-				if (moveMent.size() < 2) {
+				if (dq_moveMent.size() < 2) {
 					moveing = false;
 				}
 				elapsedTime += Time::DeltaTime();
@@ -150,13 +154,13 @@ void UnitIcon::Draw()
 		}
 		case Icon::SECONDE:
 		{
-			if (s_moveMent.size() > 1) {
-				VECTOR pos = pTileIcons->GetpTIcon()[s_moveMent.front()]->Get3DPosition();
+			if (moveMent.size() >= 2) {
+				VECTOR pos = pTileIcons->GetpTIcon()[moveMent.front()]->Get3DPosition();
 				SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 / 2);
 				DrawGraph(pos.x + (TileSize.x / 2 - graphSizeF_.halfX), pos.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
 				SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 			}
-			position = pTileIcons->GetpTIcon()[s_moveMent.back()]->Get3DPosition();
+			position = pTileIcons->GetpTIcon()[moveMent.back()]->Get3DPosition();
 			DrawGraph(position.x + (TileSize.x / 2 - graphSizeF_.halfX), position.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
 			break;
 		}
