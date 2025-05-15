@@ -85,7 +85,7 @@ void MoveSetIcon::Draw()
 			DrawStringToHandle(moveFontPos.x,moveFontPos.y,move.c_str(), GetColor(0, 0, 0), fontHandle_);
 			num++;
 		}
-#if 1
+#if 0
 		DrawBoxAA(position.x, position.y, position.x + graphSizeF_.x * scale_.x, position.y + graphSizeF_.y * scale_.y, GetColor(255, 0, 0), FALSE);
 #endif
 	}

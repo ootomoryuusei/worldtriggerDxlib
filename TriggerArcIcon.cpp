@@ -36,6 +36,7 @@ void TriggerArcIcon::Update()
 			break;
 		}
 		case Icon::THIRD:
+			
 			break;
 		default:
 			break;

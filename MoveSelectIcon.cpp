@@ -50,7 +50,7 @@ void MoveSelectIcon::Draw()
 		DrawStringToHandle(fontPos.x, fontPos.y, iconName_.c_str(), GetColor(0, 0, 0), fontHandle_);
 		DrawLineAA(position.x, position.y + GetGraphSizeF_2D().y / 2
 			, position.x + GetGraphSizeF_2D().x, position.y + GetGraphSizeF_2D().y / 2, GetColor(0, 0, 0), 2.0);
-#if 1
+#if 0
 		DrawBoxAA(position.x, position.y, position.x + graphSizeF_.x * scale_.x, position.y + graphSizeF_.y * scale_.y, GetColor(255, 0, 0), FALSE);
 #endif
 	}

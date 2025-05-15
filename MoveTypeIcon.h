@@ -7,6 +7,7 @@ class MoveTypeIcon :
 public:
 	MoveTypeIcon(GameObject* parent);
 	~MoveTypeIcon();
+	void Initialize() override;
 	void Update() override;
 	void Draw() override;
 

@@ -24,12 +24,11 @@ public:
 	void SetMoveMent(int _moveMent) { moveMent.push_back(_moveMent); }
 private:
 
-	/*struct UNIT_DATA {
+	struct UNIT_DATA {
 		int moveMent;
 		float s_percent;
 		float percent;
-		int moveType;
-	};*/
+	};
 
 	vector<int> moveMent;
 	deque<int> dq_moveMent;

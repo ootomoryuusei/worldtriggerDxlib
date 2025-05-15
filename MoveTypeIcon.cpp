@@ -23,11 +23,16 @@ MoveTypeIcon::~MoveTypeIcon()
 {
 }
 
+void MoveTypeIcon::Initialize()
+{
+	
+}
+
 void MoveTypeIcon::Update()
 {
 	if (canVisible_) {
 		XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
-		space = { (graphSizeF_.x - strSize.x) / 2,(graphSizeF_.y- strSize.y) /2};
+		space = { (graphSizeF_.x - strSize.x) / 2,(graphSizeF_.y - strSize.y) / 2 };
 
 		Mouse* pMouse = GetParent()->GetParent()->GetParent()->FindGameObject<Mouse>();
 		XMFLOAT2 mousePos = pMouse->GetMousePos();

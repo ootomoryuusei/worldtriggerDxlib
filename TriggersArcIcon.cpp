@@ -28,7 +28,7 @@ void TriggersArcIcon::Update()
 	UnitIcons* pUnitIcons = GetParent()->GetParent()->FindGameObject<UnitIcons>();
 	VECTOR UnitPos = pUnitIcons->GetpUnitIcons()[createNum_]->Get3DPosition();
 
-	Mouse* pMouse =GetParent()->GetParent()->FindGameObject<Mouse>();
+	Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
 	XMFLOAT2 mousePos = pMouse->GetMousePos();
 
 	for (auto& itr : pTriggerArcIcon) {

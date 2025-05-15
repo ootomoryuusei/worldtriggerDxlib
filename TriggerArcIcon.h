@@ -16,6 +16,11 @@ public:
 
 	
 	const auto& GetBoxCorners() const { return boxCorners; }
+
+	const float GetPercent() { return percent; }
+	const float GetStartPercent() { return startPercent; }
+
+	void SetAngle(XMFLOAT2 _angle) { angle.push_back(_angle); }
 private:
 	float percent;
 	float startPercent;
@@ -23,6 +28,7 @@ private:
 	XMFLOAT2 center;
 	array<XMFLOAT2, 4> boxCorners{};
 
+	vector<XMFLOAT2> angle;
 	void calculateArc();
 };
 

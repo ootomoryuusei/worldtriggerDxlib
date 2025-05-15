@@ -40,6 +40,7 @@ void UnitIcon::Initialize()
 
 void UnitIcon::Update()
 {
+
 	Mouse* pMouse_ = GetParent()->GetParent()->FindGameObject<Mouse>();
 	TileIcons* pTileIcons_ = GetParent()->GetParent()->FindGameObject<TileIcons>();
 	MoveSetIcons* pMoveSetIcons_ = GetParent()->GetParent()->FindGameObject<MoveSetIcons>();
@@ -112,9 +113,9 @@ void UnitIcon::Update()
 			}
 			if (moveing) {
 				if (dq_moveMent.size() >= 2) {
-					auto startIndex = dq_moveMent.front();
-					auto targetIndex = *std::next(&dq_moveMent.front());
-					dq_moveMent.pop_back();
+					auto it = dq_moveMent.begin();
+					auto startIndex = *it;
+					auto targetIndex = *(++it);
 
 					VECTOR start = pTileIcons_->GetpTIcon()[startIndex]->Get3DPosition();
 					VECTOR target = pTileIcons_->GetpTIcon()[targetIndex]->Get3DPosition();
@@ -124,6 +125,7 @@ void UnitIcon::Update()
 					if (percent >= 1.0f) {
 						// ˆÚ“®Š®—¹ ¨ Ÿ‚Ì‹æŠÔ‚Ö
 						elapsedTime = 0.0f;
+						dq_moveMent.pop_front();
 					}
 				}
 
