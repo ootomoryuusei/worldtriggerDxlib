@@ -1,6 +1,9 @@
 #include "Unit.h"
 #include"Mouse.h"
 
+#include"SetIcons.h"
+
+
 Unit::Unit(GameObject* parent) : Icon(parent)
 {
 	Load("Assets//Image//unit.png");
@@ -26,6 +29,8 @@ void Unit::Initialize()
 	int fontHandle = CreateFontToHandle("出撃ユニットフォント", fontSize, fontThickness, DX_FONTTYPE_ANTIALIASING_EDGE_4X4);
 
 	fontHandle_ = fontHandle;
+
+	Instantiate<SetIcons>(this);
 }
 
 void Unit::Update()

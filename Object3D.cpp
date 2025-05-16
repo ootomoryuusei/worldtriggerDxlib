@@ -1,5 +1,9 @@
 #include "Object3D.h"
 
+#include<cmath>
+
+using std::lerp;
+
 Object3D::Object3D(GameObject* parent) : GameObject(parent)
 {
 	hModel = -1;
@@ -115,4 +119,12 @@ bool Object3D::PointInQuad(XMFLOAT2 point, const array<XMFLOAT2, 4>& corners) {
 		if (VCross(In1,In2).z < 0) return false;
 	}
 	return true;
+}
+
+VECTOR Object3D::Lerp3D(VECTOR& start, VECTOR& goal, float percent)
+{
+	return VECTOR{ lerp(start.x,goal.x,percent),
+				  lerp(start.y,goal.y,percent),
+				  lerp(start.z,goal.z,percent)
+	};
 }

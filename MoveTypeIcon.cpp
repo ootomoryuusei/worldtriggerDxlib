@@ -4,6 +4,7 @@
 #include"Mouse.h"
 #include"UnitIcons.h"
 #include"TileIcons.h"
+#include"TriggersArcIcons.h"
 #include<algorithm>
 #include <queue>
 #include <set>
@@ -57,6 +58,11 @@ void MoveTypeIcon::Update()
 					}
 				}
 				clicked = true;
+
+				TriggersArcIcons* pTriggersArcIcon = GetParent()->GetParent()->GetParent()->FindGameObject<TriggersArcIcons>();
+				for (auto& itr : pTriggersArcIcon->GetpTriggersArcIcon_()[createNum_]->GetpTriggerArcIcon()) {
+					itr->SetAngle({ itr->GetStartPercent(),itr->GetPercent() });
+				}
 			}
 		}
 		else {

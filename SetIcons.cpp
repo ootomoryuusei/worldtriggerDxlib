@@ -1,12 +1,18 @@
 #include "SetIcons.h"
-#include"BackGround.h"
 #include"TriggerSetUIs.h"
+#include"Unit.h"
 
 SetIcons::SetIcons(GameObject* parent) 
 	: GameObject(parent),selectCharNum_(MAX_SELECT_CHARACTER,-1)
 {
-	Instantiate<BackGround>(this);
+}
 
+SetIcons::~SetIcons()
+{
+}
+
+void SetIcons::Initialize()
+{
 	csv_ = new CsvReader();
 	csv_->Load("Assets//Character//SelectCharacter.csv");
 	FNSCNLine = 0;
@@ -30,6 +36,8 @@ SetIcons::SetIcons(GameObject* parent)
 	}
 
 	int num = 0;
+	Unit* pUnit = GetParent()->GetParent()->FindGameObject<Unit>();
+	VECTOR u_pos = pUnit->Get3DPosition();
 	for (int y = 0; y < MAX_SELECT_CHARACTER; y++) {
 		std::string graphName;
 		graphName = csv_->GetString(FN2DLine, selectCharNum_[y]);
@@ -40,7 +48,7 @@ SetIcons::SetIcons(GameObject* parent)
 			CharacterIcon* pCIcon = Instantiate<CharacterIcon>(this);
 			pCIcon->Load(flPath);
 			SIZE_2D IconSize = pCIcon->GetIconSize();
-			VECTOR graphPos = { 0 + IconSize.x*(j),300 + IconSize.y * (y) ,0};
+			VECTOR graphPos = { u_pos.x + IconSize.x * (j),300 + IconSize.y * (y) ,0 };
 			pCIcon->SetInitialPosition(graphPos);
 			pCIcon->Set3DPosition(graphPos);
 			pCIcon->SetState(SET);
@@ -59,10 +67,6 @@ SetIcons::SetIcons(GameObject* parent)
 		TriggerSetUIFrames* pTSUIFs = Instantiate<TriggerSetUIFrames>(this);
 		pTSUIFSs_.push_back(pTSUIFs);
 	}
-}
-
-SetIcons::~SetIcons()
-{
 }
 
 void SetIcons::Update()

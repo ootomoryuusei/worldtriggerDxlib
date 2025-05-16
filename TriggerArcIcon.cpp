@@ -2,10 +2,20 @@
 #include"Mouse.h"
 #include"TileIcons.h"
 #include"UnitIcons.h"
+#include <algorithm>
+
+using std::clamp;
 
 TriggerArcIcon::TriggerArcIcon(GameObject* parent) : Icon(parent)
 {
 	step_ = SECONDE;
+
+	firstSet = false;
+	moveing = false;
+
+	totalTime = 10.0f;
+
+	elapsedTime = 0.0f;
 }
 
 TriggerArcIcon::~TriggerArcIcon()
@@ -37,6 +47,37 @@ void TriggerArcIcon::Update()
 		}
 		case Icon::THIRD:
 			
+			if (!firstSet) {
+				for (auto& itr : angle) {
+					dq_angle.push_back(itr);
+				}
+				firstSet = true;
+				moveing = true;
+			}
+			if (moveing) {
+				if (dq_angle.size() >= 2) {
+					auto it = dq_angle.begin();
+					auto startIndex = *it;
+					auto targetIndex = *(++it);
+
+					VECTOR start = {startIndex.x,startIndex.y,0};
+					VECTOR target = {targetIndex.x,targetIndex.y,0};
+					float Percent = elapsedTime / totalTime;
+					Percent = clamp(Percent, 0.0f, 1.0f);
+					startPercent = Lerp3D(start, target, Percent).x;
+					percent = Lerp3D(start, target, Percent).y;
+					if (Percent >= 1.0f) {
+						// ˆÚ“®Š®—¹ ¨ Ÿ‚Ì‹æŠÔ‚Ö
+						elapsedTime = 0.0f;
+						dq_angle.pop_front();
+					}
+				}
+
+				if (dq_angle.size() < 2) {
+					moveing = false;
+				}
+				elapsedTime += Time::DeltaTime();
+			}
 			break;
 		default:
 			break;

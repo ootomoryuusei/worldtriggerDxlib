@@ -201,6 +201,8 @@ public:
 
 	bool PointInQuad(XMFLOAT2 point, const array<XMFLOAT2, 4>& corners);
 
+	VECTOR Lerp3D(VECTOR& start, VECTOR& goal, float percent);
+
 	void SetState(int _state) { state_ = _state; }
 
 	VECTOR Get3DPosition() { return position; }

@@ -19,6 +19,7 @@ public:
 	const auto& GetpUnitIcons() const { return pUIcons_; }
 
 	void SetMoveMentSet(bool _moveMentSet) { moveMentSet = _moveMentSet; }
+	bool GetMoveMentSet() { return moveMentSet; }
 private:
 	vector<UnitIcon*> pUIcons_;
 	UnitIcon* pSelecting_ptr;

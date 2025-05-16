@@ -16,10 +16,10 @@ void TriggersArcIcon::Initialize()
 	pMainTriggerArcIcon->Load("Assets//Image//MainTriggerCircle.png");
 	TriggerArcIcon* pSubTriggerArcIcon = Instantiate<TriggerArcIcon>(this);
 	pSubTriggerArcIcon->Load("Assets//Image//SubTriggerCircle.png");
-	pTriggerArcIcon[0] = pMainTriggerArcIcon;
-	pTriggerArcIcon[1] = pSubTriggerArcIcon;
-	pTriggerArcIcon[0]->SetCreateNum(0);
-	pTriggerArcIcon[1]->SetCreateNum(1);
+	pTriggerArcIcon[MAIN] = pMainTriggerArcIcon;
+	pTriggerArcIcon[SUB] = pSubTriggerArcIcon;
+	pTriggerArcIcon[MAIN]->SetCreateNum(0);
+	pTriggerArcIcon[SUB]->SetCreateNum(1);
 	canVisible_ = true;
 }
 

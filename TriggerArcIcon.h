@@ -1,8 +1,10 @@
 #pragma once
 #include "Icon.h"
 #include<array>
+#include<deque>
 
 using std::array;
+using std::deque;
 
 class TriggerArcIcon :
     public Icon
@@ -21,6 +23,7 @@ public:
 	const float GetStartPercent() { return startPercent; }
 
 	void SetAngle(XMFLOAT2 _angle) { angle.push_back(_angle); }
+
 private:
 	float percent;
 	float startPercent;
@@ -29,6 +32,14 @@ private:
 	array<XMFLOAT2, 4> boxCorners{};
 
 	vector<XMFLOAT2> angle;
+	deque<XMFLOAT2> dq_angle;
+
+	bool firstSet;
+	bool moveing;
+
+	float totalTime;
+	float elapsedTime;
+
 	void calculateArc();
 };
 

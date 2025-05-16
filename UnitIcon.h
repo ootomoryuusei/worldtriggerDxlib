@@ -41,8 +41,6 @@ private:
 	float totalTime;
 	float elapsedTime;
 
-	VECTOR Lerp3D(VECTOR & start, VECTOR & goal, float percent);
-
 	/*Mouse* pMouse_;
 	TileIcons* pTileIcons_;
 	MoveSetIcons* pMoveSetIcons_;

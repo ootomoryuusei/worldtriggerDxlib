@@ -67,7 +67,7 @@ void CharacterIcon::Update()
 	}
 	case SET:
 	{
-		Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
+		Mouse* pMouse = GetParent()->GetParent()->GetParent()->FindGameObject<Mouse>();
 		XMFLOAT2 mousePos = pMouse->GetMousePos();
 		if (IsInMousePoint(mousePos)) {
 			if (pMouse->IsPressed(Mouse::LEFT)) {

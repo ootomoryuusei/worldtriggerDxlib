@@ -1,9 +1,9 @@
 #pragma once
-#include "Engine/GameObject.h"
+#include "Icon.h"
 #include"TriggersArcIcon.h"
 
 class TriggersArcIcons :
-    public GameObject
+    public Icon
 {
 public:
 	TriggersArcIcons(GameObject* parent);

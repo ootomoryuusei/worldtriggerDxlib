@@ -17,8 +17,14 @@ public:
 	/*void Draw() override;*/
 
 	const auto& GetpTriggerArcIcon() const { return pTriggerArcIcon; }
+
+	enum MAIN_SUB {
+		MAIN = 0,
+		SUB,
+		MAX
+	};
 private:
 	
-	array<TriggerArcIcon*,2> pTriggerArcIcon;
+	array<TriggerArcIcon*,MAX> pTriggerArcIcon;
 };
 

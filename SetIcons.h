@@ -20,6 +20,7 @@ class SetIcons :
 public:
     SetIcons(GameObject* parent);
     ~SetIcons();
+    void Initialize() override;
     void Update() override;
     void Draw() override;
 

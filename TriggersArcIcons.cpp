@@ -1,7 +1,7 @@
 #include "TriggersArcIcons.h"
 #include"UnitIcons.h"
 
-TriggersArcIcons::TriggersArcIcons(GameObject* parent) : GameObject(parent)
+TriggersArcIcons::TriggersArcIcons(GameObject* parent) : Icon(parent)
 {
 }
 
@@ -20,4 +20,11 @@ void TriggersArcIcons::Initialize()
 
 void TriggersArcIcons::Update()
 {
+	UnitIcons* pUnitIcon = /*GetParent()->*/GetParent()->FindGameObject<UnitIcons>();
+	if (pUnitIcon->GetMoveMentSet()) {
+		for (auto& itr : pTriggersArcIcon_) {
+			itr->GetpTriggerArcIcon()[0]->SetStep(THIRD);
+			itr->GetpTriggerArcIcon()[1]->SetStep(THIRD);
+		}
+	}
 }

@@ -7,10 +7,9 @@
 #include"MoveTypesIcons.h"
 #include "Mouse.h"
 
-#include<cmath>
+
 #include<algorithm>
 
-using std::lerp;
 using std::clamp;
 
 UnitIcon::UnitIcon(GameObject* parent) : Icon(parent)
@@ -178,12 +177,4 @@ void UnitIcon::Draw()
 #if 0
 		DrawBoxAA(position.x, position.y, position.x + graphSizeF_.x , position.y + graphSizeF_.y, GetColor(255, 0, 0), FALSE);
 #endif
-}
-
-VECTOR UnitIcon::Lerp3D(VECTOR& start, VECTOR& goal, float percent)
-{
-	return VECTOR{lerp(start.x,goal.x,percent),
-		          lerp(start.y,goal.y,percent),
-		          lerp(start.z,goal.z,percent)
-	             };
 }

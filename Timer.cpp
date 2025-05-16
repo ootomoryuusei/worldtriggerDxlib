@@ -32,6 +32,7 @@ void Timer::Update()
 	Mouse* pMouse = GetParent()->FindGameObject<Mouse>();
 	XMFLOAT2 m_pos = pMouse->GetMousePos();
 	UnitIcons* pUnitIcons = GetParent()->FindGameObject<UnitIcons>();
+
 	if (PointInBox(m_pos, { position.x, position.y }, boxSize)) {
 		if (pMouse->IsDoubleClicked(Mouse::LEFT)) {
 			pUnitIcons->SetMoveMentSet(true);
