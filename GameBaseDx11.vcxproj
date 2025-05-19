@@ -138,6 +138,7 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CharacterIcon.cpp" />
     <ClCompile Include="CharacterIcons.cpp" />
+    <ClCompile Include="Characters.cpp" />
     <ClCompile Include="CharacterSelectUI.cpp" />
     <ClCompile Include="CharacterSetUIFrame.cpp" />
     <ClCompile Include="CharacterSetUIFrames.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterIcon.h" />
     <ClInclude Include="CharacterIcons.h" />
+    <ClInclude Include="Characters.h" />
     <ClInclude Include="CharacterSelectUI.h" />
     <ClInclude Include="CharacterSetUIFrame.h" />
     <ClInclude Include="CharacterSetUIFrames.h" />

@@ -20,7 +20,7 @@ TriggerIcon::~TriggerIcon()
 void TriggerIcon::Update()
 {
 	if (canVisible_) {
-		Mouse* pMouse = /*GetParent()->*/GetParent()->GetParent()->FindGameObject<Mouse>();
+		Mouse* pMouse = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<Mouse>();
 		XMFLOAT2 mousePos = pMouse->GetMousePos();
 		TriggerSetUIFrames* pTSUIFs = GetParent()->GetParent()->FindGameObject<TriggerSetUIFrames>();
 		if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x, graphSizeF_.y })) {

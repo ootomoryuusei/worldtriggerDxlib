@@ -37,7 +37,10 @@ void SetIcons::Initialize()
 
 	int num = 0;
 	Unit* pUnit = GetParent()->GetParent()->FindGameObject<Unit>();
-	VECTOR u_pos = pUnit->Get3DPosition();
+	XMFLOAT2 u_pos = pUnit->GetGraphPos();
+	SIZE_F_2D u_size = pUnit->GetGraphSizeF_2D();
+	
+	
 	for (int y = 0; y < MAX_SELECT_CHARACTER; y++) {
 		std::string graphName;
 		graphName = csv_->GetString(FN2DLine, selectCharNum_[y]);
@@ -48,7 +51,8 @@ void SetIcons::Initialize()
 			CharacterIcon* pCIcon = Instantiate<CharacterIcon>(this);
 			pCIcon->Load(flPath);
 			SIZE_2D IconSize = pCIcon->GetIconSize();
-			VECTOR graphPos = { u_pos.x + IconSize.x * (j),300 + IconSize.y * (y) ,0 };
+			XMFLOAT2 space = { (u_size.x / MAX_SELECT_CHARACTER - IconSize.x )/ 2, 0 };
+			VECTOR graphPos = { u_pos.x + space.x + IconSize.x * (y)  ,u_pos.y + IconSize.y * (j) ,0 };
 			pCIcon->SetInitialPosition(graphPos);
 			pCIcon->Set3DPosition(graphPos);
 			pCIcon->SetState(SET);

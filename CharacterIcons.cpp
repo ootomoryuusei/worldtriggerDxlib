@@ -3,6 +3,16 @@
 
 CharacterIcons::CharacterIcons(GameObject* parent) : Icon(parent)
 {
+	
+}
+
+CharacterIcons::~CharacterIcons()
+{
+}
+
+void CharacterIcons::Initialize()
+{
+	
 	csv_ = new CsvReader();
 	csv_->Load("Assets//Character//CharacterStatus.csv");
 	FN2DLine = 0;
@@ -26,10 +36,6 @@ CharacterIcons::CharacterIcons(GameObject* parent) : Icon(parent)
 		pCIcon->SetNum(y);
 		pCIcons_.push_back(pCIcon);
 	}
-}
-
-CharacterIcons::~CharacterIcons()
-{
 }
 
 void CharacterIcons::Update()

@@ -10,6 +10,7 @@ class CharacterIcons :
 public:
     CharacterIcons(GameObject* parent);
     ~CharacterIcons();
+    void Initialize() override;
     void Update() override;
     void Draw() override;
 
