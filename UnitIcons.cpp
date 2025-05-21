@@ -2,7 +2,7 @@
 #include"TileIcons.h"
 #include"Mouse.h"
 
-UnitIcons::UnitIcons(GameObject* parent) : Icon(parent),selectCharNum_(MAX_SELECT_CHARACTER,-1)
+UnitIcons::UnitIcons(GameObject* parent) : Icon(parent),selectCharNum_(MAX_SELECT_CHARACTER*2,-1)
 {
 
 }
@@ -18,66 +18,61 @@ void UnitIcons::Initialize()
 
 	csv_ = new CsvReader();
 	csv_->Load("Assets//Character//SelectCharacter.csv");
-	FNSCNLine = 0;
-	for (int x = 0; x < csv_->GetWidth(0); x++) {
-		if (csv_->GetString(x, 0) == "SelectCharacterNum") {
-			FNSCNLine = x;
-		}
+
+	for (int y = 0; y < MAX_SELECT_CHARACTER * 2; y++) {
+		selectCharNum_[y] = (csv_->GetInt(0, y + 1));
 	}
 
-	for (int y = 0; y < MAX_SELECT_CHARACTER; y++) {
-		selectCharNum_[y] = (csv_->GetInt(FNSCNLine, y + 1));
-	}
-
-	csv_->Load("Assets//Character//CharacterStatus.csv");
-
-	FN2DLine = 0;
-	for (int x = 0; x < csv_->GetWidth(0); x++) {
-		if (csv_->GetString(x, 0) == "FileName2D") {
-			FN2DLine = x;
-		}
-	}
+	
 
 	int num = 0;
-	for (int y = 0; y < MAX_SELECT_CHARACTER; y++) {
+	for (int y = 0; y < selectCharNum_.size(); y++) {
+		csv_->Load("Assets//Character//CharacterStatus.csv");
 		std::string graphName;
-		graphName = csv_->GetString(FN2DLine, selectCharNum_[y]);
+		graphName = csv_->GetString(1, selectCharNum_[y]);
 		std::string flPath;
 		DLC = "Assets//Image//CharacterIcon//CIcon//";
 		flPath = DLC + graphName;
 		VECTOR pos;
 		int tilenum;
-		for (int j = 0; j < 2; j++) {
-			bool isSeted = false;
-			UnitIcon* pUIcon = Instantiate<UnitIcon>(this);
-			pUIcon->Load(flPath);
-			while (!isSeted) {
-				int randX = GetRand(MAX_MAP_WIDTH - 1);
-				int randY = GetRand(0);
-				tilenum = randX + 1 * randY;
-				pos = pTIcons->GetpTIcon()[tilenum]->Get3DPosition();
+		bool isSeted = false;
+		UnitIcon* pUIcon = Instantiate<UnitIcon>(this);
+		pUIcon->Load(flPath);
+		while (!isSeted) {
+			int randX = GetRand(MAX_MAP_WIDTH - 1);
+			int randY = GetRand(0);
+			tilenum = randX + 1 * randY;
+			pos = pTIcons->GetpTIcon()[tilenum]->Get3DPosition();
 
-				bool isOk = false;
-				for (auto& itr : pUIcons_) {
-					if (itr->Get3DPosition().x == pos.x && itr->Get3DPosition().y == pos.y && itr->Get3DPosition().z == pos.z) {
-						isOk = true;
-						break;
-					}
-				}
-				if (!isOk) {
-					isSeted = true;
+			bool isOk = false;
+			for (auto& itr : pUIcons_) {
+				if (itr->Get3DPosition().x == pos.x && itr->Get3DPosition().y == pos.y && itr->Get3DPosition().z == pos.z) {
+					isOk = true;
+					break;
 				}
 			}
-			string IconName = graphName;
-			pUIcon->SetIconName(IconName);
-			pUIcon->Set3DPosition(pos);
-			pUIcon->SetCreateNum(num);
-			pUIcon->SetMoveMent(tilenum);
-			pUIcons_.push_back(pUIcon);
-			num++;
+			if (!isOk) {
+				isSeted = true;
+			}
 		}
+		string IconName = graphName;
+		pUIcon->SetIconName(IconName);
+		pUIcon->Set3DPosition(pos);
+		pUIcon->SetCreateNum(num);
+		pUIcon->SetMoveMent(tilenum);
+		MYTRIGGER myTrigger;
+		for (int x = 0;x < 4;x++) {
+			string TriggerName = csv_->GetString(10 + x, selectCharNum_[y]);
+			myTrigger.Main[x].trigger = TriggerName;
+		}
+		for (int x = 0;x < 4;x++) {
+			string TriggerName = csv_->GetString(14 + x, selectCharNum_[y]);
+			myTrigger.Sub[x].trigger = TriggerName;
+		}
+		pUIcon->SetMyTrigger(myTrigger);
+		pUIcons_.push_back(pUIcon);
+		num++;
 	}
-
 	canVisible_ = true;
 	moveMentSet = false;
 }

@@ -22,6 +22,8 @@ public:
 
 	const auto& GetMoveMent() const{ return moveMent; }
 	void SetMoveMent(int _moveMent) { moveMent.push_back(_moveMent); }
+
+	void SetMyTrigger(MYTRIGGER _myTrigger) { myTrigger = _myTrigger; }
 private:
 
 	struct UNIT_DATA {
@@ -40,6 +42,8 @@ private:
 
 	float totalTime;
 	float elapsedTime;
+
+	MYTRIGGER myTrigger;
 
 	/*Mouse* pMouse_;
 	TileIcons* pTileIcons_;

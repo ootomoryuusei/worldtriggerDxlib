@@ -20,12 +20,18 @@
 PlayScene::PlayScene(GameObject* parent)
 {
 	Instantiate<BackGround>(this);
+
+	Instantiate<Timer>(this);
+
 	Instantiate<Map>(this);
+
+	Instantiate<TileIcons>(this);
+
 	Instantiate<rader>(this);
 	Instantiate<Unit>(this);
-	Instantiate<Timer>(this);
 	
-	Instantiate<TileIcons>(this);
+	
+	
 
 	Instantiate<TriggersArcIcons>(this);
 

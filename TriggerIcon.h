@@ -9,8 +9,6 @@ public:
     void Update() override;
     void Draw() override;
 
-    void Load(const std::string& _fileName);
-
     SIZE_2D GetIconSize() { return graphSize_; }
     void SetInitialPosition(VECTOR _initialPosition) { initialPosition_ = _initialPosition; }
     int GetSettingNum() { return settingNum_; }

@@ -20,11 +20,16 @@ public:
 
     auto GetInFrame() { return inFrame_; }
     bool GetCatchIcon() { return false; }
+
+    void SetMyTrigger(MYTRIGGER _myTrigger) { myTrigger = _myTrigger; }
+    MYTRIGGER GetMyTrigger() { return myTrigger; }
 private:
     VECTOR initialPosition_;
     bool alreadySet_[MAX_SELECT_CHARACTER];
     int settingNum_;
     vector<bool> inFrame_;
     bool isCatchIcon_;
+
+    MYTRIGGER myTrigger;
 };
 

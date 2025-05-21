@@ -2,7 +2,7 @@
 #include "Icon.h"
 #include<vector>
 #include"TriggerIcon.h"
-
+#include"CharacterIcon.h"
 
 class CsvReader;
 
@@ -19,15 +19,21 @@ class TriggerIcons :
 public:
     TriggerIcons(GameObject* parent);
     ~TriggerIcons();
+    void Initialize() override;
     void Update() override;
     void Draw() override;
 
     auto GetpTIcons() { return pTIcons_; }
+
+    void DefaultSetTriggers(CharacterIcon* pCharacterIcon);
+
+    void SetpCharacterIcon_(CharacterIcon* _pChracterIcon) { pCharacterIcon_ = _pChracterIcon; }
 private:
     CsvReader* csv_;
-    int FN2DLine;
     vector<TriggerIcon*> pMainTIcons_;
     vector<TriggerIcon*> pSubTIcons_;
     vector<TriggerIcon*> pTIcons_;
+    CharacterIcon* pCharacterIcon_;
+    bool firstSet;
 };
 

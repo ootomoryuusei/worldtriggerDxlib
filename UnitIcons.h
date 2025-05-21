@@ -25,8 +25,6 @@ private:
 	UnitIcon* pSelecting_ptr;
 	vector<int> selectCharNum_;
 	CsvReader* csv_;
-	int FNSCNLine;
-	int FN2DLine;
 	string DLC;
 
 	bool moveMentSet;

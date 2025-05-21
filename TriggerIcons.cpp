@@ -5,53 +5,25 @@
 
 TriggerIcons::TriggerIcons(GameObject* parent) : Icon(parent)
 {
-	csv_ = new CsvReader();
-	csv_->Load("Assets//Weapon//DefaultWeaponStatus.csv");
-	FN2DLine = 0;
-	std::string DLC = "Assets//Image//TriggerIcon//";
-	for (int x = 0; x < csv_->GetWidth(0); x++) {
-		if (csv_->GetString(x, 0) == "FileName2D") {
-			FN2DLine = x;
-		}
-	}
-	for (int y = 1; y < csv_->GetHeight(); y++) {
-		std::string graphName;
-		graphName = csv_->GetString(FN2DLine, y);
-		std::string flPath;
-		flPath = DLC + graphName;
-		TriggerIcon* pTIcon = Instantiate<TriggerIcon>(this);
-		pTIcon->Load(flPath);
-		SIZE_2D IconSize = pTIcon->GetIconSize();
-		VECTOR graphPos = { 0,IconSize.y * (y - 1) ,0 };
-		pTIcon->SetInitialPosition(graphPos);
-		pTIcon->Set3DPosition(graphPos);
-		pMainTIcons_.push_back(pTIcon);
-		pTIcons_.push_back(pTIcon);
-	}
-
-	for (int y = 1; y < csv_->GetHeight(); y++) {
-		std::string graphName;
-		graphName = csv_->GetString(FN2DLine, y);
-		std::string flPath;
-		flPath = DLC + graphName;
-		TriggerIcon* pTIcon = Instantiate<TriggerIcon>(this);
-		pTIcon->Load(flPath);
-		SIZE_2D IconSize = pTIcon->GetIconSize();
-		VECTOR graphPos = { 0,IconSize.y * (y - 1) ,0 };
-		pTIcon->SetInitialPosition(graphPos);
-		pTIcon->Set3DPosition(graphPos);
-		pSubTIcons_.push_back(pTIcon);
-		pTIcons_.push_back(pTIcon);
-	}
-	canVisible_ = false;
 }
 
 TriggerIcons::~TriggerIcons()
 {
 }
 
+void TriggerIcons::Initialize()
+{
+	canVisible_ = false;
+	firstSet = false;
+}
+
 void TriggerIcons::Update()
 {
+	/*if (!firstSet) {
+		DefaultSetTriggers(pCharacterIcon_);
+		firstSet = true;
+	}*/
+
 	if (canVisible_) {
 		for (auto itr : pMainTIcons_) { //ボタンをクリックしたらトリガーセットできるようにフラグを立てる
 			itr->SetCanVisible(true);
@@ -79,7 +51,53 @@ void TriggerIcons::Update()
 
 void TriggerIcons::Draw()
 {
-	/*for (auto itr : pTIcons_) {
-		itr->SetCanVisible(true);
-	}*/
+
+}
+
+void TriggerIcons::DefaultSetTriggers(CharacterIcon* pCharacterIcon)
+{
+	MYTRIGGER myTrigger = pCharacterIcon->GetMyTrigger();
+	csv_ = new CsvReader();
+	csv_->Load("Assets//Weapon//DefaultWeaponStatus.csv");
+	std::string DLC = "Assets//Image//TriggerIcon//";
+
+	for (int y = 1;y < csv_->GetHeight();y++) {
+		for (int i = 0;i < 4;i++) {
+			if (csv_->GetString(0, y) == myTrigger.Main[i].trigger) {
+				std::string graphName;
+				graphName = csv_->GetString(1, y);
+				std::string flPath;
+				flPath = DLC + graphName;
+				TriggerIcon* pTIcon = Instantiate<TriggerIcon>(this);
+				pTIcon->Load(flPath);
+				SIZE_2D IconSize = pTIcon->GetIconSize();
+				VECTOR graphPos = { 0,IconSize.y * (y - 1) ,0 };
+				pTIcon->SetInitialPosition(graphPos);
+				pTIcon->Set3DPosition(graphPos);
+				pMainTIcons_.push_back(pTIcon);
+				pTIcons_.push_back(pTIcon);
+			}
+		}
+		
+	}
+	
+	for (int y = 1;y < csv_->GetHeight();y++) {
+		for (int i = 0;i < 4;i++) {
+			if (csv_->GetString(0, y) == myTrigger.Sub[i].trigger) {
+				std::string graphName;
+				graphName = csv_->GetString(1, y);
+				std::string flPath;
+				flPath = DLC + graphName;
+				TriggerIcon* pTIcon = Instantiate<TriggerIcon>(this);
+				pTIcon->Load(flPath);
+				SIZE_2D IconSize = pTIcon->GetIconSize();
+				VECTOR graphPos = { 0,IconSize.y * (y - 1) ,0 };
+				pTIcon->SetInitialPosition(graphPos);
+				pTIcon->Set3DPosition(graphPos);
+				pSubTIcons_.push_back(pTIcon);
+				pTIcons_.push_back(pTIcon);
+			}
+		}
+
+	}
 }

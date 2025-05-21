@@ -18,6 +18,16 @@ TriggerSetUIFrames::~TriggerSetUIFrames()
 
 void TriggerSetUIFrames::Update()
 {
+	if (canVisible_) {
+		for (auto& itr : pTSUIFrames_) {
+			itr->SetCanVisible(true);
+		}
+	}
+	else {
+		for (auto& itr : pTSUIFrames_) {
+			itr->SetCanVisible(true);
+		}
+	}
 }
 
 void TriggerSetUIFrames::Draw()

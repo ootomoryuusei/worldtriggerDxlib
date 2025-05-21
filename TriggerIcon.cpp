@@ -68,13 +68,3 @@ void TriggerIcon::Draw()
 		DrawGraph(position.x, position.y, hModel, TRUE);
 	}
 }
-
-void TriggerIcon::Load(const std::string& _fileName)
-{
-	fileName_ = _fileName;
-	hModel = LoadGraph(fileName_.c_str());
-	assert(hModel >= 0);
-	GetGraphSize(hModel, &graphSize_.x, &graphSize_.y);
-	graphSize_.halfX = graphSize_.x / 2.0f;
-	graphSize_.halfY = graphSize_.y / 2.0f;
-}

@@ -2,6 +2,8 @@
 #include"Player1.h"
 #include"ImGui/imgui.h"
 
+#include"CharacterIcons.h"
+
 TriggerSetUI::TriggerSetUI(GameObject* parent) : Icon(parent)
 {
 	Load("Assets//Image//TriggerSetUI.png");
@@ -13,8 +15,14 @@ TriggerSetUI::~TriggerSetUI()
 {
 }
 
+void TriggerSetUI::Initialize()
+{
+}
+
 void TriggerSetUI::Update()
 {
+	CharacterIcons* pC_Icons = GetParent()->GetParent()->FindGameObject<CharacterIcons>();
+	for(auto& itr : pC_Icons->GetpCIcons())
 }
 
 void TriggerSetUI::Draw()
