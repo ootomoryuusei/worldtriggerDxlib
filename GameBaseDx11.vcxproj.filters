@@ -256,9 +256,6 @@
     <ClCompile Include="TriggersArcIcons.cpp">
       <Filter>Icon\MiniMap</Filter>
     </ClCompile>
-    <ClCompile Include="Characters.cpp">
-      <Filter>Character</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -477,9 +474,6 @@
     </ClInclude>
     <ClInclude Include="TriggersArcIcons.h">
       <Filter>Icon\MiniMap</Filter>
-    </ClInclude>
-    <ClInclude Include="Characters.h">
-      <Filter>Character</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
