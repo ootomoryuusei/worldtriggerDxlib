@@ -10,7 +10,7 @@ TriggerIcon::TriggerIcon(GameObject* parent) : Icon(parent)
 	initialPosition_ = { 0,0,0 };
 	alreadySet_ = false;
 	settingNum_ = 0;
-	canVisible_ = false;
+	canVisible_ = true;
 }
 
 TriggerIcon::~TriggerIcon()
@@ -20,9 +20,9 @@ TriggerIcon::~TriggerIcon()
 void TriggerIcon::Update()
 {
 	if (canVisible_) {
-		Mouse* pMouse = /*GetParent()->*/GetParent()->GetParent()->FindGameObject<Mouse>();
+		Mouse* pMouse = GetParent()->GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<Mouse>();
 		XMFLOAT2 mousePos = pMouse->GetMousePos();
-		TriggerSetUIFrames* pTSUIFs = GetParent()->GetParent()->FindGameObject<TriggerSetUIFrames>();
+		/*TriggerSetUIFrames* pTSUIFs = FindGameObject<TriggerSetUIFrames>();*/
 		if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x, graphSizeF_.y })) {
 			if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 
@@ -30,7 +30,7 @@ void TriggerIcon::Update()
 				position = { position.x + mouseVariation.x, position.y + mouseVariation.y, 0.0f };
 
 			}
-			else {
+			/*else {
 				int num = 0;
 				for (auto itr : pTSUIFs->GetpTSUIFrames()) {
 					XMFLOAT2 leftUp = { itr->Get3DPosition().x,itr->Get3DPosition().y };
@@ -46,7 +46,7 @@ void TriggerIcon::Update()
 					}
 					num++;
 				}
-			}
+			}*/
 			prevMousePos_ = mousePos;
 		}
 		//if (PointInBox(mousePos, { position.x,position.y }, { (float)graphSize_.x, (float)graphSize_.y })) {

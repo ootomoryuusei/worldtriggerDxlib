@@ -13,31 +13,31 @@ TriggerIcons::~TriggerIcons()
 
 void TriggerIcons::Initialize()
 {
-	canVisible_ = false;
+	canVisible_ = true;
 	firstSet = false;
 }
 
 void TriggerIcons::Update()
 {
-	/*if (!firstSet) {
+	if (!firstSet) {
 		DefaultSetTriggers(pCharacterIcon_);
 		firstSet = true;
-	}*/
+	}
 
 	if (canVisible_) {
-		for (auto itr : pMainTIcons_) { //ボタンをクリックしたらトリガーセットできるようにフラグを立てる
-			itr->SetCanVisible(true);
-		}
-		size_t index = 0;
-		for (auto itr : pMainTIcons_) {
-			if (itr->GetAlreadySet()) {
-				pSubTIcons_[index]->SetCanVisible(true);
-			}
-			else {
-				pSubTIcons_[index]->SetCanVisible(false);
-			}
-			index++;
-		}
+		//for (auto itr : pMainTIcons_) { //ボタンをクリックしたらトリガーセットできるようにフラグを立てる
+		//	itr->SetCanVisible(true);
+		//}
+		//size_t index = 0;
+		//for (auto itr : pMainTIcons_) {
+		//	if (itr->GetAlreadySet()) {
+		//		pSubTIcons_[index]->SetCanVisible(true);
+		//	}
+		//	else {
+		//		pSubTIcons_[index]->SetCanVisible(false);
+		//	}
+		//	index++;
+		//}
 	}
 	else {
 		for (auto itr : pMainTIcons_) {
@@ -70,8 +70,8 @@ void TriggerIcons::DefaultSetTriggers(CharacterIcon* pCharacterIcon)
 				flPath = DLC + graphName;
 				TriggerIcon* pTIcon = Instantiate<TriggerIcon>(this);
 				pTIcon->Load(flPath);
-				SIZE_2D IconSize = pTIcon->GetIconSize();
-				VECTOR graphPos = { 0,IconSize.y * (y - 1) ,0 };
+				SIZE_F_2D IconSize = pTIcon->GetGraphSizeF_2D();
+				VECTOR graphPos = { 0,IconSize.y * i ,0 };
 				pTIcon->SetInitialPosition(graphPos);
 				pTIcon->Set3DPosition(graphPos);
 				pMainTIcons_.push_back(pTIcon);
@@ -90,8 +90,8 @@ void TriggerIcons::DefaultSetTriggers(CharacterIcon* pCharacterIcon)
 				flPath = DLC + graphName;
 				TriggerIcon* pTIcon = Instantiate<TriggerIcon>(this);
 				pTIcon->Load(flPath);
-				SIZE_2D IconSize = pTIcon->GetIconSize();
-				VECTOR graphPos = { 0,IconSize.y * (y - 1) ,0 };
+				SIZE_F_2D IconSize = pTIcon->GetGraphSizeF_2D();
+				VECTOR graphPos = { IconSize.x,IconSize.y * i ,0 };
 				pTIcon->SetInitialPosition(graphPos);
 				pTIcon->Set3DPosition(graphPos);
 				pSubTIcons_.push_back(pTIcon);

@@ -2,6 +2,9 @@
 #include"Icon.h"
 #include<vector>
 
+class TriggerSetUI;
+class TriggerIcons;
+
 using std::vector;
 
 class CharacterIcon
@@ -29,6 +32,11 @@ private:
     int settingNum_;
     vector<bool> inFrame_;
     bool isCatchIcon_;
+
+    bool createUI;
+
+    TriggerSetUI* pT_SetUI_;
+    TriggerIcons* pT_Icons_;
 
     MYTRIGGER myTrigger;
 };

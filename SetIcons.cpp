@@ -58,19 +58,29 @@ void SetIcons::Initialize()
 		pCIcon->Set3DPosition(graphPos);
 		pCIcon->SetState(SET);
 		pCIcon->SetCreateNum(num);
+		MYTRIGGER myTrigger;
+		for (int x = 0;x < 4;x++) {
+			string TriggerName = csv_->GetString(10 + x, selectCharNum_[y]);
+			myTrigger.Main[x].trigger = TriggerName;
+		}
+		for (int x = 0;x < 4;x++) {
+			string TriggerName = csv_->GetString(14 + x, selectCharNum_[y]);
+			myTrigger.Sub[x].trigger = TriggerName;
+		}
+		pCIcon->SetMyTrigger(myTrigger);
 		pSelectCIcons_.push_back(pCIcon);
 		num++;
 	}
-	Instantiate<TriggerSetUIs>(this);
-	for (int i = 0; i < MAX_SELECT_CHARACTER * 2; i++) { //キャラクター分のトリガーアイコンを実体化
-		TriggerIcons* pTIcons = Instantiate<TriggerIcons>(this);
-		pTIcons_.push_back(pTIcons);
-	}
+	//Instantiate<TriggerSetUIs>(this);
+	//for (int i = 0; i < MAX_SELECT_CHARACTER * 2; i++) { //キャラクター分のトリガーアイコンを実体化
+	//	TriggerIcons* pTIcons = Instantiate<TriggerIcons>(this);
+	//	pTIcons_.push_back(pTIcons);
+	//}
 
-	for (int i = 0; i < MAX_SELECT_CHARACTER * 2; i++) {
-		TriggerSetUIFrames* pTSUIFs = Instantiate<TriggerSetUIFrames>(this);
-		pTSUIFSs_.push_back(pTSUIFs);
-	}
+	//for (int i = 0; i < MAX_SELECT_CHARACTER * 2; i++) {
+	//	TriggerSetUIFrames* pTSUIFs = Instantiate<TriggerSetUIFrames>(this);
+	//	pTSUIFSs_.push_back(pTSUIFs);
+	//}
 }
 
 void SetIcons::Update()
