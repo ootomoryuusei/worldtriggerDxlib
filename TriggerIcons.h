@@ -27,6 +27,8 @@ public:
 
     void DefaultSetTriggers(CharacterIcon* pCharacterIcon);
 
+    void SetTriggers(CharacterIcon* pCharacterIcon);
+
     void SetpCharacterIcon_(CharacterIcon* _pChracterIcon) { pCharacterIcon_ = _pChracterIcon; }
 private:
     CsvReader* csv_;

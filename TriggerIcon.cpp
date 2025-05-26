@@ -1,8 +1,7 @@
 #include "TriggerIcon.h"
 #include"Player1.h"
-//#include"TriggerIcons.h"
-#include"TriggerSetUIFrames.h"
 #include "Mouse.h"
+#include"TriggerSetUI.h"
 
 TriggerIcon::TriggerIcon(GameObject* parent) : Icon(parent)
 {
@@ -22,7 +21,8 @@ void TriggerIcon::Update()
 	if (canVisible_) {
 		Mouse* pMouse = GetParent()->GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<Mouse>();
 		XMFLOAT2 mousePos = pMouse->GetMousePos();
-		/*TriggerSetUIFrames* pTSUIFs = FindGameObject<TriggerSetUIFrames>();*/
+		TriggerSetUI* pUI = GetParent()->GetParent()->FindGameObject<TriggerSetUI>();
+
 		if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x, graphSizeF_.y })) {
 			if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 
@@ -30,31 +30,19 @@ void TriggerIcon::Update()
 				position = { position.x + mouseVariation.x, position.y + mouseVariation.y, 0.0f };
 
 			}
-			/*else {
-				int num = 0;
-				for (auto itr : pTSUIFs->GetpTSUIFrames()) {
+			else {
+				for (auto& itr : pUI->GetpFrames()->GetpTSUIFrames()) {
 					XMFLOAT2 leftUp = { itr->Get3DPosition().x,itr->Get3DPosition().y };
-					XMFLOAT2 graphSize = { itr->GetGraphSizeF_2D().x,itr->GetGraphSizeF_2D().y };
-					if (PointInBox({ position.x,position.y }, leftUp, graphSize)) {
+					XMFLOAT2 distance = { itr->GetGraphSizeF_2D().x,itr->GetGraphSizeF_2D().y };
+					XMFLOAT2 center = { position.x + graphSizeF_.halfX ,position.y + graphSizeF_.halfY };
+					if (PointInBox(center, leftUp, distance)) {
 						position = { itr->Get3DPosition() };
-						settingNum_ = num;
-						alreadySet_ = true;
 						break;
 					}
-					else {
-						alreadySet_ = false;
-					}
-					num++;
 				}
-			}*/
+			}
 			prevMousePos_ = mousePos;
 		}
-		//if (PointInBox(mousePos, { position.x,position.y }, { (float)graphSize_.x, (float)graphSize_.y })) {
-		//	if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-		//		position = { mousePos.x - graphSize_.halfX,mousePos.y - graphSize_.halfY ,0.0f };
-		//	}
-		//	
-		//}
 	}
 	
 	/*if (position.x != initialPosition_.x && position.x != initialPosition_.y) {

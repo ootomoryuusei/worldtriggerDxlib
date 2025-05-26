@@ -4,7 +4,7 @@
 #include"TriggerSetUI.h"
 #include"TriggerIcons.h"
 
-CharacterIcon::CharacterIcon(GameObject* parent) : Icon(parent),inFrame_(MAX_SELECT_CHARACTER,false)
+CharacterIcon::CharacterIcon(GameObject* parent) : Icon(parent),inFrame_(MAX_SELECT_CHARACTER,false),pT_Icons_(nullptr)
 {
 	position = { 0,0,0 };
 	initialPosition_ = { 0,0,0 };
@@ -71,7 +71,7 @@ void CharacterIcon::Update()
 		XMFLOAT2 mousePos = pMouse->GetMousePos();
 		if (IsInMousePoint(mousePos)) { 
 			if (pMouse->IsDoubleClicked(Mouse::LEFT)) { //範囲内をダブルクリックしたらセット用UI生成
-				if (!createUI) { 
+				if (!createUI && pT_Icons_ == nullptr) { 
 					pT_SetUI_ = Instantiate<TriggerSetUI>(this);
 					pT_Icons_ = Instantiate<TriggerIcons>(this);
 					pT_Icons_->SetpCharacterIcon_(this);

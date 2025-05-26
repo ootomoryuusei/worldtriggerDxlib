@@ -18,17 +18,12 @@ TriggerSetUI::~TriggerSetUI()
 
 void TriggerSetUI::Initialize()
 {
-	Instantiate<TriggerSetUIFrames>(this);
+	p_frames_ = Instantiate<TriggerSetUIFrames>(this);
 }
 
 void TriggerSetUI::Update()
 {
-	/*CharacterIcons* pC_Icons = GetParent()->GetParent()->FindGameObject<CharacterIcons>();
-	for (auto& itr : pC_Icons->GetpCIcons()) {
-		if (itr->GetSelecting()) {
-			itr->GetMyTrigger();
-		}
-	}*/
+
 }
 
 void TriggerSetUI::Draw()
