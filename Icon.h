@@ -18,6 +18,7 @@ protected:
 
     SIZE_F_2D graphSizeF_; //アイコンの画像サイズ(float)
     SIZE_2D graphSize_; //アイコンの画像サイズ
+    XMFLOAT2 graphPos_; //アイコンの位置
     string fileName_; //ファイル名
     string iconName_; //iconの名前
     bool canVisible_; //iconを表示するかしないか
@@ -71,5 +72,7 @@ public:
 
     void SetStep(STEP _step) { step_ = _step; }
     int GetStep() { return step_; }
+
+    XMFLOAT2 GetGraphPos() { return graphPos_; }
 private:
 };

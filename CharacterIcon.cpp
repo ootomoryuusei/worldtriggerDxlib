@@ -71,7 +71,7 @@ void CharacterIcon::Update()
 		XMFLOAT2 mousePos = pMouse->GetMousePos();
 		if (IsInMousePoint(mousePos)) { 
 			if (pMouse->IsDoubleClicked(Mouse::LEFT)) { //範囲内をダブルクリックしたらセット用UI生成
-				if (!createUI && pT_Icons_ == nullptr) { 
+				if (!createUI && pT_SetUI_ == nullptr && pT_Icons_ == nullptr) { 
 					pT_SetUI_ = Instantiate<TriggerSetUI>(this);
 					pT_Icons_ = Instantiate<TriggerIcons>(this);
 					pT_Icons_->SetpCharacterIcon_(this);
@@ -84,6 +84,7 @@ void CharacterIcon::Update()
 		//		pT_Icons_->KillMe();
 		//		createUI = false;
 		//		pT_SetUI_ = nullptr;
+		//		pT_Icons_ = nullptr;
 		//	}			
 		}
 		break;

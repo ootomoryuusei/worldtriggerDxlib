@@ -24,6 +24,7 @@ CharacterIcons::CharacterIcons(GameObject* parent) : Icon(parent)
 		pCIcon->SetInitialPosition(graphPos);
 		pCIcon->Set3DPosition(graphPos);
 		pCIcon->SetNum(y);
+		pCIcon->SetIconName(csv_->GetString(0, y));
 		pCIcons_.push_back(pCIcon);
 	}
 }

@@ -37,7 +37,7 @@ void SetIcons::Initialize()
 
 	int num = 0;
 	Unit* pUnit = GetParent()->GetParent()->FindGameObject<Unit>();
-	VECTOR u_pos = pUnit->Get3DPosition();
+	XMFLOAT2 u_pos = pUnit->GetGraphPos();
 	for (int y = 0; y < selectCharNum_.size(); y++) {
 		std::string graphName;
 		graphName = csv_->GetString(FN2DLine, selectCharNum_[y]);
@@ -49,12 +49,12 @@ void SetIcons::Initialize()
 		SIZE_2D IconSize = pCIcon->GetIconSize();
 		VECTOR graphPos = {0,0,0};
 		if (y % 2 == 0) {
-			graphPos = { u_pos.x + IconSize.x * (y / 2),300.0f + IconSize.y * 1 ,0 };
+			graphPos = { u_pos.x + IconSize.x * (y / 2),u_pos.y + IconSize.y * 1 ,0 };
 		}
 		else {
-			graphPos = { u_pos.x + IconSize.x * (y / 2),300.0f + IconSize.y*0 ,0 };
+			graphPos = { u_pos.x + IconSize.x * (y / 2),u_pos.y + IconSize.y*0 ,0 };
 		}
-		pCIcon->SetInitialPosition(graphPos);
+		/*pCIcon->SetInitialPosition(graphPos);*/
 		pCIcon->Set3DPosition(graphPos);
 		pCIcon->SetState(SET);
 		pCIcon->SetCreateNum(num);
@@ -68,19 +68,10 @@ void SetIcons::Initialize()
 			myTrigger.Sub[x].trigger = TriggerName;
 		}
 		pCIcon->SetMyTrigger(myTrigger);
+		pCIcon->SetIconName(csv_->GetString(0, selectCharNum_[y]));
 		pSelectCIcons_.push_back(pCIcon);
 		num++;
 	}
-	//Instantiate<TriggerSetUIs>(this);
-	//for (int i = 0; i < MAX_SELECT_CHARACTER * 2; i++) { //キャラクター分のトリガーアイコンを実体化
-	//	TriggerIcons* pTIcons = Instantiate<TriggerIcons>(this);
-	//	pTIcons_.push_back(pTIcons);
-	//}
-
-	//for (int i = 0; i < MAX_SELECT_CHARACTER * 2; i++) {
-	//	TriggerSetUIFrames* pTSUIFs = Instantiate<TriggerSetUIFrames>(this);
-	//	pTSUIFSs_.push_back(pTSUIFs);
-	//}
 }
 
 void SetIcons::Update()

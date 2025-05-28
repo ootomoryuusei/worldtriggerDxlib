@@ -33,9 +33,13 @@ public:
 private:
     CsvReader* csv_;
     vector<TriggerIcon*> pMainTIcons_;
+    vector<TriggerIcon*> pCanSetMain_;
     vector<TriggerIcon*> pSubTIcons_;
+    vector<TriggerIcon*> pCanSetSub_;
     vector<TriggerIcon*> pTIcons_;
     CharacterIcon* pCharacterIcon_;
     bool firstSet;
+
+    void CreateCanSetMain(CharacterIcon* pCharacterIcon);
 };
 

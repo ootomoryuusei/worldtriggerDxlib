@@ -21,6 +21,7 @@ void TriggerIcons::Update()
 {
 	if (!firstSet) {
 		DefaultSetTriggers(pCharacterIcon_);
+		CreateCanSetMain(pCharacterIcon_);
 		firstSet = true;
 	}
 
@@ -147,6 +148,56 @@ void TriggerIcons::SetTriggers(CharacterIcon* pCharacterIcon)
 				pTIcon->Set3DPosition(graphPos);
 				pTIcon->SetIconName(csv_->GetString(0, y));
 				pSubTIcons_.push_back(pTIcon);
+				pTIcons_.push_back(pTIcon);
+			}
+		}
+
+	}
+}
+
+void TriggerIcons::CreateCanSetMain(CharacterIcon* pCharacterIcon)
+{
+	MYTRIGGER myTrigger = pCharacterIcon->GetMyTrigger();
+	vector<string> main;
+	csv_ = new CsvReader();
+	csv_->Load("Assets//Character//CharacterStatus.csv");
+	int findLine;
+	for (int y = 1;y < csv_->GetHeight() ; y++) {
+		if (csv_->GetString(0, y) == pCharacterIcon->GetIconName()) {
+			findLine = y;
+		}
+	}
+	for (int x = 19;x < 21;x++) {
+		main.push_back(csv_->GetString(x, findLine));
+	}
+
+	csv_->Load("Assets//Weapon//DefaultWeaponStatus.csv");
+	std::string DLC = "Assets//Image//TriggerIcon//";
+
+	/*for (int i = 0;i < 4;i++) {
+		for (auto& itr : main) {
+			if (myTrigger.Main[i].trigger == itr) {
+				itr.erase();
+			}
+		}
+	}*/
+
+
+	for (int y = 1;y < csv_->GetHeight();y++) {
+		for(auto& itr : main){
+			if (csv_->GetString(0, y) == itr) {
+				std::string graphName;
+				graphName = csv_->GetString(1, y);
+				std::string flPath;
+				flPath = DLC + graphName;
+				TriggerIcon* pTIcon = Instantiate<TriggerIcon>(this);
+				pTIcon->Load(flPath);
+				SIZE_F_2D IconSize = pTIcon->GetGraphSizeF_2D();
+				VECTOR graphPos = { 0 + 10 * y,300+IconSize.y ,0 };
+				pTIcon->SetInitialPosition(graphPos);
+				pTIcon->Set3DPosition(graphPos);
+				pTIcon->SetIconName(csv_->GetString(0, y));
+				pCanSetMain_.push_back(pTIcon);
 				pTIcons_.push_back(pTIcon);
 			}
 		}
