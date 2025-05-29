@@ -9,11 +9,17 @@ class Icon :
     public Object3D
 {
 protected:
+    enum MAIN_SUB {
+        MAIN = 0,
+        SUB,
+        MAX
+    };
+
     enum STEP {
         FIRST = 0,
         SECONDE,
         THIRD,
-        MAX
+        STEP_MAX
     };
 
     SIZE_F_2D graphSizeF_; //アイコンの画像サイズ(float)

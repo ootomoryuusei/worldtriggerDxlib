@@ -20,8 +20,10 @@ void TriggerIcons::Initialize()
 void TriggerIcons::Update()
 {
 	if (!firstSet) {
-		DefaultSetTriggers(pCharacterIcon_);
-		CreateCanSetMain(pCharacterIcon_);
+		DefaultSetTriggers(pCharacterIcon_,MAIN);
+		DefaultSetTriggers(pCharacterIcon_, SUB);
+		CreateCanSet(pCharacterIcon_,MAIN);
+		CreateCanSet(pCharacterIcon_, SUB);
 		firstSet = true;
 	}
 
@@ -40,14 +42,6 @@ void TriggerIcons::Update()
 		//	index++;
 		//}
 	}
-	else {
-		for (auto itr : pMainTIcons_) {
-			itr->SetCanVisible(false);
-		}
-		for (auto itr : pSubTIcons_) {
-			itr->SetCanVisible(false);
-		}
-	}
 }
 
 void TriggerIcons::Draw()
@@ -55,7 +49,7 @@ void TriggerIcons::Draw()
 
 }
 
-void TriggerIcons::DefaultSetTriggers(CharacterIcon* pCharacterIcon)
+void TriggerIcons::DefaultSetTriggers(CharacterIcon* pCharacterIcon,MAIN_SUB type)
 {
 	MYTRIGGER myTrigger = pCharacterIcon->GetMyTrigger();
 	csv_ = new CsvReader();
@@ -64,7 +58,7 @@ void TriggerIcons::DefaultSetTriggers(CharacterIcon* pCharacterIcon)
 
 	for (int y = 1;y < csv_->GetHeight();y++) {
 		for (int i = 0;i < 4;i++) {
-			if (csv_->GetString(0, y) == myTrigger.Main[i].trigger) {
+			if (csv_->GetString(0, y) == myTrigger.myTrigger[type].trigger[i].triggerName) {
 				std::string graphName;
 				graphName = csv_->GetString(1, y);
 				std::string flPath;
@@ -72,40 +66,20 @@ void TriggerIcons::DefaultSetTriggers(CharacterIcon* pCharacterIcon)
 				TriggerIcon* pTIcon = Instantiate<TriggerIcon>(this);
 				pTIcon->Load(flPath);
 				SIZE_F_2D IconSize = pTIcon->GetGraphSizeF_2D();
-				VECTOR graphPos = { 0,IconSize.y * i ,0 };
+				VECTOR graphPos = { 0,0,0 };
+				graphPos = { 0 + IconSize.x * (int)type,IconSize.y * pTIcons_[type].size() ,0};
 				pTIcon->SetInitialPosition(graphPos);
 				pTIcon->Set3DPosition(graphPos);
 				pTIcon->SetIconName(csv_->GetString(0, y));
-				pMainTIcons_.push_back(pTIcon);
-				pTIcons_.push_back(pTIcon);
+				pTIcons_[type].push_back(pTIcon);
+				pALLTIcons_.push_back(pTIcon);
 			}
 		}
 		
 	}
-	
-	for (int y = 1;y < csv_->GetHeight();y++) {
-		for (int i = 0;i < 4;i++) {
-			if (csv_->GetString(0, y) == myTrigger.Sub[i].trigger) {
-				std::string graphName;
-				graphName = csv_->GetString(1, y);
-				std::string flPath;
-				flPath = DLC + graphName;
-				TriggerIcon* pTIcon = Instantiate<TriggerIcon>(this);
-				pTIcon->Load(flPath);
-				SIZE_F_2D IconSize = pTIcon->GetGraphSizeF_2D();
-				VECTOR graphPos = { IconSize.x,IconSize.y * i ,0 };
-				pTIcon->SetInitialPosition(graphPos);
-				pTIcon->Set3DPosition(graphPos);
-				pTIcon->SetIconName(csv_->GetString(0,y));
-				pSubTIcons_.push_back(pTIcon);
-				pTIcons_.push_back(pTIcon);
-			}
-		}
-
-	}
 }
 
-void TriggerIcons::SetTriggers(CharacterIcon* pCharacterIcon)
+void TriggerIcons::SetTriggers(CharacterIcon* pCharacterIcon,MAIN_SUB type)
 {
 	MYTRIGGER myTrigger = pCharacterIcon->GetMyTrigger();
 	csv_ = new CsvReader();
@@ -114,7 +88,7 @@ void TriggerIcons::SetTriggers(CharacterIcon* pCharacterIcon)
 
 	for (int y = 1;y < csv_->GetHeight();y++) {
 		for (int i = 0;i < 4;i++) {
-			if (csv_->GetString(0, y) == myTrigger.Main[i].trigger) {
+			if (csv_->GetString(0, y) == myTrigger.myTrigger[type].trigger[i].triggerName) {
 				std::string graphName;
 				graphName = csv_->GetString(1, y);
 				std::string flPath;
@@ -122,53 +96,39 @@ void TriggerIcons::SetTriggers(CharacterIcon* pCharacterIcon)
 				TriggerIcon* pTIcon = Instantiate<TriggerIcon>(this);
 				pTIcon->Load(flPath);
 				SIZE_F_2D IconSize = pTIcon->GetGraphSizeF_2D();
-				VECTOR graphPos = { 0,IconSize.y * i ,0 };
+				VECTOR graphPos = { 0,0,0 };
+				graphPos = { 0 + IconSize.x * (int)type,IconSize.y * pTIcons_[type].size() ,0 };
 				pTIcon->SetInitialPosition(graphPos);
 				pTIcon->Set3DPosition(graphPos);
 				pTIcon->SetIconName(csv_->GetString(0, y));
-				pMainTIcons_.push_back(pTIcon);
-				pTIcons_.push_back(pTIcon);
+				pTIcons_[type].push_back(pTIcon);
+				pALLTIcons_.push_back(pTIcon);
 			}
 		}
-
-	}
-
-	for (int y = 1;y < csv_->GetHeight();y++) {
-		for (int i = 0;i < 4;i++) {
-			if (csv_->GetString(0, y) == myTrigger.Sub[i].trigger) {
-				std::string graphName;
-				graphName = csv_->GetString(1, y);
-				std::string flPath;
-				flPath = DLC + graphName;
-				TriggerIcon* pTIcon = Instantiate<TriggerIcon>(this);
-				pTIcon->Load(flPath);
-				SIZE_F_2D IconSize = pTIcon->GetGraphSizeF_2D();
-				VECTOR graphPos = { IconSize.x,IconSize.y * i ,0 };
-				pTIcon->SetInitialPosition(graphPos);
-				pTIcon->Set3DPosition(graphPos);
-				pTIcon->SetIconName(csv_->GetString(0, y));
-				pSubTIcons_.push_back(pTIcon);
-				pTIcons_.push_back(pTIcon);
-			}
-		}
-
 	}
 }
 
-void TriggerIcons::CreateCanSetMain(CharacterIcon* pCharacterIcon)
+void TriggerIcons::CreateCanSet(CharacterIcon* pCharacterIcon, MAIN_SUB type)
 {
 	MYTRIGGER myTrigger = pCharacterIcon->GetMyTrigger();
-	vector<string> main;
+	vector<string> canSet;
 	csv_ = new CsvReader();
 	csv_->Load("Assets//Character//CharacterStatus.csv");
-	int findLine;
+	int findLine = 0;
 	for (int y = 1;y < csv_->GetHeight() ; y++) {
 		if (csv_->GetString(0, y) == pCharacterIcon->GetIconName()) {
 			findLine = y;
 		}
 	}
-	for (int x = 19;x < 21;x++) {
-		main.push_back(csv_->GetString(x, findLine));
+	if (type == MAIN) {
+		for (int x = 19;x < 21;x++) {
+			canSet.push_back(csv_->GetString(x, findLine));
+		}
+	}
+	else if (type == SUB) {
+		for (int x = 21;x < 23;x++) {
+			canSet.push_back(csv_->GetString(x, findLine));
+		}
 	}
 
 	csv_->Load("Assets//Weapon//DefaultWeaponStatus.csv");
@@ -182,10 +142,10 @@ void TriggerIcons::CreateCanSetMain(CharacterIcon* pCharacterIcon)
 		}
 	}*/
 
-
 	for (int y = 1;y < csv_->GetHeight();y++) {
-		for(auto& itr : main){
-			if (csv_->GetString(0, y) == itr) {
+		for(auto& itr : canSet){
+			string name = csv_->GetString(0, y);
+			if ( name == itr) {
 				std::string graphName;
 				graphName = csv_->GetString(1, y);
 				std::string flPath;
@@ -193,12 +153,12 @@ void TriggerIcons::CreateCanSetMain(CharacterIcon* pCharacterIcon)
 				TriggerIcon* pTIcon = Instantiate<TriggerIcon>(this);
 				pTIcon->Load(flPath);
 				SIZE_F_2D IconSize = pTIcon->GetGraphSizeF_2D();
-				VECTOR graphPos = { 0 + 10 * y,300+IconSize.y ,0 };
+				VECTOR graphPos = { 0 + +IconSize.x * (int)type,300+IconSize.y * pTIcons_[type].size(),0};
 				pTIcon->SetInitialPosition(graphPos);
 				pTIcon->Set3DPosition(graphPos);
 				pTIcon->SetIconName(csv_->GetString(0, y));
-				pCanSetMain_.push_back(pTIcon);
-				pTIcons_.push_back(pTIcon);
+				pTIcons_[type].push_back(pTIcon);
+				pALLTIcons_.push_back(pTIcon);
 			}
 		}
 

@@ -136,7 +136,7 @@ void Player1::SetMyTrigger(MYTRIGGER _trigger)
 void Player1::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix)
 {
 
-	for (int i = 0; i < 4; i++) {
+	/*for (int i = 0; i < 4; i++) {
 		if (_trigger.Main[i].IsSelected) {
 			switch (_trigger.Main[i].tNum)
 			{
@@ -190,5 +190,5 @@ void Player1::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _righ
 				break;
 			}
 		}
-	}
+	}*/
 }

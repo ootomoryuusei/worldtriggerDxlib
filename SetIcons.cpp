@@ -61,11 +61,11 @@ void SetIcons::Initialize()
 		MYTRIGGER myTrigger;
 		for (int x = 0;x < 4;x++) {
 			string TriggerName = csv_->GetString(10 + x, selectCharNum_[y]);
-			myTrigger.Main[x].trigger = TriggerName;
+			myTrigger.myTrigger[0].trigger[x].triggerName = TriggerName;
 		}
 		for (int x = 0;x < 4;x++) {
 			string TriggerName = csv_->GetString(14 + x, selectCharNum_[y]);
-			myTrigger.Sub[x].trigger = TriggerName;
+			myTrigger.myTrigger[0].trigger[x].triggerName = TriggerName;
 		}
 		pCIcon->SetMyTrigger(myTrigger);
 		pCIcon->SetIconName(csv_->GetString(0, selectCharNum_[y]));

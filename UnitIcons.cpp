@@ -63,11 +63,11 @@ void UnitIcons::Initialize()
 		MYTRIGGER myTrigger;
 		for (int x = 0;x < 4;x++) {
 			string TriggerName = csv_->GetString(10 + x, selectCharNum_[y]);
-			myTrigger.Main[x].trigger = TriggerName;
+			myTrigger.myTrigger[0].trigger[x].triggerName = TriggerName;
 		}
 		for (int x = 0;x < 4;x++) {
 			string TriggerName = csv_->GetString(14 + x, selectCharNum_[y]);
-			myTrigger.Sub[x].trigger = TriggerName;
+			myTrigger.myTrigger[1].trigger[x].triggerName = TriggerName;
 		}
 		pUIcon->SetMyTrigger(myTrigger);
 		pUIcons_.push_back(pUIcon);

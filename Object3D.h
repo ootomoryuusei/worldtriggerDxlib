@@ -22,7 +22,7 @@ const int MAX_CAN_SET_TRIGGER = 4;
 //};
 
 struct TRIGGER {
-	string trigger; //トリガー名
+	string triggerName; //トリガー名
 	bool IsSelected; //選択されているかどうか
 	float angle; //アングル
 	float startAngle; //はじめのアングル
@@ -30,9 +30,12 @@ struct TRIGGER {
 	int tNum; //triggerナンバー
 };
 
+struct TRIGGERS {
+	TRIGGER trigger[4];
+};
+
 struct MYTRIGGER {
-	TRIGGER Main[4];
-	TRIGGER Sub[4];
+	TRIGGERS myTrigger[2];
 };
 
 struct SIZE_2D {
