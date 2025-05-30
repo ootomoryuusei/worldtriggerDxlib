@@ -23,9 +23,6 @@ public:
     void Initialize() override;
     void Update() override;
     void Draw() override;
-
-    auto GetFrames() { return pTSUIFSs_; }
-    auto GetIcons() { return pTIcons_; }
 private:
     vector<CharacterIcon> pSelectCIcons_;
     vector<int> selectCharNum_;
@@ -33,9 +30,5 @@ private:
     int FNSCNLine;
     int FN2DLine;
     string DLC; //ディレクトリ
-
-    vector<TriggerSetButton*> pTSButtons_;
-    vector<TriggerSetUIFrames*> pTSUIFSs_;
-    vector<TriggerIcons*> pTIcons_;
 };
 

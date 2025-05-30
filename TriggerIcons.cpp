@@ -2,6 +2,7 @@
 #include"CharacterSelectUI.h"
 #include"TriggerSetButton.h"
 #include"Engine/CsvReader.h"
+#include"TriggerSetUI.h"
 
 TriggerIcons::TriggerIcons(GameObject* parent) : Icon(parent)
 {
@@ -27,6 +28,17 @@ void TriggerIcons::Update()
 		firstSet = true;
 	}
 
+	TriggerSetUI* pUI = GetParent()->FindGameObject<TriggerSetUI>();
+	
+	for (int i = 0; i < (int)MAIN_SUB::MAX;i++) {
+		int index = 0;
+		for (auto& itr : pTIcons_[i]) {
+			VECTOR position = pUI->GetpFrames()->GetpTSUIFrames()[index]->Get3DPosition();
+			itr->Set3DPosition(position);
+			index++;
+		}
+	
+	}
 	if (canVisible_) {
 		//for (auto itr : pMainTIcons_) { //ボタンをクリックしたらトリガーセットできるようにフラグを立てる
 		//	itr->SetCanVisible(true);
@@ -157,7 +169,6 @@ void TriggerIcons::CreateCanSet(CharacterIcon* pCharacterIcon, MAIN_SUB type)
 				pTIcon->SetInitialPosition(graphPos);
 				pTIcon->Set3DPosition(graphPos);
 				pTIcon->SetIconName(csv_->GetString(0, y));
-				pTIcons_[type].push_back(pTIcon);
 				pALLTIcons_.push_back(pTIcon);
 			}
 		}

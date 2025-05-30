@@ -78,14 +78,14 @@ void CharacterIcon::Update()
 					createUI = true;
 				}
 			}
-		//}else if (pMouse->IsClicked(Mouse::LEFT)) { //範囲外をクリックしたら消す
-		//	if (createUI) { 
-		//		pT_SetUI_->KillMe();
-		//		pT_Icons_->KillMe();
-		//		createUI = false;
-		//		pT_SetUI_ = nullptr;
-		//		pT_Icons_ = nullptr;
-		//	}			
+		}else if (pMouse->IsClicked(Mouse::LEFT)) { //範囲外をクリックしたら消す
+			if (createUI) { 
+				pT_SetUI_->KillMe();
+				pT_Icons_->KillMe();
+				createUI = false;
+				pT_SetUI_ = nullptr;
+				pT_Icons_ = nullptr;
+			}			
 		}
 		break;
 	}
