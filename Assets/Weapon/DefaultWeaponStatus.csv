@@ -1,5 +1,6 @@
-WeaponName,FileName2D,FileName3D,Angle,RangeSize
-FREE,FreeTrigger.png,,0,0
-MOONBLADE,MoonBlade.png,blade.mv1,30,1
-SHIELD,Sheald.png,SampleSheald.mv1,30,1
-ASTEROID,Asteroid.png,SampleAsteroid.mv1,30,1.5
+WeaponName,FileName2D,FileName3D,StartPercent,Percent,Angle,RangeSize
+FREE,FreeTrigger.png,,0,0,0,0
+MOONBLADE,MoonBlade.png,blade.mv1,,,30,1
+SHIELD,Sheald.png,SampleSheald.mv1,,,30,1
+ASTEROID,Asteroid.png,SampleAsteroid.mv1,,,30,1.5
+EAGLET,EAGLET.png,SampleEaglet.mv1,,,,3

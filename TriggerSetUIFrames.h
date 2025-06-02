@@ -8,11 +8,13 @@ class TriggerSetUIFrames :
 public:
     TriggerSetUIFrames(GameObject* parent);
     ~TriggerSetUIFrames();
+    void Initialize() override;
     void Update() override;
     void Draw() override;
 
-    auto GetpTSUIFrames() { return pTSUIFrames_; }
+    const auto& GetpUIFrames() const{ return pUIFrames_; }
+
 private:
-    vector<TriggerSetUIFrame*> pTSUIFrames_;
+    array<vector<TriggerSetUIFrame*>,MAX > pUIFrames_;
 };
 

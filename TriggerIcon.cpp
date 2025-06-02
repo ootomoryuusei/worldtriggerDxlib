@@ -31,13 +31,15 @@ void TriggerIcon::Update()
 
 			}
 			else {
-				for (auto& itr : pUI->GetpFrames()->GetpTSUIFrames()) {
-					XMFLOAT2 leftUp = { itr->Get3DPosition().x,itr->Get3DPosition().y };
-					XMFLOAT2 distance = { itr->GetGraphSizeF_2D().x,itr->GetGraphSizeF_2D().y };
-					XMFLOAT2 center = { position.x + graphSizeF_.halfX ,position.y + graphSizeF_.halfY };
-					if (PointInBox(center, leftUp, distance)) {
-						position = { itr->Get3DPosition() };
-						break;
+				for (int index = 0;index < (int)MAX;index++) {
+					for (auto& itr : pUI->GetpFrames()->GetpUIFrames()[index]) {
+						XMFLOAT2 leftUp = { itr->Get3DPosition().x,itr->Get3DPosition().y };
+						XMFLOAT2 distance = { itr->GetGraphSizeF_2D().x,itr->GetGraphSizeF_2D().y };
+						XMFLOAT2 center = { position.x + graphSizeF_.halfX ,position.y + graphSizeF_.halfY };
+						if (PointInBox(center, leftUp, distance)) {
+							position = { itr->Get3DPosition() };
+							break;
+						}
 					}
 				}
 			}

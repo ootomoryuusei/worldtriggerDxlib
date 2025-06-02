@@ -6,7 +6,7 @@ TriggerSetUIFrame::TriggerSetUIFrame(GameObject* parent) :Icon(parent)
 {
 	Load("Assets//Image//TriggerSetUIFrame.png");
 	position = { 0,0,0 };
-	canVisible_ = false;
+	canVisible_ = true;
 }
 
 TriggerSetUIFrame::~TriggerSetUIFrame()

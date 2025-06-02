@@ -25,7 +25,7 @@ public:
     void Update() override;
     void Draw() override;
 
-    auto GetpTIcons() { return pALLTIcons_; }
+    const auto& GetpTIcons() const{ return pALLTIcons_; }
 
     void SetTriggers(CharacterIcon* pCharacterIcon, MAIN_SUB type);
 
