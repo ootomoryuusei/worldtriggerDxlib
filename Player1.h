@@ -19,6 +19,7 @@ class Player1 :
 public:
 	Player1(GameObject* parent);
 	~Player1();
+	void Initialize() override;
 	void Update() override;
 	void Draw() override;
 

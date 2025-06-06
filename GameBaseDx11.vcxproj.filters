@@ -44,6 +44,12 @@
     <Filter Include="Icon\CharacterIcons">
       <UniqueIdentifier>{23254e2a-bf8b-4ebc-bb64-2b14b141c49c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Trigger">
+      <UniqueIdentifier>{18a01d68-3281-4790-b56b-b642704bb3e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trigger\Triggers">
+      <UniqueIdentifier>{e1d361ae-59d4-4e63-8f4f-dd7ed975cf8e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\GameObject.cpp">
@@ -255,6 +261,24 @@
     </ClCompile>
     <ClCompile Include="TriggersArcIcons.cpp">
       <Filter>Icon\MiniMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Trigger.cpp">
+      <Filter>Trigger</Filter>
+    </ClCompile>
+    <ClCompile Include="Shield.cpp">
+      <Filter>Trigger\Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="Asteroid.cpp">
+      <Filter>Trigger\Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="Eaglet.cpp">
+      <Filter>Trigger\Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="Kogetsu.cpp">
+      <Filter>Trigger\Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="Characters.cpp">
+      <Filter>Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -474,6 +498,24 @@
     </ClInclude>
     <ClInclude Include="TriggersArcIcons.h">
       <Filter>Icon\MiniMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Trigger.h">
+      <Filter>Trigger</Filter>
+    </ClInclude>
+    <ClInclude Include="Shield.h">
+      <Filter>Trigger\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="Asteroid.h">
+      <Filter>Trigger\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="Eaglet.h">
+      <Filter>Trigger\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="Kogetsu.h">
+      <Filter>Trigger\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="Characters.h">
+      <Filter>Character</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

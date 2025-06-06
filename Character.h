@@ -45,6 +45,8 @@ public:
 
 	void SetMyTrigger(MYTRIGGER _trigger) { Trigger = _trigger; }
 
+	void SetStatus(CHARACTER_STATUS _c_status) { cStatus = _c_status; }
+
 	void DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix);
 private:
 	

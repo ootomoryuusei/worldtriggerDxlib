@@ -2,11 +2,12 @@
 #include "Camera.h"
 #include"Tile.h"
 #include"Icon.h"
+#include"Engine/CsvReader.h"
 #include"ImGui/imgui.h"
 
 Character::Character(GameObject* parent) : Object3D(parent),hBlade(-1), hShield(-1),hAsteroid(-1)
 {
-	hModel = MV1LoadModel("Assets//human.mv1");
+	/*hModel = MV1LoadModel("Assets//human.mv1");
 	assert(hModel >= 0);
 	hBlade = MV1LoadModel("Assets//blade.mv1");
 	assert(hBlade >= 0);
@@ -32,7 +33,7 @@ Character::Character(GameObject* parent) : Object3D(parent),hBlade(-1), hShield(
 	flame = 1.0f / 60.0f;
 	time = 0.0f;
 
-	Trigger = {};
+	Trigger = {};*/
 }
 
 Character::~Character()
@@ -68,6 +69,7 @@ void Character::Update()
 	SetCameraPositionAndTarget_UpVecY(position + pRot, position + vRot);
 	icon = GetParent()->FindGameObject<Icon>();
 	Tile* tile = GetParent()->FindGameObject<Tile>();
+
 	//if (icon->GetCompWay()) {
 	//	time += flame;  // ŠÔ‚ğ‘‰Á‚³‚¹‚é
 	//	if (time > movetime) {  // ˆê’è‚ÌŠÔ‚ªŒo‰ß‚µ‚½ê‡

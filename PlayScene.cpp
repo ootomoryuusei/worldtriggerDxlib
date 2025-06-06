@@ -16,10 +16,11 @@
 #include"MoveMentsLoads.h"
 #include "Mouse.h"
 #include"TriggersArcIcons.h"
+#include "Characters.h"
 
 PlayScene::PlayScene(GameObject* parent)
 {
-	Instantiate<BackGround>(this);
+	/*Instantiate<BackGround>(this);
 
 	Instantiate<Timer>(this);
 
@@ -43,12 +44,14 @@ PlayScene::PlayScene(GameObject* parent)
 
 	Instantiate<MoveTypesIcons>(this);
 
-	Instantiate<MoveMentsLoads>(this);
+	Instantiate<MoveMentsLoads>(this);*/
 
-	
+	Instantiate<Tile>(this);
+
+	Instantiate<Characters>(this);
 
 	Instantiate<Player1>(this);
-	Instantiate<Tile>(this);
+	
 	Instantiate<Camera>(this); // Player‚æ‚èŒã‚É‘‚­
 	Instantiate<Mouse>(this);
 	// ‚Æ‚è‚ ‚¦‚¸ƒJƒƒ‰‚ğİ’è‚·‚é
