@@ -5,39 +5,11 @@
 #include"Engine/CsvReader.h"
 #include"PlayScene.h"
 #include"Mouse.h"
+#include"Characters.h"
 #include"ImGui/imgui.h"
 
 Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1),hShield(-1)
 {
-	/*hModel = MV1LoadModel("Assets//Model//human.mv1");
-	assert(hModel >= 0);
-	hBlade = MV1LoadModel("Assets//Model//blade.mv1");
-	assert(hBlade >= 0);
-	hShield = MV1LoadModel("Assets//Model//SampleSheald.mv1");
-	assert(hShield >= 0);
-	hAsteroid = MV1LoadModel("Assets//Model//SampleAsteroid.mv1");
-	assert(hAsteroid >= 0);
-
-	position = VGet(0, 0, 0);
-	rotation = VGet(0, 0, 0);
-	cPos.x = 0;
-	cPos.y = 0;
-	prevX = 0;
-	prevY = 0;
-	prevKey = false;
-
-	cStatus.move = 5;
-	cStatus.attack = 4;
-	cStatus.speed = 6;
-	cStatus.defense = 10;
-
-	movetime = 5.0f;
-	flame = 1.0f / 60.0f;
-	time = 0.0f;
-
-	Trigger = {};
-
-	state_ = SELECT;*/
 }
 
 Player1::~Player1()
@@ -70,66 +42,26 @@ void Player1::Initialize()
 
 void Player1::Update()
 {
-	
+	//Characters* pCharacters = GetParent()->GetParent()->FindGameObject<Characters>();
+	//XMFLOAT3 c_rota = pCharacters->GetRotate();
+	//VECTOR c_position = pCharacters->Get3DPosition();
 
-	// カメラの設定
-	MATRIX mRot = MGetRotY(rotation.y);  // 回転行列
-	// 回ってないとき、プレイヤーからどれぐらい後ろ？→ベクトル
-	VECTOR tmpP = VGet(0, 5, 10);
-	// これに回転行列をかける
-	VECTOR pRot = tmpP * mRot;
-	// これにプレイヤーの座標を足すと、カメラ位置が出る
-	VECTOR vRot = VGet(0,5,-5) * mRot;
-	SetCameraPositionAndTarget_UpVecY(position + pRot, position + vRot);
-	//icon = GetParent()->FindGameObject<Icon>();
-	//Tile* tile = GetParent()->FindGameObject<Tile>();
+	//// カメラの設定
+	//MATRIX mRot = MGetRotY(c_rota.y);  // 回転行列
+	//// 回ってないとき、プレイヤーからどれぐらい後ろ？→ベクトル
+	//VECTOR tmpP = VGet(0, 5, 10);
+	//// これに回転行列をかける
+	//VECTOR pRot = tmpP * mRot;
+	//// これにプレイヤーの座標を足すと、カメラ位置が出る
+	//VECTOR vRot = VGet(0, 5, -5) * mRot;
 
-	/*if (CheckHitKey(KEY_INPUT_RETURN)) {
-		state_ = STEP1;
-		tile->SetState_(STEP1);
-	}*/
+	//VECTOR cam_position = c_position + pRot;
+	//VECTOR cam_target = c_position + vRot;
+	//SetCameraPositionAndTarget_UpVecY(cam_position,cam_target);
 }
 
 void Player1::Draw()
 {
-	//switch (state_)
-	//{
-	//case SELECT:
-	//{
-	//	break;
-	//}
-	//case SET:
-	//{
-	//	/*position = { icon->GetPIconPos().x,icon->GetPIconPos().y,0.0 };*/
-	//	//Object3D::Draw(); // 基底クラスの関数を呼ぶ→Playerキャラを描画する
-	//	MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);
-	//	MV1SetMatrix(hModel, mModel);
-	//	MV1DrawModel(hModel);
-
-	//	/*DrawCapsule3D(position, position + VGet(0, 160, 0), 30, 20, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);*/
-
-	//	int RightHand = MV1SearchFrame(hModel, "RightHand");
-	//	assert(RightHand >= 0);
-	//	MATRIX mRightHand = MV1GetFrameLocalWorldMatrix(hModel, RightHand);
-	//	//MATRIX mBlade = MV1GetFrameLocalWorldMatrix(hModel, RightHand);
-
-	//	int LeftHand = MV1SearchFrame(hModel, "LeftHand");
-	//	assert(LeftHand >= 0);
-	//	MATRIX mLeftHand = MV1GetFrameLocalWorldMatrix(hModel, LeftHand);
-	//	MATRIX mAsteroid = Object3D::ChangeFLOAT3ToMATRIX(VGet(mLeftHand.m[3][0], mLeftHand.m[3][1] - 0.2f, mLeftHand.m[3][2]), rotation);
-
-	//	MATRIX mShield = Object3D::ChangeFLOAT3ToMATRIX({ position.x,position.y,position.z - 1.0f }, rotation);
-
-	//	DrawMyTrigger(Trigger, mLeftHand, mRightHand);
-
-	//	break;
-	//}
-	//default:
-	//	break;
-	//}
-	//
-	// サーベルの刃は、(0,0,0)～(0,-150,0)にある。これにmSabelをかけると、今の座標が手に入る
-	/*DrawLine3D(VGet(0, 0, 0) * hBlade, VGet(0, -150, 0) * hBlade, GetColor(255, 0, 0));*/
 }
 
 void Player1::SetMyTrigger(MYTRIGGER _trigger)

@@ -1,12 +1,29 @@
 #pragma once
 #include "Object3D.h"
+#include<vector>
+#include<deque>
 
 class Icon;
+
+using std::vector;
+using std::deque;
 
 class Character :
     public Object3D
 {
 protected:
+
+	vector<int> moveMent;
+	deque<int> dq_moveMent;
+
+	bool firstSet;
+	bool moveing;
+
+	int maxMoveMent;
+
+	float totalTime;
+	float elapsedTime;
+
 	int hBlade; // サーベルモデルのデータ
 
 	int hShield;

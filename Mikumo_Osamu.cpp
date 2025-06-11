@@ -45,13 +45,10 @@ void Mikumo_Osamu::Update()
 	VECTOR pRot = tmpP * mRot;
 	// これにプレイヤーの座標を足すと、カメラ位置が出る
 	VECTOR vRot = VGet(0, 5, -5) * mRot;
-	/*SetCameraPositionAndTarget_UpVecY(position + pRot, position + vRot);*/
 }
 
 void Mikumo_Osamu::Draw()
 {
-	/*position = { icon->GetPIconPos().x,0.0,icon->GetPIconPos().y };*/
-	//Object3D::Draw(); // 基底クラスの関数を呼ぶ→Playerキャラを描画する
 	MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);
 	MV1SetMatrix(hModel, mModel);
 	MV1DrawModel(hModel);

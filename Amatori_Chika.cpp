@@ -1,4 +1,6 @@
 #include "Amatori_Chika.h"
+#include"Tile.h"
+#include<algorithm>
 
 Amatori_Chika::Amatori_Chika(GameObject* parent) : Character(parent)
 {
@@ -35,23 +37,55 @@ Amatori_Chika::~Amatori_Chika()
 {
 }
 
+void Amatori_Chika::Initialize()
+{
+	pTile = GetParent()->GetParent()->FindGameObject<Tile>();
+}
+
 void Amatori_Chika::Update()
 {
-	// カメラの設定
-	MATRIX mRot = MGetRotY(rotation.y);  // 回転行列
-	// 回ってないとき、プレイヤーからどれぐらい後ろ？→ベクトル
-	VECTOR tmpP = VGet(0, 5, 10);
-	// これに回転行列をかける
-	VECTOR pRot = tmpP * mRot;
-	// これにプレイヤーの座標を足すと、カメラ位置が出る
-	VECTOR vRot = VGet(0, 5, -5) * mRot;
-	SetCameraPositionAndTarget_UpVecY(position + pRot, position + vRot);
+	//if (!firstSet) {
+	//	for (auto& itr : moveMent) {
+	//		dq_moveMent.push_back(itr);
+	//	}
+
+	//	int x = dq_moveMent.front() % MAX_MAP_WIDTH;
+	//	int y = dq_moveMent.front() / MAX_MAP_WIDTH;
+	//	position = pTile->GetTilesData(x,y).position;
+	//	firstSet = true;
+	//	moveing = true;
+	//}
+	//if (moveing) {
+	//	if (dq_moveMent.size() >= 2) {
+	//		auto it = dq_moveMent.begin();
+	//		auto startIndex = *it;
+	//		auto targetIndex = *(++it);
+
+	//		int x = startIndex % MAX_MAP_WIDTH;
+	//		int y = startIndex / MAX_MAP_WIDTH;
+	//		VECTOR start = pTile->GetTilesData(x, y).position;
+	//		x = targetIndex % MAX_MAP_WIDTH;
+	//		y = targetIndex / MAX_MAP_WIDTH;
+	//		VECTOR target = pTile->GetTilesData(x, y).position;
+	//		float percent = elapsedTime / totalTime;
+	//		percent = std::clamp(percent, 0.0f, 1.0f);
+	//		position = Lerp3D(start, target, percent);
+	//		if (percent >= 1.0f) {
+	//			// 移動完了 → 次の区間へ
+	//			elapsedTime = 0.0f;
+	//			dq_moveMent.pop_front();
+	//		}
+	//	}
+
+	//	if (dq_moveMent.size() < 2) {
+	//		moveing = false;
+	//	}
+	//	elapsedTime += Time::DeltaTime();
+	//}
 }
 
 void Amatori_Chika::Draw()
 {
-	/*position = { icon->GetPIconPos().x,0.0,icon->GetPIconPos().y };*/
-	//Object3D::Draw(); // 基底クラスの関数を呼ぶ→Playerキャラを描画する
 	MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);
 	MV1SetMatrix(hModel, mModel);
 	MV1DrawModel(hModel);
