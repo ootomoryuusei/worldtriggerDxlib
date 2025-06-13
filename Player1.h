@@ -4,15 +4,6 @@
 class Icon;
 //class CsvReader;
 
-enum WEAPON {
-	NONE,
-	FREE,
-	MOONBLADE,
-	SHIELD,
-	ASTEROID,
-	MAX
-};
-
 class Player1 :
     public Object3D
 {

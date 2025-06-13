@@ -28,7 +28,7 @@ Mikumo_Osamu::Mikumo_Osamu(GameObject* parent) :Character(parent)
 	flame = 1.0f / 60.0f;
 	time = 0.0f;
 
-	Trigger = {};
+	myTrigger_ = {};
 }
 
 Mikumo_Osamu::~Mikumo_Osamu()

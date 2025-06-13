@@ -199,6 +199,7 @@
     <ClCompile Include="TriggerArcIcon.cpp" />
     <ClCompile Include="TriggerIcon.cpp" />
     <ClCompile Include="TriggerIcons.cpp" />
+    <ClCompile Include="Triggers.cpp" />
     <ClCompile Include="TriggersArcIcon.cpp" />
     <ClCompile Include="TriggersArcIcons.cpp" />
     <ClCompile Include="TriggerSetButton.cpp" />
@@ -281,6 +282,7 @@
     <ClInclude Include="TriggerArcIcon.h" />
     <ClInclude Include="TriggerIcon.h" />
     <ClInclude Include="TriggerIcons.h" />
+    <ClInclude Include="Triggers.h" />
     <ClInclude Include="TriggersArcIcon.h" />
     <ClInclude Include="TriggersArcIcons.h" />
     <ClInclude Include="TriggerSetButton.h" />

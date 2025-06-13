@@ -30,7 +30,7 @@ Amatori_Chika::Amatori_Chika(GameObject* parent) : Character(parent)
 	flame = 1.0f / 60.0f;
 	time = 0.0f;
 
-	Trigger = {};
+	myTrigger_ = {};
 }
 
 Amatori_Chika::~Amatori_Chika()

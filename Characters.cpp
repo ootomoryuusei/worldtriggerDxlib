@@ -34,7 +34,7 @@ void Characters::Initialize()
 
 		VECTOR initialPosition = pTile_->GetTilesData(x, y).position;
 		itr->Set3DPosition(initialPosition);
-
+		itr->ReadMyTrigger(index);
 		index++;
 	}
 }

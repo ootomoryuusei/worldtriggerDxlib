@@ -280,6 +280,9 @@
     <ClCompile Include="Characters.cpp">
       <Filter>Character</Filter>
     </ClCompile>
+    <ClCompile Include="Triggers.cpp">
+      <Filter>Trigger</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -516,6 +519,9 @@
     </ClInclude>
     <ClInclude Include="Characters.h">
       <Filter>Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Triggers.h">
+      <Filter>Trigger</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

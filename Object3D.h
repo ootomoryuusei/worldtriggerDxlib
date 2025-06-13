@@ -56,6 +56,20 @@ struct CHARACTER_STATUS
 	int move, attack, speed, defense;
 };
 
+enum MAIN_SUB {
+	MAIN = 0,
+	SUB,
+	MAX
+};
+
+enum WEAPON {
+	FREE,
+	KOGETSU,
+	SHIELD,
+	ASTEROID,
+	EAGLET,
+	WEAPON_MAX
+};
 /// <summary>
 /// 
 /// </summary>

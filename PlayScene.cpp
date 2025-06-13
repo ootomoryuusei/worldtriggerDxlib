@@ -20,7 +20,7 @@
 
 PlayScene::PlayScene(GameObject* parent)
 {
-	/*Instantiate<BackGround>(this);
+	Instantiate<BackGround>(this);
 
 	Instantiate<Timer>(this);
 
@@ -44,11 +44,11 @@ PlayScene::PlayScene(GameObject* parent)
 
 	Instantiate<MoveTypesIcons>(this);
 
-	Instantiate<MoveMentsLoads>(this);*/
+	Instantiate<MoveMentsLoads>(this);
 
-	Instantiate<Tile>(this);
+	/*Instantiate<Tile>(this);
 
-	Instantiate<Characters>(this);
+	Instantiate<Characters>(this);*/
 
 	Instantiate<Player1>(this);
 	

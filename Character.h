@@ -4,6 +4,7 @@
 #include<deque>
 
 class Icon;
+class CsvReader;
 
 using std::vector;
 using std::deque;
@@ -48,11 +49,12 @@ protected:
 
 	CHARACTER_STATUS cStatus;
 
-	MYTRIGGER Trigger;
+	MYTRIGGER myTrigger_;
 
 public:
 	Character(GameObject* parent);
 	~Character();
+	void Initialize() override;
 	void Update() override;
 	void Draw() override;
 
@@ -60,12 +62,15 @@ public:
 
 	VECTOR GetPosition() { return position; }
 
-	void SetMyTrigger(MYTRIGGER _trigger) { Trigger = _trigger; }
+	void ReadMyTrigger(int _createNum);
+
+	void CreateTriggerInstance();
+	void SetMyTrigger(MYTRIGGER _trigger) { myTrigger_ = _trigger; }
 
 	void SetStatus(CHARACTER_STATUS _c_status) { cStatus = _c_status; }
 
 	void DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix);
 private:
-	
+	CsvReader* csv_;
 };
 

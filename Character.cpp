@@ -5,6 +5,11 @@
 #include"Engine/CsvReader.h"
 #include"ImGui/imgui.h"
 
+#include"Kogetsu.h"
+#include"Asteroid.h"
+#include"Shield.h"
+#include"Eaglet.h"
+
 Character::Character(GameObject* parent) : Object3D(parent),hBlade(-1), hShield(-1),hAsteroid(-1)
 {
 	/*hModel = MV1LoadModel("Assets//human.mv1");
@@ -54,6 +59,11 @@ Character::~Character()
 		MV1DeleteModel(hAsteroid);
 		hAsteroid = -1;
 	}
+}
+
+void Character::Initialize()
+{
+	csv_ = new CsvReader();
 }
 
 void Character::Update()
@@ -115,10 +125,75 @@ void Character::Draw()
 
 	MATRIX mShield = Object3D::ChangeFLOAT3ToMATRIX({ position.x,position.y,position.z - 1.0f }, rotation);
 
-	DrawMyTrigger(Trigger, mLeftHand, mRightHand);
+	DrawMyTrigger(myTrigger_, mLeftHand, mRightHand);
 
 	// サーベルの刃は、(0,0,0)～(0,-150,0)にある。これにmSabelをかけると、今の座標が手に入る
 	/*DrawLine3D(VGet(0, 0, 0) * hBlade, VGet(0, -150, 0) * hBlade, GetColor(255, 0, 0));*/
+}
+
+void Character::ReadMyTrigger(int _createNum)
+{
+	csv_->Load("Assets/Character/SelectCharacter.csv");
+	int line = 0;
+	for (int x = 0;x < csv_->GetWidth(0);x++) {
+		if ("MainTrigger" == csv_->GetString(x, 0)) {
+			line = x;
+			break;
+		}
+	}
+	
+	for (int i = 0;i < (int)MAX;i++) {
+		for (int index = 0;index < 4;index++) {
+			myTrigger_.myTrigger[i].trigger[index].triggerName = csv_->GetString(line, _createNum + 1);
+			line++;
+		}
+	}
+
+	csv_->Load("Assets/Weapon/DefaultWeaponStatus.csv");
+	for (int i = 0;i < (int)MAX;i++) {
+		for (int index = 0;index < 4;index++) {
+			string t_name = myTrigger_.myTrigger[i].trigger[index].triggerName;
+			for (int y = 1;y < csv_->GetHeight();y++) {
+				if (t_name == csv_->GetString(0,y)) {
+					myTrigger_.myTrigger[i].trigger[index].tNum = y - 1;
+				}
+			}
+		}
+	}
+}
+
+void Character::CreateTriggerInstance()
+{
+	for (int i = 0;i < (int)MAX;i++) {
+		for (int index = 0;index < 4;index++) {
+			switch (myTrigger_.myTrigger[i].trigger[index].tNum)
+			{
+			case FREE: break;
+			case KOGETSU:
+			{
+				Instantiate<Kogetsu>(this);
+				break;
+			}
+			case SHIELD:
+			{
+				Instantiate<Shield>(this);
+				break;
+			}
+			case ASTEROID:
+			{
+				Instantiate<Asteroid>(this);
+				break;
+			}
+			case EAGLET:
+			{
+				Instantiate<Eaglet>(this);
+				break;
+			}
+			default:
+				break;
+			}
+		}
+	}
 }
 
 void Character::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix)

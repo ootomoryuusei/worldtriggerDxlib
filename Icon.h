@@ -9,11 +9,6 @@ class Icon :
     public Object3D
 {
 protected:
-    enum MAIN_SUB {
-        MAIN = 0,
-        SUB,
-        MAX
-    };
 
     enum STEP {
         FIRST = 0,
