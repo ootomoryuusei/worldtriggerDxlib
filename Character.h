@@ -5,6 +5,7 @@
 
 class Icon;
 class CsvReader;
+class Tile;
 
 using std::vector;
 using std::deque;
@@ -17,6 +18,8 @@ protected:
 	vector<int> moveMent;
 	deque<int> dq_moveMent;
 
+	Tile* tile_;
+
 	bool firstSet;
 	bool moveing;
 
@@ -24,22 +27,6 @@ protected:
 
 	float totalTime;
 	float elapsedTime;
-
-	int hBlade; // サーベルモデルのデータ
-
-	int hShield;
-
-	int hAsteroid;
-
-	/*Tile* tile;*/
-	Icon* icon;
-
-	int hPIcon;
-
-	bool prevKey;
-
-	XMINT2 cPos;
-	int prevX, prevY;
 
 	float movetime;
 	float flame;
@@ -72,5 +59,7 @@ public:
 	void DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix);
 private:
 	CsvReader* csv_;
+	Tile* tile_;
+	void MoveMent();
 };
 

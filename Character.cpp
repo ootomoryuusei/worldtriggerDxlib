@@ -10,6 +10,10 @@
 #include"Shield.h"
 #include"Eaglet.h"
 
+#include<algorithm>
+
+using std::clamp;
+
 Character::Character(GameObject* parent) : Object3D(parent),hBlade(-1), hShield(-1),hAsteroid(-1)
 {
 	/*hModel = MV1LoadModel("Assets//human.mv1");
@@ -47,23 +51,12 @@ Character::~Character()
 		MV1DeleteModel(hModel);
 		hModel = -1;
 	}
-	if (hBlade > 0) {
-		MV1DeleteModel(hBlade);
-		hBlade = -1;
-	}
-	if (hShield > 0) {
-		MV1DeleteModel(hShield);
-		hShield = -1;
-	}
-	if (hAsteroid > 0) {
-		MV1DeleteModel(hAsteroid);
-		hAsteroid = -1;
-	}
 }
 
 void Character::Initialize()
 {
 	csv_ = new CsvReader();
+	tile_ = GetParent()->FindGameObject<Tile>();
 }
 
 void Character::Update()
@@ -77,30 +70,6 @@ void Character::Update()
 	// これにプレイヤーの座標を足すと、カメラ位置が出る
 	VECTOR vRot = VGet(0, 5, -5) * mRot;
 	SetCameraPositionAndTarget_UpVecY(position + pRot, position + vRot);
-	icon = GetParent()->FindGameObject<Icon>();
-	Tile* tile = GetParent()->FindGameObject<Tile>();
-
-	//if (icon->GetCompWay()) {
-	//	time += flame;  // 時間を増加させる
-	//	if (time > movetime) {  // 一定の時間が経過した場合
-	//		static size_t index = 0;  // 現在処理しているイテレーターのインデックス
-	//		const auto& way = icon->GetWay();
-
-	//		// イテレーターが範囲内にある場合に処理
-	//		if (index < way.size()) {
-	//			// 現在の位置を取得
-	//			position = tile->GetTilesData(way[index].y, way[index].x).position;
-	//			// インデックスを次に進める
-	//			++index;
-	//		}
-	//		else {
-	//			// すべての処理が終わった場合、インデックスをリセット
-	//			icon->SetCompWay(false);
-	//			icon->GetWay().clear();
-	//		}
-	//		time = 0.0f;  // 時間リセット
-	//	}
-	//}
 }
 
 void Character::Draw()
@@ -199,4 +168,35 @@ void Character::CreateTriggerInstance()
 void Character::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix)
 {
 	
+}
+
+void Character::MoveMent()
+{
+	if (moveing) {
+		if (dq_moveMent.size() >= 2) {
+			auto it = dq_moveMent.begin();
+			auto startIndex = *it;
+			auto targetIndex = *(++it);
+
+			Tile* pTile = GetParent()->FindGameObject<Tile>();
+
+			XMINT2 s_index = { startIndex % pTile->GetTileX(), startIndex / pTile->GetTileZ() };
+			XMINT2 t_index = { targetIndex % pTile->GetTileX(),targetIndex / pTile->GetTileZ() };
+			VECTOR start = pTile->GetTilesData(s_index.x, s_index.y).position;
+			VECTOR target = pTile->GetTilesData(t_index.x, t_index.y).position;
+			float percent = elapsedTime / totalTime;
+			percent = clamp(percent, 0.0f, 1.0f);
+			position = Lerp3D(start, target, percent);
+			if (percent >= 1.0f) {
+				// 移動完了 → 次の区間へ
+				elapsedTime = 0.0f;
+				dq_moveMent.pop_front();
+			}
+		}
+
+		if (dq_moveMent.size() < 2) {
+			moveing = false;
+		}
+		elapsedTime += Time::DeltaTime();
+	}
 }

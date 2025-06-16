@@ -1,6 +1,6 @@
 #include "Triggers.h"
 
-Triggers::Triggers(GameObject* parent)
+Triggers::Triggers(GameObject* parent) : Object3D(parent)
 {
 }
 
