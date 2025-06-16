@@ -14,7 +14,7 @@
 
 using std::clamp;
 
-Character::Character(GameObject* parent) : Object3D(parent),hBlade(-1), hShield(-1),hAsteroid(-1)
+Character::Character(GameObject* parent) : Object3D(parent)
 {
 	/*hModel = MV1LoadModel("Assets//human.mv1");
 	assert(hModel >= 0);

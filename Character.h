@@ -59,7 +59,6 @@ public:
 	void DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix);
 private:
 	CsvReader* csv_;
-	Tile* tile_;
 	void MoveMent();
 };
 
