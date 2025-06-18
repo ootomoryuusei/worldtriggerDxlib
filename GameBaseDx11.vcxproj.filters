@@ -283,6 +283,7 @@
     <ClCompile Include="Triggers.cpp">
       <Filter>Trigger</Filter>
     </ClCompile>
+    <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -523,6 +524,7 @@
     <ClInclude Include="Triggers.h">
       <Filter>Trigger</Filter>
     </ClInclude>
+    <ClInclude Include="UIManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc">

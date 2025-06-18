@@ -13,29 +13,11 @@ Icons::Icons(GameObject* parent) : Object3D(parent)
 	Instantiate<BackGround>(this);
 	Instantiate<CharacterSelectUI>(this);
 
-	/*csv_ = new CsvReader();*/
-
-
-	
-	
 	Instantiate<CharacterIcons>(this);
-	//for (int x = 0; x < MAX_TRIGGER_HANDS; x++) { //TriggerSet‚ÌƒtƒŒ[ƒ€‚ÌˆÊ’uŒˆ‚ß
-	//	for (int y = 0; y < MAX_CAN_SET_TRIGGER; y++) {
-	//		TriggerSetUIFrame* pTsuif = Instantiate<TriggerSetUIFrame>(this);;
-	//		VECTOR graphPos = { 780.0f + 330.0f * x, 50.0f + (pTsuif->GetGraphSizeF_2D().y + 10) * y,0 };
-	//		pTsuif->Set3DPosition(graphPos);
-	//		pTSUIFrames_.push_back(pTsuif);
-	//	}
-	//}
+
 	Instantiate<CharacterSetUIFrames>(this);
 	Instantiate<OkButton>(this);
-	//for (int y = 0; y < pCIcons_.size(); y++) { //button_‚Ì‰Šú‰»
-	//	std::vector<bool> CsSize;
-	//	for (int x = 0; x < MAX_SELECT_CHARACTER; x++) {
-	//		CsSize.push_back(false);
-	//	}
-	//	button_.push_back(CsSize);
-	//}
+
 }
 
 Icons::~Icons()

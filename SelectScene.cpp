@@ -10,7 +10,6 @@ SelectScene::SelectScene(GameObject* parent)
 {
 	Instantiate<Icons>(this);
 	Instantiate<Player1>(this);
-	////Instantiate<Tile>(this);
 	Instantiate<Camera>(this); // Player‚æ‚èŒã‚É‘‚­
 	Instantiate<Mouse>(this);
 }

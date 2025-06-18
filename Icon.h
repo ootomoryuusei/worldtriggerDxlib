@@ -10,13 +10,6 @@ class Icon :
 {
 protected:
 
-    enum STEP {
-        FIRST = 0,
-        SECONDE,
-        THIRD,
-        STEP_MAX
-    };
-
     SIZE_F_2D graphSizeF_; //アイコンの画像サイズ(float)
     SIZE_2D graphSize_; //アイコンの画像サイズ
     XMFLOAT2 graphPos_; //アイコンの位置

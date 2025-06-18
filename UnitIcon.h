@@ -21,7 +21,7 @@ public:
 	void Draw() override;
 
 	const auto& GetMoveMent() const{ return moveMent; }
-	void SetMoveMent(int _moveMent) { moveMent.push_back(_moveMent); }
+	void AddMoveMent(int _moveMent) { moveMent.push_back(_moveMent); }
 
 	void SetMyTrigger(MYTRIGGER _myTrigger) { myTrigger = _myTrigger; }
 private:

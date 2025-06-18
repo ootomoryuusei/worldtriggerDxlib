@@ -34,18 +34,18 @@ void TriggerArcIcon::Update()
 	if (canVisible_) {
 		switch (step_)
 		{
-		case Icon::FIRST:
+		case FIRST:
 		{
 			canVisible_ = false;
 		}
 			break;
-		case Icon::SECONDE:
+		case SECONDE:
 		{
 			canVisible_ = true;
 			calculateArc();
 			break;
 		}
-		case Icon::THIRD:
+		case THIRD:
 			
 			if (!firstSet) {
 				for (auto& itr : angle) {

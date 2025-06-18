@@ -19,6 +19,7 @@ protected:
 	deque<int> dq_moveMent;
 
 	Tile* tile_;
+	CsvReader* csv_;
 
 	bool firstSet;
 	bool moveing;
@@ -56,9 +57,11 @@ public:
 
 	void SetStatus(CHARACTER_STATUS _c_status) { cStatus = _c_status; }
 
+	void AddMoveMent(int _movement) { moveMent.push_back(_movement); }
+
 	void DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix);
-private:
-	CsvReader* csv_;
+
 	void MoveMent();
+private:
 };
 

@@ -51,7 +51,7 @@ void UnitIcon::Update()
 	
 		switch (step_)
 		{
-		case Icon::FIRST:
+		case FIRST:
 		{
 			if (IsInMousePoint(mousePos)) {
 				if (selecting_) {
@@ -76,7 +76,7 @@ void UnitIcon::Update()
 			prevMousePos_ = mousePos;
 			break;
 		}
-		case Icon::SECONDE:
+		case SECONDE:
 		{
 			if (IsInMousePoint(mousePos)) {
 				//unitIcon‚Ì‘I‘ðˆ—
@@ -98,7 +98,7 @@ void UnitIcon::Update()
 			}
 			break;
 		}
-		case Icon::THIRD:
+		case THIRD:
 		{
 			
 			if (!firstSet) {
@@ -148,12 +148,12 @@ void UnitIcon::Draw()
 	if (canVisible_) {
 		switch (step_)
 		{
-		case Icon::FIRST:
+		case FIRST:
 		{
 			DrawGraph(position.x + (TileSize.x / 2 - graphSizeF_.halfX), position.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
 			break;
 		}
-		case Icon::SECONDE:
+		case SECONDE:
 		{
 			if (moveMent.size() >= 2) {
 				VECTOR pos = pTileIcons->GetpTIcon()[moveMent.front()]->Get3DPosition();
@@ -165,7 +165,7 @@ void UnitIcon::Draw()
 			DrawGraph(position.x + (TileSize.x / 2 - graphSizeF_.halfX), position.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
 			break;
 		}
-		case Icon::THIRD:
+		case THIRD:
 		{
 			DrawGraph(position.x + (TileSize.x / 2 - graphSizeF_.halfX), position.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
 			break;

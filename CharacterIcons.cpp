@@ -19,7 +19,7 @@ CharacterIcons::CharacterIcons(GameObject* parent) : Icon(parent)
 		flPath = DLC + graphName;
 		CharacterIcon* pCIcon = Instantiate<CharacterIcon>(this);
 		pCIcon->Load(flPath);
-		SIZE_2D IconSize = pCIcon->GetIconSize();
+		SIZE_F_2D IconSize = pCIcon->GetGraphSizeF_2D();
 		VECTOR graphPos = { 0,300 + IconSize.y * (y - 1) ,0 };
 		pCIcon->SetInitialPosition(graphPos);
 		pCIcon->Set3DPosition(graphPos);
@@ -35,7 +35,7 @@ CharacterIcons::~CharacterIcons()
 
 void CharacterIcons::Update()
 {
-	Mouse* pMouse = GetParent()->FindGameObject<Mouse>();
+	Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
 	XMFLOAT2 mousePos = pMouse->GetMousePos();
 
 	if (canVisible_) {

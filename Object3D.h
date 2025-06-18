@@ -56,6 +56,14 @@ struct CHARACTER_STATUS
 	int move, attack, speed, defense;
 };
 
+enum STEP {
+	FIRST = 0,
+	SECONDE,
+	THIRD,
+	STEP_MAX
+};
+
+
 enum MAIN_SUB {
 	MAIN = 0,
 	SUB,

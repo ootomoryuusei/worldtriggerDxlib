@@ -6,6 +6,7 @@ class Mikumo_Osamu :
 public:
 	Mikumo_Osamu(GameObject* parent);
 	~Mikumo_Osamu();
+	void Initialize() override;
 	void Update() override;
 	void Draw() override;
 private:

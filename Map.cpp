@@ -2,7 +2,8 @@
 
 Map::Map(GameObject* parent) : Icon(parent)
 {
-	position = { 100, 120, 0 };
+	/*position = { 100, 120, 0 };*/
+	position = { 700, 120, 0 };
 	canVisible_ = true;
 
 	boxSize[0] = { 90 ,40 };

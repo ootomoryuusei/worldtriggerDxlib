@@ -46,7 +46,7 @@ void SetIcons::Initialize()
 		flPath = DLC + graphName;
 		CharacterIcon* pCIcon = Instantiate<CharacterIcon>(this);
 		pCIcon->Load(flPath);
-		SIZE_2D IconSize = pCIcon->GetIconSize();
+		SIZE_F_2D IconSize = pCIcon->GetGraphSizeF_2D();
 		VECTOR graphPos = {0,0,0};
 		if (y % 2 == 0) {
 			graphPos = { u_pos.x + IconSize.x * (y / 2),u_pos.y + IconSize.y * 1 ,0 };

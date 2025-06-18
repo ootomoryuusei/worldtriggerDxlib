@@ -207,6 +207,7 @@
     <ClCompile Include="TriggerSetUIFrame.cpp" />
     <ClCompile Include="TriggerSetUIFrames.cpp" />
     <ClCompile Include="TriggerSetUIs.cpp" />
+    <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitIcon.cpp" />
     <ClCompile Include="UnitIcons.cpp" />
@@ -291,6 +292,7 @@
     <ClInclude Include="globals.h" />
     <ClInclude Include="TriggerSetUIFrames.h" />
     <ClInclude Include="TriggerSetUIs.h" />
+    <ClInclude Include="UIManager.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitIcon.h" />
     <ClInclude Include="UnitIcons.h" />

@@ -3,6 +3,8 @@
 #include"TileIcon.h"
 #include<vector>
 
+class Map;
+
 using std::vector;
 
 class TileIcons :
@@ -11,10 +13,11 @@ class TileIcons :
 public:
 	TileIcons(GameObject* parent);
 	~TileIcons();
+	void Initialize() override;
 	void Update() override;
-
 	auto GetpTIcon() { return pTIcons_; }
 private:
 	vector<TileIcon*> pTIcons_;
+	Map* pMap;
 };
 

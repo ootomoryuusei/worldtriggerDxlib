@@ -1,8 +1,6 @@
 #pragma once
 #include "Character.h"
 
-class Tile;
-
 class Amatori_Chika :
     public Character
 {
@@ -13,6 +11,5 @@ public:
 	void Update() override;
 	void Draw() override;
 private:
-	Tile* pTile;
 };
 

@@ -28,8 +28,8 @@ PlayScene::PlayScene(GameObject* parent)
 
 	Instantiate<TileIcons>(this);
 
-	Instantiate<rader>(this);
-	Instantiate<Unit>(this);
+	/*Instantiate<rader>(this);*/
+	/*Instantiate<Unit>(this);*/
 	
 	
 	
@@ -46,9 +46,9 @@ PlayScene::PlayScene(GameObject* parent)
 
 	Instantiate<MoveMentsLoads>(this);
 
-	/*Instantiate<Tile>(this);
+	Instantiate<Tile>(this);
 
-	Instantiate<Characters>(this);*/
+	Instantiate<Characters>(this);
 
 	Instantiate<Player1>(this);
 	

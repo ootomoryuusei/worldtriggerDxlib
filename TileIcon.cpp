@@ -3,7 +3,6 @@
 #include"MoveTypesIcons.h"
 #include"UnitIcons.h"
 
-
 TileIcon::TileIcon(GameObject* parent) : Icon(parent)
 {
 	Load("Assets//Image//tile.png");
@@ -37,7 +36,7 @@ void TileIcon::Update()
 				}
 
 				UnitIcons* pUnitIcons = GetParent()->GetParent()->FindGameObject<UnitIcons>();
-				pUnitIcons->GetpUnitIcons()[num]->SetMoveMent(tile_.num);
+				pUnitIcons->GetpUnitIcons()[num]->AddMoveMent(tile_.num);
 				select = false;
 				selected = true;
 			}

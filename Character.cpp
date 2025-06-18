@@ -43,6 +43,8 @@ Character::Character(GameObject* parent) : Object3D(parent)
 	time = 0.0f;
 
 	Trigger = {};*/
+
+	csv_ = new CsvReader();
 }
 
 Character::~Character()
@@ -55,8 +57,11 @@ Character::~Character()
 
 void Character::Initialize()
 {
-	csv_ = new CsvReader();
+	
 	tile_ = GetParent()->FindGameObject<Tile>();
+
+	totalTime = 5;
+	elapsedTime = 0.0f;
 }
 
 void Character::Update()
@@ -172,13 +177,22 @@ void Character::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _ri
 
 void Character::MoveMent()
 {
+	Tile* pTile = GetParent()->GetParent()->FindGameObject<Tile>();
+	if (!firstSet) {
+		for (auto& itr : moveMent) {
+			dq_moveMent.push_back(itr);
+		}
+
+		XMINT2 f_index = { dq_moveMent.front() % pTile->GetTileX(), dq_moveMent.front() / pTile->GetTileZ() };
+		position = pTile->GetTilesData(f_index.x, f_index.y).position;
+		firstSet = true;
+		moveing = true;
+	}
 	if (moveing) {
 		if (dq_moveMent.size() >= 2) {
 			auto it = dq_moveMent.begin();
 			auto startIndex = *it;
 			auto targetIndex = *(++it);
-
-			Tile* pTile = GetParent()->FindGameObject<Tile>();
 
 			XMINT2 s_index = { startIndex % pTile->GetTileX(), startIndex / pTile->GetTileZ() };
 			XMINT2 t_index = { targetIndex % pTile->GetTileX(),targetIndex / pTile->GetTileZ() };

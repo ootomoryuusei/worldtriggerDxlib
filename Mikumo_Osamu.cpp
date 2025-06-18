@@ -1,5 +1,8 @@
 #include "Mikumo_Osamu.h"
 
+#include"Tile.h"
+#include<algorithm>
+
 Mikumo_Osamu::Mikumo_Osamu(GameObject* parent) :Character(parent)
 {
 	hModel = MV1LoadModel("Assets//Model//human.mv1");
@@ -24,16 +27,24 @@ Mikumo_Osamu::~Mikumo_Osamu()
 {
 }
 
+void Mikumo_Osamu::Initialize()
+{
+}
+
 void Mikumo_Osamu::Update()
 {
-	// カメラの設定
-	MATRIX mRot = MGetRotY(rotation.y);  // 回転行列
-	// 回ってないとき、プレイヤーからどれぐらい後ろ？→ベクトル
-	VECTOR tmpP = VGet(0, 5, 10);
-	// これに回転行列をかける
-	VECTOR pRot = tmpP * mRot;
-	// これにプレイヤーの座標を足すと、カメラ位置が出る
-	VECTOR vRot = VGet(0, 5, -5) * mRot;
+	switch (state_)
+	{
+	case FIRST: break;
+	case SECONDE: break;
+	case THIRD: 
+	{
+		MoveMent();
+		break;
+	}
+	default:
+		break;
+	}
 }
 
 void Mikumo_Osamu::Draw()

@@ -59,7 +59,7 @@ void UnitIcons::Initialize()
 		pUIcon->SetIconName(IconName);
 		pUIcon->Set3DPosition(pos);
 		pUIcon->SetCreateNum(num);
-		pUIcon->SetMoveMent(tilenum);
+		pUIcon->AddMoveMent(tilenum);
 		MYTRIGGER myTrigger;
 		for (int x = 0;x < 4;x++) {
 			string TriggerName = csv_->GetString(10 + x, selectCharNum_[y]);
@@ -117,7 +117,7 @@ void UnitIcons::Update()
 		if (moveMentSet) {
 			for (auto& itr : pUIcons_) {
 				itr->SetStep(THIRD);
-				moveMentSet = false;
+				/*moveMentSet = false;*/
 			}
 		}
 	}
