@@ -54,7 +54,6 @@ void Characters::Update()
 		}
 		pUnitIcons->SetMoveMentSet(false);
 	}
-	
 }
 
 void Characters::Draw()

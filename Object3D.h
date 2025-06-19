@@ -6,20 +6,10 @@
 using std::string;
 using std::array;
 
-//const int FREE = 500;
-//const int MOONBLADE = 501;
-//const int SHIELD = 502;
-//const int ASTEROID = 503;
-
 const int MAX_SELECT_CHARACTER = 3;
 const int MAX_TRIGGER_HANDS = 2;
 const int MAX_CAN_SET_TRIGGER = 4;
 
-//enum PLAY_SCENE_STATE {
-//	SELECT,
-//	STEP1,
-//	MAXS
-//};
 
 struct TRIGGER {
 	string triggerName; //ÉgÉäÉKÅ[ñº

@@ -19,6 +19,8 @@ public:
 
 	const auto& GetpCharacters() const { return pCharacters_; }
 
+	void AddCharacter(Character* _pCharacter) { pCharacters_.push_back(_pCharacter); }
+
 private:
 	vector<Character*> pCharacters_;
 

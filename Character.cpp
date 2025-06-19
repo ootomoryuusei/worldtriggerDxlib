@@ -16,35 +16,12 @@ using std::clamp;
 
 Character::Character(GameObject* parent) : Object3D(parent)
 {
-	/*hModel = MV1LoadModel("Assets//human.mv1");
-	assert(hModel >= 0);
-	hBlade = MV1LoadModel("Assets//blade.mv1");
-	assert(hBlade >= 0);
-	hShield = MV1LoadModel("Assets//SampleSheald.mv1");
-	assert(hShield >= 0);
-	hAsteroid = MV1LoadModel("Assets//SampleAsteroid.mv1");
-	assert(hAsteroid >= 0);
-
-	position = VGet(0, 0, 0);
-	rotation = VGet(0, 0, 0);
-	cPos.x = 0;
-	cPos.y = 0;
-	prevX = 0;
-	prevY = 0;
-	prevKey = false;
-
-	cStatus.move = 5;
-	cStatus.attack = 4;
-	cStatus.speed = 6;
-	cStatus.defense = 10;
-
-	movetime = 5.0f;
-	flame = 1.0f / 60.0f;
-	time = 0.0f;
-
-	Trigger = {};*/
-
 	csv_ = new CsvReader();
+
+	totalTime = 10;
+	elapsedTime = 0.0f;
+
+	dir_ = VGet(1.0f, 0.0f, 0.0f);
 }
 
 Character::~Character()
@@ -57,11 +34,7 @@ Character::~Character()
 
 void Character::Initialize()
 {
-	
 	tile_ = GetParent()->FindGameObject<Tile>();
-
-	totalTime = 5;
-	elapsedTime = 0.0f;
 }
 
 void Character::Update()
@@ -172,7 +145,6 @@ void Character::CreateTriggerInstance()
 
 void Character::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix)
 {
-	
 }
 
 void Character::MoveMent()
@@ -213,4 +185,20 @@ void Character::MoveMent()
 		}
 		elapsedTime += Time::DeltaTime();
 	}
+}
+
+bool Character::ArcInPoint(VECTOR _e_pos)
+{
+	VECTOR toEnemy = ToTarget(_e_pos);
+	toEnemy = VNorm(toEnemy);
+
+	float dot = VDot(dir_, toEnemy);
+	float angle = ToRad(acosf(dot));
+
+	float fov = 45.0f;
+
+	if (angle <= fov) {
+		return true;
+	}
+	return false;
 }

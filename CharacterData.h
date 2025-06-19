@@ -1,18 +1,14 @@
 #pragma once
 #include "Object3D.h"
-
-class CsvReader;
-
-class Enemy :
+class CharacterData :
     public Object3D
 {
 public:
-	Enemy(GameObject* parent);
-	~Enemy();
+	CharacterData(GameObject* parent);
+	~CharacterData();
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
 private:
-	CsvReader* csv_;
 };
 

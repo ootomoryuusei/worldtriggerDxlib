@@ -15,6 +15,7 @@ class Character :
 {
 protected:
 
+	VECTOR dir_;
 	vector<int> moveMent;
 	deque<int> dq_moveMent;
 
@@ -62,6 +63,8 @@ public:
 	void DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix);
 
 	void MoveMent();
+
+	bool ArcInPoint(VECTOR _e_pos);
 private:
 };
 
