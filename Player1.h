@@ -1,8 +1,9 @@
 #pragma once
 #include "Object3D.h"
-//class Tile;
-class Icon;
-//class CsvReader;
+
+class CsvReader;
+class Characters;
+class Tile;
 
 class Player1 :
     public Object3D
@@ -25,23 +26,9 @@ public:
 	void SetState_(int _state) { state_ = _state; }
 
 private:
-	int state_;
-
-	int hBlade; // サーベルモデルのデータ
-
-	int hShield;
-
-	int hAsteroid;
-
-	
-	Icon* icon;
-
-	int hPIcon;
-
-	bool prevKey;
-	
-	XMINT2 cPos;
-	int prevX, prevY;
+	CsvReader* csv_;
+	Characters* pCharacters_;
+	Tile* pTile_;
 
 	float movetime;
 	float flame;

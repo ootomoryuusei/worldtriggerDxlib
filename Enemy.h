@@ -2,6 +2,8 @@
 #include "Object3D.h"
 
 class CsvReader;
+class Characters;
+class Tile;
 
 class Enemy :
     public Object3D
@@ -14,5 +16,7 @@ public:
 	void Draw() override;
 private:
 	CsvReader* csv_;
+	Characters* pCharacters_;
+	Tile* pTile_;
 };
 

@@ -1,7 +1,7 @@
 #include "Character.h"
 #include "Camera.h"
 #include"Tile.h"
-#include"Icon.h"
+#include"CharacterData.h"
 #include"Engine/CsvReader.h"
 #include"ImGui/imgui.h"
 
@@ -35,6 +35,7 @@ Character::~Character()
 void Character::Initialize()
 {
 	tile_ = GetParent()->FindGameObject<Tile>();
+	pCharacterData_ = Instantiate<CharacterData>(this);
 }
 
 void Character::Update()
@@ -149,7 +150,7 @@ void Character::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _ri
 
 void Character::MoveMent()
 {
-	Tile* pTile = GetParent()->GetParent()->FindGameObject<Tile>();
+	Tile* pTile = GetParent()->GetParent()->GetParent()->FindGameObject<Tile>();
 	if (!firstSet) {
 		for (auto& itr : moveMent) {
 			dq_moveMent.push_back(itr);

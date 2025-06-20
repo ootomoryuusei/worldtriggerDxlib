@@ -18,31 +18,11 @@ Characters::~Characters()
 
 void Characters::Initialize()
 {
-	pTile_ = GetParent()->FindGameObject<Tile>();
-
-	CsvReader* csv = new CsvReader();
-	csv->Load("Assets//Character//SelectCharacter.csv");
-	for (int y = 1;y < csv->GetHeight();y++) {
-		CreateCharInstance(csv->GetInt(0, y));
-	}
-
-	int index = 0;
-	for (auto& itr : pCharacters_) {
-		int placementIndex = csv->GetInt(9, index + 1);
-
-		int x = placementIndex % MAX_MAP_WIDTH;
-		int y = placementIndex / MAX_MAP_WIDTH;
-
-		VECTOR initialPosition = pTile_->GetTilesData(x, y).position;
-		itr->Set3DPosition(initialPosition);
-		itr->ReadMyTrigger(index);
-		index++;
-	}
 }
 
 void Characters::Update()
 {
-	UnitIcons* pUnitIcons = GetParent()->FindGameObject<UnitIcons>();
+	UnitIcons* pUnitIcons = GetParent()->GetParent()->FindGameObject<UnitIcons>();
 	int index = 0;
 	if (pUnitIcons->GetMoveMentSet()) {
 		for (auto& itr : pCharacters_) {
@@ -60,7 +40,7 @@ void Characters::Draw()
 {
 }
 
-void Characters::CreateCharInstance(int _char_num)
+void Characters::CreateCharacterInstance(int _char_num)
 {
 	switch (_char_num)
 	{

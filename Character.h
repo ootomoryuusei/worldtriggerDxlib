@@ -6,6 +6,7 @@
 class Icon;
 class CsvReader;
 class Tile;
+class CharacterData;
 
 using std::vector;
 using std::deque;
@@ -22,10 +23,10 @@ protected:
 	Tile* tile_;
 	CsvReader* csv_;
 
+	CharacterData* pCharacterData_;
+
 	bool firstSet;
 	bool moveing;
-
-	int maxMoveMent;
 
 	float totalTime;
 	float elapsedTime;
@@ -33,8 +34,6 @@ protected:
 	float movetime;
 	float flame;
 	float time;
-
-	/*int nowNum;*/
 
 	CHARACTER_STATUS cStatus;
 

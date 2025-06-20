@@ -1,14 +1,11 @@
 #include "Player1.h"
 #include "Camera.h"
 #include"Tile.h"
-#include"Icon.h"
 #include"Engine/CsvReader.h"
-#include"PlayScene.h"
-#include"Mouse.h"
 #include"Characters.h"
 #include"ImGui/imgui.h"
 
-Player1::Player1(GameObject* parent) : Object3D(parent),hBlade(-1),hShield(-1)
+Player1::Player1(GameObject* parent) : Object3D(parent)
 {
 }
 
@@ -38,6 +35,27 @@ Player1::~Player1()
 
 void Player1::Initialize()
 {
+	pTile_ = GetParent()->FindGameObject<Tile>();
+	pCharacters_ = Instantiate<Characters>(this);
+
+	CsvReader* csv = new CsvReader();
+	csv->Load("Assets//Character//SelectCharacter.csv");
+	for (int y = 1;y < csv->GetHeight();y++) {
+		pCharacters_->CreateCharacterInstance(csv->GetInt(0, y));
+	}
+
+	int index = 0;
+	for (auto& itr : pCharacters_->GetpCharacters()) {
+		int placementIndex = csv->GetInt(9, index + 1);
+
+		int x = placementIndex % MAX_MAP_WIDTH;
+		int y = placementIndex / MAX_MAP_WIDTH;
+
+		VECTOR initialPosition = pTile_->GetTilesData(x, y).position;
+		itr->Set3DPosition(initialPosition);
+		itr->ReadMyTrigger(index);
+		index++;
+	}
 }
 
 void Player1::Update()

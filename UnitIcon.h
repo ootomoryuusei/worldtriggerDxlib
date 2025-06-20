@@ -44,11 +44,5 @@ private:
 	float elapsedTime;
 
 	MYTRIGGER myTrigger;
-
-	/*Mouse* pMouse_;
-	TileIcons* pTileIcons_;
-	MoveSetIcons* pMoveSetIcons_;
-	MoveSelectIcons* pMoveSelectIcons_;
-	MoveTypesIcons* pMoveTypesIcons_;*/
 };
 

@@ -1,6 +1,7 @@
 #include "PlayScene.h"
 #include "Engine/SceneManager.h"
 #include"Player1.h"
+#include"Enemy.h"
 #include "Camera.h"
 #include"Tile.h"
 #include"BackGround.h"
@@ -16,7 +17,6 @@
 #include"MoveMentsLoads.h"
 #include "Mouse.h"
 #include"TriggersArcIcons.h"
-#include "Characters.h"
 
 PlayScene::PlayScene(GameObject* parent)
 {
@@ -30,9 +30,6 @@ PlayScene::PlayScene(GameObject* parent)
 
 	/*Instantiate<rader>(this);*/
 	/*Instantiate<Unit>(this);*/
-	
-	
-	
 
 	Instantiate<TriggersArcIcons>(this);
 
@@ -48,10 +45,10 @@ PlayScene::PlayScene(GameObject* parent)
 
 	Instantiate<Tile>(this);
 
-	Instantiate<Characters>(this);
-
 	Instantiate<Player1>(this);
 	
+	Instantiate<Enemy>(this);
+
 	Instantiate<Camera>(this); // Player‚æ‚èŒã‚É‘‚­
 	Instantiate<Mouse>(this);
 	// ‚Æ‚è‚ ‚¦‚¸ƒJƒƒ‰‚ğİ’è‚·‚é

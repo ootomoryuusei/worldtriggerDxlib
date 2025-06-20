@@ -43,7 +43,7 @@ struct TILEDATA {
 
 struct CHARACTER_STATUS
 {
-	int move, attack, speed, defense;
+	int move,trion, attack,avoidace,defense,support,technique;
 };
 
 enum STEP {
@@ -222,6 +222,7 @@ public:
 
 	VECTOR Get3DPosition() { return position; }
 	void Set3DPosition(VECTOR _position) { position = _position; }
+
 protected:
 	int hModel;  // モデルデータ
 	VECTOR position; // 座標
