@@ -5,6 +5,8 @@
 #include"Characters.h"
 #include"ImGui/imgui.h"
 
+#include"Factory.h"
+
 Player1::Player1(GameObject* parent) : Object3D(parent)
 {
 }
@@ -41,7 +43,9 @@ void Player1::Initialize()
 	CsvReader* csv = new CsvReader();
 	csv->Load("Assets//Character//SelectCharacter.csv");
 	for (int y = 1;y < csv->GetHeight();y++) {
-		pCharacters_->CreateCharacterInstance(csv->GetInt(0, y));
+		string selectCharacterName = csv_->GetString(0, y);
+		GameObject* pObject = Factory::Instance().Create(selectCharacterName, this);
+
 	}
 
 	int index = 0;

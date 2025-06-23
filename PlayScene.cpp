@@ -18,8 +18,23 @@
 #include "Mouse.h"
 #include"TriggersArcIcons.h"
 
+#include"Factory.h"
+#include"Mikumo_Osamu.h"
+#include"Amatori_Chika.h"
+#include"Kuga_Yuuma.h"
+
 PlayScene::PlayScene(GameObject* parent)
 {
+	Factory::Instance().Register("Mikumo Osamu", [](GameObject* parent) {
+		return Instantiate<Mikumo_Osamu>(parent);
+		});
+	Factory::Instance().Register("Kuga Yuuma", [](GameObject* parent) {
+		return Instantiate<Kuga_Yuuma>(parent);
+		});
+	Factory::Instance().Register("Amatori Chika", [](GameObject* parent) {
+		return Instantiate<Amatori_Chika>(parent);
+		});
+
 	Instantiate<BackGround>(this);
 
 	Instantiate<Timer>(this);

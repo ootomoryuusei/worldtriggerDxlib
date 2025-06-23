@@ -227,6 +227,7 @@
     <ClInclude Include="CharacterSelectUI.h" />
     <ClInclude Include="CharacterSetUIFrame.h" />
     <ClInclude Include="CharacterSetUIFrames.h" />
+    <ClInclude Include="Factory.h" />
     <ClInclude Include="Eaglet.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Engine\CsvReader.h" />

@@ -39,30 +39,3 @@ void Characters::Update()
 void Characters::Draw()
 {
 }
-
-void Characters::CreateCharacterInstance(int _char_num)
-{
-	switch (_char_num)
-	{
-	case MIKUMO_OSAMU : 
-	{
-		Character* pCharacter = Instantiate<Mikumo_Osamu>(this);
-		pCharacters_.push_back(pCharacter);
-		break;
-	}
-	case AMATORI_CHIKA:
-	{
-		Character* pCharacter = Instantiate<Amatori_Chika>(this);
-		pCharacters_.push_back(pCharacter);
-		break;
-	}
-	case KUGA_YUUMA:
-	{
-		Character* pCharacter = Instantiate<Kuga_Yuuma>(this);
-		pCharacters_.push_back(pCharacter);
-		break;
-	}
-	default:
-		break;
-	}
-}

@@ -527,6 +527,7 @@
     </ClInclude>
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="CharacterData.h" />
+    <ClInclude Include="Factory.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc">
