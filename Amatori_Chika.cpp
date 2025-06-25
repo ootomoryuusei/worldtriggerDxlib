@@ -1,5 +1,6 @@
 #include "Amatori_Chika.h"
-#include<algorithm>
+
+AutoRegister<Amatori_Chika,CharacterFactory> Amatori_Chika::register_("Amatori_Chika");
 
 Amatori_Chika::Amatori_Chika(GameObject* parent) : Character(parent)
 {
@@ -8,11 +9,6 @@ Amatori_Chika::Amatori_Chika(GameObject* parent) : Character(parent)
 
 	position = VGet(0, 0, 0);
 	rotation = VGet(0, 0, 0);
-
-	cStatus.move = 5;
-	cStatus.attack = 4;
-	cStatus.speed = 6;
-	cStatus.defense = 10;
 
 	movetime = 5.0f;
 	flame = 1.0f / 60.0f;

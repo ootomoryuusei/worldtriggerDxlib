@@ -1,7 +1,10 @@
 #pragma once
-#include "Object3D.h"
+#include "Trigger.h"
+#include"TriggerFactory.h"
+#include"AutoRegister.h"
+
 class Shield :
-    public Object3D
+    public Trigger
 {
 public:
     Shield(GameObject* parent);
@@ -10,5 +13,6 @@ public:
     void Update() override;
     void Draw() override;
 private:
+    static AutoRegister<Shield, TriggerFactory> register_;
 };
 

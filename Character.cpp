@@ -4,13 +4,9 @@
 #include"CharacterData.h"
 #include"Engine/CsvReader.h"
 #include"ImGui/imgui.h"
-
-#include"Kogetsu.h"
-#include"Asteroid.h"
-#include"Shield.h"
-#include"Eaglet.h"
-
 #include<algorithm>
+
+#include"TriggerFactory.h"
 
 using std::clamp;
 
@@ -114,32 +110,8 @@ void Character::CreateTriggerInstance()
 {
 	for (int i = 0;i < (int)MAX;i++) {
 		for (int index = 0;index < 4;index++) {
-			switch (myTrigger_.myTrigger[i].trigger[index].tNum)
-			{
-			case FREE: break;
-			case KOGETSU:
-			{
-				Instantiate<Kogetsu>(this);
-				break;
-			}
-			case SHIELD:
-			{
-				Instantiate<Shield>(this);
-				break;
-			}
-			case ASTEROID:
-			{
-				Instantiate<Asteroid>(this);
-				break;
-			}
-			case EAGLET:
-			{
-				Instantiate<Eaglet>(this);
-				break;
-			}
-			default:
-				break;
-			}
+			string name = myTrigger_.myTrigger[i].trigger[index].triggerName;
+			TriggerFactory::Instance().Create(name, this);
 		}
 	}
 }
@@ -150,7 +122,7 @@ void Character::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _ri
 
 void Character::MoveMent()
 {
-	Tile* pTile = GetParent()->GetParent()->GetParent()->FindGameObject<Tile>();
+	Tile* pTile = GetParent()->GetParent()->FindGameObject<Tile>();
 	if (!firstSet) {
 		for (auto& itr : moveMent) {
 			dq_moveMent.push_back(itr);

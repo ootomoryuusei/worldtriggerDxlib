@@ -1,5 +1,6 @@
 #pragma once
 #include "Object3D.h"
+
 class Trigger :
     public Object3D
 {

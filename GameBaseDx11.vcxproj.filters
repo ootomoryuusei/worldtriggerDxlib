@@ -50,6 +50,9 @@
     <Filter Include="Trigger\Triggers">
       <UniqueIdentifier>{e1d361ae-59d4-4e63-8f4f-dd7ed975cf8e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Factory">
+      <UniqueIdentifier>{59d12bbc-06fb-4335-917a-f00a7e0633f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\GameObject.cpp">
@@ -527,7 +530,18 @@
     </ClInclude>
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="CharacterData.h" />
-    <ClInclude Include="Factory.h" />
+    <ClInclude Include="TriggerFactory.h">
+      <Filter>Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseFactory.h">
+      <Filter>Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoRegister.h">
+      <Filter>Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterFactory.h">
+      <Filter>Factory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc">

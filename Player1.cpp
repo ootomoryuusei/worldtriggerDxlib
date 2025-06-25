@@ -5,7 +5,7 @@
 #include"Characters.h"
 #include"ImGui/imgui.h"
 
-#include"Factory.h"
+#include"CharacterFactory.h"
 
 Player1::Player1(GameObject* parent) : Object3D(parent)
 {
@@ -40,17 +40,17 @@ void Player1::Initialize()
 	pTile_ = GetParent()->FindGameObject<Tile>();
 	pCharacters_ = Instantiate<Characters>(this);
 
-	CsvReader* csv = new CsvReader();
-	csv->Load("Assets//Character//SelectCharacter.csv");
-	for (int y = 1;y < csv->GetHeight();y++) {
+	csv_ = new CsvReader();
+	csv_->Load("Assets//Character//SelectCharacter.csv");
+	for (int y = 1;y < csv_->GetHeight();y++) {
 		string selectCharacterName = csv_->GetString(0, y);
-		GameObject* pObject = Factory::Instance().Create(selectCharacterName, this);
-
+		Character* pCharacter = CharacterFactory::Instance().Create(selectCharacterName, this);
+		pCharacters_->AddCharacter(pCharacter);
 	}
 
 	int index = 0;
 	for (auto& itr : pCharacters_->GetpCharacters()) {
-		int placementIndex = csv->GetInt(9, index + 1);
+		int placementIndex = csv_->GetInt(9, index + 1);
 
 		int x = placementIndex % MAX_MAP_WIDTH;
 		int y = placementIndex / MAX_MAP_WIDTH;

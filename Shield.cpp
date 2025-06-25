@@ -1,6 +1,8 @@
 #include "Shield.h"
 
-Shield::Shield(GameObject* parent) : Object3D(parent)
+AutoRegister<Shield, TriggerFactory> Shield::register_("SHIELD");
+
+Shield::Shield(GameObject* parent) : Trigger(parent)
 {
 	hModel = MV1LoadModel("Assets//Model//SampleShield.mv1");
 	assert(hModel >= 0);

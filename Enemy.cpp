@@ -3,6 +3,8 @@
 #include"Characters.h"
 #include"Tile.h"
 
+#include"CharacterFactory.h"
+
 Enemy::Enemy(GameObject* parent) : Object3D(parent)
 {
 }
@@ -16,6 +18,7 @@ void Enemy::Initialize()
 	csv_ = new CsvReader();
 	csv_->Load("Assets//Character//CharacterStatus.csv");
 	std::vector<int> randomselect;
+    std::vector<string> selectCharacterName;
     for (int x = 0; x < MAX_SELECT_CHARACTER; x++) {
         int num;
         bool selected = false;
@@ -30,12 +33,14 @@ void Enemy::Initialize()
             }
         }
         randomselect.push_back(num);
+        selectCharacterName.push_back(csv_->GetString(0, num));
     }
 
     pCharacters_ = Instantiate<Characters>(this);
-    for (auto& itr : randomselect) {
+    for (auto& itr : selectCharacterName) {
         for (int i = 0;i < 2;i++) {
-            pCharacters_->CreateCharacterInstance(itr);
+            Character* pChracter = CharacterFactory::Instance().Create(itr, this);
+            pCharacters_->AddCharacter(pChracter);
         }
     }
 

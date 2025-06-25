@@ -2,7 +2,7 @@
 #include"TileIcons.h"
 #include"Mouse.h"
 
-UnitIcons::UnitIcons(GameObject* parent) : Icon(parent),selectCharNum_(MAX_SELECT_CHARACTER*2,-1)
+UnitIcons::UnitIcons(GameObject* parent) : Icon(parent)
 {
 
 }
@@ -19,20 +19,12 @@ void UnitIcons::Initialize()
 	csv_ = new CsvReader();
 	csv_->Load("Assets//Character//SelectCharacter.csv");
 
-	for (int y = 0; y < MAX_SELECT_CHARACTER * 2; y++) {
-		selectCharNum_[y] = (csv_->GetInt(0, y + 1));
-	}
-
-	
-
-	int num = 0;
-	for (int y = 0; y < selectCharNum_.size(); y++) {
-		csv_->Load("Assets//Character//CharacterStatus.csv");
+	for (int y = 1;y < csv_->GetHeight();y++) {
 		std::string graphName;
-		graphName = csv_->GetString(1, selectCharNum_[y]);
+		graphName = csv_->GetString(0,y);
 		std::string flPath;
 		DLC = "Assets//Image//CharacterIcon//CIcon//";
-		flPath = DLC + graphName;
+		flPath = DLC + graphName + ".png";
 		VECTOR pos;
 		int tilenum;
 		bool isSeted = false;
@@ -58,20 +50,19 @@ void UnitIcons::Initialize()
 		string IconName = graphName;
 		pUIcon->SetIconName(IconName);
 		pUIcon->Set3DPosition(pos);
-		pUIcon->SetCreateNum(num);
+		pUIcon->SetCreateNum(y - 1);
 		pUIcon->AddMoveMent(tilenum);
 		MYTRIGGER myTrigger;
 		for (int x = 0;x < 4;x++) {
-			string TriggerName = csv_->GetString(10 + x, selectCharNum_[y]);
+			string TriggerName = csv_->GetString(1 + x, y);
 			myTrigger.myTrigger[0].trigger[x].triggerName = TriggerName;
 		}
 		for (int x = 0;x < 4;x++) {
-			string TriggerName = csv_->GetString(14 + x, selectCharNum_[y]);
+			string TriggerName = csv_->GetString(5 + x, y);
 			myTrigger.myTrigger[1].trigger[x].triggerName = TriggerName;
 		}
 		pUIcon->SetMyTrigger(myTrigger);
 		pUIcons_.push_back(pUIcon);
-		num++;
 	}
 	canVisible_ = true;
 	moveMentSet = false;

@@ -1,6 +1,8 @@
 #include "Asteroid.h"
 
-Asteroid::Asteroid(GameObject* parent) : Object3D(parent)
+AutoRegister<Asteroid, TriggerFactory> Asteroid::register_("ASTEROID");
+
+Asteroid::Asteroid(GameObject* parent) : Trigger(parent)
 {
 	hModel = MV1LoadModel("Assets//Model//SampleAsteroid.mv1");
 	assert(hModel >= 0);

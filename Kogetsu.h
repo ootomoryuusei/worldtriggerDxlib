@@ -1,7 +1,10 @@
 #pragma once
-#include "Object3D.h"
+#include "Trigger.h"
+#include"TriggerFactory.h"
+#include"AutoRegister.h"
+
 class Kogetsu :
-    public Object3D
+    public Trigger
 {
 public:
     Kogetsu(GameObject* parent);
@@ -10,5 +13,6 @@ public:
     void Update() override;
     void Draw() override;
 private:
+   static AutoRegister<Kogetsu, TriggerFactory> register_;
 };
 

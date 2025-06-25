@@ -1,6 +1,9 @@
 #include "Kogetsu.h"
 
-Kogetsu::Kogetsu(GameObject* parent) : Object3D(parent)
+
+AutoRegister<Kogetsu, TriggerFactory> Kogetsu::register_("KOGETSU");
+
+Kogetsu::Kogetsu(GameObject* parent) : Trigger(parent)
 {
 	hModel = MV1LoadModel("Assets//Model//SampleMoonBlade.mv1");
 	assert(hModel >= 0);

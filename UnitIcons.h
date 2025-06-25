@@ -23,7 +23,6 @@ public:
 private:
 	vector<UnitIcon*> pUIcons_;
 	UnitIcon* pSelecting_ptr;
-	vector<int> selectCharNum_;
 	CsvReader* csv_;
 	string DLC;
 

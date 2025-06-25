@@ -217,17 +217,19 @@
     <ClInclude Include="Amatori_Chika.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="Asteroid.h" />
+    <ClInclude Include="AutoRegister.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterData.h" />
+    <ClInclude Include="CharacterFactory.h" />
     <ClInclude Include="CharacterIcon.h" />
     <ClInclude Include="CharacterIcons.h" />
     <ClInclude Include="Characters.h" />
     <ClInclude Include="CharacterSelectUI.h" />
     <ClInclude Include="CharacterSetUIFrame.h" />
     <ClInclude Include="CharacterSetUIFrames.h" />
-    <ClInclude Include="Factory.h" />
+    <ClInclude Include="BaseFactory.h" />
     <ClInclude Include="Eaglet.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Engine\CsvReader.h" />
@@ -299,6 +301,7 @@
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitIcon.h" />
     <ClInclude Include="UnitIcons.h" />
+    <ClInclude Include="TriggerFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc" />

@@ -1,6 +1,9 @@
 #include "Eaglet.h"
 
-Eaglet::Eaglet(GameObject* parent) : Object3D(parent)
+
+AutoRegister<Eaglet, TriggerFactory> Eaglet::register_("EAGLET");
+
+Eaglet::Eaglet(GameObject* parent) : Trigger(parent)
 {
 	hModel = MV1LoadModel("Assets//Model//SampleEaglet.mv1");
 	assert(hModel >= 0);

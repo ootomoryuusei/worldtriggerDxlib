@@ -35,7 +35,7 @@ void MoveSetIcon::Initialize()
 			num = y;
 		}
 	}
-	maxSetMove = csv_->GetInt(moveNum, num);
+	/*maxSetMove = csv_->GetInt(moveNum, num);*/
 }
 
 void MoveSetIcon::Update()
