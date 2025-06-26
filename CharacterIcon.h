@@ -1,6 +1,8 @@
 #pragma once
 #include"Icon.h"
 #include<vector>
+#include"IconFactory.h"
+#include"AutoRegister.h"
 
 class TriggerSetUI;
 class TriggerIcons;
@@ -22,9 +24,6 @@ public:
 
     auto GetInFrame() { return inFrame_; }
     bool GetCatchIcon() { return false; }
-
-    void SetMyTrigger(MYTRIGGER _myTrigger) { myTrigger = _myTrigger; }
-    MYTRIGGER GetMyTrigger() { return myTrigger; }
 private:
     VECTOR initialPosition_;
     bool alreadySet_[MAX_SELECT_CHARACTER];
@@ -37,6 +36,6 @@ private:
     TriggerSetUI* pT_SetUI_;
     TriggerIcons* pT_Icons_;
 
-    MYTRIGGER myTrigger;
+    static AutoRegister<Icon, IconFactory> register_;
 };
 

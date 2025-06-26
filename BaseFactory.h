@@ -17,10 +17,9 @@ public:
         creators_[name] = creator;
     }
     
-    T* Create(const string& name, GameObject* parent) {
+    T* Create(const string& name, GameObject* parent) { 
         auto it = creators_.find(name);
         if (it != creators_.end()) {
-           /* return dynamic_cast<T*>(base);*/
             return it->second(parent);
         }
         return nullptr;

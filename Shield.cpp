@@ -18,11 +18,11 @@ void Shield::Initialize()
 
 void Shield::Update()
 {
+	matrix = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);
 }
 
 void Shield::Draw()
 {
-	MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);
-	MV1SetMatrix(hModel, mModel);
+	MV1SetMatrix(hModel, matrix);
 	MV1DrawModel(hModel);
 }

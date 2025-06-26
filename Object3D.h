@@ -227,5 +227,6 @@ protected:
 	int hModel;  // モデルデータ
 	VECTOR position; // 座標
 	VECTOR rotation; // 回転
+	MATRIX matrix; //行列
 	int state_;
 };

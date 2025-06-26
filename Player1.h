@@ -2,7 +2,7 @@
 #include "Object3D.h"
 
 class CsvReader;
-class Characters;
+class CharacterGroup;
 class Tile;
 
 class Player1 :
@@ -27,7 +27,7 @@ public:
 
 private:
 	CsvReader* csv_;
-	Characters* pCharacters_;
+	CharacterGroup* pGroup;
 	Tile* pTile_;
 
 	float movetime;

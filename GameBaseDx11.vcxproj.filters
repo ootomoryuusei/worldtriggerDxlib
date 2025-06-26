@@ -53,6 +53,9 @@
     <Filter Include="Factory">
       <UniqueIdentifier>{59d12bbc-06fb-4335-917a-f00a7e0633f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Group">
+      <UniqueIdentifier>{ed593275-2d7f-40b0-864d-e699c8a9c8fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\GameObject.cpp">
@@ -103,7 +106,7 @@
     <ClCompile Include="Object3D.cpp">
       <Filter>10PlayScene</Filter>
     </ClCompile>
-    <ClCompile Include="animator.cpp">
+    <ClCompile Include="Animator.cpp">
       <Filter>10PlayScene</Filter>
     </ClCompile>
     <ClCompile Include="Engine\time.cpp">
@@ -280,14 +283,14 @@
     <ClCompile Include="Kogetsu.cpp">
       <Filter>Trigger\Triggers</Filter>
     </ClCompile>
-    <ClCompile Include="Characters.cpp">
-      <Filter>Character</Filter>
-    </ClCompile>
-    <ClCompile Include="Triggers.cpp">
-      <Filter>Trigger</Filter>
-    </ClCompile>
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="CharacterData.cpp" />
+    <ClCompile Include="CharacterGroup.cpp">
+      <Filter>Group</Filter>
+    </ClCompile>
+    <ClCompile Include="TriggerGroup.cpp">
+      <Filter>Group</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -522,12 +525,6 @@
     <ClInclude Include="Kogetsu.h">
       <Filter>Trigger\Triggers</Filter>
     </ClInclude>
-    <ClInclude Include="Characters.h">
-      <Filter>Character</Filter>
-    </ClInclude>
-    <ClInclude Include="Triggers.h">
-      <Filter>Trigger</Filter>
-    </ClInclude>
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="CharacterData.h" />
     <ClInclude Include="TriggerFactory.h">
@@ -541,6 +538,18 @@
     </ClInclude>
     <ClInclude Include="CharacterFactory.h">
       <Filter>Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="IconFactory.h">
+      <Filter>Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Group.h">
+      <Filter>Group</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerGroup.h">
+      <Filter>Group</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterGroup.h">
+      <Filter>Group</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

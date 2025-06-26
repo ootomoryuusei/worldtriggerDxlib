@@ -2,10 +2,10 @@
 #include "Camera.h"
 #include"Tile.h"
 #include"Engine/CsvReader.h"
-#include"Characters.h"
 #include"ImGui/imgui.h"
 
 #include"CharacterFactory.h"
+#include "CharacterGroup.h"
 
 Player1::Player1(GameObject* parent) : Object3D(parent)
 {
@@ -38,18 +38,18 @@ Player1::~Player1()
 void Player1::Initialize()
 {
 	pTile_ = GetParent()->FindGameObject<Tile>();
-	pCharacters_ = Instantiate<Characters>(this);
+	pGroup = Instantiate<CharacterGroup>(this);
 
 	csv_ = new CsvReader();
 	csv_->Load("Assets//Character//SelectCharacter.csv");
 	for (int y = 1;y < csv_->GetHeight();y++) {
 		string selectCharacterName = csv_->GetString(0, y);
 		Character* pCharacter = CharacterFactory::Instance().Create(selectCharacterName, this);
-		pCharacters_->AddCharacter(pCharacter);
+		pGroup->AddCharacter(pCharacter);
 	}
 
 	int index = 0;
-	for (auto& itr : pCharacters_->GetpCharacters()) {
+	for (auto& itr : pGroup->GetpCharacters()) {
 		int placementIndex = csv_->GetInt(9, index + 1);
 
 		int x = placementIndex % MAX_MAP_WIDTH;

@@ -7,12 +7,12 @@ using std::vector;
 
 class Tile;
 
-class Characters :
+class CharacterGroup :
     public Object3D
 {
 public:
-	Characters(GameObject* parent);
-	~Characters();
+	CharacterGroup(GameObject* parent);
+	~CharacterGroup();
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;

@@ -132,7 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Amatori_Chika.cpp" />
-    <ClCompile Include="animator.cpp" />
+    <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -140,7 +140,7 @@
     <ClCompile Include="CharacterData.cpp" />
     <ClCompile Include="CharacterIcon.cpp" />
     <ClCompile Include="CharacterIcons.cpp" />
-    <ClCompile Include="Characters.cpp" />
+    <ClCompile Include="CharacterGroup.cpp" />
     <ClCompile Include="CharacterSelectUI.cpp" />
     <ClCompile Include="CharacterSetUIFrame.cpp" />
     <ClCompile Include="CharacterSetUIFrames.cpp" />
@@ -198,9 +198,9 @@
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="Trigger.cpp" />
     <ClCompile Include="TriggerArcIcon.cpp" />
+    <ClCompile Include="TriggerGroup.cpp" />
     <ClCompile Include="TriggerIcon.cpp" />
     <ClCompile Include="TriggerIcons.cpp" />
-    <ClCompile Include="Triggers.cpp" />
     <ClCompile Include="TriggersArcIcon.cpp" />
     <ClCompile Include="TriggersArcIcons.cpp" />
     <ClCompile Include="TriggerSetButton.cpp" />
@@ -225,7 +225,7 @@
     <ClInclude Include="CharacterFactory.h" />
     <ClInclude Include="CharacterIcon.h" />
     <ClInclude Include="CharacterIcons.h" />
-    <ClInclude Include="Characters.h" />
+    <ClInclude Include="CharacterGroup.h" />
     <ClInclude Include="CharacterSelectUI.h" />
     <ClInclude Include="CharacterSetUIFrame.h" />
     <ClInclude Include="CharacterSetUIFrames.h" />
@@ -241,6 +241,7 @@
     <ClInclude Include="Engine\Transform.h" />
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="Group.h" />
     <ClInclude Include="Icon.h" />
     <ClInclude Include="Icons.h" />
     <ClInclude Include="ImGui\imconfig.h" />
@@ -288,7 +289,7 @@
     <ClInclude Include="TriggerArcIcon.h" />
     <ClInclude Include="TriggerIcon.h" />
     <ClInclude Include="TriggerIcons.h" />
-    <ClInclude Include="Triggers.h" />
+    <ClInclude Include="TriggerGroup.h" />
     <ClInclude Include="TriggersArcIcon.h" />
     <ClInclude Include="TriggersArcIcons.h" />
     <ClInclude Include="TriggerSetButton.h" />
@@ -302,6 +303,7 @@
     <ClInclude Include="UnitIcon.h" />
     <ClInclude Include="UnitIcons.h" />
     <ClInclude Include="TriggerFactory.h" />
+    <ClInclude Include="IconFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc" />

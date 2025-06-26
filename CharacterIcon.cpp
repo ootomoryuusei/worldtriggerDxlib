@@ -4,6 +4,8 @@
 #include"TriggerSetUI.h"
 #include"TriggerIcons.h"
 
+AutoRegister<Icon, IconFactory> CharacterIcon::register_("CharacterIcon");
+
 CharacterIcon::CharacterIcon(GameObject* parent) : Icon(parent),inFrame_(MAX_SELECT_CHARACTER,false),pT_Icons_(nullptr)
 {
 	position = { 0,0,0 };

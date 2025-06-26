@@ -1,4 +1,4 @@
-#include "animator.h"
+#include "Animator.h"
 #include <DxLib.h>
 #include "Engine/time.h"
 
