@@ -1,6 +1,6 @@
 #include "Enemy.h"
 #include"Engine/CsvReader.h"
-#include"Characters.h"
+#include"CharacterGroup.h"
 #include"Tile.h"
 
 #include"CharacterFactory.h"
@@ -36,7 +36,7 @@ void Enemy::Initialize()
         selectCharacterName.push_back(csv_->GetString(0, num));
     }
 
-    pCharacters_ = Instantiate<Characters>(this);
+    pCharacters_ = Instantiate<CharacterGroup>(this);
     for (auto& itr : selectCharacterName) {
         for (int i = 0;i < 2;i++) {
             Character* pChracter = CharacterFactory::Instance().Create(itr, this);

@@ -10,14 +10,17 @@ const int MAX_SELECT_CHARACTER = 3;
 const int MAX_TRIGGER_HANDS = 2;
 const int MAX_CAN_SET_TRIGGER = 4;
 
+struct ARC_DATA {
+	float percent;
+	float startPercent;
+	float angle;
+	float rangeSize;
+};
 
 struct TRIGGER {
 	string triggerName; //トリガー名
 	bool IsSelected; //選択されているかどうか
-	float angle; //アングル
-	float startAngle; //はじめのアングル
-	float rangeSize; //射程や警戒範囲の長さ
-	int tNum; //triggerナンバー
+	ARC_DATA arc; //トリガーの範囲(円弧のデータ)
 };
 
 struct TRIGGERS {
@@ -41,9 +44,19 @@ struct TILEDATA {
 	int num;
 };
 
+enum STATUS {
+	MOVE = 0,
+	TRION,
+	ATTACK,
+	AVOIDANCE,
+	DEFENCE,
+	SUPPORT,
+	TECHNIQUE,
+	STATUS_MAX
+};
 struct CHARACTER_STATUS
 {
-	int move,trion, attack,avoidace,defense,support,technique;
+	int status[STATUS_MAX];
 };
 
 enum STEP {
@@ -68,6 +81,7 @@ enum WEAPON {
 	EAGLET,
 	WEAPON_MAX
 };
+
 /// <summary>
 /// 
 /// </summary>

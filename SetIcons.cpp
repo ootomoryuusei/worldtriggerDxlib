@@ -67,7 +67,7 @@ void SetIcons::Initialize()
 			string TriggerName = csv_->GetString(14 + x, selectCharNum_[y]);
 			myTrigger.myTrigger[1].trigger[x].triggerName = TriggerName;
 		}
-		pCIcon->SetMyTrigger(myTrigger);
+		/*pCIcon->SetMyTrigger(myTrigger);*/
 		pCIcon->SetIconName(csv_->GetString(0, selectCharNum_[y]));
 		pSelectCIcons_.push_back(pCIcon);
 		num++;

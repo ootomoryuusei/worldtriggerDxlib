@@ -69,7 +69,7 @@ void Character::Draw()
 
 	MATRIX mShield = Object3D::ChangeFLOAT3ToMATRIX({ position.x,position.y,position.z - 1.0f }, rotation);
 
-	DrawMyTrigger(myTrigger_, mLeftHand, mRightHand);
+	/*DrawMyTrigger(myTrigger_, mLeftHand, mRightHand);*/
 
 	// サーベルの刃は、(0,0,0)～(0,-150,0)にある。これにmSabelをかけると、今の座標が手に入る
 	/*DrawLine3D(VGet(0, 0, 0) * hBlade, VGet(0, -150, 0) * hBlade, GetColor(255, 0, 0));*/
@@ -77,7 +77,7 @@ void Character::Draw()
 
 void Character::ReadMyTrigger(int _createNum)
 {
-	csv_->Load("Assets/Character/SelectCharacter.csv");
+	/*csv_->Load("Assets/Character/SelectCharacter.csv");
 	int line = 0;
 	for (int x = 0;x < csv_->GetWidth(0);x++) {
 		if ("MainTrigger" == csv_->GetString(x, 0)) {
@@ -91,29 +91,17 @@ void Character::ReadMyTrigger(int _createNum)
 			myTrigger_.myTrigger[i].trigger[index].triggerName = csv_->GetString(line, _createNum + 1);
 			line++;
 		}
-	}
-
-	csv_->Load("Assets/Weapon/DefaultWeaponStatus.csv");
-	for (int i = 0;i < (int)MAX;i++) {
-		for (int index = 0;index < 4;index++) {
-			string t_name = myTrigger_.myTrigger[i].trigger[index].triggerName;
-			for (int y = 1;y < csv_->GetHeight();y++) {
-				if (t_name == csv_->GetString(0,y)) {
-					myTrigger_.myTrigger[i].trigger[index].tNum = y - 1;
-				}
-			}
-		}
-	}
+	}*/
 }
 
 void Character::CreateTriggerInstance()
 {
-	for (int i = 0;i < (int)MAX;i++) {
+	/*for (int i = 0;i < (int)MAX;i++) {
 		for (int index = 0;index < 4;index++) {
 			string name = myTrigger_.myTrigger[i].trigger[index].triggerName;
 			TriggerFactory::Instance().Create(name, this);
 		}
-	}
+	}*/
 }
 
 void Character::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix)
@@ -160,7 +148,7 @@ void Character::MoveMent()
 	}
 }
 
-bool Character::ArcInPoint(VECTOR _e_pos)
+bool Character::ArcInPoint(VECTOR _e_pos,float _fov)
 {
 	VECTOR toEnemy = ToTarget(_e_pos);
 	toEnemy = VNorm(toEnemy);
@@ -168,9 +156,7 @@ bool Character::ArcInPoint(VECTOR _e_pos)
 	float dot = VDot(dir_, toEnemy);
 	float angle = ToRad(acosf(dot));
 
-	float fov = 45.0f;
-
-	if (angle <= fov) {
+	if (angle <= _fov) {
 		return true;
 	}
 	return false;

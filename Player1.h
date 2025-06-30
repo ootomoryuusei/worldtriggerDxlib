@@ -4,6 +4,7 @@
 class CsvReader;
 class CharacterGroup;
 class Tile;
+class Enemy;
 
 class Player1 :
     public Object3D
@@ -15,11 +16,7 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	CHARACTER_STATUS GetCStatus() { return cStatus; }
-
 	VECTOR GetPosition() { return position; }
-
-	void SetMyTrigger(MYTRIGGER _trigger);
 
 	void DrawMyTrigger(MYTRIGGER _trigger,MATRIX _leftMatrix,MATRIX _rightMatrix);
 
@@ -34,9 +31,6 @@ private:
 	float flame;
 	float time;
 
-	CHARACTER_STATUS cStatus;
-	
-	MYTRIGGER Trigger;
-
+	Enemy* pEnemy_;
 };
 
