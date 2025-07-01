@@ -147,17 +147,3 @@ void Character::MoveMent()
 		elapsedTime += Time::DeltaTime();
 	}
 }
-
-bool Character::ArcInPoint(VECTOR _e_pos,float _fov)
-{
-	VECTOR toEnemy = ToTarget(_e_pos);
-	toEnemy = VNorm(toEnemy);
-
-	float dot = VDot(dir_, toEnemy);
-	float angle = ToRad(acosf(dot));
-
-	if (angle <= _fov) {
-		return true;
-	}
-	return false;
-}

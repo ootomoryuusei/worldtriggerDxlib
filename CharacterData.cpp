@@ -57,7 +57,7 @@ void CharacterData::DefaultSetMyTrigger(string _name)
 	for (int i = 0;i < MAX;i++) {
 		for (int x = 0;x < 4;x++) {
 			for (int y = 1;y < csv_->GetHeight();y++) {
-				myTrigger_.myTrigger[i].trigger[x].arc.
+				/*myTrigger_.myTrigger[i].trigger[x].arc.*/
 			}
 		}
 	}

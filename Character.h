@@ -3,6 +3,7 @@
 #include<vector>
 #include<deque>
 #include<list>
+#include "Trigger.h"
 
 class Icon;
 class CsvReader;
@@ -23,6 +24,7 @@ protected:
 	vector<int> moveMent;
 	deque<int> dq_moveMent;
 	list<Character*> e_characterlist_;
+	array<Trigger*, MAX> hands_;
 
 	Tile* tile_;
 	CsvReader* csv_;
@@ -56,8 +58,6 @@ public:
 	void DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix);
 
 	void MoveMent();
-
-	bool ArcInPoint(VECTOR _e_pos,float _fov);
 private:
 };
 

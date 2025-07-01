@@ -10,6 +10,8 @@ public:
     void Initialize() override;
     void Update() override;
     void Draw() override;
+
+    bool ArcInPoint(VECTOR _targer_pos, float _fov);
 private:
 };
 
