@@ -21,8 +21,8 @@ void TriggerIcons::Initialize()
 void TriggerIcons::Update()
 {
 	if (!firstSet) { 
-		DefaultSetTriggers(pCharacterIcon_,MAIN);
-		DefaultSetTriggers(pCharacterIcon_, SUB);
+		DefaultSetTriggers(pCharacterIcon_,RIGHT);
+		DefaultSetTriggers(pCharacterIcon_, LEFT);
 		/*CreateCanSet(pCharacterIcon_,MAIN);
 		CreateCanSet(pCharacterIcon_, SUB);*/
 		firstSet = true;
@@ -31,7 +31,7 @@ void TriggerIcons::Update()
 	TriggerSetUI* pUI = GetParent()->FindGameObject<TriggerSetUI>();
 	
 	
-	for (int i = 0; i < (int)MAIN_SUB::MAX;i++) {
+	for (int i = 0; i < (int)HANDS::MAX;i++) {
 		int index = 0;
 		for (auto& itr : pTIcons_[i]) {
 			VECTOR position = pUI->GetpFrames()->GetpUIFrames()[i][index]->Get3DPosition();
@@ -47,7 +47,7 @@ void TriggerIcons::Draw()
 
 }
 
-void TriggerIcons::DefaultSetTriggers(CharacterIcon* pCharacterIcon,MAIN_SUB type)
+void TriggerIcons::DefaultSetTriggers(CharacterIcon* pCharacterIcon,HANDS hands)
 {
 	/*MYTRIGGER myTrigger = pCharacterIcon->GetMyTrigger();
 	csv_ = new CsvReader();
@@ -78,7 +78,7 @@ void TriggerIcons::DefaultSetTriggers(CharacterIcon* pCharacterIcon,MAIN_SUB typ
 	}*/
 }
 
-void TriggerIcons::SetTriggers(CharacterIcon* pCharacterIcon,MAIN_SUB type)
+void TriggerIcons::SetTriggers(CharacterIcon* pCharacterIcon,HANDS hands)
 {
 	//MYTRIGGER myTrigger = pCharacterIcon->GetMyTrigger();
 	//csv_ = new CsvReader();
@@ -107,7 +107,7 @@ void TriggerIcons::SetTriggers(CharacterIcon* pCharacterIcon,MAIN_SUB type)
 	//}
 }
 
-void TriggerIcons::CreateCanSet(CharacterIcon* pCharacterIcon, MAIN_SUB type)
+void TriggerIcons::CreateCanSet(CharacterIcon* pCharacterIcon, HANDS hands)
 {
 	/*MYTRIGGER myTrigger = pCharacterIcon->GetMyTrigger();
 	vector<string> canSet;

@@ -27,7 +27,7 @@ public:
 
     const auto& GetpTIcons() const{ return pALLTIcons_; }
 
-    void SetTriggers(CharacterIcon* pCharacterIcon, MAIN_SUB type);
+    void SetTriggers(CharacterIcon* pCharacterIcon, HANDS hands);
 
     void SetpCharacterIcon_(CharacterIcon* _pChracterIcon) { pCharacterIcon_ = _pChracterIcon; }
 private:
@@ -39,7 +39,7 @@ private:
     CharacterIcon* pCharacterIcon_;
     bool firstSet;
 
-    void DefaultSetTriggers(CharacterIcon* pCharacterIcon, MAIN_SUB type);
-    void CreateCanSet(CharacterIcon* pCharacterIcon,MAIN_SUB type);
+    void DefaultSetTriggers(CharacterIcon* pCharacterIcon, HANDS hands);
+    void CreateCanSet(CharacterIcon* pCharacterIcon,HANDS hands);
 };
 

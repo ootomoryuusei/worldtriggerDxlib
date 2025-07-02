@@ -20,26 +20,14 @@ Amatori_Chika::~Amatori_Chika()
 {
 }
 
-void Amatori_Chika::Initialize()
-{
-	
-}
-
 void Amatori_Chika::Update()
 {
-	pEnemy_ = GetParent()->GetParent()->FindGameObject<Enemy>();
-	e_characterlist_ = pEnemy_->FindGameObjects<Character>();
-
 	switch (state_)
 	{
 	case FIRST: break;
 	case SECONDE: break;
 	case THIRD:
 	{
-		for (auto& itr : e_characterlist_) {
-			VECTOR e_pos = itr->Get3DPosition();
-			ArcInPoint(e_pos,40);
-		}
 		MoveMent();
 		break;
 	}

@@ -23,14 +23,13 @@ protected:
 	VECTOR dir_;
 	vector<int> moveMent;
 	deque<int> dq_moveMent;
-	list<Character*> e_characterlist_;
+	list<Character*> characterlist_;
 	array<Trigger*, MAX> hands_;
 
 	Tile* tile_;
 	CsvReader* csv_;
-	Enemy* pEnemy_;
 
-	CharacterData* pCharacterData_;
+	CharacterData* pData_;
 
 	bool firstSet;
 	bool moveing;

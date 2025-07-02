@@ -17,12 +17,12 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	const auto& GetpCharacters() const { return pCharacters_; }
+	/*const auto& GetpCharacters() const { return pCharacters_; }
 
-	void AddCharacter(Character* _pCharacter) { pCharacters_.push_back(_pCharacter); }
+	void AddCharacter(Character* _pCharacter) { pCharacters_.push_back(_pCharacter); }*/
 
 private:
-	vector<Character*> pCharacters_;
+	/*vector<Character*> pCharacters_;*/
 
 	Tile* pTile_;
 };

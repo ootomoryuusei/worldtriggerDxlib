@@ -6,6 +6,7 @@
 
 #include"CharacterFactory.h"
 #include "CharacterGroup.h"
+#include"CharacterData.h"
 
 Player1::Player1(GameObject* parent) : Object3D(parent)
 {
@@ -38,18 +39,23 @@ Player1::~Player1()
 void Player1::Initialize()
 {
 	pTile_ = GetParent()->FindGameObject<Tile>();
-	pGroup = Instantiate<CharacterGroup>(this);
+	pGroup_ = Instantiate<CharacterGroup>(this);
 
 	csv_ = new CsvReader();
 	csv_->Load("Assets//Character//SelectCharacter.csv");
 	for (int y = 1;y < csv_->GetHeight();y++) {
 		string selectCharacterName = csv_->GetString(0, y);
-		Character* pCharacter = CharacterFactory::Instance().Create(selectCharacterName, this);
-		pGroup->AddCharacter(pCharacter);
+		Character* pCharacter = CharacterFactory::Instance().Create(selectCharacterName, pGroup_);
+		auto pData = pCharacter->FindGameObject<CharacterData>();
+		pData->SetName(selectCharacterName);
+		pData->DefaultSetStatus(selectCharacterName);
+		pData->DefaultSetMyTrigger(selectCharacterName);
+		pData->SetTarget(pGroup_);
 	}
 
 	int index = 0;
-	for (auto& itr : pGroup->GetpCharacters()) {
+	characters_ = pGroup_->FindGameObjects<Character>();
+	for (auto& itr : characters_) {
 		int placementIndex = csv_->GetInt(9, index + 1);
 
 		int x = placementIndex % MAX_MAP_WIDTH;
@@ -64,10 +70,11 @@ void Player1::Initialize()
 
 void Player1::Update()
 {
-	//Characters* pCharacters = GetParent()->GetParent()->FindGameObject<Characters>();
-	//XMFLOAT3 c_rota = pCharacters->GetRotate();
-	//VECTOR c_position = pCharacters->Get3DPosition();
-
+	//characters_ = pGroup_->FindGameObjects<Character>();
+	//for (auto& itr : characters_) {
+	//}
+	//XMFLOAT3 c_rota = pSelectingCharacter_->GetRotate();
+	//VECTOR c_position = pSelectingCharacter_->Get3DPosition();
 	//// カメラの設定
 	//MATRIX mRot = MGetRotY(c_rota.y);  // 回転行列
 	//// 回ってないとき、プレイヤーからどれぐらい後ろ？→ベクトル
@@ -84,63 +91,4 @@ void Player1::Update()
 
 void Player1::Draw()
 {
-}
-
-void Player1::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix)
-{
-	/*for (int i = 0; i < 4; i++) {
-		if (_trigger.Main[i].IsSelected) {
-			switch (_trigger.Main[i].tNum)
-			{
-			case FREE:
-			{
-				break;
-			}
-			case MOONBLADE:
-			{
-				IsLoaded(hBlade,_rightMatrix);
-				break;
-			}
-			case SHIELD:
-			{
-				IsLoaded(hShield,_rightMatrix);
-				break;
-			}
-			case ASTEROID:
-			{
-				IsLoaded(hAsteroid,_rightMatrix);
-				break;
-			}
-			default:
-				break;
-			}
-		}
-
-		if (_trigger.Sub[i].IsSelected) {
-			switch (_trigger.Sub[i].tNum)
-			{
-			case FREE:
-			{
-				break;
-			}
-			case MOONBLADE:
-			{
-				IsLoaded(hBlade, _leftMatrix);
-				break;
-			}
-			case SHIELD:
-			{
-				IsLoaded(hShield, _leftMatrix);
-				break;
-			}
-			case ASTEROID:
-			{
-				IsLoaded(hAsteroid, _leftMatrix);
-				break;
-			}
-			default:
-				break;
-			}
-		}
-	}*/
 }

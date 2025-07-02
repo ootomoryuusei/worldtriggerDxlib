@@ -2,9 +2,11 @@
 // GameObjectÅ®Object3DÅ®Player/GroundÇÃä÷åWÇ…Ç∑ÇÈ
 #include "Engine/GameObject.h"
 #include<array>
+#include<unordered_map>
 
 using std::string;
 using std::array;
+using std::unordered_map;
 
 const int MAX_SELECT_CHARACTER = 3;
 const int MAX_TRIGGER_HANDS = 2;
@@ -67,9 +69,9 @@ enum STEP {
 };
 
 
-enum MAIN_SUB {
-	MAIN = 0,
-	SUB,
+enum HANDS {
+	RIGHT = 0,
+	LEFT,
 	MAX
 };
 

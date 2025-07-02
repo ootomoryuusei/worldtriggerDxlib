@@ -9,7 +9,6 @@ class Amatori_Chika :
 public:
 	Amatori_Chika(GameObject* parent);
 	~Amatori_Chika();
-	void Initialize() override;
 	void Update() override;
 	void Draw() override;
 private:

@@ -20,10 +20,6 @@ Kuga_Yuuma::~Kuga_Yuuma()
 {
 }
 
-void Kuga_Yuuma::Initialize()
-{
-}
-
 void Kuga_Yuuma::Update()
 {
 	switch (state_)

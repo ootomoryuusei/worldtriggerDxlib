@@ -25,7 +25,7 @@ void CharacterData::Draw()
 
 void CharacterData::DefaultSetStatus(string _name)
 {
-	int line;
+	int line = 0;
 	csv_->Load("Assets//Character//CharacterStatus.csv");
 	for (int y = 1;y < csv_->GetHeight();y++) {
 		if (_name == csv_->GetString(0, y)) {
@@ -40,25 +40,17 @@ void CharacterData::DefaultSetStatus(string _name)
 
 void CharacterData::DefaultSetMyTrigger(string _name)
 {
-	int line;
+	int line = 0;
 	csv_->Load("Assets//Character//CharacterStatus.csv");
 	for (int y = 1;y < csv_->GetHeight();y++) {
 		if (_name == csv_->GetString(0, y)) {
 			line = y;
 		}
 	}
-	for (int x = 1;x < 5;x++) {
-		myTrigger_.myTrigger[MAIN].trigger[x].triggerName = csv_->GetString(STATUS_MAX + x + 1, line);
+	for (int x = 0;x < 4;x++) {
+		myTrigger_.myTrigger[RIGHT].trigger[x].triggerName = csv_->GetString(STATUS_MAX + x + 1, line);
 	}
-	for (int x = 5;x < 9;x++) {
-		myTrigger_.myTrigger[SUB].trigger[x].triggerName = csv_->GetString(STATUS_MAX + x + 1, line);
-	}
-	csv_->Load("Assets//Weapon//DefaultWeaponStatus.csv");
-	for (int i = 0;i < MAX;i++) {
-		for (int x = 0;x < 4;x++) {
-			for (int y = 1;y < csv_->GetHeight();y++) {
-				/*myTrigger_.myTrigger[i].trigger[x].arc.*/
-			}
-		}
+	for (int x = 0;x < 4;x++) {
+		myTrigger_.myTrigger[LEFT].trigger[x].triggerName = csv_->GetString(11 + x + 1, line);
 	}
 }

@@ -19,10 +19,6 @@ Mikumo_Osamu::~Mikumo_Osamu()
 {
 }
 
-void Mikumo_Osamu::Initialize()
-{
-}
-
 void Mikumo_Osamu::Update()
 {
 	switch (state_)

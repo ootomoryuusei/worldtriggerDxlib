@@ -39,13 +39,13 @@ void Enemy::Initialize()
     pCharacters_ = Instantiate<CharacterGroup>(this);
     for (auto& itr : selectCharacterName) {
         for (int i = 0;i < 2;i++) {
-            Character* pChracter = CharacterFactory::Instance().Create(itr, this);
-            pCharacters_->AddCharacter(pChracter);
+            Character* pChracter = CharacterFactory::Instance().Create(itr, pCharacters_);
         }
     }
 
     pTile_ = GetParent()->FindGameObject<Tile>();
-    for (auto& itr : pCharacters_->GetpCharacters()) {
+    list<Character*> characters = pCharacters_->FindGameObjects<Character>();
+    for (auto& itr : characters) {
         int rand_posX = GetRand(pTile_->GetTileX());
         int rand_posY = GetRand(1);
         rand_posY = rand_posY + (pTile_->GetTileX() - 2);

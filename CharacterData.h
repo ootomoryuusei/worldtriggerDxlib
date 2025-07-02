@@ -2,6 +2,7 @@
 #include "Object3D.h"
 
 class CsvReader;
+class CharacterGroup;
 
 class CharacterData :
     public Object3D
@@ -22,10 +23,14 @@ public:
 
 	void DefaultSetStatus(string _name);
 	void DefaultSetMyTrigger(string _name);
+
+	void SetTarget(CharacterGroup* _target) { target_ = _target; }
+	const auto& GetTarget()const { return target_; }
 private: 
 	CsvReader* csv_;
 	CHARACTER_STATUS status_;
 	MYTRIGGER myTrigger_;
 	string name_;
+	CharacterGroup* target_;
 };
 

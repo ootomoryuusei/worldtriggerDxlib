@@ -30,8 +30,9 @@ Character::~Character()
 
 void Character::Initialize()
 {
-	tile_ = GetParent()->FindGameObject<Tile>();
-	pCharacterData_ = Instantiate<CharacterData>(this);
+	tile_ = GetParent()->GetParent()->GetParent()->FindGameObject<Tile>();
+	pData_ = Instantiate<CharacterData>(this);
+	MYTRIGGER myTrigger = pData_->GetMyTrigger();
 }
 
 void Character::Update()
@@ -110,14 +111,13 @@ void Character::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _ri
 
 void Character::MoveMent()
 {
-	Tile* pTile = GetParent()->GetParent()->FindGameObject<Tile>();
 	if (!firstSet) {
 		for (auto& itr : moveMent) {
 			dq_moveMent.push_back(itr);
 		}
 
-		XMINT2 f_index = { dq_moveMent.front() % pTile->GetTileX(), dq_moveMent.front() / pTile->GetTileZ() };
-		position = pTile->GetTilesData(f_index.x, f_index.y).position;
+		XMINT2 f_index = { dq_moveMent.front() % tile_->GetTileX(), dq_moveMent.front() / tile_->GetTileZ() };
+		position = tile_->GetTilesData(f_index.x, f_index.y).position;
 		firstSet = true;
 		moveing = true;
 	}
@@ -127,10 +127,10 @@ void Character::MoveMent()
 			auto startIndex = *it;
 			auto targetIndex = *(++it);
 
-			XMINT2 s_index = { startIndex % pTile->GetTileX(), startIndex / pTile->GetTileZ() };
-			XMINT2 t_index = { targetIndex % pTile->GetTileX(),targetIndex / pTile->GetTileZ() };
-			VECTOR start = pTile->GetTilesData(s_index.x, s_index.y).position;
-			VECTOR target = pTile->GetTilesData(t_index.x, t_index.y).position;
+			XMINT2 s_index = { startIndex % tile_->GetTileX(), startIndex / tile_->GetTileZ() };
+			XMINT2 t_index = { targetIndex % tile_->GetTileX(),targetIndex / tile_->GetTileZ() };
+			VECTOR start = tile_->GetTilesData(s_index.x, s_index.y).position;
+			VECTOR target = tile_->GetTilesData(t_index.x, t_index.y).position;
 			float percent = elapsedTime / totalTime;
 			percent = clamp(percent, 0.0f, 1.0f);
 			position = Lerp3D(start, target, percent);
