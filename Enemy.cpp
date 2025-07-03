@@ -39,18 +39,18 @@ void Enemy::Initialize()
         selectCharacterName.push_back(csv_->GetString(0, num));
     }
 
-    Characters* pCharacter = GetParent()->FindGameObject<Characters>();
-    Group<Character>* enemyGroup = pCharacter->GetEnemyGroup();
+    Characters* pCharacters = GetParent()->FindGameObject<Characters>();
+    Group<Character>* enemyGroup = pCharacters->GetEnemyGroup();
 
     for (auto& itr : selectCharacterName) {
         for (int i = 0;i < 2;i++) {
-            Character* pChracter = CharacterFactory::Instance().Create(itr, enemyGroup);
+            Character* pCharacter = CharacterFactory::Instance().Create(itr, enemyGroup);
+            enemyGroup->Add(pCharacter);
         }
     }
 
     pTile_ = GetParent()->FindGameObject<Tile>();
-    list<Character*> characters = pCharacters_->FindGameObjects<Character>();
-    for (auto& itr : characters) {
+    for (auto& itr : enemyGroup->GetAll()) {
         int rand_posX = GetRand(pTile_->GetTileX());
         int rand_posY = GetRand(1);
         rand_posY = rand_posY + (pTile_->GetTileX() - 2);
