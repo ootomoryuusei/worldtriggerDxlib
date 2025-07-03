@@ -18,8 +18,12 @@
 #include "Mouse.h"
 #include"TriggersArcIcons.h"
 
+#include"Characters.h"
+
 PlayScene::PlayScene(GameObject* parent)
 {
+	Instantiate<Characters>(this);
+
 	Instantiate<BackGround>(this);
 
 	Instantiate<Timer>(this);

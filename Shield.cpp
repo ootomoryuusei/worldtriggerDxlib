@@ -1,4 +1,8 @@
 #include "Shield.h"
+#include<list> 
+#include"CharacterGroup.h"
+
+using std::list;
 
 AutoRegister<Shield, TriggerFactory> Shield::register_("SHIELD");
 

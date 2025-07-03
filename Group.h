@@ -1,18 +1,25 @@
 #pragma once
-#include "Object3D.h"
-#include<vector>
+#include"Engine/GameObject.h"
 #include<list>
+#include<string>
+#include<vector>
 
 using std::vector;
 using std::list;
+using std::string;
 
-
-class Group :
-    public Object3D
-{
+template<class T>
+class Group : public GameObject {
 public:
-    Group(GameObject* parent, const std::string& name = "") : Object3D(parent) {}
-protected:
-    vector<GameObject*> members_;
-};
+	Group(GameObject* parent,const string& name = "") : GameObject(parent,name){}
 
+	void Add(T* obj) {
+		members_.push_back(obj);
+	}
+
+	const vector<T*>& GetAll() const {
+		return members_;
+	}
+private:
+	vector<T*> members_;
+};

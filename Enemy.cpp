@@ -5,6 +5,9 @@
 
 #include"CharacterFactory.h"
 
+#include"Characters.h"
+
+
 Enemy::Enemy(GameObject* parent) : Object3D(parent)
 {
 }
@@ -36,10 +39,12 @@ void Enemy::Initialize()
         selectCharacterName.push_back(csv_->GetString(0, num));
     }
 
-    pCharacters_ = Instantiate<CharacterGroup>(this);
+    Characters* pCharacter = GetParent()->FindGameObject<Characters>();
+    Group<Character>* enemyGroup = pCharacter->GetEnemyGroup();
+
     for (auto& itr : selectCharacterName) {
         for (int i = 0;i < 2;i++) {
-            Character* pChracter = CharacterFactory::Instance().Create(itr, pCharacters_);
+            Character* pChracter = CharacterFactory::Instance().Create(itr, enemyGroup);
         }
     }
 

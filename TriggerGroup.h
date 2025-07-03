@@ -1,10 +1,10 @@
 #pragma once
-#include "Group.h"
+#include "Object3D.h"
 class TriggerGroup :
-    public Group
+    public Object3D
 {
 public:
-    TriggerGroup(GameObject* parent) : Group(parent){}
+    TriggerGroup(GameObject* parent) : Object3D(parent){}
     ~TriggerGroup() {};
 private:
 };

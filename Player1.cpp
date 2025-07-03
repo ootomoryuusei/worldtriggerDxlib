@@ -8,6 +8,8 @@
 #include "CharacterGroup.h"
 #include"CharacterData.h"
 
+#include"Characters.h"
+
 Player1::Player1(GameObject* parent) : Object3D(parent)
 {
 }
@@ -38,24 +40,25 @@ Player1::~Player1()
 
 void Player1::Initialize()
 {
+	Characters* pCharacters = GetParent()->FindGameObject<Characters>();
+	Group<Character>* playerGroup = pCharacters->GetPlayerGroup();
+
 	pTile_ = GetParent()->FindGameObject<Tile>();
-	pGroup_ = Instantiate<CharacterGroup>(this);
 
 	csv_ = new CsvReader();
 	csv_->Load("Assets//Character//SelectCharacter.csv");
 	for (int y = 1;y < csv_->GetHeight();y++) {
 		string selectCharacterName = csv_->GetString(0, y);
-		Character* pCharacter = CharacterFactory::Instance().Create(selectCharacterName, pGroup_);
+		Character* pCharacter = CharacterFactory::Instance().Create(selectCharacterName, playerGroup);
+		playerGroup->Add(pCharacter);
 		auto pData = pCharacter->FindGameObject<CharacterData>();
 		pData->SetName(selectCharacterName);
 		pData->DefaultSetStatus(selectCharacterName);
 		pData->DefaultSetMyTrigger(selectCharacterName);
-		pData->SetTarget(pGroup_);
 	}
 
 	int index = 0;
-	characters_ = pGroup_->FindGameObjects<Character>();
-	for (auto& itr : characters_) {
+	for (auto& itr : playerGroup->GetAll()) {
 		int placementIndex = csv_->GetInt(9, index + 1);
 
 		int x = placementIndex % MAX_MAP_WIDTH;

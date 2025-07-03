@@ -16,14 +16,7 @@ public:
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
-
-	/*const auto& GetpCharacters() const { return pCharacters_; }
-
-	void AddCharacter(Character* _pCharacter) { pCharacters_.push_back(_pCharacter); }*/
-
 private:
-	/*vector<Character*> pCharacters_;*/
-
 	Tile* pTile_;
 };
 

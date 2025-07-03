@@ -12,6 +12,7 @@ public:
     void Draw() override;
 
     bool ArcInPoint(VECTOR _targer_pos,VECTOR _dir,float _fov);
+
 private:
 };
 
