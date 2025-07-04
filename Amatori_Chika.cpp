@@ -20,22 +20,6 @@ Amatori_Chika::~Amatori_Chika()
 {
 }
 
-void Amatori_Chika::Update()
-{
-	switch (state_)
-	{
-	case FIRST: break;
-	case SECONDE: break;
-	case THIRD:
-	{
-		MoveMent();
-		break;
-	}
-	default:
-		break;
-	}
-}
-
 void Amatori_Chika::Draw()
 {
 	MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);

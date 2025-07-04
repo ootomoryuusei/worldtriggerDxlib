@@ -22,6 +22,7 @@ void Shield::Initialize()
 
 void Shield::Update()
 {
+
 	matrix = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);
 }
 

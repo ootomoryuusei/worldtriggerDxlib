@@ -5,7 +5,7 @@ AutoRegister<Kogetsu, TriggerFactory> Kogetsu::register_("KOGETSU");
 
 Kogetsu::Kogetsu(GameObject* parent) : Trigger(parent)
 {
-	hModel = MV1LoadModel("Assets//Model//SampleMoonBlade.mv1");
+	hModel = MV1LoadModel("Assets//Model//SampleKogetsu.mv1");
 	assert(hModel >= 0);
 }
 

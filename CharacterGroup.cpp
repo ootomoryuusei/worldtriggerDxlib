@@ -1,10 +1,6 @@
 #include "CharacterGroup.h"
 #include"Engine/CsvReader.h"
 
-#include"Mikumo_Osamu.h"
-#include"Amatori_Chika.h"
-#include"Kuga_Yuuma.h"
-
 #include"UnitIcons.h"
 #include"Tile.h"
 

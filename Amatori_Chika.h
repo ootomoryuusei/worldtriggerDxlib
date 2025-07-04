@@ -9,7 +9,6 @@ class Amatori_Chika :
 public:
 	Amatori_Chika(GameObject* parent);
 	~Amatori_Chika();
-	void Update() override;
 	void Draw() override;
 private:
 	static AutoRegister<Amatori_Chika,CharacterFactory> register_;

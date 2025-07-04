@@ -9,7 +9,6 @@ class Mikumo_Osamu :
 public:
 	Mikumo_Osamu(GameObject* parent);
 	~Mikumo_Osamu();
-	void Update() override;
 	void Draw() override;
 private:
 	static AutoRegister<Mikumo_Osamu,CharacterFactory> register_;

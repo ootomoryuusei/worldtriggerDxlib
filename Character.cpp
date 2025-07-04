@@ -32,20 +32,52 @@ void Character::Initialize()
 {
 	tile_ = GetParent()->GetParent()->GetParent()->FindGameObject<Tile>();
 	pData_ = Instantiate<CharacterData>(this);
-	MYTRIGGER myTrigger = pData_->GetMyTrigger();
 }
 
 void Character::Update()
 {
-	// カメラの設定
-	MATRIX mRot = MGetRotY(rotation.y);  // 回転行列
-	// 回ってないとき、プレイヤーからどれぐらい後ろ？→ベクトル
-	VECTOR tmpP = VGet(0, 5, 10);
-	// これに回転行列をかける
-	VECTOR pRot = tmpP * mRot;
-	// これにプレイヤーの座標を足すと、カメラ位置が出る
-	VECTOR vRot = VGet(0, 5, -5) * mRot;
-	SetCameraPositionAndTarget_UpVecY(position + pRot, position + vRot);
+	int RightHand = MV1SearchFrame(hModel, "RightHand");
+	assert(RightHand >= 0);
+	VECTOR righthand_position = MV1GetFramePosition(hModel, RightHand);
+	handsPostion_[RIGHT] = righthand_position;
+	//MATRIX mBlade = MV1GetFrameLocalWorldMatrix(hModel, RightHand);
+
+	int LeftHand = MV1SearchFrame(hModel, "LeftHand");
+	assert(LeftHand >= 0);
+	VECTOR lefthand_postion = MV1GetFramePosition(hModel, LeftHand);
+	handsPostion_[LEFT] = lefthand_postion;
+
+	for (int hands = 0;hands < MAX;hands++) {
+		for (int i = 0;i < 4;i++) {
+			if (trigger_[i][hands] != nullptr) {
+				trigger_[i][hands]->Set3DPosition(handsPostion_[hands]);
+			}
+		}
+	}
+
+	switch (state_)
+	{
+	case FIRST: break;
+	case SECONDE: break;
+	case THIRD:
+	{
+		MoveMent();
+		break;
+	}
+	default:
+		break;
+	}
+	/*MATRIX mAsteroid = Object3D::ChangeFLOAT3ToMATRIX(VGet(mLeftHand.m[3][0], mLeftHand.m[3][1] - 0.2f, mLeftHand.m[3][2]), rotation);*/
+
+	//// カメラの設定
+	//MATRIX mRot = MGetRotY(rotation.y);  // 回転行列
+	//// 回ってないとき、プレイヤーからどれぐらい後ろ？→ベクトル
+	//VECTOR tmpP = VGet(0, 5, 10);
+	//// これに回転行列をかける
+	//VECTOR pRot = tmpP * mRot;
+	//// これにプレイヤーの座標を足すと、カメラ位置が出る
+	//VECTOR vRot = VGet(0, 5, -5) * mRot;
+	//SetCameraPositionAndTarget_UpVecY(position + pRot, position + vRot);
 }
 
 void Character::Draw()
@@ -58,15 +90,7 @@ void Character::Draw()
 
 	/*DrawCapsule3D(position, position + VGet(0, 160, 0), 30, 20, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);*/
 
-	int RightHand = MV1SearchFrame(hModel, "RightHand");
-	assert(RightHand >= 0);
-	MATRIX mRightHand = MV1GetFrameLocalWorldMatrix(hModel, RightHand);
-	//MATRIX mBlade = MV1GetFrameLocalWorldMatrix(hModel, RightHand);
-
-	int LeftHand = MV1SearchFrame(hModel, "LeftHand");
-	assert(LeftHand >= 0);
-	MATRIX mLeftHand = MV1GetFrameLocalWorldMatrix(hModel, LeftHand);
-	MATRIX mAsteroid = Object3D::ChangeFLOAT3ToMATRIX(VGet(mLeftHand.m[3][0], mLeftHand.m[3][1] - 0.2f, mLeftHand.m[3][2]), rotation);
+	
 
 	MATRIX mShield = Object3D::ChangeFLOAT3ToMATRIX({ position.x,position.y,position.z - 1.0f }, rotation);
 
@@ -97,12 +121,14 @@ void Character::ReadMyTrigger(int _createNum)
 
 void Character::CreateTriggerInstance()
 {
-	/*for (int i = 0;i < (int)MAX;i++) {
-		for (int index = 0;index < 4;index++) {
-			string name = myTrigger_.myTrigger[i].trigger[index].triggerName;
-			TriggerFactory::Instance().Create(name, this);
+	for (int hands = 0;hands < MAX;hands++) {
+		for (int i = 0;i < 4;i++) {
+			MYTRIGGER myTrigger = pData_->GetMyTrigger();
+			string trigger_name = myTrigger.myTrigger[hands].trigger[i].triggerName;
+			auto ptr = TriggerFactory::Instance().Create(trigger_name, this);
+			trigger_[i][hands] = ptr;
 		}
-	}*/
+	}
 }
 
 void Character::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix)

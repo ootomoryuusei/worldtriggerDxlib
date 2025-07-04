@@ -20,22 +20,6 @@ Kuga_Yuuma::~Kuga_Yuuma()
 {
 }
 
-void Kuga_Yuuma::Update()
-{
-	switch (state_)
-	{
-	case FIRST: break;
-	case SECONDE: break;
-	case THIRD:
-	{
-		MoveMent();
-		break;
-	}
-	default:
-		break;
-	}
-}
-
 void Kuga_Yuuma::Draw()
 {
 	MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);

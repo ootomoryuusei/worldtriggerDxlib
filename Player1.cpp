@@ -47,13 +47,14 @@ void Player1::Initialize()
 
 	csv_ = new CsvReader();
 	csv_->Load("Assets//Character//SelectCharacter.csv");
-	for (int y = 1;y < csv_->GetHeight();y++) {
+	for (int y = 1;y < csv_->GetHeight();y++) { //選択したキャラクターをplayerに生成&playerのグループに追加
 		string selectCharacterName = csv_->GetString(0, y);
 		Character* pCharacter = CharacterFactory::Instance().Create(selectCharacterName, pPlayerGroup);
 		auto pData = pCharacter->FindGameObject<CharacterData>();
 		pData->SetName(selectCharacterName);
 		pData->DefaultSetStatus(selectCharacterName);
 		pData->DefaultSetMyTrigger(selectCharacterName);
+		pCharacter->CreateTriggerInstance();
 	}
 
 	list<Character*> characterlist = pPlayerGroup->FindGameObjects<Character>();

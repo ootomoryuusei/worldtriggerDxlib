@@ -25,6 +25,8 @@ protected:
 	deque<int> dq_moveMent;
 	list<Character*> characterlist_;
 	array<Trigger*, MAX> hands_;
+	array<VECTOR, MAX> handsPostion_;
+	array<array<Trigger*, MAX>, 4> trigger_;
 
 	Tile* tile_;
 	CsvReader* csv_;

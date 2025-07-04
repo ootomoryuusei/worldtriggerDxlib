@@ -19,22 +19,6 @@ Mikumo_Osamu::~Mikumo_Osamu()
 {
 }
 
-void Mikumo_Osamu::Update()
-{
-	switch (state_)
-	{
-	case FIRST: break;
-	case SECONDE: break;
-	case THIRD: 
-	{
-		MoveMent();
-		break;
-	}
-	default:
-		break;
-	}
-}
-
 void Mikumo_Osamu::Draw()
 {
 	MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);

@@ -56,6 +56,9 @@
     <Filter Include="Group">
       <UniqueIdentifier>{ed593275-2d7f-40b0-864d-e699c8a9c8fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{3e77d1db-6869-4ebd-968c-9439609300d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\GameObject.cpp">
@@ -283,13 +286,20 @@
     <ClCompile Include="Kogetsu.cpp">
       <Filter>Trigger\Triggers</Filter>
     </ClCompile>
-    <ClCompile Include="UIManager.cpp" />
-    <ClCompile Include="CharacterData.cpp" />
     <ClCompile Include="CharacterGroup.cpp">
       <Filter>Group</Filter>
     </ClCompile>
     <ClCompile Include="TriggerGroup.cpp">
       <Filter>Group</Filter>
+    </ClCompile>
+    <ClCompile Include="IconGroup.cpp">
+      <Filter>Group</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterData.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="StageData.cpp">
+      <Filter>Data</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -525,8 +535,6 @@
     <ClInclude Include="Kogetsu.h">
       <Filter>Trigger\Triggers</Filter>
     </ClInclude>
-    <ClInclude Include="UIManager.h" />
-    <ClInclude Include="CharacterData.h" />
     <ClInclude Include="TriggerFactory.h">
       <Filter>Factory</Filter>
     </ClInclude>
@@ -553,6 +561,15 @@
     </ClInclude>
     <ClInclude Include="GroupBase.h">
       <Filter>Group</Filter>
+    </ClInclude>
+    <ClInclude Include="IconGroup.h">
+      <Filter>Group</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterData.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="StageData.h">
+      <Filter>Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
