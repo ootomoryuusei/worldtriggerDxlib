@@ -5,7 +5,7 @@
 
 #include"CharacterFactory.h"
 
-#include"Characters.h"
+#include"GroupManager.h"
 
 
 Enemy::Enemy(GameObject* parent) : Object3D(parent)
@@ -39,18 +39,19 @@ void Enemy::Initialize()
         selectCharacterName.push_back(csv_->GetString(0, num));
     }
 
-    Characters* pCharacters = GetParent()->FindGameObject<Characters>();
-    Group<Character>* enemyGroup = pCharacters->GetEnemyGroup();
+    auto* pGroupManager = GetParent()->FindGameObject<GroupManager>();
+    auto* pEnemyGroup = pGroupManager->CreateGroup<CharacterGroup>("enemyGroup");
 
+  
     for (auto& itr : selectCharacterName) {
         for (int i = 0;i < 2;i++) {
-            Character* pCharacter = CharacterFactory::Instance().Create(itr, enemyGroup);
-            enemyGroup->Add(pCharacter);
+            Character* pCharacter = CharacterFactory::Instance().Create(itr, pEnemyGroup);
         }
     }
 
+    list<Character*> characterlist = pEnemyGroup->FindGameObjects<Character>();
     pTile_ = GetParent()->FindGameObject<Tile>();
-    for (auto& itr : enemyGroup->GetAll()) {
+    for (auto& itr : characterlist) {
         int rand_posX = GetRand(pTile_->GetTileX());
         int rand_posY = GetRand(1);
         rand_posY = rand_posY + (pTile_->GetTileX() - 2);

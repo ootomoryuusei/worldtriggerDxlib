@@ -141,7 +141,6 @@
     <ClCompile Include="CharacterIcon.cpp" />
     <ClCompile Include="CharacterIcons.cpp" />
     <ClCompile Include="CharacterGroup.cpp" />
-    <ClCompile Include="Characters.cpp" />
     <ClCompile Include="CharacterSelectUI.cpp" />
     <ClCompile Include="CharacterSetUIFrame.cpp" />
     <ClCompile Include="CharacterSetUIFrames.cpp" />
@@ -227,7 +226,6 @@
     <ClInclude Include="CharacterIcon.h" />
     <ClInclude Include="CharacterIcons.h" />
     <ClInclude Include="CharacterGroup.h" />
-    <ClInclude Include="Characters.h" />
     <ClInclude Include="CharacterSelectUI.h" />
     <ClInclude Include="CharacterSetUIFrame.h" />
     <ClInclude Include="CharacterSetUIFrames.h" />
@@ -243,6 +241,7 @@
     <ClInclude Include="Engine\Transform.h" />
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="GroupBase.h" />
     <ClInclude Include="Icon.h" />
     <ClInclude Include="Icons.h" />
     <ClInclude Include="ImGui\imconfig.h" />
@@ -305,7 +304,7 @@
     <ClInclude Include="UnitIcons.h" />
     <ClInclude Include="TriggerFactory.h" />
     <ClInclude Include="IconFactory.h" />
-    <ClInclude Include="Group.h" />
+    <ClInclude Include="GroupManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc" />

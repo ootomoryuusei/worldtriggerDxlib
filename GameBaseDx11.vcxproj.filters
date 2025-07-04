@@ -291,9 +291,6 @@
     <ClCompile Include="TriggerGroup.cpp">
       <Filter>Group</Filter>
     </ClCompile>
-    <ClCompile Include="Characters.cpp">
-      <Filter>Group</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -551,10 +548,10 @@
     <ClInclude Include="CharacterGroup.h">
       <Filter>Group</Filter>
     </ClInclude>
-    <ClInclude Include="Characters.h">
+    <ClInclude Include="GroupManager.h">
       <Filter>Group</Filter>
     </ClInclude>
-    <ClInclude Include="Group.h">
+    <ClInclude Include="GroupBase.h">
       <Filter>Group</Filter>
     </ClInclude>
   </ItemGroup>

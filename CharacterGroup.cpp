@@ -8,7 +8,7 @@
 #include"UnitIcons.h"
 #include"Tile.h"
 
-CharacterGroup::CharacterGroup(GameObject* parent) : Object3D(parent)
+CharacterGroup::CharacterGroup(GameObject* parent) : GroupBase(parent)
 {
 }
 

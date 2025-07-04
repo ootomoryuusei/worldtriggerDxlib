@@ -1,5 +1,5 @@
 #pragma once
-#include "Object3D.h"
+#include "GroupBase.h"
 #include"Character.h"
 #include<vector>
 
@@ -8,7 +8,7 @@ using std::vector;
 class Tile;
 
 class CharacterGroup :
-    public Object3D
+    public GroupBase
 {
 public:
 	CharacterGroup(GameObject* parent);
