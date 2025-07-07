@@ -26,7 +26,7 @@ protected:
 	list<Character*> characterlist_;
 	array<Trigger*, MAX> hands_;
 	array<VECTOR, MAX> handsPostion_;
-	array<array<Trigger*, MAX>, 4> trigger_;
+	array<array<Trigger*,4>, MAX> trigger_;
 
 	Tile* tile_;
 	CsvReader* csv_;

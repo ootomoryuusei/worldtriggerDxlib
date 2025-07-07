@@ -49,8 +49,8 @@ void Character::Update()
 
 	for (int hands = 0;hands < MAX;hands++) {
 		for (int i = 0;i < 4;i++) {
-			if (trigger_[i][hands] != nullptr) {
-				trigger_[i][hands]->Set3DPosition(handsPostion_[hands]);
+			if (trigger_[hands][i] != nullptr) {
+				trigger_[hands][i]->Set3DPosition(handsPostion_[hands]);
 			}
 		}
 	}
@@ -126,7 +126,11 @@ void Character::CreateTriggerInstance()
 			MYTRIGGER myTrigger = pData_->GetMyTrigger();
 			string trigger_name = myTrigger.myTrigger[hands].trigger[i].triggerName;
 			auto ptr = TriggerFactory::Instance().Create(trigger_name, this);
-			trigger_[i][hands] = ptr;
+			if (ptr != nullptr) {
+				ptr->SetTriggerData(myTrigger.myTrigger[hands].trigger[i]);
+				ptr->SetTarget(pData_->GetTarget());
+				trigger_[hands][i] = ptr;
+			}
 		}
 	}
 }
