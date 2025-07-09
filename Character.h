@@ -59,6 +59,7 @@ public:
 	void DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix);
 
 	void MoveMent();
+	void EnemyMoveMent();
 private:
 };
 

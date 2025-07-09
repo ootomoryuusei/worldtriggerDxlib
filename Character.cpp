@@ -17,7 +17,7 @@ Character::Character(GameObject* parent) : Object3D(parent)
 	totalTime = 10;
 	elapsedTime = 0.0f;
 
-	dir_ = VGet(1.0f, 0.0f, 0.0f);
+	dir_ = VGet(0.0f, 0.0f, 1.0f);
 }
 
 Character::~Character()
@@ -68,16 +68,6 @@ void Character::Update()
 		break;
 	}
 	/*MATRIX mAsteroid = Object3D::ChangeFLOAT3ToMATRIX(VGet(mLeftHand.m[3][0], mLeftHand.m[3][1] - 0.2f, mLeftHand.m[3][2]), rotation);*/
-
-	//// カメラの設定
-	//MATRIX mRot = MGetRotY(rotation.y);  // 回転行列
-	//// 回ってないとき、プレイヤーからどれぐらい後ろ？→ベクトル
-	//VECTOR tmpP = VGet(0, 5, 10);
-	//// これに回転行列をかける
-	//VECTOR pRot = tmpP * mRot;
-	//// これにプレイヤーの座標を足すと、カメラ位置が出る
-	//VECTOR vRot = VGet(0, 5, -5) * mRot;
-	//SetCameraPositionAndTarget_UpVecY(position + pRot, position + vRot);
 }
 
 void Character::Draw()
@@ -176,4 +166,8 @@ void Character::MoveMent()
 		}
 		elapsedTime += Time::DeltaTime();
 	}
+}
+
+void Character::EnemyMoveMent()
+{
 }

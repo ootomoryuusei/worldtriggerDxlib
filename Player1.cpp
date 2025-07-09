@@ -40,8 +40,8 @@ Player1::~Player1()
 
 void Player1::Initialize()
 {
-	auto* pGroupManager = GetParent()->FindGameObject<GroupManager>();
-	auto* pPlayerGroup = pGroupManager->CreateGroup<CharacterGroup>("playerGroup");
+	pGroupManager_ = GetParent()->FindGameObject<GroupManager>();
+	auto* pPlayerGroup = pGroupManager_->CreateGroup<CharacterGroup>("playerGroup");
 
 	pTile_ = GetParent()->FindGameObject<Tile>();
 
@@ -58,9 +58,9 @@ void Player1::Initialize()
 		pCharacter->CreateTriggerInstance();
 	}
 
-	list<Character*> characterlist = pPlayerGroup->FindGameObjects<Character>();
+	characterlist_ = pPlayerGroup->FindGameObjects<Character>();
 	int index = 0;
-	for (auto& itr : characterlist) {
+	for (auto& itr : characterlist_) {
 		int placementIndex = csv_->GetInt(9, index + 1);
 
 		int x = placementIndex % MAX_MAP_WIDTH;
@@ -75,8 +75,9 @@ void Player1::Initialize()
 
 void Player1::Update()
 {
-	//characters_ = pGroup_->FindGameObjects<Character>();
-	//for (auto& itr : characters_) {
+	//characterlist_ = pGroupManager_->GetGroup("playerGroup")->FindGameObjects<Character>();
+	//for (auto& itr : characterlist_) {
+	//	pSelectingCharacter_ = itr;
 	//}
 	//XMFLOAT3 c_rota = pSelectingCharacter_->GetRotate();
 	//VECTOR c_position = pSelectingCharacter_->Get3DPosition();

@@ -1,4 +1,6 @@
 #include "Eaglet.h"
+#include "Character.h"
+#include "GroupManager.h"
 
 
 AutoRegister<Eaglet, TriggerFactory> Eaglet::register_("EAGLET");
@@ -19,11 +21,20 @@ void Eaglet::Initialize()
 
 void Eaglet::Update()
 {
+	auto groupManger = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<GroupManager>();
+	auto target_group = groupManger->GetGroup(target_);
+	list<Character*> target_list = target_group->FindGameObjects<Character>();
+	for (auto& itr : target_list) {
+		if (ArcInPoint(itr->Get3DPosition(), { 0,0,1 }, trigger_.arc.percent * 3.6)) {
+
+		}
+	}
+	matrix = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);
 }
 
 void Eaglet::Draw()
 {
-	MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);
-	MV1SetMatrix(hModel, mModel);
+	
+	MV1SetMatrix(hModel, matrix);
 	MV1DrawModel(hModel);
 }

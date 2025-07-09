@@ -3,6 +3,7 @@
 #include<list>
 
 class CsvReader;
+class GroupManager;
 class CharacterGroup;
 class Character;
 class Tile;
@@ -24,8 +25,8 @@ public:
 
 private:
 	CsvReader* csv_;
-	CharacterGroup* pGroup_;
-	list<Character*> characters_;
+	GroupManager* pGroupManager_;
+	list<Character*> characterlist_;
 	Character* pSelectingCharacter_;
 	Tile* pTile_;
 
