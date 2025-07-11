@@ -24,8 +24,8 @@ TriggerArcIcon::~TriggerArcIcon()
 
 void TriggerArcIcon::Initialize()
 {
-	percent = 40.0f;
-	startPercent = 20.0f;
+	percent = 5.0f;
+	startPercent = -5.0f;
 	VECTOR prevVec = { 0,0,0 };
 }
 
@@ -103,7 +103,7 @@ void TriggerArcIcon::Draw()
 			DrawString(boxCorners[0].x, boxCorners[0].y, "Sub", GetColor(255, 255, 255), 1.5);
 		}
 	}
-#if 0
+#if 1
 	// éläpå`ï`âÊ
 	for (int i = 0; i < 4; i++) {
 		int j = (i + 1) % 4;

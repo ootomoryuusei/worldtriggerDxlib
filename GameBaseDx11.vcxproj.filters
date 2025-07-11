@@ -304,9 +304,6 @@
     <ClCompile Include="TriggerData.cpp">
       <Filter>Data</Filter>
     </ClCompile>
-    <ClCompile Include="Data.cpp">
-      <Filter>Data</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -581,6 +578,15 @@
       <Filter>Data</Filter>
     </ClInclude>
     <ClInclude Include="Data.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterStatusFactory.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerStatusFactory.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="DataLoader.h">
       <Filter>Data</Filter>
     </ClInclude>
   </ItemGroup>

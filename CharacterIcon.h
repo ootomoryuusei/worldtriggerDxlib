@@ -3,6 +3,8 @@
 #include<vector>
 #include"IconFactory.h"
 #include"AutoRegister.h"
+#include "CharacterStatusFactory.h"
+#include "CharacterData.h"
 
 class TriggerSetUI;
 class TriggerIcons;
@@ -35,6 +37,8 @@ private:
 
     TriggerSetUI* pT_SetUI_;
     TriggerIcons* pT_Icons_;
+
+    CharacterData* data_;
 
     static AutoRegister<Icon, IconFactory> register_;
 };

@@ -1,4 +1,5 @@
 #include "Trigger.h"
+#include"TriggerData.h"
 
 Trigger::Trigger(GameObject* parent) : Object3D(parent)
 {
@@ -10,6 +11,7 @@ Trigger::~Trigger()
 
 void Trigger::Initialize()
 {
+	pData_ = Instantiate<TriggerData>(this);
 }
 
 void Trigger::Update()

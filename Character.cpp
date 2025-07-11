@@ -72,7 +72,6 @@ void Character::Update()
 
 void Character::Draw()
 {
-	/*position = { icon->GetPIconPos().x,0.0,icon->GetPIconPos().y };*/
 	//Object3D::Draw(); // 基底クラスの関数を呼ぶ→Playerキャラを描画する
 	MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);
 	MV1SetMatrix(hModel, mModel);
@@ -88,25 +87,6 @@ void Character::Draw()
 
 	// サーベルの刃は、(0,0,0)～(0,-150,0)にある。これにmSabelをかけると、今の座標が手に入る
 	/*DrawLine3D(VGet(0, 0, 0) * hBlade, VGet(0, -150, 0) * hBlade, GetColor(255, 0, 0));*/
-}
-
-void Character::ReadMyTrigger(int _createNum)
-{
-	/*csv_->Load("Assets/Character/SelectCharacter.csv");
-	int line = 0;
-	for (int x = 0;x < csv_->GetWidth(0);x++) {
-		if ("MainTrigger" == csv_->GetString(x, 0)) {
-			line = x;
-			break;
-		}
-	}
-	
-	for (int i = 0;i < (int)MAX;i++) {
-		for (int index = 0;index < 4;index++) {
-			myTrigger_.myTrigger[i].trigger[index].triggerName = csv_->GetString(line, _createNum + 1);
-			line++;
-		}
-	}*/
 }
 
 void Character::CreateTriggerInstance()

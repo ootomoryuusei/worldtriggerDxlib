@@ -51,7 +51,6 @@ void Player1::Initialize()
 		string selectCharacterName = csv_->GetString(0, y);
 		Character* pCharacter = CharacterFactory::Instance().Create(selectCharacterName, pPlayerGroup);
 		auto pData = pCharacter->FindGameObject<CharacterData>();
-		pData->SetName(selectCharacterName);
 		pData->DefaultSetStatus(selectCharacterName);
 		pData->DefaultSetMyTrigger(selectCharacterName);
 		pData->SetTarget("enemyGroup");

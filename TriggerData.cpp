@@ -1,6 +1,6 @@
 #include "TriggerData.h"
 
-TriggerData::TriggerData(GameObject* parent)
+TriggerData::TriggerData(GameObject* parent) : Object3D(parent)
 {
 }
 

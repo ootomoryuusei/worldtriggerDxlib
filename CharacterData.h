@@ -1,5 +1,7 @@
 #pragma once
 #include "Object3D.h"
+#include"CharacterStatusFactory.h"
+#include "TriggerStatusFactory.h"
 
 class CsvReader;
 class CharacterGroup;
@@ -14,11 +16,11 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	void SetName(string _name) { name_ = _name; }
-	void SetStatus(CHARACTER_STATUS _status) { status_ = _status; }
+	void SetCharacterStatus(CharacterStatus _status) { c_status_ = _status; }
+	CharacterStatus GetCharacterStatus() { return c_status_; }
+	void SetTriggerStatus(TriggerStatus _status) { t_status_ = _status; }
+	TriggerStatus GetTriggerStatus() { return t_status_; }
 	void SetMyTrigger(MYTRIGGER _myTrigger) { myTrigger_ = _myTrigger; }
-	string GetName() { return name_; }
-	CHARACTER_STATUS GetStatus() { return status_; }
 	MYTRIGGER GetMyTrigger() { return myTrigger_; }
 
 	void DefaultSetStatus(string _name);
@@ -28,9 +30,9 @@ public:
 	const string& GetTarget()const { return target_; }
 private: 
 	CsvReader* csv_;
-	CHARACTER_STATUS status_;
 	MYTRIGGER myTrigger_;
-	string name_;
 	string target_;
+	CharacterStatus c_status_;
+	TriggerStatus t_status_;
 };
 

@@ -47,7 +47,6 @@ void Enemy::Initialize()
         for (int i = 0;i < 2;i++) {
             Character* pCharacter = CharacterFactory::Instance().Create(itr, pEnemyGroup);
             auto pData = pCharacter->FindGameObject<CharacterData>();
-            pData->SetName(itr);
             pData->DefaultSetStatus(itr);
             pData->DefaultSetMyTrigger(itr);
             pData->SetTarget("playerGroup");

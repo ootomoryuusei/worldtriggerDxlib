@@ -1,4 +1,4 @@
-CharacterName,行動力,トリオン,攻撃,防御,回避,援護,技術,MainTrigger,,,,SubTrigger,,,,CanSetMain,,CanSetSub,
+キャラ名,行動力,トリオン,攻撃,防御,回避,援護,技術,MainTrigger,,,,SubTrigger,,,,CanSetMain,,CanSetSub,
 Mikumo_Osamu,13,2,3,4,4,5,6,FREE,FREE,SHIELD,FREE,ASTEROID,FREE,SHIELD,FREE,SHIELD,ASTEROID,SHIELD,ASTEROID
 Kuga_Yuuma,18,2,3,4,4,5,6,KOGETSU,FREE,SHIELD,FREE,FREE,FREE,SHIELD,FREE,SHIELD,,SHIELD,
 Amatori_Chika,15,2,3,4,4,5,6,EAGLET,FREE,SHIELD,FREE,FREE,FREE,SHIELD,FREE,SHIELD,ASTEROID,SHIELD,ASTEROID

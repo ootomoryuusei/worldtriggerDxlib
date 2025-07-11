@@ -144,7 +144,6 @@
     <ClCompile Include="CharacterSelectUI.cpp" />
     <ClCompile Include="CharacterSetUIFrame.cpp" />
     <ClCompile Include="CharacterSetUIFrames.cpp" />
-    <ClCompile Include="Data.cpp" />
     <ClCompile Include="Eaglet.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Engine\CsvReader.cpp" />
@@ -233,7 +232,9 @@
     <ClInclude Include="CharacterSetUIFrame.h" />
     <ClInclude Include="CharacterSetUIFrames.h" />
     <ClInclude Include="BaseFactory.h" />
+    <ClInclude Include="CharacterStatusFactory.h" />
     <ClInclude Include="Data.h" />
+    <ClInclude Include="DataLoader.h" />
     <ClInclude Include="Eaglet.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Engine\CsvReader.h" />
@@ -305,6 +306,7 @@
     <ClInclude Include="globals.h" />
     <ClInclude Include="TriggerSetUIFrames.h" />
     <ClInclude Include="TriggerSetUIs.h" />
+    <ClInclude Include="TriggerStatusFactory.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitIcon.h" />
     <ClInclude Include="UnitIcons.h" />

@@ -25,8 +25,6 @@ Tile::Tile(GameObject* parent) : Object3D(parent)
 			count++;
 		}
 	}
-
-	state_ = SET;
 }
 
 Tile::~Tile()
@@ -43,24 +41,10 @@ void Tile::Update()
 
 void Tile::Draw()
 {
-
-	switch (state_)
-	{
-	case SELECT:
-	{
-		break;
-	}
-	case SET:
-	{
 		for (int i = 0; i < MAX_MAP_HIGHT; i++) {
 			for (int j = 0; j < MAX_MAP_WIDTH; j++) {
 				MV1SetMatrix(hModel, Object3D::ChangeFLOAT3ToMATRIX(Tiles[i][j].position, rotation));
 				MV1DrawModel(hModel);
 			}
 		}
-		break;
-	}
-	default:
-		break;
-	}
 }

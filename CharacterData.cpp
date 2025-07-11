@@ -1,5 +1,7 @@
 #include "CharacterData.h"
 #include"Engine/CsvReader.h"
+#include "DataLoader.h"
+
 
 CharacterData::CharacterData(GameObject* parent) : Object3D(parent)
 {
@@ -25,17 +27,9 @@ void CharacterData::Draw()
 
 void CharacterData::DefaultSetStatus(string _name)
 {
-	int line = 0;
-	csv_->Load("Assets//Character//CharacterStatus.csv");
-	for (int y = 1;y < csv_->GetHeight();y++) {
-		if (_name == csv_->GetString(0, y)) {
-			line = y;
-		}
-	}
-
-	for (int x = 0;x < STATUS_MAX;x++) {
-		status_.status[x] = csv_->GetInt(x + 1, line);
-	}
+	CsvReader csv("Assets//Character//CharacterStatus.csv");
+	vector<Data> data = DataLoader::Load(csv);
+	c_status_ = DataLoader::GetByName<CharacterStatus, CharacterStatusFactory>("ƒLƒƒƒ‰–¼",_name, data);
 }
 
 void CharacterData::DefaultSetMyTrigger(string _name)
@@ -59,12 +53,13 @@ void CharacterData::DefaultSetMyTrigger(string _name)
 			int line = 0;
 			for (int y = 1;y < csv_->GetHeight();y++) {
 				string name = myTrigger_.myTrigger[hands].trigger[i].triggerName;
-				if (csv_->GetString(0, y) == name) {
-					line = y;
-				}
-				myTrigger_.myTrigger[hands].trigger[i].arc.startPercent = csv_->GetFloat(1, y);
-				myTrigger_.myTrigger[hands].trigger[i].arc.percent = csv_->GetFloat(2, y);
-				myTrigger_.myTrigger[hands].trigger[i].arc.rangeSize = csv_->GetFloat(3, y);
+				CsvReader csv("Assets/Weapon/DefaultWeaponStatus.csv");
+				vector<Data> data = DataLoader::Load(csv);
+				t_status_ = DataLoader::GetByName<TriggerStatus, TriggerStatusFactory>("WeaponName", name, data);
+				myTrigger_.myTrigger[hands].trigger[i].arc.startPercent = t_status_.startPercent;
+				myTrigger_.myTrigger[hands].trigger[i].arc.percent = t_status_.percent;
+				myTrigger_.myTrigger[hands].trigger[i].arc.angle = t_status_.angle;
+				myTrigger_.myTrigger[hands].trigger[i].arc.rangeSize = t_status_.rangeSize;
 			}
 			
 		}

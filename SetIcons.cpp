@@ -56,7 +56,6 @@ void SetIcons::Initialize()
 		}
 		/*pCIcon->SetInitialPosition(graphPos);*/
 		pCIcon->Set3DPosition(graphPos);
-		pCIcon->SetState(SET);
 		pCIcon->SetCreateNum(num);
 		MYTRIGGER myTrigger;
 		for (int x = 0;x < 4;x++) {

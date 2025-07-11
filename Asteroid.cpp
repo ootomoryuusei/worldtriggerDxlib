@@ -36,7 +36,6 @@ void Asteroid::Update()
 
 void Asteroid::Draw()
 {
-	
 	MV1SetMatrix(hModel, matrix);
 	MV1DrawModel(hModel);
 }

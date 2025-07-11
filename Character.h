@@ -18,6 +18,10 @@ using std::list;
 class Character :
     public Object3D
 {
+	enum OWENER {
+		PLAYER = 0,
+		ENEMY
+	};
 protected:
 
 	VECTOR dir_;
@@ -27,6 +31,7 @@ protected:
 	array<Trigger*, MAX> hands_;
 	array<VECTOR, MAX> handsPostion_;
 	array<array<Trigger*,4>, MAX> trigger_;
+	OWENER owener_;
 
 	Tile* tile_;
 	CsvReader* csv_;
@@ -51,12 +56,12 @@ public:
 
 	VECTOR GetPosition() { return position; }
 
-	void ReadMyTrigger(int _createNum);
-
 	void CreateTriggerInstance();
 	void AddMoveMent(int _movement) { moveMent.push_back(_movement); }
 
 	void DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix);
+
+	void SetOwener(OWENER _owener) { owener_ = _owener; }
 
 	void MoveMent();
 	void EnemyMoveMent();

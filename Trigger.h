@@ -2,12 +2,13 @@
 #include "Object3D.h"
 #include"CharacterData.h"
 
+class TriggerData;
+
 class Trigger :
     public Object3D
 {
 protected:
-    string target_;
-    TRIGGER trigger_;
+    TriggerData* pData_;
 public:
     Trigger(GameObject* parent);
     ~Trigger();
@@ -17,11 +18,7 @@ public:
 
     bool ArcInPoint(VECTOR _targer_pos,VECTOR _dir,float _fov);
 
-    void SetTriggerData(TRIGGER _trigger) { trigger_ = _trigger; }
-    TRIGGER GetTriggerData() { return trigger_; }
-
-    void SetTarget(string _target) { target_ = _target; }
-    const string& GetTarget()const { return target_; }
+    const auto& GetptrData() const { return pData_; }
 private:
 };
 
