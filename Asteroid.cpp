@@ -2,6 +2,7 @@
 #include "GroupManager.h"
 #include<list>
 #include "Character.h"
+#include"TriggerData.h"
 
 using std::list;
 
@@ -19,15 +20,18 @@ Asteroid::~Asteroid()
 
 void Asteroid::Initialize()
 {
+	pData_ = Instantiate<TriggerData>(this);
 }
 
 void Asteroid::Update()
 {
 	auto groupManger = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<GroupManager>();
-	auto target_group = groupManger->GetGroup(target_);
+	string target = pData_->GetTarget();
+	auto target_group = groupManger->GetGroup(target);
 	list<Character*> target_list = target_group->FindGameObjects<Character>();
+	float angle = pData_->GetTriggerData().arc.angle;
 	for (auto& itr : target_list) {
-		if (ArcInPoint(itr->Get3DPosition(), { 0,0,1 },trigger_.arc.percent * 3.6)) {
+		if (ArcInPoint(itr->Get3DPosition(), { 0,0,1 },angle)) {
 
 		}
 	}

@@ -54,7 +54,7 @@ void SetIcons::Initialize()
 		else {
 			graphPos = { u_pos.x + IconSize.x * (y / 2),u_pos.y + IconSize.y*0 ,0 };
 		}
-		/*pCIcon->SetInitialPosition(graphPos);*/
+	
 		pCIcon->Set3DPosition(graphPos);
 		pCIcon->SetCreateNum(num);
 		MYTRIGGER myTrigger;
@@ -66,7 +66,7 @@ void SetIcons::Initialize()
 			string TriggerName = csv_->GetString(14 + x, selectCharNum_[y]);
 			myTrigger.myTrigger[1].trigger[x].triggerName = TriggerName;
 		}
-		/*pCIcon->SetMyTrigger(myTrigger);*/
+
 		pCIcon->SetIconName(csv_->GetString(0, selectCharNum_[y]));
 		pSelectCIcons_.push_back(pCIcon);
 		num++;

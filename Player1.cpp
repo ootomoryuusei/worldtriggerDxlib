@@ -41,7 +41,7 @@ Player1::~Player1()
 void Player1::Initialize()
 {
 	pGroupManager_ = GetParent()->FindGameObject<GroupManager>();
-	auto* pPlayerGroup = pGroupManager_->CreateGroup<CharacterGroup>("playerGroup");
+	auto* pPlayerGroup = pGroupManager_->CreateGroup<CharacterGroup>("playerGroup"); //グループマネージャーでplayerGroupを作成
 
 	pTile_ = GetParent()->FindGameObject<Tile>();
 
@@ -67,7 +67,6 @@ void Player1::Initialize()
 
 		VECTOR initialPosition = pTile_->GetTilesData(x, y).position;
 		itr->Set3DPosition(initialPosition);
-		itr->ReadMyTrigger(index);
 		index++;
 	}
 }

@@ -30,9 +30,9 @@ public:
 	const string& GetTarget()const { return target_; }
 private: 
 	CsvReader* csv_;
-	MYTRIGGER myTrigger_;
-	string target_;
-	CharacterStatus c_status_;
-	TriggerStatus t_status_;
+	MYTRIGGER myTrigger_; //持っているトリガーのデータ
+	string target_; //敵対しているターゲット群
+	CharacterStatus c_status_; //キャラクターのステータス
+	TriggerStatus t_status_; //トリガーのステータス
 };
 

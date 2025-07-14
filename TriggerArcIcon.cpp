@@ -93,7 +93,7 @@ void TriggerArcIcon::Draw()
 								position.y + (graphSizeF_.halfY - tileSize.halfY) };
 
 	if (canVisible_) {
-		DrawCircleGaugeF(DrawCenterPos.x, DrawCenterPos.y, percent, hModel, startPercent);
+		DrawCircleGaugeF(DrawCenterPos.x, DrawCenterPos.y, percent, hModel, startPercent,2.0f);
 
 		if (createNum_ == 0) {
 			/*DrawRotaStringF()*/
@@ -103,7 +103,7 @@ void TriggerArcIcon::Draw()
 			DrawString(boxCorners[0].x, boxCorners[0].y, "Sub", GetColor(255, 255, 255), 1.5);
 		}
 	}
-#if 1
+#if 0
 	// 四角形描画
 	for (int i = 0; i < 4; i++) {
 		int j = (i + 1) % 4;
@@ -114,9 +114,9 @@ void TriggerArcIcon::Draw()
 	Mouse* pMouse = GetParent()->GetParent()->GetParent()->FindGameObject<Mouse>();
 	XMFLOAT2 mousePos = pMouse->GetMousePos();
 	for (int i = 0; i < 4; ++i) {
-		DrawCircle(boxCorners[i].x, boxCorners[i].y, 5,GetColor(0,255,0)); // 四隅のマーク
+		DrawCircle(boxCorners[i].x, boxCorners[i].y, 2,GetColor(0,255,0)); // 四隅のマーク
 	}
-	DrawCircle(mousePos.x, mousePos.y, 5, GetColor(0,0,255)); // マウス位置
+	DrawCircle(mousePos.x, mousePos.y, 2, GetColor(0,0,255)); // マウス位置
 #endif
 }
 

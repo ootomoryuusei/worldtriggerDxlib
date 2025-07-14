@@ -2,6 +2,7 @@
 #include "Camera.h"
 #include"Tile.h"
 #include"CharacterData.h"
+#include"TriggerData.h"
 #include"Engine/CsvReader.h"
 #include"ImGui/imgui.h"
 #include<algorithm>
@@ -91,14 +92,15 @@ void Character::Draw()
 
 void Character::CreateTriggerInstance()
 {
-	for (int hands = 0;hands < MAX;hands++) {
+	for (int hands = 0;hands < MAX;hands++) { //characterが持つtriggerを生成
 		for (int i = 0;i < 4;i++) {
 			MYTRIGGER myTrigger = pData_->GetMyTrigger();
 			string trigger_name = myTrigger.myTrigger[hands].trigger[i].triggerName;
 			auto ptr = TriggerFactory::Instance().Create(trigger_name, this);
-			if (ptr != nullptr) {
-				ptr->SetTriggerData(myTrigger.myTrigger[hands].trigger[i]);
-				ptr->SetTarget(pData_->GetTarget());
+			if (ptr != nullptr) { //生成したものがnull(FREE)以外ならtriggerにdataとtargetをセットする
+				auto data = ptr->GetTriggerData();
+				data->SetTriggerData(pData_->GetMyTrigger().myTrigger[hands].trigger[i]);
+				data->SetTarget(pData_->GetTarget());
 				trigger_[hands][i] = ptr;
 			}
 		}

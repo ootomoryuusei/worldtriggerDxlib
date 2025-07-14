@@ -40,7 +40,6 @@ private:
 	float totalTime;
 	float elapsedTime;
 
-	TriggerStatus
 	void calculateArc();
 };
 

@@ -18,7 +18,7 @@ public:
 
     bool ArcInPoint(VECTOR _targer_pos,VECTOR _dir,float _fov);
 
-    const auto& GetptrData() const { return pData_; }
+    const auto& GetTriggerData() const { return pData_; }
 private:
 };
 
