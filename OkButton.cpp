@@ -50,12 +50,10 @@ void OkButton::Update()
 					CharacterIcons* pCIcons = GetParent()->FindGameObject<CharacterIcons>();
 					int num = 0;
 					for (auto itr : pCIcons->GetpCIcons()) {
-						if (itr->GetInFrame()[i] == true) {
 							string fileName = "Assets//Character//SelectCharacter.csv";
 							int tartgerRow = i + 1;
 							string newData = std::to_string(itr->GetNum());
 							updateCSVRow(fileName, tartgerRow, newData);
-						}
 					}
 				
 				}

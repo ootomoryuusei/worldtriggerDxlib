@@ -21,7 +21,6 @@ CharacterIcons::CharacterIcons(GameObject* parent) : Icon(parent)
 		pCIcon->Load(flPath);
 		SIZE_F_2D IconSize = pCIcon->GetGraphSizeF_2D();
 		VECTOR graphPos = { 0,300 + IconSize.y * (y - 1) ,0 };
-		pCIcon->SetInitialPosition(graphPos);
 		pCIcon->Set3DPosition(graphPos);
 		pCIcon->SetNum(y);
 		pCIcon->SetIconName(csv_->GetString(0, y));

@@ -20,7 +20,7 @@ void TriggersArcIcons::Initialize()
 
 void TriggersArcIcons::Update()
 {
-	UnitIcons* pUnitIcon = /*GetParent()->*/GetParent()->FindGameObject<UnitIcons>();
+	UnitIcons* pUnitIcon = GetParent()->FindGameObject<UnitIcons>();
 	if (pUnitIcon->GetMoveMentSet()) {
 		for (auto& itr : pTriggersArcIcon_) {
 			itr->GetpTriggerArcIcon()[0]->SetStep(THIRD);

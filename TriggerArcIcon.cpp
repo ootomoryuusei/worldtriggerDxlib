@@ -2,6 +2,7 @@
 #include"Mouse.h"
 #include"TileIcons.h"
 #include"UnitIcons.h"
+#include"TriggerData.h"
 #include <algorithm>
 
 using std::clamp;
@@ -27,6 +28,7 @@ void TriggerArcIcon::Initialize()
 	percent = 5.0f;
 	startPercent = -5.0f;
 	VECTOR prevVec = { 0,0,0 };
+	pData_ = Instantiate<TriggerData>(this);
 }
 
 void TriggerArcIcon::Update()

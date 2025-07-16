@@ -26,6 +26,8 @@ public:
 	void DefaultSetStatus(string _name);
 	void DefaultSetMyTrigger(string _name);
 
+	void SelectSetMyTrigger(string _name);
+
 	void SetTarget(string _target) { target_ = _target; }
 	const string& GetTarget()const { return target_; }
 private: 

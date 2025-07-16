@@ -3,18 +3,13 @@
 #include "CharacterSetUIFrames.h"
 #include"TriggerSetUI.h"
 #include"TriggerIcons.h"
+#include "CharacterData.h"
 
 AutoRegister<Icon, IconFactory> CharacterIcon::register_("CharacterIcon");
 
-CharacterIcon::CharacterIcon(GameObject* parent) : Icon(parent),inFrame_(MAX_SELECT_CHARACTER,false),pT_Icons_(nullptr)
+CharacterIcon::CharacterIcon(GameObject* parent) : Icon(parent)
 {
 	position = { 0,0,0 };
-	initialPosition_ = { 0,0,0 };
-	settingNum_ = 0;
-	for (int i = 0; i < MAX_SELECT_CHARACTER; i++) {
-		alreadySet_[i] = false;
-	}
-	isCatchIcon_ = false;
 	num_ = -1;
 	createNum_ = -1;
 
@@ -23,6 +18,11 @@ CharacterIcon::CharacterIcon(GameObject* parent) : Icon(parent),inFrame_(MAX_SEL
 
 CharacterIcon::~CharacterIcon()
 {
+}
+
+void CharacterIcon::Initialize()
+{
+	pData_ = Instantiate<CharacterData>(this);
 }
 
 void CharacterIcon::Update()
@@ -47,7 +47,6 @@ void CharacterIcon::Update()
 		//				settingNum_ = num;
 		//				alreadySet_[num] = true;
 		//				itr->SetIsSet(true);
-
 		//				inFrame_[num] = true;
 		//			}
 		//			else {
@@ -60,7 +59,7 @@ void CharacterIcon::Update()
 		//	}
 		//	prevMousePos_ = mousePos;
 		//}
-		Mouse* pMouse = GetParent()->GetParent()->GetParent()->FindGameObject<Mouse>();
+		Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
 		XMFLOAT2 mousePos = pMouse->GetMousePos();
 		if (IsInMousePoint(mousePos)) { 
 			if (pMouse->IsDoubleClicked(Mouse::LEFT)) { //範囲内をダブルクリックしたらセット用UI生成

@@ -4,8 +4,8 @@
 #include"IconFactory.h"
 #include"AutoRegister.h"
 #include "CharacterStatusFactory.h"
-#include "CharacterData.h"
 
+class CharacterData;
 class TriggerSetUI;
 class TriggerIcons;
 
@@ -17,28 +17,18 @@ class CharacterIcon
 public:
     CharacterIcon(GameObject* parent);
     ~CharacterIcon();
+    void Initialize() override;
     void Update() override;
     void Draw() override;
 
-    void SetInitialPosition(VECTOR _initialPosition) { initialPosition_ = _initialPosition; }
-    int GetSettingNum() { return settingNum_; }
-    bool GetAlreadySet(int _num) { return alreadySet_[_num]; }
-
-    auto GetInFrame() { return inFrame_; }
-    bool GetCatchIcon() { return false; }
+    const auto& GetpData()const { return pData_; }
 private:
-    VECTOR initialPosition_;
-    bool alreadySet_[MAX_SELECT_CHARACTER];
-    int settingNum_;
-    vector<bool> inFrame_;
-    bool isCatchIcon_;
-
     bool createUI;
 
     TriggerSetUI* pT_SetUI_;
     TriggerIcons* pT_Icons_;
 
-    CharacterData* data_;
+    CharacterData* pData_;
 
     static AutoRegister<Icon, IconFactory> register_;
 };

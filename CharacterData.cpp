@@ -65,3 +65,36 @@ void CharacterData::DefaultSetMyTrigger(string _name)
 		}
 	}
 }
+
+void CharacterData::SelectSetMyTrigger(string _name)
+{
+	int line = 0;
+	csv_->Load("Assets//Character//SelectCharacter.csv");
+	for (int y = 1;y < csv_->GetHeight();y++) {
+		if (_name == csv_->GetString(0, y)) {
+			line = y;
+		}
+	}
+	for (int x = 0;x < 4;x++) {
+		myTrigger_.myTrigger[RIGHT].trigger[x].triggerName = csv_->GetString(x + 1, line);
+	}
+	for (int x = 0;x < 4;x++) {
+		myTrigger_.myTrigger[LEFT].trigger[x].triggerName = csv_->GetString(4 + x + 1, line);
+	}
+	csv_->Load("Assets//Weapon//DefaultWeaponStatus.csv");
+	for (int hands = 0;hands < MAX;hands++) {
+		for (int i = 0;i < 4;i++) {
+			int line = 0;
+			for (int y = 1;y < csv_->GetHeight();y++) {
+				string name = myTrigger_.myTrigger[hands].trigger[i].triggerName;
+				CsvReader csv("Assets/Weapon/DefaultWeaponStatus.csv");
+				vector<Data> data = DataLoader::Load(csv);
+				t_status_ = DataLoader::GetByName<TriggerStatus, TriggerStatusFactory>("WeaponName", name, data);
+				myTrigger_.myTrigger[hands].trigger[i].arc.startPercent = t_status_.startPercent;
+				myTrigger_.myTrigger[hands].trigger[i].arc.percent = t_status_.percent;
+				myTrigger_.myTrigger[hands].trigger[i].arc.angle = t_status_.angle;
+				myTrigger_.myTrigger[hands].trigger[i].arc.rangeSize = t_status_.rangeSize;
+			}
+		}
+	}
+}

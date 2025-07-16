@@ -1,10 +1,11 @@
 #pragma once
 #include<string>
-#include<list>
+#include<unordered_set>
 #include"Engine/GameObject.h"
+
+using std::unordered_set;
 
 class GroupBase : public GameObject {
 public:
-	GroupBase(GameObject* parent) : GameObject(parent){}
-	virtual ~GroupBase() = default;
+	using ObjectList = unordered_set<GameObject*>;
 };

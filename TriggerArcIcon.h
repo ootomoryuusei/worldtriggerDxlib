@@ -3,6 +3,8 @@
 #include<array>
 #include<deque>
 
+class TriggerData;
+
 using std::array;
 using std::deque;
 
@@ -15,7 +17,6 @@ public:
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
-
 	
 	const auto& GetBoxCorners() const { return boxCorners; }
 
@@ -24,6 +25,7 @@ public:
 
 	void SetAngle(XMFLOAT2 _angle) { angle.push_back(_angle); }
 
+	const auto& GetpData()const { return pData_; }
 private:
 	float percent;
 	float startPercent;
@@ -34,6 +36,7 @@ private:
 	vector<XMFLOAT2> angle;
 	deque<XMFLOAT2> dq_angle;
 
+	TriggerData* pData_;
 	bool firstSet;
 	bool moveing;
 
