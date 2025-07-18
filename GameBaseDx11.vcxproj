@@ -156,7 +156,6 @@
     <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Icon.cpp" />
-    <ClCompile Include="IconGroup.cpp" />
     <ClCompile Include="Icons.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_draw.cpp" />
@@ -201,7 +200,6 @@
     <ClCompile Include="Trigger.cpp" />
     <ClCompile Include="TriggerArcIcon.cpp" />
     <ClCompile Include="TriggerData.cpp" />
-    <ClCompile Include="TriggerGroup.cpp" />
     <ClCompile Include="TriggerIcon.cpp" />
     <ClCompile Include="TriggerIcons.cpp" />
     <ClCompile Include="TriggersArcIcon.cpp" />
@@ -248,7 +246,6 @@
     <ClInclude Include="Ground.h" />
     <ClInclude Include="GroupBase.h" />
     <ClInclude Include="Icon.h" />
-    <ClInclude Include="IconGroup.h" />
     <ClInclude Include="Icons.h" />
     <ClInclude Include="ImGui\imconfig.h" />
     <ClInclude Include="ImGui\imgui.h" />
@@ -297,7 +294,6 @@
     <ClInclude Include="TriggerData.h" />
     <ClInclude Include="TriggerIcon.h" />
     <ClInclude Include="TriggerIcons.h" />
-    <ClInclude Include="TriggerGroup.h" />
     <ClInclude Include="TriggersArcIcon.h" />
     <ClInclude Include="TriggersArcIcons.h" />
     <ClInclude Include="TriggerSetButton.h" />
@@ -307,6 +303,7 @@
     <ClInclude Include="TriggerSetUIFrames.h" />
     <ClInclude Include="TriggerSetUIs.h" />
     <ClInclude Include="TriggerStatusFactory.h" />
+    <ClInclude Include="TypedGroup.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitIcon.h" />
     <ClInclude Include="UnitIcons.h" />

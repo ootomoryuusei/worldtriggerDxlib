@@ -50,6 +50,7 @@ void Player1::Initialize()
 	for (int y = 1;y < csv_->GetHeight();y++) { //選択したキャラクターをplayerに生成&playerのグループに追加
 		string selectCharacterName = csv_->GetString(0, y);
 		Character* pCharacter = CharacterFactory::Instance().Create(selectCharacterName, pPlayerGroup);
+		pPlayerGroup->Add(pCharacter);
 		auto pData = pCharacter->FindGameObject<CharacterData>();
 		pData->DefaultSetStatus(selectCharacterName);
 		pData->DefaultSetMyTrigger(selectCharacterName);

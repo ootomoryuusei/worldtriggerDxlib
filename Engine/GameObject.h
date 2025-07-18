@@ -6,7 +6,11 @@
 #include "Transform.h"
 #include <DxLib.h>
 #include "time.h"
+#include<unordered_set>
 
+class GroupBase;
+
+using std::unordered_set;
 using namespace DirectX;
 
 const int MAX_MAP_HIGHT = 15;
@@ -26,6 +30,7 @@ protected:
 	//オブジェクトの名前
 	std::string				objectName_;
 
+	unordered_set<GroupBase*> groups_;
 public:
 	//コンストラクタ
 	GameObject();
@@ -182,7 +187,15 @@ public:
 	void SetScale(XMFLOAT3 scale) { transform_.scale_ = scale; }
 	void SetScale(float x, float y, float z) { SetScale(XMFLOAT3(x, y, z)); }
 
-
+	void AddGroup(GroupBase* group) {
+		groups_.insert(group);
+	}
+	void RemoveGroup(GroupBase* group) {
+		groups_.erase(group);
+	}
+	const unordered_set<GroupBase*>& GetGroups()const {
+		return groups_;
+	}
 private:
 
 	//オブジェクト削除（再帰）

@@ -3,7 +3,6 @@
 
 #include"SetIcons.h"
 #include"GroupManager.h"
-#include"IconGroup.h"
 #include"CharacterData.h"
 
 Unit::Unit(GameObject* parent) : Icon(parent)
@@ -38,7 +37,6 @@ void Unit::Initialize()
 	fontHandle_ = fontHandle;
 
 	GroupManager* pGroupManager_ = GetParent()->FindGameObject<GroupManager>();
-	auto* sortieUnitGroup = pGroupManager_->CreateGroup<IconGroup>("sortieUnitGroup"); //グループマネージャーでplayerGroupを作成
 
 	CsvReader* csv_ = new CsvReader();
 	csv_->Load("Assets//Character//SelectCharacter.csv");

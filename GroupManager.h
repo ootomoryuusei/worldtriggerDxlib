@@ -3,6 +3,7 @@
 #include"GroupBase.h"
 #include<unordered_map>
 #include<string>
+#include"TypedGroup.h"
 
 using std::unordered_map;
 using std::string;
@@ -12,9 +13,9 @@ public:
 	GroupManager(GameObject* parent) : GameObject(parent,"GroupManager") {}
 
 	template<class T>
-	T* CreateGroup(const string& name) {
+	TypedGroup<T>* CreateGroup(const string& name) {
 		if (groups_.count(name)) return nullptr;
-		T* group = Instantiate<T>(this);
+		T* group = Instantiate<TypedGroup<T>>(this);
 		groups_[name] = group;
 		return group;
 	}
@@ -25,8 +26,8 @@ public:
 	}
 
 	template<class T>
-	T* GetGroupAs(string& name) {
-		return dynamic_cast<T*>(GetGroup(name));
+	TypedGroup<T>* GetGroupAs(string& name) {
+		return dynamic_cast<TypedGroup<T>*>(GetGroup(name));
 	}
 private:
 	unordered_map<string,GroupBase*> groups_;
