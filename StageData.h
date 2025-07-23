@@ -17,8 +17,12 @@ public:
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
+
+	XMFLOAT2 GetStageSize() { return size; }
+	const auto& GetStageData()const { return stageData_; }
 private:
 	CsvReader* csv_;
 	vector<vector<string>> stageData_;
+	XMFLOAT2 size;
 };
 

@@ -29,6 +29,11 @@ void TriggerArcIcon::Initialize()
 	startPercent = -5.0f;
 	VECTOR prevVec = { 0,0,0 };
 	pData_ = Instantiate<TriggerData>(this);
+	TRIGGER trigger;
+	trigger.arc.percent = 5.0f;
+	trigger.arc.rangeSize = 1.5f;
+	trigger.arc.startPercent = -5.0f;
+	pData_->SetTriggerData(trigger);
 }
 
 void TriggerArcIcon::Update()
@@ -95,7 +100,8 @@ void TriggerArcIcon::Draw()
 								position.y + (graphSizeF_.halfY - tileSize.halfY) };
 
 	if (canVisible_) {
-		DrawCircleGaugeF(DrawCenterPos.x, DrawCenterPos.y, percent, hModel, startPercent,2.0f);
+		float size = pData_->GetTriggerData().arc.rangeSize;
+		DrawCircleGaugeF(DrawCenterPos.x, DrawCenterPos.y, percent, hModel, startPercent,size);
 
 		if (createNum_ == 0) {
 			/*DrawRotaStringF()*/
@@ -105,7 +111,7 @@ void TriggerArcIcon::Draw()
 			DrawString(boxCorners[0].x, boxCorners[0].y, "Sub", GetColor(255, 255, 255), 1.5);
 		}
 	}
-#if 0
+#if 1
 	// 四角形描画
 	for (int i = 0; i < 4; i++) {
 		int j = (i + 1) % 4;
@@ -140,8 +146,9 @@ void TriggerArcIcon::calculateArc()
 
 	// 四角形サイズ（幅は角度に応じて、高さは固定）
 	float angleSpanDeg = endAngleDeg - startAngleDeg;
-	float width = graphSizeF_.halfX * sqrtf(2 * (1 - cos(XMConvertToRadians(angleSpanDeg))));
-	float height = graphSizeF_.halfY;
+	float size = pData_->GetTriggerData().arc.rangeSize;
+	float width = graphSizeF_.halfX * size * sqrtf(2 * (1 - cos(XMConvertToRadians(angleSpanDeg))));
+	float height = graphSizeF_.halfY * size;
 
 	// 四角形のローカル座標（原点は底辺中央）
 	XMFLOAT2 localCorners[4] = {

@@ -156,6 +156,7 @@
     <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Icon.cpp" />
+    <ClCompile Include="IconGroup.cpp" />
     <ClCompile Include="Icons.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_draw.cpp" />
@@ -246,6 +247,7 @@
     <ClInclude Include="Ground.h" />
     <ClInclude Include="GroupBase.h" />
     <ClInclude Include="Icon.h" />
+    <ClInclude Include="IconGroup.h" />
     <ClInclude Include="Icons.h" />
     <ClInclude Include="ImGui\imconfig.h" />
     <ClInclude Include="ImGui\imgui.h" />

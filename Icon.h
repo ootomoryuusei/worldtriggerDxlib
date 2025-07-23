@@ -25,6 +25,8 @@ protected:
 
     STEP step_;
 
+    XMFLOAT2 center_pos; //‰æ‘œ‚ğ‰ñ“]•`‰æ‚·‚é‰æ‘œã‚Ì’†SÀ•W
+    float angle; //•`‰æŠp“x
 public:
     Icon(GameObject* parent);
     ~Icon();

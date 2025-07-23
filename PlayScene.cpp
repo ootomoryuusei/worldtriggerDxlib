@@ -31,7 +31,7 @@ PlayScene::PlayScene(GameObject* parent)
 	Instantiate<TileIcons>(this);
 
 	/*Instantiate<rader>(this);*/
-	Instantiate<Unit>(this);
+	/*Instantiate<Unit>(this);*/
 
 	Instantiate<TriggersArcIcons>(this);
 

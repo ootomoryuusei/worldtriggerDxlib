@@ -298,6 +298,9 @@
     <ClCompile Include="TriggerData.cpp">
       <Filter>Data</Filter>
     </ClCompile>
+    <ClCompile Include="IconGroup.cpp">
+      <Filter>Group</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -578,6 +581,9 @@
       <Filter>Data</Filter>
     </ClInclude>
     <ClInclude Include="TypedGroup.h">
+      <Filter>Group</Filter>
+    </ClInclude>
+    <ClInclude Include="IconGroup.h">
       <Filter>Group</Filter>
     </ClInclude>
   </ItemGroup>

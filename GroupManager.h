@@ -13,9 +13,9 @@ public:
 	GroupManager(GameObject* parent) : GameObject(parent,"GroupManager") {}
 
 	template<class T>
-	TypedGroup<T>* CreateGroup(const string& name) {
+	T* CreateGroup(const string& name) {
 		if (groups_.count(name)) return nullptr;
-		T* group = Instantiate<TypedGroup<T>>(this);
+		T* group = Instantiate<T>(this);
 		groups_[name] = group;
 		return group;
 	}

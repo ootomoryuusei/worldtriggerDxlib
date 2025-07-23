@@ -11,6 +11,7 @@ public:
 	void Draw() override;
 
 	XMFLOAT2 GetBoxSize(int _num) { return boxSize[_num]; }
+	XMFLOAT2 GetBoxPos(int _num) { return boxPos[_num]; }
 private:
 	XMFLOAT2 boxPos[2];
 	XMFLOAT2 boxSize[2];

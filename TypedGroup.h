@@ -16,9 +16,9 @@ public:
 		}
 	}
 
-	void Remove(T* obj) override {
+	void Remove(GameObject* obj) override {
 		T* casted = dynamic_cast<T*>(obj);
-		if (casted && members_.erease(casted)) {
+		if (casted && members_.erase(casted)) {
 			obj->RemoveGroup(this);
 		}
 	}
