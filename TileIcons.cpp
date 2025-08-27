@@ -23,29 +23,21 @@ void TileIcons::Initialize()
     for (int y = 0; y < MAX_MAP_HIGHT; y++) {
         for (int x = 0; x < MAX_MAP_WIDTH; x++) {
             TileIcon* pTIcon = Instantiate<TileIcon>(this);
-            VECTOR scale = {
-                space.x / pTIcon->GetGraphSizeF_2D().x,space.y / pTIcon->GetGraphSizeF_2D().y,1};
-            pTIcon->SetScale(scale);
-            // スケーリング後のサイズ
-            XMFLOAT2 scaledSize = {
-                pTIcon->GetGraphSizeF_2D().x * scale.x,
-                pTIcon->GetGraphSizeF_2D().y * scale.y
-            };
+            XMFLOAT2 size;
+            size.x = (MAX_MAP_HIGHT - 1) * (3.0 / 4.0) * pTIcon->GetGraphSizeF_2D().x;
+            size.y = MAX_MAP_WIDTH * pTIcon->GetGraphSizeF_2D().y + pTIcon->GetGraphSizeF_2D().y / 2.0;
+
+            XMFLOAT2 scale;
+            scale.x = space.x * MAX_MAP_WIDTH/ size.x;
+            scale.y = space.y + MAX_MAP_HIGHT / size.y;
+            float m_scale = min(scale.x, scale.y);
+
+            pTIcon->SetScale({m_scale, m_scale, m_scale});
             TILEDATA tile;
-            if (x % 2 == 1) {
-                tile.position = {
-                    transform_.position_.x + scaledSize.x * 0.75f * x,
-                    transform_.position_.y + scaledSize.y * y + scaledSize.y * 0.5f,
-                    0.0f
-                };
-            }
-            else {
-                tile.position = {
-                    transform_.position_.x + scaledSize.x * 0.75f * x,
-                    transform_.position_.y + scaledSize.y * y,
-                    0.0f
-                };
-            }
+            XMFLOAT2 pos;
+            pos.x = x * (3.0 / 4.0) * pTIcon->GetGraphSizeF_2D().x * m_scale;
+            pos.y = y * pTIcon->GetGraphSizeF_2D().y * m_scale + (x % 2 == 1 ? pTIcon->GetGraphSizeF_2D().y * m_scale / 2.0 : 0);
+            tile.position = {transform_.position_.x + pos.x,transform_.position_.y + pos.y,0 };
             tile.num = num;
             pTIcon->SetTileData(tile);
             pTIcon->Set3DPosition(tile.position);
