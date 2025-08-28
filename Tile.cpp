@@ -16,10 +16,10 @@ Tile::Tile(GameObject* parent) : Object3D(parent)
 	for (int i = 0; i < MAX_MAP_HIGHT; i++) {
 		for (int j = 0; j < MAX_MAP_WIDTH; j++) {
 			if (j % 2 == 1) {
-				Tiles[i][j].position = { position.x + tWSize * j,position.y,position.z - tHSize/2 - tHSize * i };
+				Tiles[i][j].position = { position.x - tWSize * j,position.y,position.z + tHSize/2 + tHSize * i };
 			}
 			else {
-				Tiles[i][j].position = { position.x + tWSize * j,position.y,position.z - tHSize * i };
+				Tiles[i][j].position = { position.x - tWSize * j,position.y,position.z + tHSize * i };
 			}
 			Tiles[i][j].num = count;
 			count++;

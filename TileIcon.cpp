@@ -56,7 +56,7 @@ void TileIcon::Draw()
 		if (select) {
 			DrawGraph(position.x, position.y, hImage, TRUE);
 		}
-#if 1
+#if 0
 		DrawString(position.x + graphSizeF_.halfX, position.y + graphSizeF_.halfY, num.c_str(), GetColor(255, 255, 255));
 		DrawBoxAA(position.x + graphSizeF_.x/4, position.y, position.x + (graphSizeF_.x/4 * 3), position.y + graphSizeF_.y, GetColor(255, 255, 255), FALSE);
 #endif

@@ -74,24 +74,24 @@ void Player1::Initialize()
 
 void Player1::Update()
 {
-	//characterlist_ = pGroupManager_->GetGroup("playerGroup")->FindGameObjects<Character>();
-	//for (auto& itr : characterlist_) {
-	//	pSelectingCharacter_ = itr;
-	//}
-	//XMFLOAT3 c_rota = pSelectingCharacter_->GetRotate();
-	//VECTOR c_position = pSelectingCharacter_->Get3DPosition();
-	//// カメラの設定
-	//MATRIX mRot = MGetRotY(c_rota.y);  // 回転行列
-	//// 回ってないとき、プレイヤーからどれぐらい後ろ？→ベクトル
-	//VECTOR tmpP = VGet(0, 5, 10);
-	//// これに回転行列をかける
-	//VECTOR pRot = tmpP * mRot;
-	//// これにプレイヤーの座標を足すと、カメラ位置が出る
-	//VECTOR vRot = VGet(0, 5, -5) * mRot;
+	characterlist_ = pGroupManager_->GetGroup("playerGroup")->FindGameObjects<Character>();
+	for (auto& itr : characterlist_) {
+		pSelectingCharacter_ = itr;
+	}
+	XMFLOAT3 c_rota = pSelectingCharacter_->GetRotate();
+	VECTOR c_position = pSelectingCharacter_->Get3DPosition();
+	// カメラの設定
+	MATRIX mRot = MGetRotY(c_rota.y);  // 回転行列
+	// 回ってないとき、プレイヤーからどれぐらい後ろ？→ベクトル
+	VECTOR tmpP = VGet(0, 5, 10);
+	// これに回転行列をかける
+	VECTOR pRot = tmpP * mRot;
+	// これにプレイヤーの座標を足すと、カメラ位置が出る
+	VECTOR vRot = VGet(0, 3, -5) * mRot;
 
-	//VECTOR cam_position = c_position + pRot;
-	//VECTOR cam_target = c_position + vRot;
-	//SetCameraPositionAndTarget_UpVecY(cam_position,cam_target);
+	VECTOR cam_position = c_position + pRot;
+	VECTOR cam_target = c_position + vRot;
+	SetCameraPositionAndTarget_UpVecY(cam_position,cam_target);
 }
 
 void Player1::Draw()

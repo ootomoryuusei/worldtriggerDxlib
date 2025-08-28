@@ -17,19 +17,19 @@ void TileIcons::Initialize()
 	VECTOR MapPos = pMap->Get3DPosition();
 	XMFLOAT2 boxSize = pMap->GetBoxSize(1);
 	XMFLOAT2 boxPos = pMap->GetBoxPos(1);
-	XMFLOAT2 space = { boxSize.x / (MAX_MAP_WIDTH + 2),boxSize.y / (MAX_MAP_HIGHT + 2) };
+	XMFLOAT2 space = { boxSize.x * 0.05f,boxSize.y * 0.05f };
     transform_.position_ = { boxPos.x + space.x, boxPos.y + space.y, 0 };
     int num = 0;
     for (int y = 0; y < MAX_MAP_HIGHT; y++) {
         for (int x = 0; x < MAX_MAP_WIDTH; x++) {
             TileIcon* pTIcon = Instantiate<TileIcon>(this);
             XMFLOAT2 size;
-            size.x = (MAX_MAP_HIGHT - 1) * (3.0 / 4.0) * pTIcon->GetGraphSizeF_2D().x;
-            size.y = MAX_MAP_WIDTH * pTIcon->GetGraphSizeF_2D().y + pTIcon->GetGraphSizeF_2D().y / 2.0;
+            size.x = (MAX_MAP_WIDTH - 1) * (3.0 / 4.0) * pTIcon->GetGraphSizeF_2D().x + pTIcon->GetGraphSizeF_2D().x;
+            size.y = MAX_MAP_HIGHT * pTIcon->GetGraphSizeF_2D().y + pTIcon->GetGraphSizeF_2D().halfY;
 
             XMFLOAT2 scale;
-            scale.x = space.x * MAX_MAP_WIDTH/ size.x;
-            scale.y = space.y + MAX_MAP_HIGHT / size.y;
+            scale.x = (boxSize.x - space.x * 2) / size.x;
+            scale.y = (boxSize.y - space.y * 2) / size.y;
             float m_scale = min(scale.x, scale.y);
 
             pTIcon->SetScale({m_scale, m_scale, m_scale});

@@ -7,7 +7,11 @@ Map::Map(GameObject* parent) : Icon(parent)
 	canVisible_ = true;
 
 	boxSize[0] = { 90 ,40 };
-	boxSize[1] = { 500, 500};
+	boxSize[1].x = 450;
+	float a = boxSize[1].x / (1.5 * (MAX_MAP_WIDTH - 1) + 2);
+	float h = sqrt(3.0) * a;
+	float H = MAX_MAP_HIGHT * h;
+	boxSize[1] = { boxSize[1].x,H };
 
 	boxPos[0] = { position.x + boxSize[0].x,position.y + boxSize[0].y };
 	boxPos[1] = { position.x ,boxPos[0].y };
