@@ -5,8 +5,6 @@
 
 Tile::Tile(GameObject* parent) : Object3D(parent)
 {
-	tWSize = 1.5;
-	tHSize = 1.75;
 	hModel = MV1LoadModel("Assets//Model//Tile.mv1");
 	assert(hModel >= 0);
 	

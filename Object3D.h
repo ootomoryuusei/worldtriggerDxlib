@@ -41,6 +41,16 @@ struct SIZE_F_2D {
 	float x, y, halfX, halfY;
 };
 
+struct SIZE_F_3D {
+	float x, y, z;
+	void set(float _x, float _y, float _z) {
+		x = _x; y = _y; z = _z;
+	}
+	float halfX() const{ return x / 2; }
+	float halfY() const{ return y / 2; }
+	float halfZ() const{ return z / 2; }
+};
+
 struct TILEDATA {
 	VECTOR position;
 	int num;

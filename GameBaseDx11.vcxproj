@@ -196,6 +196,7 @@
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileIcon.cpp" />
     <ClCompile Include="TileIcons.cpp" />
+    <ClCompile Include="Tiles.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="Trigger.cpp" />
@@ -289,6 +290,7 @@
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileIcon.h" />
     <ClInclude Include="TileIcons.h" />
+    <ClInclude Include="Tiles.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="Trigger.h" />

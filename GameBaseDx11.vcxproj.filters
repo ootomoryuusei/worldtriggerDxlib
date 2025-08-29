@@ -301,6 +301,7 @@
     <ClCompile Include="IconGroup.cpp">
       <Filter>Group</Filter>
     </ClCompile>
+    <ClCompile Include="Tiles.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -586,6 +587,7 @@
     <ClInclude Include="IconGroup.h">
       <Filter>Group</Filter>
     </ClInclude>
+    <ClInclude Include="Tiles.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc">
