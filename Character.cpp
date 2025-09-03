@@ -1,6 +1,6 @@
 #include "Character.h"
 #include "Camera.h"
-#include"Tile.h"
+#include"Tiles.h"
 #include"CharacterData.h"
 #include"TriggerData.h"
 #include"Engine/CsvReader.h"
@@ -31,7 +31,7 @@ Character::~Character()
 
 void Character::Initialize()
 {
-	tile_ = GetParent()->GetParent()->GetParent()->FindGameObject<Tile>();
+	pTiles_ = GetParent()->GetParent()->GetParent()->FindGameObject<Tiles>();
 	pData_ = Instantiate<CharacterData>(this);
 }
 
@@ -74,7 +74,7 @@ void Character::Update()
 void Character::Draw()
 {
 	//Object3D::Draw(); // Šî’êƒNƒ‰ƒX‚ÌŠÖ”‚ðŒÄ‚Ô¨PlayerƒLƒƒƒ‰‚ð•`‰æ‚·‚é
-	MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);
+	MATRIX mModel = Object3D::ToMATRIX(position, rotation);
 	MV1SetMatrix(hModel, mModel);
 	MV1DrawModel(hModel);
 
@@ -82,7 +82,7 @@ void Character::Draw()
 
 	
 
-	MATRIX mShield = Object3D::ChangeFLOAT3ToMATRIX({ position.x,position.y,position.z - 1.0f }, rotation);
+	MATRIX mShield = Object3D::ToMATRIX({ position.x,position.y,position.z - 1.0f }, rotation);
 
 	/*DrawMyTrigger(myTrigger_, mLeftHand, mRightHand);*/
 
@@ -118,8 +118,8 @@ void Character::MoveMent()
 			dq_moveMent.push_back(itr);
 		}
 
-		XMINT2 f_index = { dq_moveMent.front() % tile_->GetTileX(), dq_moveMent.front() / tile_->GetTileZ() };
-		position = tile_->GetTilesData(f_index.x, f_index.y).position;
+		XMINT2 f_index = { dq_moveMent.front() % MAX_MAP_WIDTH, dq_moveMent.front() / MAX_MAP_HIGHT };
+		position = pTiles_->GetpTiles()[f_index.x][f_index.y]->Get3DPosition();
 		firstSet = true;
 		moveing = true;
 	}
@@ -129,10 +129,10 @@ void Character::MoveMent()
 			auto startIndex = *it;
 			auto targetIndex = *(++it);
 
-			XMINT2 s_index = { startIndex % tile_->GetTileX(), startIndex / tile_->GetTileZ() };
-			XMINT2 t_index = { targetIndex % tile_->GetTileX(),targetIndex / tile_->GetTileZ() };
-			VECTOR start = tile_->GetTilesData(s_index.x, s_index.y).position;
-			VECTOR target = tile_->GetTilesData(t_index.x, t_index.y).position;
+			XMINT2 s_index = { startIndex % MAX_MAP_WIDTH, startIndex / MAX_MAP_HIGHT };
+			XMINT2 t_index = { targetIndex % MAX_MAP_WIDTH,targetIndex / MAX_MAP_HIGHT };
+			VECTOR start = pTiles_->GetpTiles()[s_index.x][s_index.y]->Get3DPosition();
+			VECTOR target = pTiles_->GetpTiles()[t_index.x][t_index.y]->Get3DPosition();
 			float percent = elapsedTime / totalTime;
 			percent = clamp(percent, 0.0f, 1.0f);
 			position = Lerp3D(start, target, percent);

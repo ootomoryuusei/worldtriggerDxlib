@@ -3,7 +3,7 @@
 
 class CsvReader;
 class CharacterGroup;
-class Tile;
+class Tiles;
 
 class Enemy :
     public Object3D
@@ -17,6 +17,6 @@ public:
 private:
 	CsvReader* csv_;
 	CharacterGroup* pCharacters_;
-	Tile* pTile_;
+	Tiles* pTiles_;
 };
 

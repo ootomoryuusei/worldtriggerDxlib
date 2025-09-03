@@ -175,6 +175,10 @@ inline const VECTOR& operator +=(VECTOR& a, const VECTOR& b) {
 	return a = VAdd(a, b);
 }
 
+inline VECTOR operator *(const VECTOR& a,const VECTOR& b) {
+	return VECTOR{ a.x * b.x,a.y * b.y,a.z * b.z };
+}
+
 inline VECTOR operator *(const VECTOR& a, const MATRIX& m) {
 	return VTransform(a, m);
 }
@@ -229,7 +233,8 @@ public:
 	// ベクトルに向かって移動する
 	void MoveTo(VECTOR vec, float speed);
 
-	MATRIX ChangeFLOAT3ToMATRIX(FLOAT3 pos, FLOAT3 rot);
+	// マトリクスへ変換
+	MATRIX ToMATRIX(FLOAT3 pos, FLOAT3 rot);
 
 	/// <summary>
 	/// 点と短形の当たり判定
@@ -249,10 +254,14 @@ public:
 	VECTOR Get3DPosition() { return position; }
 	void Set3DPosition(VECTOR _position) { position = _position; }
 
+	VECTOR CalculateModelSize();
+
+	VECTOR GetModelSize() { return size; }
 protected:
 	int hModel;  // モデルデータ
 	VECTOR position; // 座標
 	VECTOR rotation; // 回転
-	MATRIX matrix; //行列
+	MATRIX matrix; //　行列
+	VECTOR size; // サイズ
 	int state_;
 };

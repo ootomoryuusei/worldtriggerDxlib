@@ -35,7 +35,7 @@ void Asteroid::Update()
 
 		}
 	}
-	matrix = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);
+	matrix = ToMATRIX(position, rotation);
 }
 
 void Asteroid::Draw()

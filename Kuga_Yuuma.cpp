@@ -22,7 +22,7 @@ Kuga_Yuuma::~Kuga_Yuuma()
 
 void Kuga_Yuuma::Draw()
 {
-	MATRIX mModel = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);
+	MATRIX mModel = ToMATRIX(position, rotation);
 	MV1SetMatrix(hModel, mModel);
 	MV1DrawModel(hModel);
 }

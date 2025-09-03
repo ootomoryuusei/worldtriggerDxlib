@@ -32,7 +32,7 @@ void Kogetsu::Update()
 
 		}
 	}
-	matrix = Object3D::ChangeFLOAT3ToMATRIX(position, rotation);
+	matrix = ToMATRIX(position, rotation);
 }
 
 void Kogetsu::Draw()

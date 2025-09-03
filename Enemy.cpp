@@ -1,7 +1,7 @@
 #include "Enemy.h"
 #include"Engine/CsvReader.h"
 #include"CharacterGroup.h"
-#include"Tile.h"
+#include"Tiles.h"
 
 #include"CharacterFactory.h"
 
@@ -56,12 +56,12 @@ void Enemy::Initialize()
     }
 
     list<Character*> characterlist = pEnemyGroup->FindGameObjects<Character>();
-    pTile_ = GetParent()->FindGameObject<Tile>();
+    pTiles_ = GetParent()->FindGameObject<Tiles>();
     for (auto& itr : characterlist) {
-        int rand_posX = GetRand(pTile_->GetTileX());
+        int rand_posX = GetRand(MAX_MAP_WIDTH -1);
         int rand_posY = GetRand(1);
-        rand_posY = rand_posY + (pTile_->GetTileX() - 2);
-        VECTOR initialPosition = pTile_->GetTilesData(rand_posX,rand_posY).position;
+        rand_posY = rand_posY + (MAX_MAP_WIDTH);
+        VECTOR initialPosition = pTiles_->GetpTiles()[rand_posX][rand_posY]->Get3DPosition();
         itr->Set3DPosition(initialPosition);
         itr->SetRotateY(90.0f);
     }

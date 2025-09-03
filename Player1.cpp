@@ -1,13 +1,12 @@
 #include "Player1.h"
 #include "Camera.h"
-#include"Tile.h"
 #include"Engine/CsvReader.h"
 #include"ImGui/imgui.h"
 
 #include"CharacterFactory.h"
 #include "CharacterGroup.h"
 #include"CharacterData.h"
-
+#include"Tiles.h"
 #include"GroupManager.h"
 
 Player1::Player1(GameObject* parent) : Object3D(parent)
@@ -43,7 +42,7 @@ void Player1::Initialize()
 	pGroupManager_ = GetParent()->FindGameObject<GroupManager>();
 	auto* pPlayerGroup = pGroupManager_->CreateGroup<CharacterGroup>("playerGroup"); //グループマネージャーでplayerGroupを作成
 
-	pTile_ = GetParent()->FindGameObject<Tile>();
+	pTiles_ = GetParent()->FindGameObject<Tiles>();
 
 	csv_ = new CsvReader();
 	csv_->Load("Assets//Character//SelectCharacter.csv");
@@ -64,9 +63,9 @@ void Player1::Initialize()
 		int placementIndex = csv_->GetInt(9, index + 1);
 
 		int x = placementIndex % MAX_MAP_WIDTH;
-		int y = placementIndex / MAX_MAP_WIDTH;
+		int y = placementIndex / MAX_MAP_WIDTH - 1;
 
-		VECTOR initialPosition = pTile_->GetTilesData(x, y).position;
+		VECTOR initialPosition = pTiles_->GetpTiles()[x][y]->Get3DPosition();
 		itr->Set3DPosition(initialPosition);
 		index++;
 	}

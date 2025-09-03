@@ -6,7 +6,7 @@ class CsvReader;
 class GroupManager;
 class CharacterGroup;
 class Character;
-class Tile;
+class Tiles;
 class Enemy;
 
 using std::list;
@@ -28,7 +28,7 @@ private:
 	GroupManager* pGroupManager_;
 	list<Character*> characterlist_;
 	Character* pSelectingCharacter_;
-	Tile* pTile_;
+	Tiles* pTiles_;
 
 	float movetime;
 	float flame;

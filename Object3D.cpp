@@ -67,7 +67,7 @@ void Object3D::MoveTo(VECTOR vec, float speed)
 	position += VNorm(vec) * speed;
 }
 
-MATRIX Object3D::ChangeFLOAT3ToMATRIX(FLOAT3 pos, FLOAT3 rot)
+MATRIX Object3D::ToMATRIX(FLOAT3 pos, FLOAT3 rot)
 {
 	MATRIX mTrans = MGetTranslate(pos); // à⁄ìÆçsóÒ
 	MATRIX mRotX = MGetRotX(rot.x); // Xé≤ÇÃâÒì]çsóÒ
@@ -127,4 +127,35 @@ VECTOR Object3D::Lerp3D(VECTOR& start, VECTOR& goal, float percent)
 				  lerp(start.y,goal.y,percent),
 				  lerp(start.z,goal.z,percent)
 	};
+}
+
+VECTOR Object3D::CalculateModelSize()
+{
+	if (hModel <= 0) {
+		return {0,0,0};
+	}
+	
+	VECTOR overallMin = { FLT_MAX,FLT_MAX,FLT_MAX };
+	VECTOR overallMax = { -FLT_MAX,-FLT_MAX,-FLT_MAX };
+
+	VECTOR scale = MV1GetScale(hModel);
+	int meshCount = MV1GetMeshNum(hModel);
+
+	for (int i = 0;i < meshCount;i++) {
+		VECTOR minV = MV1GetMeshMinPosition(hModel, i);
+		VECTOR maxV = MV1GetMeshMaxPosition(hModel, i);
+
+		if (minV.x < overallMin.x) overallMin.x = minV.x;
+		if (minV.y < overallMin.y) overallMin.y = minV.y;
+		if (minV.z < overallMin.z) overallMin.z = minV.z;
+
+		if (maxV.x > overallMax.x) overallMax.x = maxV.x;
+		if (maxV.y > overallMax.y) overallMax.y = maxV.y;
+		if (maxV.z > overallMax.z) overallMax.z = maxV.z;
+	}
+
+	VECTOR modelSize;
+	modelSize = (overallMax - overallMin) * scale;
+
+	return modelSize;
 }

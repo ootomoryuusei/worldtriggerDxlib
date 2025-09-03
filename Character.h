@@ -7,7 +7,7 @@
 
 class Icon;
 class CsvReader;
-class Tile;
+class Tiles;
 class CharacterData;
 class Enemy;
 
@@ -33,7 +33,7 @@ protected:
 	array<array<Trigger*,4>, MAX> trigger_;
 	OWENER owener_;
 
-	Tile* tile_;
+	Tiles* pTiles_;
 	CsvReader* csv_;
 
 	CharacterData* pData_;
