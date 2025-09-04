@@ -15,14 +15,12 @@ void Tiles::Initialize()
 		vector<Tile*> row;
 		for (int j = 0; j < MAX_MAP_WIDTH; j++) {
 			Tile* pTile = Instantiate<Tile>(this);
-			VECTOR pos = pTile->GetPosition();
 			VECTOR size = pTile->GetModelSize();
+			VECTOR pos = { position.x - (size.x * (3.0/4.0)) * j,position.y,position.z + size.z * i };
 			if (j % 2 == 1) {
-				pTile->Set3DPosition(VGet(pos.x - size.x * j, pos.y, pos.z + size.z / 2 + size.y * i));
+				pos.z += size.z / 2;
 			}
-			else {
-				pTile->Set3DPosition(VGet(position.x - size.x * j, position.y, position.z + size.z * i));
-			}
+			pTile->Set3DPosition(pos);
 			row.push_back(pTile);
 		}
 		pTiles.push_back(row);

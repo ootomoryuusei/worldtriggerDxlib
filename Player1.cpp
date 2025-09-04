@@ -63,9 +63,9 @@ void Player1::Initialize()
 		int placementIndex = csv_->GetInt(9, index + 1);
 
 		int x = placementIndex % MAX_MAP_WIDTH;
-		int y = placementIndex / MAX_MAP_WIDTH - 1;
+		int y = placementIndex / MAX_MAP_WIDTH;
 
-		VECTOR initialPosition = pTiles_->GetpTiles()[x][y]->Get3DPosition();
+		VECTOR initialPosition = pTiles_->GetpTiles()[x][y-1]->Get3DPosition();
 		itr->Set3DPosition(initialPosition);
 		index++;
 	}

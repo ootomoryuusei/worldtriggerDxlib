@@ -32,7 +32,7 @@ void UnitIcons::Initialize()
 		pUIcon->Load(flPath);
 		while (!isSeted) {
 			int randX = GetRand(MAX_MAP_WIDTH - 1);
-			int randY = MAX_MAP_HIGHT;
+			int randY = MAX_MAP_HIGHT -1;
 			tilenum = randY * randY - randX;
 			pos = pTIcons->GetpTIcon()[tilenum]->Get3DPosition();
 
