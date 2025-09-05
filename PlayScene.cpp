@@ -26,17 +26,23 @@ PlayScene::PlayScene(GameObject* parent)
 	Instantiate<GroupManager>(this);
 	Instantiate<Timer>(this);
 
+	/*Instantiate<rader>(this);
+	Instantiate<Unit>(this);*/
+
+	Instantiate<Tiles>(this);
+
+	Instantiate<Player1>(this);
+	
+	Instantiate<Enemy>(this);
+
 	Instantiate<Map>(this);
 
 	Instantiate<TileIcons>(this);
 
-	/*Instantiate<rader>(this);
-	Instantiate<Unit>(this);*/
-
 	Instantiate<TriggersArcIcons>(this);
 
 	Instantiate<UnitIcons>(this);
-	
+
 	Instantiate<MoveSetIcons>(this);
 
 	Instantiate<MoveSelectIcons>(this);
@@ -45,11 +51,6 @@ PlayScene::PlayScene(GameObject* parent)
 
 	Instantiate<MoveMentsLoads>(this);
 
-	Instantiate<Tiles>(this);
-
-	Instantiate<Player1>(this);
-	
-	Instantiate<Enemy>(this);
 
 	Instantiate<Camera>(this); // Player‚æ‚èŒã‚É‘‚­
 	Instantiate<Mouse>(this);

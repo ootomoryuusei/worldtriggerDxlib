@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine/GameObject.h"
 #include"TileIcon.h"
+#include"GroupManager.h"
 #include<vector>
 
 class Map;
@@ -19,5 +20,6 @@ public:
 private:
 	vector<TileIcon*> pTIcons_;
 	Map* pMap;
+	GroupManager* pGroupManager_;
 };
 

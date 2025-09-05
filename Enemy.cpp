@@ -60,8 +60,7 @@ void Enemy::Initialize()
     for (auto& itr : characterlist) {
         int rand_posX = GetRand(MAX_MAP_WIDTH -1);
         int rand_posY = GetRand(1);
-        rand_posY = rand_posY + (MAX_MAP_WIDTH -2);
-        VECTOR initialPosition = pTiles_->GetpTiles()[rand_posX][rand_posY]->Get3DPosition();
+        VECTOR initialPosition = pTiles_->GetpTiles()[rand_posY][rand_posX]->Get3DPosition();
         itr->Set3DPosition(initialPosition);
         itr->SetRotateY(90.0f);
     }

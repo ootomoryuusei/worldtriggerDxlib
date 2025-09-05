@@ -119,7 +119,7 @@ void Character::MoveMent()
 		}
 
 		XMINT2 f_index = { dq_moveMent.front() % MAX_MAP_WIDTH, dq_moveMent.front() / MAX_MAP_HIGHT };
-		position = pTiles_->GetpTiles()[f_index.x][f_index.y]->Get3DPosition();
+		position = pTiles_->GetpTiles()[f_index.y][f_index.x]->Get3DPosition();
 		firstSet = true;
 		moveing = true;
 	}
@@ -131,8 +131,8 @@ void Character::MoveMent()
 
 			XMINT2 s_index = { startIndex % MAX_MAP_WIDTH, startIndex / MAX_MAP_HIGHT };
 			XMINT2 t_index = { targetIndex % MAX_MAP_WIDTH,targetIndex / MAX_MAP_HIGHT };
-			VECTOR start = pTiles_->GetpTiles()[s_index.x][s_index.y]->Get3DPosition();
-			VECTOR target = pTiles_->GetpTiles()[t_index.x][t_index.y]->Get3DPosition();
+			VECTOR start = pTiles_->GetpTiles()[s_index.y][s_index.x]->Get3DPosition();
+			VECTOR target = pTiles_->GetpTiles()[t_index.y][t_index.x]->Get3DPosition();
 			float percent = elapsedTime / totalTime;
 			percent = clamp(percent, 0.0f, 1.0f);
 			position = Lerp3D(start, target, percent);

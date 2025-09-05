@@ -65,17 +65,28 @@ void Player1::Initialize()
 		int x = placementIndex % MAX_MAP_WIDTH;
 		int y = placementIndex / MAX_MAP_WIDTH;
 
-		VECTOR initialPosition = pTiles_->GetpTiles()[x][y-1]->Get3DPosition();
+		VECTOR initialPosition = pTiles_->GetpTiles()[y-1][x]->Get3DPosition();
 		itr->Set3DPosition(initialPosition);
 		index++;
+	}
+
+	/*characterlist_ = pGroupManager_->GetGroup("playerGroup")->FindGameObjects<Character>();*/
+	for (auto& itr : characterlist_) {
+		pSelectingCharacter_ = itr;
 	}
 }
 
 void Player1::Update()
 {
-	characterlist_ = pGroupManager_->GetGroup("playerGroup")->FindGameObjects<Character>();
-	for (auto& itr : characterlist_) {
-		pSelectingCharacter_ = itr;
+	if (CheckHitKey(KEY_INPUT_RIGHT)) {
+		auto it = std::find(characterlist_.begin(), characterlist_.end(), pSelectingCharacter_);
+		if (it != characterlist_.end()) {
+			int index = std::distance(characterlist_.begin(), it);
+			if (!(characterlist_.size() > index + 1)) {
+				pSelectingCharacter_ = std::advance(characterlist_.begin(), index + 1);
+			}
+		}
+		
 	}
 	XMFLOAT3 c_rota = pSelectingCharacter_->GetRotate();
 	VECTOR c_position = pSelectingCharacter_->Get3DPosition();
