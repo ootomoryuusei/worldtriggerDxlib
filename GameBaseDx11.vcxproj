@@ -166,6 +166,7 @@
     <ClCompile Include="ImGui\imgui_ja_gryph_ranges.cpp" />
     <ClCompile Include="ImGui\imgui_tables.cpp" />
     <ClCompile Include="ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Kogetsu.cpp" />
     <ClCompile Include="Kuga_Yuuma.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -260,6 +261,7 @@
     <ClInclude Include="ImGui\imstb_rectpack.h" />
     <ClInclude Include="ImGui\imstb_textedit.h" />
     <ClInclude Include="ImGui\imstb_truetype.h" />
+    <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Kogetsu.h" />
     <ClInclude Include="Kuga_Yuuma.h" />
     <ClInclude Include="Map.h" />

@@ -8,6 +8,7 @@ class CharacterGroup;
 class Character;
 class Tiles;
 class Enemy;
+class Keyboard;
 
 using std::list;
 
@@ -35,5 +36,6 @@ private:
 	float time;
 
 	Enemy* pEnemy_;
+	Keyboard* pKeyboard_;
 };
 

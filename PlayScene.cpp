@@ -19,9 +19,11 @@
 #include"TriggersArcIcons.h"
 
 #include"GroupManager.h"
+#include"Keyboard.h"
 
 PlayScene::PlayScene(GameObject* parent)
 {
+	Instantiate<Keyboard>(this);
 	Instantiate<BackGround>(this);
 	Instantiate<GroupManager>(this);
 	Instantiate<Timer>(this);
@@ -54,6 +56,7 @@ PlayScene::PlayScene(GameObject* parent)
 
 	Instantiate<Camera>(this); // Player‚æ‚èŒã‚É‘‚­
 	Instantiate<Mouse>(this);
+	
 	// ‚Æ‚è‚ ‚¦‚¸ƒJƒƒ‰‚ğİ’è‚·‚é
 	/*SetCameraPositionAndTarget_UpVecY(VGet(0,0,0), VGet(0, 0, 0));*/
 }

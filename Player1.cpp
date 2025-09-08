@@ -8,6 +8,7 @@
 #include"CharacterData.h"
 #include"Tiles.h"
 #include"GroupManager.h"
+#include"Keyboard.h"
 
 Player1::Player1(GameObject* parent) : Object3D(parent)
 {
@@ -74,19 +75,33 @@ void Player1::Initialize()
 	for (auto& itr : characterlist_) {
 		pSelectingCharacter_ = itr;
 	}
+	pKeyboard_ = GetParent()->FindGameObject<Keyboard>();
 }
 
 void Player1::Update()
 {
-	if (CheckHitKey(KEY_INPUT_RIGHT)) {
+	
+	if (pKeyboard_->IsTriggered(Keyboard::RIGHT)) {
 		auto it = std::find(characterlist_.begin(), characterlist_.end(), pSelectingCharacter_);
 		if (it != characterlist_.end()) {
-			int index = std::distance(characterlist_.begin(), it);
-			if (!(characterlist_.size() > index + 1)) {
-				pSelectingCharacter_ = std::advance(characterlist_.begin(), index + 1);
+			// 次の要素が存在するか確認
+			auto nextIt = std::next(it);
+			if (nextIt != characterlist_.end()) {
+				pSelectingCharacter_ = *nextIt;  // 次のキャラクターに切り替え
 			}
+			// 末尾だったら何もしない or 最初に戻すなども可能
 		}
-		
+	}
+	if (pKeyboard_->IsTriggered(Keyboard::LEFT)) {
+		auto it = std::find(characterlist_.begin(), characterlist_.end(), pSelectingCharacter_);
+		if (it != characterlist_.end()) {
+			// itがbegin()より後ろなら前に戻せる
+			if (it != characterlist_.begin()) {
+				auto prevIt = std::prev(it);  // 1つ前のイテレータ
+				pSelectingCharacter_ = *prevIt;
+			}
+			// 先頭だった場合は何もしない or 末尾に戻すなども可能
+		}
 	}
 	XMFLOAT3 c_rota = pSelectingCharacter_->GetRotate();
 	VECTOR c_position = pSelectingCharacter_->Get3DPosition();
