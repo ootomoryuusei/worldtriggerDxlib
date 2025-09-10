@@ -15,12 +15,12 @@ void MoveSelectIcons::Initialize()
 	int fontThickness = 5;
 	int fontHandle = CreateFontToHandle("行動選択フォント", fontSize, fontThickness, DX_FONTTYPE_NORMAL);
 
-	for (int i = 0; i < MAX_SELECT_CHARACTER * 2; i++) {
+	/*for (int i = 0; i < MAX_SELECT_CHARACTER * 2; i++) {
 		MoveSelectIcon* pMoveSelectIcon = Instantiate<MoveSelectIcon>(this);
 		pMoveSelectIcon->SetCreateNum(i);
 		pMoveSelectIcon->SetFontHandle(fontHandle);
 		pMoveSelectIcons_.push_back(pMoveSelectIcon);
-	}
+	}*/
 }
 
 void MoveSelectIcons::Update()

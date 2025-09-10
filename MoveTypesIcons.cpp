@@ -11,7 +11,7 @@ MoveTypesIcons::~MoveTypesIcons()
 
 void MoveTypesIcons::Initialize()
 {
-	for (int i = 0; i < MAX_SELECT_CHARACTER * 2; i++) {
+	/*for (int i = 0; i < MAX_SELECT_CHARACTER * 2; i++) {
 		MoveTypeIcons* pMoveTypeIcons = Instantiate<MoveTypeIcons>(this);
 		pMoveTypeIcons->SetCreateNum(i);
 		for (auto& itr : pMoveTypeIcons->GetpMoveTypeIcons()) {
@@ -19,7 +19,7 @@ void MoveTypesIcons::Initialize()
 		}
 
 		pMoveTypesIcons_.push_back(pMoveTypeIcons);
-	}
+	}*/
 }
 
 void MoveTypesIcons::Update()

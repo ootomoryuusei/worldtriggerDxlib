@@ -6,8 +6,10 @@ class MoveSelectIcon :
 public:
 	MoveSelectIcon(GameObject* parent);
 	~MoveSelectIcon();
+	void Initialize() override;
 	void Update() override;
 	void Draw() override;
+	void Release() override;
 private:
 	/*string iconName;*/
 	XMFLOAT2 space;

@@ -9,7 +9,6 @@ class Icon :
     public Object3D
 {
 protected:
-
     SIZE_F_2D graphSizeF_; //アイコンの画像サイズ(float)
     SIZE_2D graphSize_; //アイコンの画像サイズ
     XMFLOAT2 graphPos_; //アイコンの位置

@@ -19,7 +19,11 @@ MoveSetIcon::~MoveSetIcon()
 
 void MoveSetIcon::Initialize()
 {
-	UnitIcons* pUnitIcons = GetParent()->GetParent()->FindGameObject<UnitIcons>();
+	int fontSize = 32;
+	int fontThickness = 5;
+	int fontHandle = CreateFontToHandle("行動設定フォント", fontSize, fontThickness, DX_FONTTYPE_NORMAL);
+
+	/*UnitIcons* pUnitIcons = GetParent()->GetParent()->FindGameObject<UnitIcons>();
 	string WhoIcon = pUnitIcons->GetpUnitIcons()[createNum_]->GetIconName();
 	csv_ = new CsvReader();
 	csv_->Load("Assets/Character/CharacterStatus.csv");
@@ -34,7 +38,7 @@ void MoveSetIcon::Initialize()
 		if ( WhoIcon == csv_->GetString(1, y)) {
 			num = y;
 		}
-	}
+	}*/
 	/*maxSetMove = csv_->GetInt(moveNum, num);*/
 }
 

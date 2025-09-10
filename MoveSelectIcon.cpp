@@ -15,6 +15,13 @@ MoveSelectIcon::~MoveSelectIcon()
 {
 }
 
+void MoveSelectIcon::Initialize()
+{
+	int fontSize = 32;
+	int fontThickness = 5;
+	int fontHandle = CreateFontToHandle("行動選択フォント", fontSize, fontThickness, DX_FONTTYPE_NORMAL);
+}
+
 void MoveSelectIcon::Update()
 {
 	if (canVisible_) {
@@ -54,4 +61,8 @@ void MoveSelectIcon::Draw()
 		DrawBoxAA(position.x, position.y, position.x + graphSizeF_.x * scale_.x, position.y + graphSizeF_.y * scale_.y, GetColor(255, 0, 0), FALSE);
 #endif
 	}
+}
+
+void MoveSelectIcon::Release()
+{
 }

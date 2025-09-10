@@ -2,7 +2,7 @@
 
 MoveSetIcons::MoveSetIcons(GameObject* parent) : GameObject(parent,"MoveSetIcons")
 {
-	int fontSize = 32;
+	/*int fontSize = 32;
 	int fontThickness = 5;
 	int fontHandle = CreateFontToHandle("行動設定フォント", fontSize, fontThickness, DX_FONTTYPE_NORMAL);
 
@@ -12,7 +12,7 @@ MoveSetIcons::MoveSetIcons(GameObject* parent) : GameObject(parent,"MoveSetIcons
 		pMoveSetIcon->SetCreateNum(i);
 		pMoveSetIcons_.push_back(pMoveSetIcon);
 
-	}
+	}*/
 }
 
 MoveSetIcons::~MoveSetIcons()
