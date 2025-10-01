@@ -11,9 +11,8 @@
 #include"Timer.h"
 #include"TileIcons.h"
 #include"UnitIcons.h"
-#include"MoveSetIcons.h"
-#include"MoveSelectIcons.h"
-#include"MoveTypesIcons.h"
+#include"MoveSetIcon.h"
+#include"MoveSelectIcon.h"
 #include"MoveMentsLoads.h"
 #include "Mouse.h"
 #include"TriggersArcIcons.h"
@@ -45,11 +44,9 @@ PlayScene::PlayScene(GameObject* parent)
 
 	Instantiate<UnitIcons>(this);
 
-	Instantiate<MoveSetIcons>(this);
+	Instantiate<MoveSetIcon>(this);
 
-	Instantiate<MoveSelectIcons>(this);
-
-	Instantiate<MoveTypesIcons>(this);
+	Instantiate<MoveSelectIcon>(this);
 
 	Instantiate<MoveMentsLoads>(this);
 

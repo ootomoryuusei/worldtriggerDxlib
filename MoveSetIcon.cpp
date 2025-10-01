@@ -1,6 +1,6 @@
 #include "MoveSetIcon.h"
 #include"player1.h"
-#include"MoveTypesIcons.h"
+#include"MoveTypeIcons.h"
 #include"UnitIcons.h"
 #include "Mouse.h"
 
@@ -60,8 +60,8 @@ void MoveSetIcon::Update()
 			prevMousePos_ = mousePos;
 		}
 
-		MoveTypesIcons* pMoveTypesIcons = GetParent()->GetParent()->FindGameObject<MoveTypesIcons>();
-		for (auto& itr : pMoveTypesIcons->GetpMoveTypesIcons()[createNum_]->GetpMoveTypeIcons()) {
+		MoveTypeIcons* pMoveTypeIcons = GetParent()->GetParent()->FindGameObject<MoveTypeIcons>();
+		for (auto& itr : pMoveTypeIcons->GetpMoveTypeIcons()) {
 			if (itr->GetClicked()) {
 				moveName.push_back(itr->GetIconName());
 				itr->SetClicked(false);

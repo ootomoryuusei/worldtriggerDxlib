@@ -214,13 +214,7 @@
     <ClCompile Include="MoveSetIcon.cpp">
       <Filter>Icon\MovementIcons</Filter>
     </ClCompile>
-    <ClCompile Include="MoveSetIcons.cpp">
-      <Filter>Icon\MovementIcons</Filter>
-    </ClCompile>
     <ClCompile Include="MoveSelectIcon.cpp">
-      <Filter>Icon\MovementIcons</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveSelectIcons.cpp">
       <Filter>Icon\MovementIcons</Filter>
     </ClCompile>
     <ClCompile Include="MoveTypeIcon.cpp">
@@ -249,9 +243,6 @@
     </ClCompile>
     <ClCompile Include="SetIcons.cpp">
       <Filter>Icon</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveTypesIcons.cpp">
-      <Filter>Icon\MovementIcons</Filter>
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
       <Filter>01Engine</Filter>
@@ -465,13 +456,7 @@
     <ClInclude Include="MoveSetIcon.h">
       <Filter>Icon\MovementIcons</Filter>
     </ClInclude>
-    <ClInclude Include="MoveSetIcons.h">
-      <Filter>Icon\MovementIcons</Filter>
-    </ClInclude>
     <ClInclude Include="MoveSelectIcon.h">
-      <Filter>Icon\MovementIcons</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveSelectIcons.h">
       <Filter>Icon\MovementIcons</Filter>
     </ClInclude>
     <ClInclude Include="MoveTypeIcon.h">
@@ -500,9 +485,6 @@
     </ClInclude>
     <ClInclude Include="SetIcons.h">
       <Filter>Icon</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveTypesIcons.h">
-      <Filter>Icon\MovementIcons</Filter>
     </ClInclude>
     <ClInclude Include="Mouse.h">
       <Filter>01Engine</Filter>

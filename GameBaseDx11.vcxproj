@@ -175,12 +175,9 @@
     <ClCompile Include="MoveMentsLoad.cpp" />
     <ClCompile Include="MoveMentsLoads.cpp" />
     <ClCompile Include="MoveSetIcon.cpp" />
-    <ClCompile Include="MoveSetIcons.cpp" />
     <ClCompile Include="MoveSelectIcon.cpp" />
-    <ClCompile Include="MoveSelectIcons.cpp" />
     <ClCompile Include="MoveTypeIcon.cpp" />
     <ClCompile Include="MoveTypeIcons.cpp" />
-    <ClCompile Include="MoveTypesIcons.cpp" />
     <ClCompile Include="Object3D.cpp" />
     <ClCompile Include="OkButton.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -270,12 +267,9 @@
     <ClInclude Include="MoveMentsLoad.h" />
     <ClInclude Include="MoveMentsLoads.h" />
     <ClInclude Include="MoveSetIcon.h" />
-    <ClInclude Include="MoveSetIcons.h" />
     <ClInclude Include="MoveSelectIcon.h" />
-    <ClInclude Include="MoveSelectIcons.h" />
     <ClInclude Include="MoveTypeIcon.h" />
     <ClInclude Include="MoveTypeIcons.h" />
-    <ClInclude Include="MoveTypesIcons.h" />
     <ClInclude Include="Object3D.h" />
     <ClInclude Include="OkButton.h" />
     <ClInclude Include="Player.h" />

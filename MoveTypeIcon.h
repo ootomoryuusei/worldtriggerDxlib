@@ -20,7 +20,7 @@ public:
 private:
 	bool prevMouse;
 	bool currentMouse;
-	/*string iconName;*/
+
 	XMFLOAT2 space;
 	bool clicked;
 

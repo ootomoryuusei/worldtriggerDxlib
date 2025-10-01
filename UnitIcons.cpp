@@ -1,6 +1,8 @@
 #include "UnitIcons.h"
 #include"TileIcons.h"
 #include"Mouse.h"
+#include"MoveSelectIcon.h"
+#include"MoveSetIcon.h"
 
 UnitIcons::UnitIcons(GameObject* parent) : Icon(parent)
 {
@@ -66,6 +68,9 @@ void UnitIcons::Initialize()
 	}
 	canVisible_ = true;
 	moveMentSet = false;
+
+	pMoveSelectIcon_ = nullptr;
+	pMoveSetIcon_ = nullptr;
 }
 
 void UnitIcons::Update()
@@ -115,6 +120,17 @@ void UnitIcons::Update()
 	else {
 		for (auto& itr : pUIcons_) {
 			itr->SetCanVisible(false);
+		}
+	}
+
+	for (auto& itr : pUIcons_) {
+		if (itr->GetSet() && pMoveSelectIcon_ == nullptr && pMoveSetIcon_ == nullptr) {
+			pMoveSelectIcon_ = Instantiate<MoveSelectIcon>(this);
+			pMoveSetIcon_ = Instantiate<MoveSetIcon>(this);
+		}
+		else if(!(itr->GetSet())){
+			pMoveSelectIcon_ = nullptr;
+			pMoveSetIcon_ = nullptr;
 		}
 	}
 }

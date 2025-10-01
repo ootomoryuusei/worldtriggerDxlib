@@ -1,6 +1,6 @@
 #include "MoveTypeIcon.h"
 #include"Player1.h"
-#include"MoveSelectIcons.h"
+#include"MoveSelectIcon.h"
 #include"Mouse.h"
 #include"UnitIcons.h"
 #include"TileIcons.h"
@@ -76,20 +76,17 @@ void MoveTypeIcon::Draw()
 	Mouse* pMouse = GetParent()->GetParent()->GetParent()->FindGameObject<Mouse>();
 	XMFLOAT2 mousePos = pMouse->GetMousePos();
 
-	if (canVisible_) {
-		if (IsInMousePoint(mousePos)) {
-			DrawGraph(position.x, position.y, hImage, TRUE);
-		}
-		else {
-			DrawGraph(position.x, position.y, hModel, TRUE);
-		}
-		VECTOR fontPos = { position.x + space.x, position.y + space.y,position.z };
-		DrawStringToHandle(fontPos.x, fontPos.y, iconName_.c_str(), GetColor(0, 0, 0), fontHandle_);
-	
+	if (IsInMousePoint(mousePos)) {
+		DrawGraph(position.x, position.y, hImage, TRUE);
+	}
+	else {
+		DrawGraph(position.x, position.y, hModel, TRUE);
+	}
+	VECTOR fontPos = { position.x + space.x, position.y + space.y,position.z };
+	DrawStringToHandle(fontPos.x, fontPos.y, iconName_.c_str(), GetColor(0, 0, 0), fontHandle_);
 #if 0
 		DrawBoxAA(position.x, position.y, position.x + graphSizeF_.x, position.y + graphSizeF_.y, GetColor(255, 0, 0), FALSE);
 #endif
-	}
 }
 
 vector<int> MoveTypeIcon::SerchAroundTileNum(int _CenterNum, int _range)

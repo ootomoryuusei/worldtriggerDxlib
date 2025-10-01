@@ -24,6 +24,7 @@ public:
 	void AddMoveMent(int _moveMent) { moveMent.push_back(_moveMent); }
 
 	void SetMyTrigger(MYTRIGGER _myTrigger) { myTrigger = _myTrigger; }
+	bool GetSet() { return set; }
 private:
 
 	struct UNIT_DATA {
@@ -44,5 +45,6 @@ private:
 	float elapsedTime;
 
 	MYTRIGGER myTrigger;
+	bool set;
 };
 

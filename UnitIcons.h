@@ -4,6 +4,9 @@
 #include"Engine/CsvReader.h"
 #include<vector>
 
+class MoveSelectIcon;
+class MoveSetIcon;
+
 using std::vector;
 
 class UnitIcons :
@@ -25,6 +28,9 @@ private:
 	UnitIcon* pSelecting_ptr;
 	CsvReader* csv_;
 	string DLC;
+
+	MoveSelectIcon* pMoveSelectIcon_;
+	MoveSetIcon* pMoveSetIcon_;
 
 	bool moveMentSet;
 };

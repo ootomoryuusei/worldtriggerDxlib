@@ -2,9 +2,8 @@
 #include"Player1.h"
 
 #include"TileIcons.h"
-#include"MoveSetIcons.h"
-#include"MoveSelectIcons.h"
-#include"MoveTypesIcons.h"
+#include"MoveSetIcon.h"
+#include"MoveSelectIcon.h"
 #include "Mouse.h"
 
 
@@ -26,6 +25,8 @@ UnitIcon::UnitIcon(GameObject* parent) : Icon(parent)
 	totalTime = 10.0f;
 
 	elapsedTime = 0.0f;
+
+	set = false;
 }
 
 UnitIcon::~UnitIcon()
@@ -42,10 +43,9 @@ void UnitIcon::Update()
 
 	Mouse* pMouse_ = GetParent()->GetParent()->FindGameObject<Mouse>();
 	TileIcons* pTileIcons_ = GetParent()->GetParent()->FindGameObject<TileIcons>();
-	MoveSetIcons* pMoveSetIcons_ = GetParent()->GetParent()->FindGameObject<MoveSetIcons>();
-	MoveSelectIcons* pMoveSelectIcons_ = GetParent()->GetParent()->FindGameObject<MoveSelectIcons>();
-	MoveTypesIcons* pMoveTypesIcons_ = GetParent()->GetParent()->FindGameObject<MoveTypesIcons>();
 	
+	MoveSetIcon* pMoveSetIcon_ = GetParent()->GetParent()->FindGameObject<MoveSetIcon>();
+	MoveSelectIcon* pMoveSelectIcon_ = GetParent()->GetParent()->FindGameObject<MoveSelectIcon>();
 	XMFLOAT2 mousePos = pMouse_->GetMousePos();
 
 	
@@ -80,16 +80,13 @@ void UnitIcon::Update()
 		{
 			if (IsInMousePoint(mousePos)) {
 				//unitIconの選択処理
-				if (pMouse_->IsDoubleClicked(Mouse::LEFT)) { //ダブルクリックの処理
-
-					pMoveSetIcons_->GetpMoveSetIcons()[createNum_]->SetCanVisible(true);
-					pMoveSelectIcons_->GetpMoveSelectIcons()[createNum_]->SetCanVisible(true);
-					pMoveTypesIcons_->GetpMoveTypesIcons()[createNum_]->SetCanVisible(true);
+				if (pMouse_->IsDoubleClicked(Mouse::LEFT)) { //ダブルクリック処理
+					//行動選択、行動一覧を生成
+					set = true;
 				}
-				else if (pMouse_->IsClicked(Mouse::LEFT)) { //シングルクリック
-					pMoveSetIcons_->GetpMoveSetIcons()[createNum_]->SetCanVisible(false);
-					pMoveSelectIcons_->GetpMoveSelectIcons()[createNum_]->SetCanVisible(false);
-					pMoveTypesIcons_->GetpMoveTypesIcons()[createNum_]->SetCanVisible(false);
+				else if (pMouse_->IsClicked(Mouse::LEFT)) { //シングルクリック処理
+					//行動選択、行動一覧、ユニットの範囲外だった場合消去
+					set = false;
 				}
 				/*	if (!moveMent.empty()) {
 						VECTOR pos = pTileIcons_->GetpTIcon()[moveMent.back()]->Get3DPosition();

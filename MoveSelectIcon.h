@@ -1,5 +1,8 @@
 #pragma once
 #include "Icon.h"
+
+class MoveTypeIcons;
+
 class MoveSelectIcon :
     public Icon
 {
@@ -11,6 +14,7 @@ public:
 	void Draw() override;
 	void Release() override;
 private:
+	MoveTypeIcons* pMoveTypeIcons_;
 	/*string iconName;*/
 	XMFLOAT2 space;
 	float scale;
