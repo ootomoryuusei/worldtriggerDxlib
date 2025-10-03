@@ -11,20 +11,21 @@
 #include"Timer.h"
 #include"TileIcons.h"
 #include"UnitIcons.h"
-#include"MoveSetIcon.h"
-#include"MoveSelectIcon.h"
 #include"MoveMentsLoads.h"
 #include "Mouse.h"
 #include"TriggersArcIcons.h"
+#include"MoveSelectIcon.h"
+#include"MoveSetIcon.h"
 
 #include"GroupManager.h"
 #include"Keyboard.h"
 
-PlayScene::PlayScene(GameObject* parent)
+PlayScene::PlayScene(GameObject* parent) : GameObject(parent,"プレイシーン")
 {
-	Instantiate<Keyboard>(this);
-	Instantiate<BackGround>(this);
-	Instantiate<GroupManager>(this);
+	Instantiate<Keyboard>(this); //キーボード
+	Instantiate<Mouse>(this); //マウス
+	Instantiate<BackGround>(this); //背景
+	Instantiate<GroupManager>(this); //グループ管理クラス
 	Instantiate<Timer>(this);
 
 	/*Instantiate<rader>(this);
@@ -33,7 +34,7 @@ PlayScene::PlayScene(GameObject* parent)
 	Instantiate<Tiles>(this);
 
 	Instantiate<Player1>(this);
-	
+
 	Instantiate<Enemy>(this);
 
 	Instantiate<Map>(this);
@@ -42,17 +43,14 @@ PlayScene::PlayScene(GameObject* parent)
 
 	Instantiate<TriggersArcIcons>(this);
 
+	Instantiate<MoveSelectIcon>(this); //行動選択用アイコン
+	Instantiate<MoveSetIcon>(this); //行動セット用アイコン
+
 	Instantiate<UnitIcons>(this);
-
-	Instantiate<MoveSetIcon>(this);
-
-	Instantiate<MoveSelectIcon>(this);
 
 	Instantiate<MoveMentsLoads>(this);
 
-
 	Instantiate<Camera>(this); // Playerより後に書く
-	Instantiate<Mouse>(this);
 	
 	// とりあえずカメラを設定する
 	/*SetCameraPositionAndTarget_UpVecY(VGet(0,0,0), VGet(0, 0, 0));*/

@@ -2,7 +2,7 @@
 #include <DxLib.h>
 #include "Time.h" // DeltaTime() 用
 
-Keyboard::Keyboard(GameObject* parent) : GameObject(parent)
+Keyboard::Keyboard(GameObject* parent) : GameObject(parent,"キーボード")
 {
 }
 

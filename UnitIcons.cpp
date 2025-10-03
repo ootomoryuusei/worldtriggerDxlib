@@ -3,6 +3,7 @@
 #include"Mouse.h"
 #include"MoveSelectIcon.h"
 #include"MoveSetIcon.h"
+#include"Engine/Global.h"
 
 UnitIcons::UnitIcons(GameObject* parent) : Icon(parent)
 {
@@ -11,7 +12,7 @@ UnitIcons::UnitIcons(GameObject* parent) : Icon(parent)
 
 UnitIcons::~UnitIcons()
 {
-	delete (pSelecting_ptr);
+	//SAFE_DELETE(pSelecting_ptr);
 }
 
 void UnitIcons::Initialize()
@@ -69,8 +70,10 @@ void UnitIcons::Initialize()
 	canVisible_ = true;
 	moveMentSet = false;
 
-	pMoveSelectIcon_ = nullptr;
-	pMoveSetIcon_ = nullptr;
+	pSelecting_ptr = nullptr;
+
+	pMoveSelectIcon_ = GetParent()->FindGameObject<MoveSelectIcon>();
+	pMoveSetIcon_ = GetParent()->FindGameObject<MoveSetIcon>();
 }
 
 void UnitIcons::Update()
@@ -78,59 +81,62 @@ void UnitIcons::Update()
 	Mouse* pMouse = GetParent()->FindGameObject<Mouse>();
 	XMFLOAT2 mousePos = pMouse->GetMousePos();
 
-	if (canVisible_) {
-		// 全アイコンを初期化（表示ON・選択解除）
-		for (auto& itr : pUIcons_) {
-			if (!itr->GetCanVisible()) {
-				itr->SetCanVisible(true);
-			}
-			itr->SetSelecting(false); // まず全て非選択にする
+	// 全アイコンを初期化（表示ON・選択解除）
+	for (auto& itr : pUIcons_) {
+		if (!itr->GetCanVisible()) {
+			itr->SetCanVisible(true);
 		}
-
-		// 1つだけ選択処理
-		if (pSelecting_ptr != nullptr) {
-			if (pMouse->IsPressed(Mouse::LEFT)) {
-				pSelecting_ptr->SetSelecting(true);
-				return;
-			}
-			else {
-				pSelecting_ptr = nullptr;
-			}
-		}
-
-
-		for (auto itr = pUIcons_.rbegin();itr != pUIcons_.rend();++itr) {
-			XMFLOAT2 leftUp = { (*itr)->Get3DPosition().x,(*itr)->Get3DPosition().y };
-			XMFLOAT2 distance = { (*itr)->GetGraphSizeF_2D().x,(*itr)->GetGraphSizeF_2D().y };
-			if (PointInBox(mousePos, leftUp, distance)) {
-				pSelecting_ptr = *itr;
-				pSelecting_ptr->SetSelecting(true);
-				break;
-			}
-			
-		}
-
-		if (moveMentSet) {
-			for (auto& itr : pUIcons_) {
-				itr->SetStep(THIRD);
-				/*moveMentSet = false;*/
-			}
-		}
+		itr->SetSelecting(false); // まず全て非選択にする
 	}
-	else {
+
+	// 1つだけ選択処理
+	/*if (pSelecting_ptr != nullptr) {
+		if (pMouse->IsPressed(Mouse::LEFT)) {
+			pSelecting_ptr->SetSelecting(true);
+			return;
+		}else {
+			pSelecting_ptr = nullptr;
+		}
+	}*/
+
+
+	/*for (auto itr = pUIcons_.rbegin();itr != pUIcons_.rend();++itr) {
+		XMFLOAT2 leftUp = { (*itr)->Get3DPosition().x,(*itr)->Get3DPosition().y };
+		XMFLOAT2 distance = { (*itr)->GetGraphSizeF_2D().x,(*itr)->GetGraphSizeF_2D().y };
+		if (PointInBox(mousePos, leftUp, distance)) {
+			pSelecting_ptr = *itr;
+			pSelecting_ptr->SetSelecting(true);
+			break;
+		}		
+	}*/
+
+	if (moveMentSet) {	
+		for (auto& itr : pUIcons_) {
+			itr->SetStep(THIRD);
+			/*moveMentSet = false;*/
+		}
+	}else {
 		for (auto& itr : pUIcons_) {
 			itr->SetCanVisible(false);
 		}
 	}
 
 	for (auto& itr : pUIcons_) {
-		if (itr->GetSet() && pMoveSelectIcon_ == nullptr && pMoveSetIcon_ == nullptr) {
-			pMoveSelectIcon_ = Instantiate<MoveSelectIcon>(this);
-			pMoveSetIcon_ = Instantiate<MoveSetIcon>(this);
+		if (itr->GetSet()) {
+			pSelecting_ptr = itr;
+			pMoveSelectIcon_->Enter(); //update許可
+			pMoveSelectIcon_->Visible(); //draw許可
+			pMoveSetIcon_->Enter(); //update許可
+			pMoveSetIcon_->Visible(); //draw許可
 		}
-		else if(!(itr->GetSet())){
-			pMoveSelectIcon_ = nullptr;
-			pMoveSetIcon_ = nullptr;
+	}
+	if (pSelecting_ptr != nullptr) {
+		if (!pSelecting_ptr->GetSet()) {
+			pSelecting_ptr = nullptr;
+			pMoveSelectIcon_->Leave(); //update拒否
+			pMoveSelectIcon_->Invisible(); //draw拒否
+			pMoveSetIcon_->Leave(); //update拒否
+			pMoveSetIcon_->Invisible(); //draw拒否
 		}
 	}
 }

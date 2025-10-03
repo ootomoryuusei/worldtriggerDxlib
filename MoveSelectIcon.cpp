@@ -1,6 +1,7 @@
 #include "MoveSelectIcon.h"
 #include "Mouse.h"
 #include"MoveTypeIcons.h"
+#include "Engine/Global.h"
 
 MoveSelectIcon::MoveSelectIcon(GameObject* parent) : Icon(parent)
 {
@@ -21,6 +22,8 @@ void MoveSelectIcon::Initialize()
 	int fontThickness = 5;
 	int fontHandle = CreateFontToHandle("行動選択フォント", fontSize, fontThickness, DX_FONTTYPE_NORMAL);
 	pMoveTypeIcons_ = Instantiate<MoveTypeIcons>(this);
+	Leave(); //updateを拒否
+	Invisible(); //drawを拒否
 }
 
 void MoveSelectIcon::Update()
@@ -31,7 +34,7 @@ void MoveSelectIcon::Update()
 	XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
 	space = { (graphSizeF_.x - strSize.x) / 2,(graphSizeF_.y / 2 - strSize.y) / 2 };
 
-	Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
+	Mouse* pMouse = GetParent()->FindGameObject<Mouse>();
 	XMFLOAT2 mousePos = pMouse->GetMousePos();
 		
 	if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x * scale_.x, graphSizeF_.y * scale_.y })) {
@@ -59,3 +62,32 @@ void MoveSelectIcon::Draw()
 void MoveSelectIcon::Release()
 {
 }
+
+void MoveSelectIcon::UpdateSub()
+{
+	for (auto* child : *GetChildList()) {
+		if (IsEntered()) {
+			child->Enter();
+		}
+		else {
+			child->Leave();
+		}
+	}
+
+	GameObject::UpdateSub();
+}
+
+void MoveSelectIcon::DrawSub()
+{
+	for (auto* child : *GetChildList()) {
+		if (IsVisibled()) {
+			child->Visible();
+		}
+		else {
+			child->Invisible();
+		}
+	}
+
+	GameObject::DrawSub();
+}
+

@@ -293,7 +293,9 @@
       <Filter>Group</Filter>
     </ClCompile>
     <ClCompile Include="Tiles.cpp" />
-    <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>01Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -571,7 +573,9 @@
       <Filter>Group</Filter>
     </ClInclude>
     <ClInclude Include="Tiles.h" />
-    <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="Keyboard.h">
+      <Filter>01Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc">

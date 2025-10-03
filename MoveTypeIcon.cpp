@@ -26,48 +26,46 @@ MoveTypeIcon::~MoveTypeIcon()
 
 void MoveTypeIcon::Initialize()
 {
-	
+	Leave();
+	Invisible();
 }
 
 void MoveTypeIcon::Update()
 {
-	if (canVisible_) {
-		XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
-		space = { (graphSizeF_.x - strSize.x) / 2,(graphSizeF_.y - strSize.y) / 2 };
+	XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
+	space = { (graphSizeF_.x - strSize.x) / 2,(graphSizeF_.y - strSize.y) / 2 };
 
-		Mouse* pMouse = GetParent()->GetParent()->GetParent()->FindGameObject<Mouse>();
-		XMFLOAT2 mousePos = pMouse->GetMousePos();
+	Mouse* pMouse = GetParent()->GetParent()->GetParent()->FindGameObject<Mouse>();
+	XMFLOAT2 mousePos = pMouse->GetMousePos();
 
-		if (pMouse->IsDoubleClicked(Mouse::LEFT)) {
-			if (IsInMousePoint(mousePos)) {
-				int CenterNum = -1;
-				UnitIcons* pUnitIcons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
-				VECTOR UnitPos = pUnitIcons->GetpUnitIcons()[createNum_]->Get3DPosition();
-				TileIcons* pTileIcons = GetParent()->GetParent()->GetParent()->FindGameObject<TileIcons>();
-				for (auto& itr : pTileIcons->GetpTIcon()) {
-					if (itr->Get3DPosition().x == UnitPos.x && itr->Get3DPosition().y == UnitPos.y && itr->Get3DPosition().z == UnitPos.z) {
-						CenterNum = itr->GetTileData().num;
-					}
-				}
-				serchAroundTileNum = SerchAroundTileNum(CenterNum,2);
-				for (auto& itrs : serchAroundTileNum) {
-					for (auto& itr : pTileIcons->GetpTIcon()) {
-						if (itr->GetTileData().num == itrs) {
-							itr->SetSelect(true);
-						}
-					}
-				}
-				clicked = true;
-
-				TriggersArcIcons* pTriggersArcIcon = GetParent()->GetParent()->GetParent()->FindGameObject<TriggersArcIcons>();
-				for (auto& itr : pTriggersArcIcon->GetpTriggersArcIcon_()[createNum_]->GetpTriggerArcIcon()) {
-					itr->SetAngle({ itr->GetStartPercent(),itr->GetPercent() });
+	if (pMouse->IsDoubleClicked(Mouse::LEFT)) {
+		if (IsInMousePoint(mousePos)) {
+			int CenterNum = -1;
+			UnitIcons* pUnitIcons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
+			VECTOR UnitPos = pUnitIcons->GetpUnitIcons()[createNum_]->Get3DPosition();
+			TileIcons* pTileIcons = GetParent()->GetParent()->GetParent()->FindGameObject<TileIcons>();
+			for (auto& itr : pTileIcons->GetpTIcon()) {
+				if (itr->Get3DPosition().x == UnitPos.x && itr->Get3DPosition().y == UnitPos.y && itr->Get3DPosition().z == UnitPos.z) {
+					CenterNum = itr->GetTileData().num;
 				}
 			}
+			serchAroundTileNum = SerchAroundTileNum(CenterNum,2);
+			for (auto& itrs : serchAroundTileNum) {
+				for (auto& itr : pTileIcons->GetpTIcon()) {
+					if (itr->GetTileData().num == itrs) {
+						itr->SetSelect(true);
+					}
+				}
+			}
+			clicked = true;
+
+			TriggersArcIcons* pTriggersArcIcon = GetParent()->GetParent()->GetParent()->FindGameObject<TriggersArcIcons>();
+			for (auto& itr : pTriggersArcIcon->GetpTriggersArcIcon_()[createNum_]->GetpTriggerArcIcon()) {
+				itr->SetAngle({ itr->GetStartPercent(),itr->GetPercent() });
+			}
 		}
-		else {
-			clicked = false;
-		}
+	}else {
+		clicked = false;
 	}
 }
 

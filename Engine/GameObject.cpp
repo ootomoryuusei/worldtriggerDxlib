@@ -222,7 +222,9 @@ GameObject * GameObject::GetRootJob()
 
 void GameObject::UpdateSub()
 {
-	Update();
+	if (IsEntered()) {
+		Update();
+	}
 	Transform();
 
 	for (auto it = childList_.begin(); it != childList_.end(); it++)
@@ -247,7 +249,9 @@ void GameObject::UpdateSub()
 
 void GameObject::DrawSub()
 {
-	Draw();
+	if (IsVisibled()) {
+		Draw();
+	}
 
 	//その子オブジェクトの描画処理
 	for (auto it = childList_.begin(); it != childList_.end(); it++)

@@ -1,7 +1,7 @@
 #include "Mouse.h"
 #include <DxLib.h>
 
-Mouse::Mouse(GameObject* parent) : GameObject(parent)
+Mouse::Mouse(GameObject* parent) : GameObject(parent,"É}ÉEÉX")
 {
     mouseFlag = true;
 }

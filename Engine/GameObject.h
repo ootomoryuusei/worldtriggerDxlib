@@ -47,9 +47,9 @@ public:
 	virtual void Release(void) {}
 
 	//自分の該当関数を読んだ後、子供の関数も呼ぶ
-	void UpdateSub();
-	void DrawSub();
-	void ReleaseSub();
+	virtual void UpdateSub();
+	virtual void DrawSub();
+	virtual void ReleaseSub();
 
 
 	////ローカル行列の取得（このオブジェクトの行列）

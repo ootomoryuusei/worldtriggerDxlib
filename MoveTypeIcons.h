@@ -14,6 +14,10 @@ public:
 	~MoveTypeIcons();
 	void Initialize() override;
 	void Update() override;
+	void Draw() override;
+
+	void UpdateSub() override;
+	void DrawSub() override;
 
 	auto GetpMoveTypeIcons() { return pMoveTypeIcons_; }
 private:

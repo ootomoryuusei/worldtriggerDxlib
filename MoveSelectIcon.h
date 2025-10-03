@@ -13,6 +13,9 @@ public:
 	void Update() override;
 	void Draw() override;
 	void Release() override;
+
+	void UpdateSub() override;
+	void DrawSub() override;
 private:
 	MoveTypeIcons* pMoveTypeIcons_;
 	/*string iconName;*/

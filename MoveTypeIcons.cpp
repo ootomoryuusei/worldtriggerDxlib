@@ -47,3 +47,35 @@ void MoveTypeIcons::Update()
 		pMoveTypeIcons_[y - 1]->Set3DPosition({ pos.x, pos.y + (graphSize.y / 2) * y, pos.z });
 	}
 }
+
+void MoveTypeIcons::Draw()
+{
+}
+
+void MoveTypeIcons::UpdateSub()
+{
+	for (auto* child : *GetChildList()) {
+		if (IsEntered()) {
+			child->Enter();
+		}
+		else {
+			child->Leave();
+		}
+	}
+
+	GameObject::DrawSub();
+}
+
+void MoveTypeIcons::DrawSub()
+{
+	for (auto* child : *GetChildList()) {
+		if (IsVisibled()) {
+			child->Visible();
+		}
+		else {
+			child->Invisible();
+		}
+	}
+
+	GameObject::DrawSub();
+}
