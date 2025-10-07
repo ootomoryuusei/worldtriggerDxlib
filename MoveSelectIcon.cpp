@@ -20,7 +20,7 @@ void MoveSelectIcon::Initialize()
 {
 	int fontSize = 32;
 	int fontThickness = 5;
-	int fontHandle = CreateFontToHandle("行動選択フォント", fontSize, fontThickness, DX_FONTTYPE_NORMAL);
+	fontHandle_ = CreateFontToHandle("行動選択フォント", fontSize, fontThickness, DX_FONTTYPE_NORMAL);
 	pMoveTypeIcons_ = Instantiate<MoveTypeIcons>(this);
 	Leave(); //updateを拒否
 	Invisible(); //drawを拒否

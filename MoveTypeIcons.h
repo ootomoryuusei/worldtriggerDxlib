@@ -19,10 +19,12 @@ public:
 	void UpdateSub() override;
 	void DrawSub() override;
 
-	auto GetpMoveTypeIcons() { return pMoveTypeIcons_; }
+	const auto& GetpMoveTypeIcons() const { return pMoveTypeIcons_; }
+	const auto& GetpSelectTypeIcon() const { return pMoveTypeIcons_; }
 private:
 	vector<MoveTypeIcon*> pMoveTypeIcons_;
 	CsvReader* csv_;
 	int FNMTLine;
+	MoveTypeIcon* pSelectMovetypeIcon_;
 };
 

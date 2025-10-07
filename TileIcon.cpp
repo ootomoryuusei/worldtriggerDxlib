@@ -28,15 +28,12 @@ void TileIcon::Update()
 		int num = 0;
 		if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x, graphSizeF_.y })) {
 			if (pMouse->IsDoubleClicked(Mouse::LEFT)) {
-				/*MoveTypeIcons* pMoveTypeIcons = GetParent()->FindGameObject<MoveTypeIcons>();
-				for (auto& itr : pMoveTypeIcons->GetpMoveTypeIcons()) {
-					if (itr->GetCanVisible()) {
-						num = itr->GetCreateNum();
-					}
-				}*/
 
+				MoveTypeIcons* pMoveTypeIcons = GetParent()->GetParent()->FindGameObject<MoveTypeIcons>();
+				auto& ptr = pMoveTypeIcons->GetpSelectTypeIcon();
 				UnitIcons* pUnitIcons = GetParent()->GetParent()->FindGameObject<UnitIcons>();
-				pUnitIcons->GetpUnitIcons()[num]->AddMoveMent(tile_.num);
+				pUnitIcons->GetpSelecting_ptr()->AddMoveMent(tile_.num);
+				/*pUnitIcons->GetpMoveSetIcon()->*/
 				select = false;
 				selected = true;
 			}

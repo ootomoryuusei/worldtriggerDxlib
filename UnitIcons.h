@@ -20,6 +20,9 @@ public:
 	/*void Draw() override;*/
 
 	const auto& GetpUnitIcons() const { return pUIcons_; }
+	const auto& GetpSelecting_ptr() const { return pSelecting_ptr; }
+	const auto& GetpMoveSetIcon() const { return pMoveSetIcon_; }
+	const auto& GetpMoveSelectIcon() const { return pMoveSelectIcon_; }
 
 	void SetMoveMentSet(bool _moveMentSet) { moveMentSet = _moveMentSet; }
 	bool GetMoveMentSet() { return moveMentSet; }

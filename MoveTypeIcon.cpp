@@ -42,7 +42,7 @@ void MoveTypeIcon::Update()
 		if (IsInMousePoint(mousePos)) {
 			int CenterNum = -1;
 			UnitIcons* pUnitIcons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
-			VECTOR UnitPos = pUnitIcons->GetpUnitIcons()[createNum_]->Get3DPosition();
+			VECTOR UnitPos = pUnitIcons->GetpSelecting_ptr()->Get3DPosition();
 			TileIcons* pTileIcons = GetParent()->GetParent()->GetParent()->FindGameObject<TileIcons>();
 			for (auto& itr : pTileIcons->GetpTIcon()) {
 				if (itr->Get3DPosition().x == UnitPos.x && itr->Get3DPosition().y == UnitPos.y && itr->Get3DPosition().z == UnitPos.z) {
@@ -60,8 +60,10 @@ void MoveTypeIcon::Update()
 			clicked = true;
 
 			TriggersArcIcons* pTriggersArcIcon = GetParent()->GetParent()->GetParent()->FindGameObject<TriggersArcIcons>();
-			for (auto& itr : pTriggersArcIcon->GetpTriggersArcIcon_()[createNum_]->GetpTriggerArcIcon()) {
-				itr->SetAngle({ itr->GetStartPercent(),itr->GetPercent() });
+			for (auto& itrs : pTriggersArcIcon->GetpTriggersArcIcon_()) {
+				for(auto& itr : itrs->GetpTriggerArcIcon()){
+					itr->SetAngle({ itr->GetStartPercent(),itr->GetPercent() });
+				}
 			}
 		}
 	}else {

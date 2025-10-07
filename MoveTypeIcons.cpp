@@ -1,5 +1,6 @@
 #include "MoveTypeIcons.h"
 #include"MoveSelectIcon.h"
+#include"MoveTypeIcon.h"
 
 MoveTypeIcons::MoveTypeIcons(GameObject* parent) : Icon(parent)
 {
@@ -13,7 +14,7 @@ void MoveTypeIcons::Initialize()
 {
 	int fontSize = 32;
 	int fontThickness = 5;
-	int fontHandle = CreateFontToHandle("行動タイプフォント", fontSize, fontThickness, DX_FONTTYPE_NORMAL);
+	fontHandle_ = CreateFontToHandle("行動タイプフォント", fontSize, fontThickness, DX_FONTTYPE_NORMAL);
 
 	csv_ = new CsvReader();
 	csv_->Load("Assets//Character//CharacterMoveTypes.csv");
@@ -33,9 +34,10 @@ void MoveTypeIcons::Initialize()
 		XMFLOAT2 graphSize = { pMoveSelectIcon->GetGraphSizeF_2D().x, pMoveSelectIcon->GetGraphSizeF_2D().y };
 		pMoveTypeIcon->Set3DPosition({ pos.x, pos.y + (graphSize.y / 2) * y, pos.z });
 		pMoveTypeIcon->SetIconName(typeName);
-		pMoveTypeIcon->SetFontHandle(fontHandle);
+		pMoveTypeIcon->SetFontHandle(fontHandle_);
 		pMoveTypeIcons_.push_back(pMoveTypeIcon);
 	}
+	pSelectMovetypeIcon_ = nullptr;
 }
 
 void MoveTypeIcons::Update()
@@ -45,6 +47,13 @@ void MoveTypeIcons::Update()
 		VECTOR pos = pMoveSelectIcon->Get3DPosition();
 		XMFLOAT2 graphSize = { pMoveSelectIcon->GetGraphSizeF_2D().x, pMoveSelectIcon->GetGraphSizeF_2D().y };
 		pMoveTypeIcons_[y - 1]->Set3DPosition({ pos.x, pos.y + (graphSize.y / 2) * y, pos.z });
+	}
+
+	for (auto& itr : pMoveTypeIcons_) {
+		if (itr->GetClicked()) {
+			pSelectMovetypeIcon_ = itr;
+			return;
+		}
 	}
 }
 
@@ -63,7 +72,7 @@ void MoveTypeIcons::UpdateSub()
 		}
 	}
 
-	GameObject::DrawSub();
+	GameObject::UpdateSub();
 }
 
 void MoveTypeIcons::DrawSub()

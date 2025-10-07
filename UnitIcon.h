@@ -2,12 +2,6 @@
 #include "Icon.h"
 #include<deque>
 
-//class Mouse;
-//class TileIcons;
-//class MoveSetIcons;
-//class MoveSelectIcons;
-//class MoveTypesIcons;
-
 using std::deque;
 
 class UnitIcon :

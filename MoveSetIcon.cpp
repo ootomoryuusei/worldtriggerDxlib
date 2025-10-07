@@ -1,5 +1,6 @@
 #include "MoveSetIcon.h"
 #include"player1.h"
+#include"MoveSelectIcon.h"
 #include"MoveTypeIcons.h"
 #include"UnitIcons.h"
 #include "Mouse.h"
@@ -21,7 +22,7 @@ void MoveSetIcon::Initialize()
 {
 	int fontSize = 32;
 	int fontThickness = 5;
-	int fontHandle = CreateFontToHandle("行動設定フォント", fontSize, fontThickness, DX_FONTTYPE_NORMAL);
+	fontHandle_ = CreateFontToHandle("行動設定フォント", fontSize, fontThickness, DX_FONTTYPE_NORMAL);
 
 	/*UnitIcons* pUnitIcons = GetParent()->GetParent()->FindGameObject<UnitIcons>();
 	string WhoIcon = pUnitIcons->GetpUnitIcons()[createNum_]->GetIconName();
@@ -46,6 +47,8 @@ void MoveSetIcon::Initialize()
 
 void MoveSetIcon::Update()
 {
+	scale_ = { 1.0f,1.0f + moveName.size() * 0.5f };
+
 	XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
 	space = { (graphSizeF_.x - strSize.x) / 2,(graphSizeF_.y / 2 - strSize.y) / 2 };
 
@@ -61,14 +64,14 @@ void MoveSetIcon::Update()
 		prevMousePos_ = mousePos;
 	}
 
-	/*MoveTypeIcons* pMoveTypeIcons = GetParent()->FindGameObject<MoveTypeIcons>();
+	MoveSelectIcon* pMoveSelectIcon = GetParent()->FindGameObject<MoveSelectIcon>();
+	MoveTypeIcons* pMoveTypeIcons = pMoveSelectIcon->FindGameObject<MoveTypeIcons>();
 	for (auto& itr : pMoveTypeIcons->GetpMoveTypeIcons()) {
 		if (itr->GetClicked()) {
 			moveName.push_back(itr->GetIconName());
 			itr->SetClicked(false);
 		}
-	}*/
-	scale_ = { 1.0f,1.0f + moveName.size() * 0.5f };
+	}
 }
 
 void MoveSetIcon::Draw()

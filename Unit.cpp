@@ -32,9 +32,7 @@ void Unit::Initialize()
 {
 	int fontSize = 12;
 	int fontThickness = 9;
-	int fontHandle = CreateFontToHandle("出撃ユニットフォント", fontSize, fontThickness, DX_FONTTYPE_ANTIALIASING_EDGE_4X4);
-
-	fontHandle_ = fontHandle;
+	fontHandle_ = CreateFontToHandle("出撃ユニットフォント", fontSize, fontThickness, DX_FONTTYPE_ANTIALIASING_EDGE_4X4);
 
 	GroupManager* pGroupManager_ = GetParent()->FindGameObject<GroupManager>();
 
