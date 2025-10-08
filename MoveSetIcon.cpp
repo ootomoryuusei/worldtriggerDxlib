@@ -64,14 +64,14 @@ void MoveSetIcon::Update()
 		prevMousePos_ = mousePos;
 	}
 
-	MoveSelectIcon* pMoveSelectIcon = GetParent()->FindGameObject<MoveSelectIcon>();
+	/*MoveSelectIcon* pMoveSelectIcon = GetParent()->FindGameObject<MoveSelectIcon>();
 	MoveTypeIcons* pMoveTypeIcons = pMoveSelectIcon->FindGameObject<MoveTypeIcons>();
 	for (auto& itr : pMoveTypeIcons->GetpMoveTypeIcons()) {
 		if (itr->GetClicked()) {
 			moveName.push_back(itr->GetIconName());
 			itr->SetClicked(false);
 		}
-	}
+	}*/
 }
 
 void MoveSetIcon::Draw()

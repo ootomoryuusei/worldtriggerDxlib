@@ -2,6 +2,9 @@
 #include "Icon.h"
 #include<deque>
 
+class Trigger;
+class TriggersArcIcon;
+
 using std::deque;
 
 class UnitIcon :
@@ -21,14 +24,10 @@ public:
 	bool GetSet() { return set; }
 private:
 
-	struct UNIT_DATA {
-		int moveMent;
-		float s_percent;
-		float percent;
-	};
-
 	vector<int> moveMent;
 	deque<int> dq_moveMent;
+
+	array<Trigger*, MAX> hands_;
 
 	bool firstSet;
 	bool moveing;
@@ -40,5 +39,7 @@ private:
 
 	MYTRIGGER myTrigger;
 	bool set;
+
+	TriggersArcIcon* pArcs_;
 };
 

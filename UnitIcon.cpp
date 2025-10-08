@@ -5,6 +5,7 @@
 #include"MoveSetIcon.h"
 #include"MoveSelectIcon.h"
 #include "Mouse.h"
+#include"TriggersArcIcon.h"
 
 #include<algorithm>
 
@@ -35,6 +36,7 @@ UnitIcon::~UnitIcon()
 void UnitIcon::Initialize()
 {
 	maxMoveMent = 10;
+	/*pArcs_ = Instantiate<TriggersArcIcon>(this);*/
 }
 
 void UnitIcon::Update()
@@ -74,6 +76,10 @@ void UnitIcon::Update()
 	}
 	case SECONDE:
 	{
+		/*auto& arcs = pArcs_->GetpTriggerArcIcon();
+		for (auto& itr : arcs) {
+			itr->SetAngle()
+		}*/
 		if (IsInMousePoint(mousePos)) {
 			//unitIconの選択処理
 			if (pMouse_->IsDoubleClicked(Mouse::LEFT)) { //ダブルクリック処理
