@@ -26,6 +26,7 @@ public:
 	void SetAngle(XMFLOAT2 _angle) { angle.push_back(_angle); }
 
 	const auto& GetpData()const { return pData_; }
+	void SetHand(HANDS _hand) { hand_ = _hand; }
 private:
 	float percent;
 	float startPercent;
@@ -35,6 +36,7 @@ private:
 
 	vector<XMFLOAT2> angle;
 	deque<XMFLOAT2> dq_angle;
+	HANDS hand_;
 
 	TriggerData* pData_;
 	bool firstSet;

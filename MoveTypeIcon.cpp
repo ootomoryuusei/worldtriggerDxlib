@@ -4,7 +4,7 @@
 #include"Mouse.h"
 #include"UnitIcons.h"
 #include"TileIcons.h"
-#include"TriggersArcIcons.h"
+#include"TriggersArcIcon.h"
 #include<algorithm>
 #include <queue>
 #include <set>
@@ -41,9 +41,10 @@ void MoveTypeIcon::Update()
 	if (pMouse->IsDoubleClicked(Mouse::LEFT)) {
 		if (IsInMousePoint(mousePos)) {
 			int CenterNum = -1;
-			UnitIcons* pUnitIcons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
-			VECTOR UnitPos = pUnitIcons->GetpSelecting_ptr()->Get3DPosition();
-			TileIcons* pTileIcons = GetParent()->GetParent()->GetParent()->FindGameObject<TileIcons>();
+			const auto& pUnitIcons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
+			auto& select_uniticon = pUnitIcons->GetpSelecting_ptr();
+			VECTOR UnitPos = select_uniticon->Get3DPosition();
+			const auto& pTileIcons = GetParent()->GetParent()->GetParent()->FindGameObject<TileIcons>();
 			for (auto& itr : pTileIcons->GetpTIcon()) {
 				if (itr->Get3DPosition().x == UnitPos.x && itr->Get3DPosition().y == UnitPos.y && itr->Get3DPosition().z == UnitPos.z) {
 					CenterNum = itr->GetTileData().num;
@@ -59,11 +60,9 @@ void MoveTypeIcon::Update()
 			}
 			clicked = true;
 
-			TriggersArcIcons* pTriggersArcIcon = GetParent()->GetParent()->GetParent()->FindGameObject<TriggersArcIcons>();
-			for (auto& itrs : pTriggersArcIcon->GetpTriggersArcIcon_()) {
-				for(auto& itr : itrs->GetpTriggerArcIcon()){
-					itr->SetAngle({ itr->GetStartPercent(),itr->GetPercent() });
-				}
+			auto& arcs_icon = select_uniticon->GetpTriggersArcIcon();
+			for(auto& itr : arcs_icon->GetpTriggerArcIcon()){
+				itr->SetAngle({ itr->GetStartPercent(),itr->GetPercent() });
 			}
 		}
 	}else {

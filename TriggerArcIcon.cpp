@@ -38,17 +38,14 @@ void TriggerArcIcon::Initialize()
 
 void TriggerArcIcon::Update()
 {
-	if (canVisible_) {
 		switch (step_)
 		{
 		case FIRST:
 		{
-			canVisible_ = false;
 		}
 			break;
 		case SECONDE:
 		{
-			canVisible_ = true;
 			calculateArc();
 			break;
 		}
@@ -89,29 +86,27 @@ void TriggerArcIcon::Update()
 		default:
 			break;
 		}
-	}
 }
 
 void TriggerArcIcon::Draw()
 {
-	TileIcons* pTileIcons = GetParent()->GetParent()->GetParent()->FindGameObject<TileIcons>();
+	const auto& uniticons = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
+	const auto& pTileIcons = uniticons->GetParent()->FindGameObject<TileIcons>();
 	SIZE_F_2D tileSize = pTileIcons->GetpTIcon()[0]->GetGraphSizeF_2D();
 	XMFLOAT2 DrawCenterPos = { position.x + (graphSizeF_.halfX - tileSize.halfX),
 								position.y + (graphSizeF_.halfY - tileSize.halfY) };
 
-	if (canVisible_) {
-		float size = pData_->GetTriggerData().arc.rangeSize;
-		DrawCircleGaugeF(DrawCenterPos.x, DrawCenterPos.y, percent, hModel, startPercent,size);
+	float size = pData_->GetTriggerData().arc.rangeSize;
+	DrawCircleGaugeF(DrawCenterPos.x, DrawCenterPos.y, percent, hModel, startPercent,size);
 
-		if (createNum_ == 0) {
-			/*DrawRotaStringF()*/
-			DrawString(boxCorners[0].x, boxCorners[0].y, "Main", GetColor(255, 255, 255), 1.5);
-		}
-		else {
-			DrawString(boxCorners[0].x, boxCorners[0].y, "Sub", GetColor(255, 255, 255), 1.5);
-		}
+	if (hand_ == RIGHT) {
+		/*DrawRotaStringF()*/
+		DrawString(boxCorners[0].x, boxCorners[0].y, "Main", GetColor(255, 255, 255), 1.5);
 	}
-#if 1
+	else if(hand_ == LEFT){
+		DrawString(boxCorners[0].x, boxCorners[0].y, "Sub", GetColor(255, 255, 255), 1.5);
+	}
+#if 0
 	// éläpå`ï`âÊ
 	for (int i = 0; i < 4; i++) {
 		int j = (i + 1) % 4;
@@ -130,9 +125,10 @@ void TriggerArcIcon::Draw()
 
 void TriggerArcIcon::calculateArc()
 {
-	Mouse* pMouse = GetParent()->GetParent()->GetParent()->FindGameObject<Mouse>();
-	XMFLOAT2 mousePos = pMouse->GetMousePos();
-	TileIcons* pTileIcons = GetParent()->GetParent()->GetParent()->FindGameObject<TileIcons>();
+	const auto& uniticons = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
+	const auto& mouse = uniticons->GetParent()->FindGameObject<Mouse>();
+	XMFLOAT2 mousePos = mouse->GetMousePos();	
+	const auto& pTileIcons = uniticons->GetParent()->FindGameObject<TileIcons>();
 	SIZE_F_2D tileSize = pTileIcons->GetpTIcon()[0]->GetGraphSizeF_2D();
 	XMFLOAT2 DrawCenterPos = { position.x + (graphSizeF_.halfX - tileSize.halfX),
 		position.y + (graphSizeF_.halfY - tileSize.halfY) };
@@ -171,7 +167,7 @@ void TriggerArcIcon::calculateArc()
 
 	VECTOR nowVec, centerVec;
 	if (selecting_) { //ëIëíÜ
-		if (pMouse->IsPressed(Mouse::LEFT)) {
+		if (mouse->IsPressed(Mouse::LEFT)) {
 			nowVec = { mousePos.x, mousePos.y, 0 };
 			centerVec = { center.x, center.y, 0 };
 

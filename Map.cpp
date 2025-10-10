@@ -1,4 +1,5 @@
 #include "Map.h"
+#include"TileIcons.h"
 
 Map::Map(GameObject* parent) : Icon(parent)
 {
@@ -26,31 +27,31 @@ void Map::Initialize()
 {
 	int fontSize = 30;
 	int fontThickness = 9;
-	int fontHandle = CreateFontToHandle("MAPフォント", fontSize, fontThickness, DX_FONTTYPE_ANTIALIASING_EDGE_4X4);
+	fontHandle_ = CreateFontToHandle("MAPフォント", fontSize, fontThickness, DX_FONTTYPE_ANTIALIASING_EDGE_4X4);
 
-	fontHandle_ = fontHandle;
+	pTileIcons_ = Instantiate<TileIcons>(this);
 }
 
 void Map::Update()
 {
+	pTileIcons_->Set3DPosition(position);
+
 	boxPos[0] = { position.x + boxSize[0].x,position.y + boxSize[0].y };
 	boxPos[1] = { position.x, boxPos[0].y };
 }
 
 void Map::Draw()
 {
-	if (canVisible_) {
-		//テキスト入り小box
-		DrawBoxAA(position.x, position.y, boxPos[0].x, boxPos[0].y, GetColor(0, 0, 0), TRUE);
-		//大box
-		DrawBoxAA(boxPos[1].x, boxPos[1].y, boxPos[1].x + boxSize[1].x, boxPos[1].y + boxSize[1].y
-			, GetColor(0, 0, 0), TRUE);
-		DrawGraph(boxPos[1].x + 10 / 2, boxPos[1].y + 10 / 2, hModel, TRUE);
+	//テキスト入り小box
+	DrawBoxAA(position.x, position.y, boxPos[0].x, boxPos[0].y, GetColor(0, 0, 0), TRUE);
+	//大box
+	DrawBoxAA(boxPos[1].x, boxPos[1].y, boxPos[1].x + boxSize[1].x, boxPos[1].y + boxSize[1].y
+		, GetColor(0, 0, 0), TRUE);
+	DrawGraph(boxPos[1].x + 10 / 2, boxPos[1].y + 10 / 2, hModel, TRUE);
 
-		XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
-		XMFLOAT2 space = { (boxSize[0].x - strSize.x) / 2,(boxSize[0].y - strSize.y) / 2 };
-		VECTOR fontPos = { position.x + space.x, position.y + space.y,position.z };
-		DrawStringToHandle(fontPos.x, fontPos.y, iconName_.c_str(),
-			GetColor(255, 255, 255), fontHandle_/*, GetColor(0, 0, 0)*/);
-	}
+	XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
+	XMFLOAT2 space = { (boxSize[0].x - strSize.x) / 2,(boxSize[0].y - strSize.y) / 2 };
+	VECTOR fontPos = { position.x + space.x, position.y + space.y,position.z };
+	DrawStringToHandle(fontPos.x, fontPos.y, iconName_.c_str(),
+		GetColor(255, 255, 255), fontHandle_/*, GetColor(0, 0, 0)*/);
 }

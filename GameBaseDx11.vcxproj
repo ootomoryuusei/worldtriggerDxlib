@@ -173,7 +173,6 @@
     <ClCompile Include="Mikumo_Osamu.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="MoveMentsLoad.cpp" />
-    <ClCompile Include="MoveMentsLoads.cpp" />
     <ClCompile Include="MoveSetIcon.cpp" />
     <ClCompile Include="MoveSelectIcon.cpp" />
     <ClCompile Include="MoveTypeIcon.cpp" />
@@ -203,7 +202,6 @@
     <ClCompile Include="TriggerIcon.cpp" />
     <ClCompile Include="TriggerIcons.cpp" />
     <ClCompile Include="TriggersArcIcon.cpp" />
-    <ClCompile Include="TriggersArcIcons.cpp" />
     <ClCompile Include="TriggerSetButton.cpp" />
     <ClCompile Include="TriggerSetUI.cpp" />
     <ClCompile Include="TriggerSetUIFrame.cpp" />
@@ -265,7 +263,6 @@
     <ClInclude Include="Mikumo_Osamu.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="MoveMentsLoad.h" />
-    <ClInclude Include="MoveMentsLoads.h" />
     <ClInclude Include="MoveSetIcon.h" />
     <ClInclude Include="MoveSelectIcon.h" />
     <ClInclude Include="MoveTypeIcon.h" />
@@ -295,7 +292,6 @@
     <ClInclude Include="TriggerIcon.h" />
     <ClInclude Include="TriggerIcons.h" />
     <ClInclude Include="TriggersArcIcon.h" />
-    <ClInclude Include="TriggersArcIcons.h" />
     <ClInclude Include="TriggerSetButton.h" />
     <ClInclude Include="TriggerSetUI.h" />
     <ClInclude Include="TriggerSetUIFrame.h" />

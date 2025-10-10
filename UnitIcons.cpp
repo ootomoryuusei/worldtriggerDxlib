@@ -81,14 +81,6 @@ void UnitIcons::Update()
 	Mouse* pMouse = GetParent()->FindGameObject<Mouse>();
 	XMFLOAT2 mousePos = pMouse->GetMousePos();
 
-	// 全アイコンを初期化（表示ON・選択解除）
-	for (auto& itr : pUIcons_) {
-		if (!itr->GetCanVisible()) {
-			itr->SetCanVisible(true);
-		}
-		itr->SetSelecting(false); // まず全て非選択にする
-	}
-
 	// 1つだけ選択処理
 	/*if (pSelecting_ptr != nullptr) {
 		if (pMouse->IsPressed(Mouse::LEFT)) {

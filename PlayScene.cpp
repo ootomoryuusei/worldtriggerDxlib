@@ -11,9 +11,7 @@
 #include"Timer.h"
 #include"TileIcons.h"
 #include"UnitIcons.h"
-#include"MoveMentsLoads.h"
 #include "Mouse.h"
-#include"TriggersArcIcons.h"
 #include"MoveSelectIcon.h"
 #include"MoveSetIcon.h"
 
@@ -28,8 +26,8 @@ PlayScene::PlayScene(GameObject* parent) : GameObject(parent,"プレイシーン")
 	Instantiate<GroupManager>(this); //グループ管理クラス
 	Instantiate<Timer>(this);
 
-	/*Instantiate<rader>(this);
-	Instantiate<Unit>(this);*/
+	/*Instantiate<rader>(this);*/
+	Instantiate<Unit>(this);
 
 	Instantiate<Tiles>(this);
 
@@ -39,16 +37,12 @@ PlayScene::PlayScene(GameObject* parent) : GameObject(parent,"プレイシーン")
 
 	Instantiate<Map>(this);
 
-	Instantiate<TileIcons>(this);
-
-	Instantiate<TriggersArcIcons>(this);
+	/*Instantiate<TileIcons>(this);*/
 
 	Instantiate<MoveSelectIcon>(this); //行動選択用アイコン
 	Instantiate<MoveSetIcon>(this); //行動セット用アイコン
 
 	Instantiate<UnitIcons>(this);
-
-	Instantiate<MoveMentsLoads>(this);
 
 	Instantiate<Camera>(this); // Playerより後に書く
 	

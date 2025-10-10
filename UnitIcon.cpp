@@ -6,6 +6,7 @@
 #include"MoveSelectIcon.h"
 #include "Mouse.h"
 #include"TriggersArcIcon.h"
+#include"MoveMentsLoad.h"
 
 #include<algorithm>
 
@@ -36,7 +37,8 @@ UnitIcon::~UnitIcon()
 void UnitIcon::Initialize()
 {
 	maxMoveMent = 10;
-	/*pArcs_ = Instantiate<TriggersArcIcon>(this);*/
+	pArcs_ = Instantiate<TriggersArcIcon>(this);
+	pLoad_ = Instantiate<MoveMentsLoad>(this);
 }
 
 void UnitIcon::Update()
@@ -48,6 +50,7 @@ void UnitIcon::Update()
 	MoveSetIcon* pMoveSetIcon_ = GetParent()->GetParent()->FindGameObject<MoveSetIcon>();
 	MoveSelectIcon* pMoveSelectIcon_ = GetParent()->GetParent()->FindGameObject<MoveSelectIcon>();
 	XMFLOAT2 mousePos = pMouse_->GetMousePos();
+	pLoad_->setMoveMent(moveMent);
 
 	switch (step_)
 	{
@@ -76,10 +79,11 @@ void UnitIcon::Update()
 	}
 	case SECONDE:
 	{
-		/*auto& arcs = pArcs_->GetpTriggerArcIcon();
+		auto& arcs = pArcs_->GetpTriggerArcIcon();
 		for (auto& itr : arcs) {
-			itr->SetAngle()
-		}*/
+			itr->Set3DPosition(position);
+		}
+
 		if (IsInMousePoint(mousePos)) {
 			//unitIconの選択処理
 			if (pMouse_->IsDoubleClicked(Mouse::LEFT)) { //ダブルクリック処理

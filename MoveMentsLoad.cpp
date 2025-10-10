@@ -12,13 +12,11 @@ MoveMentsLoad::~MoveMentsLoad()
 
 void MoveMentsLoad::Initialize()
 {
-	
+	pTileIcons_ = GetParent()->GetParent()->GetParent()->FindGameObject<TileIcons>();
 }
 
 void MoveMentsLoad::Update()
 {
-	UnitIcons* pUnitIcons = GetParent()->GetParent()->FindGameObject<UnitIcons>();
-	pUnitIcons->GetpUnitIcons()[createNum_]->GetMoveMent();
 }
 
 void MoveMentsLoad::Draw()
@@ -28,37 +26,32 @@ void MoveMentsLoad::Draw()
 
 void MoveMentsLoad::DrawMoveLine()
 {
-	UnitIcons* pUnitIcons = GetParent()->GetParent()->FindGameObject<UnitIcons>();
-	TileIcons* pTileIcons = GetParent()->GetParent()->FindGameObject<TileIcons>();
-
-	const auto& movement = pUnitIcons->GetpUnitIcons()[createNum_]->GetMoveMent();
-
-	if (movement.empty()) return;
+	if (movement_.empty()) return;
 
 	XMFLOAT2 half_t_IconSize = {
-		pTileIcons->GetpTIcon()[0]->GetGraphSizeF_2D().halfX,
-		pTileIcons->GetpTIcon()[0]->GetGraphSizeF_2D().halfY
+		pTileIcons_->GetpTIcon()[0]->GetGraphSizeF_2D().halfX,
+		pTileIcons_->GetpTIcon()[0]->GetGraphSizeF_2D().halfY
 	};
 
 	int pointNum = 5;
 	int spaceNum = pointNum - 1;
 	int num = pointNum + spaceNum;
 
-	int totalPoints = (movement.size() - 1) * pointNum;
+	int totalPoints = (movement_.size() - 1) * pointNum;
 	int pointIndex = 0; // ç≈å„ÇÃì_Ç™ pointIndex = 0
 
-	for (int i = static_cast<int>(movement.size()) - 1; i > 0; --i) {
-		int prevTileNum = movement[i - 1];
-		int currTileNum = movement[i];
+	for (int i = static_cast<int>(movement_.size()) - 1; i > 0; --i) {
+		int prevTileNum = movement_[i - 1];
+		int currTileNum = movement_[i];
 
 		XMFLOAT2 startPoint = {
-			pTileIcons->GetpTIcon()[currTileNum]->Get3DPosition().x,
-			pTileIcons->GetpTIcon()[currTileNum]->Get3DPosition().y
+			pTileIcons_->GetpTIcon()[currTileNum]->Get3DPosition().x,
+			pTileIcons_->GetpTIcon()[currTileNum]->Get3DPosition().y
 		};
 
 		XMFLOAT2 endPoint = {
-			pTileIcons->GetpTIcon()[prevTileNum]->Get3DPosition().x,
-			pTileIcons->GetpTIcon()[prevTileNum]->Get3DPosition().y
+			pTileIcons_->GetpTIcon()[prevTileNum]->Get3DPosition().x,
+			pTileIcons_->GetpTIcon()[prevTileNum]->Get3DPosition().y
 		};
 
 		XMFLOAT2 vec = {

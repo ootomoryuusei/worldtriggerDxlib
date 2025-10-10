@@ -1,25 +1,23 @@
 #pragma once
-#include "Engine/GameObject.h"
-#include"TileIcon.h"
-#include"GroupManager.h"
+#include "Icon.h"
 #include<vector>
 
-class Map;
+class TileIcon;
+class GroupManager;
 
 using std::vector;
 
 class TileIcons :
-    public GameObject
+    public Icon
 {
 public:
 	TileIcons(GameObject* parent);
 	~TileIcons();
 	void Initialize() override;
 	void Update() override;
-	auto GetpTIcon() { return pTIcons_; }
+	const auto& GetpTIcon() const{ return pTIcons_; }
 private:
 	vector<TileIcon*> pTIcons_;
-	Map* pMap;
 	GroupManager* pGroupManager_;
 };
 

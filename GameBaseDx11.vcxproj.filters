@@ -250,16 +250,10 @@
     <ClCompile Include="MoveMentsLoad.cpp">
       <Filter>Icon\MiniMap</Filter>
     </ClCompile>
-    <ClCompile Include="MoveMentsLoads.cpp">
-      <Filter>Icon\MiniMap</Filter>
-    </ClCompile>
     <ClCompile Include="TriggerArcIcon.cpp">
       <Filter>Icon\MiniMap</Filter>
     </ClCompile>
     <ClCompile Include="TriggersArcIcon.cpp">
-      <Filter>Icon\MiniMap</Filter>
-    </ClCompile>
-    <ClCompile Include="TriggersArcIcons.cpp">
       <Filter>Icon\MiniMap</Filter>
     </ClCompile>
     <ClCompile Include="Trigger.cpp">
@@ -494,16 +488,10 @@
     <ClInclude Include="MoveMentsLoad.h">
       <Filter>Icon\MiniMap</Filter>
     </ClInclude>
-    <ClInclude Include="MoveMentsLoads.h">
-      <Filter>Icon\MiniMap</Filter>
-    </ClInclude>
     <ClInclude Include="TriggerArcIcon.h">
       <Filter>Icon\MiniMap</Filter>
     </ClInclude>
     <ClInclude Include="TriggersArcIcon.h">
-      <Filter>Icon\MiniMap</Filter>
-    </ClInclude>
-    <ClInclude Include="TriggersArcIcons.h">
       <Filter>Icon\MiniMap</Filter>
     </ClInclude>
     <ClInclude Include="Trigger.h">

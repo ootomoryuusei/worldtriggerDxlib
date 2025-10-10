@@ -4,6 +4,7 @@
 
 class Trigger;
 class TriggersArcIcon;
+class MoveMentsLoad;
 
 using std::deque;
 
@@ -22,6 +23,9 @@ public:
 
 	void SetMyTrigger(MYTRIGGER _myTrigger) { myTrigger = _myTrigger; }
 	bool GetSet() { return set; }
+
+	const auto& GetpTriggersArcIcon() { return pArcs_; }
+	const auto& GetpMoveMentLoad() { return pLoad_; }
 private:
 
 	vector<int> moveMent;
@@ -41,5 +45,6 @@ private:
 	bool set;
 
 	TriggersArcIcon* pArcs_;
+	MoveMentsLoad* pLoad_;
 };
 
