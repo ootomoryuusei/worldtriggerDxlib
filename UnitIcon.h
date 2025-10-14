@@ -19,7 +19,7 @@ public:
 	void Draw() override;
 
 	const auto& GetMoveMent() const{ return moveMent; }
-	void AddMoveMent(int _moveMent) { moveMent.push_back(_moveMent); }
+	void AddMoveMent(VECTOR _moveMent) { moveMent.push_back(_moveMent); }
 
 	void SetMyTrigger(MYTRIGGER _myTrigger) { myTrigger = _myTrigger; }
 	bool GetSet() { return set; }
@@ -28,8 +28,8 @@ public:
 	const auto& GetpMoveMentLoad() { return pLoad_; }
 private:
 
-	vector<int> moveMent;
-	deque<int> dq_moveMent;
+	vector<VECTOR> moveMent;
+	deque<VECTOR> dq_moveMent;
 
 	array<Trigger*, MAX> hands_;
 

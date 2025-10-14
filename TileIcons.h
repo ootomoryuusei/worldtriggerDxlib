@@ -1,8 +1,9 @@
 #pragma once
 #include "Icon.h"
+#include"TileIcon.h"
 #include<vector>
 
-class TileIcon;
+//class TileIcon;
 class GroupManager;
 
 using std::vector;
@@ -17,7 +18,7 @@ public:
 	void Update() override;
 	const auto& GetpTIcon() const{ return pTIcons_; }
 private:
-	vector<TileIcon*> pTIcons_;
+	vector<vector<TileIcon*>> pTIcons_;
 	GroupManager* pGroupManager_;
 };
 

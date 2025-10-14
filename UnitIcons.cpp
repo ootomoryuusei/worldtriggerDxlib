@@ -3,6 +3,7 @@
 #include"Mouse.h"
 #include"MoveSelectIcon.h"
 #include"MoveSetIcon.h"
+#include"Map.h"
 #include"Engine/Global.h"
 
 UnitIcons::UnitIcons(GameObject* parent) : Icon(parent)
@@ -17,7 +18,8 @@ UnitIcons::~UnitIcons()
 
 void UnitIcons::Initialize()
 {
-	TileIcons* pTIcons = GetParent()->FindGameObject<TileIcons>();
+	const auto& pMap = GetParent()->FindGameObject<Map>();
+	const auto& pTIcons = pMap->FindGameObject<TileIcons>();
 
 	csv_ = new CsvReader();
 	csv_->Load("Assets//Character//SelectCharacter.csv");
@@ -33,11 +35,11 @@ void UnitIcons::Initialize()
 		bool isSeted = false;
 		UnitIcon* pUIcon = Instantiate<UnitIcon>(this);
 		pUIcon->Load(flPath);
+		VECTOR rand = {0,0,0};
 		while (!isSeted) {
-			int randX = GetRand(MAX_MAP_WIDTH - 1);
-			int randY = MAX_MAP_HIGHT -1;
-			tilenum = randY * randY - randX;
-			pos = pTIcons->GetpTIcon()[tilenum]->Get3DPosition();
+			rand.x = GetRand(MAX_MAP_WIDTH - 1);
+			rand.y = MAX_MAP_HIGHT -1;
+			pos = pTIcons->GetpTIcon()[rand.y][rand.x]->Get3DPosition();
 
 			bool isOk = false;
 			for (auto& itr : pUIcons_) {
@@ -54,7 +56,7 @@ void UnitIcons::Initialize()
 		pUIcon->SetIconName(IconName);
 		pUIcon->Set3DPosition(pos);
 		pUIcon->SetCreateNum(y - 1);
-		pUIcon->AddMoveMent(tilenum);
+		pUIcon->AddMoveMent(rand);
 		MYTRIGGER myTrigger;
 		for (int x = 0;x < 4;x++) {
 			string TriggerName = csv_->GetString(1 + x, y);

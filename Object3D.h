@@ -52,7 +52,8 @@ struct SIZE_F_3D {
 };
 
 struct TILEDATA {
-	VECTOR position;
+	VECTOR pos;
+	VECTOR offset;
 	int num;
 };
 

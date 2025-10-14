@@ -7,6 +7,7 @@
 #include "Mouse.h"
 #include"TriggersArcIcon.h"
 #include"MoveMentsLoad.h"
+#include"Map.h"
 
 #include<algorithm>
 
@@ -63,12 +64,14 @@ void UnitIcon::Update()
 					XMFLOAT2 mouseVariation = { mousePos.x - prevMousePos_.x,mousePos.y - prevMousePos_.y };
 					position = { position.x + mouseVariation.x, position.y + mouseVariation.y, 0.0f };
 				}else {
-					for (auto itr : pTileIcons_->GetpTIcon()) { //タイルとの当たり判定
-						XMFLOAT2 leftUp = { itr->Get3DPosition().x + itr->GetGraphSizeF_2D().x / 4, itr->Get3DPosition().y };
-						XMFLOAT2 graphSize = { itr->GetGraphSizeF_2D().x / 4 * 2, itr->GetGraphSizeF_2D().y };
-						XMFLOAT2 graphCenter = { position.x + graphSizeF_.halfX,position.y + graphSizeF_.halfY };
-						if (PointInBox({ graphCenter.x, graphCenter.y }, leftUp, graphSize)) {
-							position = { itr->Get3DPosition() };
+					for (auto& colmun : pTileIcons_->GetpTIcon()) {//タイルとの当たり判定
+						for (auto& row : colmun) {
+							XMFLOAT2 leftUp = { row->Get3DPosition().x + row->GetGraphSizeF_2D().x / 4, row->Get3DPosition().y };
+							XMFLOAT2 graphSize = { row->GetGraphSizeF_2D().x / 4 * 2, row->GetGraphSizeF_2D().y };
+							XMFLOAT2 graphCenter = { position.x + graphSizeF_.halfX,position.y + graphSizeF_.halfY };
+							if (PointInBox({ graphCenter.x, graphCenter.y }, leftUp, graphSize)) {
+								position = { row->Get3DPosition() };
+							}
 						}
 					}
 				}
@@ -106,18 +109,19 @@ void UnitIcon::Update()
 			for (auto& itr : moveMent) {
 				dq_moveMent.push_back(itr);
 			}
-			position = pTileIcons_->GetpTIcon()[dq_moveMent.front()]->Get3DPosition();
+			VECTOR m_front = dq_moveMent.front();
+			position = pTileIcons_->GetpTIcon()[m_front.y][m_front.x]->Get3DPosition();
 			firstSet = true;
 			moveing = true;
 		}
 		if (moveing) {
 			if (dq_moveMent.size() >= 2) {
 				auto it = dq_moveMent.begin();
-				auto startIndex = *it;
-				auto targetIndex = *(++it);
+				auto s_offset = *it;
+				auto t_offset = *(++it);
 				
-				VECTOR start = pTileIcons_->GetpTIcon()[startIndex]->Get3DPosition();
-				VECTOR target = pTileIcons_->GetpTIcon()[targetIndex]->Get3DPosition();
+				VECTOR start = pTileIcons_->GetpTIcon()[s_offset.y][s_offset.x]->Get3DPosition();
+				VECTOR target = pTileIcons_->GetpTIcon()[t_offset.y][t_offset.x]->Get3DPosition();
 				float percent = elapsedTime / totalTime;
 				percent = clamp(percent, 0.0f, 1.0f);
 				position = Lerp3D(start, target, percent);
@@ -141,8 +145,9 @@ void UnitIcon::Update()
 
 void UnitIcon::Draw()
 {
-	TileIcons* pTileIcons = GetParent()->GetParent()->FindGameObject<TileIcons>();
-	XMFLOAT2 TileSize = { pTileIcons->GetpTIcon()[0]->GetGraphSizeF_2D().x,pTileIcons->GetpTIcon()[0]->GetGraphSizeF_2D().y };
+	const auto& pTileIcons = GetParent()->GetParent()->FindGameObject<Map>()->FindGameObject<TileIcons>();
+	XMFLOAT2 TileSize = { pTileIcons->GetpTIcon()[0][0]->GetGraphSizeF_2D().x,
+		pTileIcons->GetpTIcon()[0][0]->GetGraphSizeF_2D().y};
 	switch (step_)
 	{
 	case FIRST:
@@ -153,12 +158,14 @@ void UnitIcon::Draw()
 	case SECONDE:
 	{
 		if (moveMent.size() >= 2) {
-			VECTOR pos = pTileIcons->GetpTIcon()[moveMent.front()]->Get3DPosition();
+			VECTOR m_front = moveMent.front();
+			VECTOR pos = pTileIcons->GetpTIcon()[m_front.x][m_front.y]->Get3DPosition();
 			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 / 2);
 			DrawGraph(pos.x + (TileSize.x / 2 - graphSizeF_.halfX), pos.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
 			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 		}
-		position = pTileIcons->GetpTIcon()[moveMent.back()]->Get3DPosition();
+		VECTOR m_back = moveMent.back();
+		position = pTileIcons->GetpTIcon()[m_back.x][m_back.y]->Get3DPosition();
 		DrawGraph(position.x + (TileSize.x / 2 - graphSizeF_.halfX), position.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
 		break;
 	}

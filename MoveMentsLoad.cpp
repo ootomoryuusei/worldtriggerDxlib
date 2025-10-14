@@ -1,6 +1,8 @@
 #include "MoveMentsLoad.h"
 #include"UnitIcons.h"
 #include"TileIcons.h"
+#include"TileIcon.h"
+#include"Map.h"
 
 MoveMentsLoad::MoveMentsLoad(GameObject* parent) : Icon(parent)
 {
@@ -12,7 +14,7 @@ MoveMentsLoad::~MoveMentsLoad()
 
 void MoveMentsLoad::Initialize()
 {
-	pTileIcons_ = GetParent()->GetParent()->GetParent()->FindGameObject<TileIcons>();
+	pTileIcons_ = GetParent()->GetParent()->GetParent()->FindGameObject<Map>()->FindGameObject<TileIcons>();
 }
 
 void MoveMentsLoad::Update()
@@ -28,9 +30,11 @@ void MoveMentsLoad::DrawMoveLine()
 {
 	if (movement_.empty()) return;
 
+	
+
 	XMFLOAT2 half_t_IconSize = {
-		pTileIcons_->GetpTIcon()[0]->GetGraphSizeF_2D().halfX,
-		pTileIcons_->GetpTIcon()[0]->GetGraphSizeF_2D().halfY
+		pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D().halfX,
+		pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D().halfY
 	};
 
 	int pointNum = 5;
@@ -41,23 +45,14 @@ void MoveMentsLoad::DrawMoveLine()
 	int pointIndex = 0; // ç≈å„ÇÃì_Ç™ pointIndex = 0
 
 	for (int i = static_cast<int>(movement_.size()) - 1; i > 0; --i) {
-		int prevTileNum = movement_[i - 1];
-		int currTileNum = movement_[i];
+		FLOAT3 prevTileNum = movement_[i - 1];
+		FLOAT3 currTileNum = movement_[i];
 
-		XMFLOAT2 startPoint = {
-			pTileIcons_->GetpTIcon()[currTileNum]->Get3DPosition().x,
-			pTileIcons_->GetpTIcon()[currTileNum]->Get3DPosition().y
-		};
+		VECTOR startPoint = pTileIcons_->GetpTIcon()[currTileNum.x][currTileNum.y]->Get3DPosition();
 
-		XMFLOAT2 endPoint = {
-			pTileIcons_->GetpTIcon()[prevTileNum]->Get3DPosition().x,
-			pTileIcons_->GetpTIcon()[prevTileNum]->Get3DPosition().y
-		};
-
-		XMFLOAT2 vec = {
-			endPoint.x - startPoint.x,
-			endPoint.y - startPoint.y
-		};
+		VECTOR endPoint = pTileIcons_->GetpTIcon()[prevTileNum.x][prevTileNum.y]->Get3DPosition();
+		
+		VECTOR vec = endPoint - startPoint;
 
 		float maxlength = sqrt(vec.x * vec.x + vec.y * vec.y);
 		if (maxlength == 0) continue;

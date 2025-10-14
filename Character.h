@@ -25,8 +25,8 @@ class Character :
 protected:
 
 	VECTOR dir_;
-	vector<int> moveMent;
-	deque<int> dq_moveMent;
+	vector<VECTOR> moveMent;
+	deque<VECTOR> dq_moveMent;
 	list<Character*> characterlist_;
 	array<Trigger*, MAX> hands_;
 	array<VECTOR, MAX> handsPostion_;
@@ -57,7 +57,7 @@ public:
 	VECTOR GetPosition() { return position; }
 
 	void CreateTriggerInstance();
-	void AddMoveMent(int _movement) { moveMent.push_back(_movement); }
+	void AddMoveMent(VECTOR _movement) { moveMent.push_back(_movement); }
 
 	void DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix);
 

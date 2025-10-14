@@ -8,7 +8,7 @@ TileIcon::TileIcon(GameObject* parent) : Icon(parent)
 	Load("Assets//Image//tile.png");
 	position = {0, 0, 0 };
 	canVisible_ = true;
-	tile_.position = { 0,0,0 };
+	tile_.pos = { 0,0,0 };
 	tile_.num = -1;
 	select = false;
 	selected = false;
@@ -21,6 +21,8 @@ TileIcon::~TileIcon()
 
 void TileIcon::Update()
 {
+	position = tile_.pos;
+
 	if (select) {
 		Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
 		XMFLOAT2 mousePos = pMouse->GetMousePos();
@@ -32,7 +34,7 @@ void TileIcon::Update()
 				MoveTypeIcons* pMoveTypeIcons = GetParent()->GetParent()->FindGameObject<MoveTypeIcons>();
 				auto& ptr = pMoveTypeIcons->GetpSelectTypeIcon();
 				UnitIcons* pUnitIcons = GetParent()->GetParent()->FindGameObject<UnitIcons>();
-				pUnitIcons->GetpSelecting_ptr()->AddMoveMent(tile_.num);
+				pUnitIcons->GetpSelecting_ptr()->AddMoveMent(tile_.offset);
 				/*pUnitIcons->GetpMoveSetIcon()->*/
 				select = false;
 				selected = true;

@@ -1,6 +1,7 @@
 #include "TriggerArcIcon.h"
 #include"Mouse.h"
 #include"TileIcons.h"
+#include"Map.h"
 #include"UnitIcons.h"
 #include"TriggerData.h"
 #include <algorithm>
@@ -91,8 +92,9 @@ void TriggerArcIcon::Update()
 void TriggerArcIcon::Draw()
 {
 	const auto& uniticons = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
-	const auto& pTileIcons = uniticons->GetParent()->FindGameObject<TileIcons>();
-	SIZE_F_2D tileSize = pTileIcons->GetpTIcon()[0]->GetGraphSizeF_2D();
+	const auto& pMap = uniticons->GetParent()->FindGameObject<Map>();
+	const auto& pTileIcons = pMap->FindGameObject<TileIcons>();
+	SIZE_F_2D tileSize = pTileIcons->GetpTIcon()[0][0]->GetGraphSizeF_2D();
 	XMFLOAT2 DrawCenterPos = { position.x + (graphSizeF_.halfX - tileSize.halfX),
 								position.y + (graphSizeF_.halfY - tileSize.halfY) };
 
@@ -128,8 +130,9 @@ void TriggerArcIcon::calculateArc()
 	const auto& uniticons = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
 	const auto& mouse = uniticons->GetParent()->FindGameObject<Mouse>();
 	XMFLOAT2 mousePos = mouse->GetMousePos();	
-	const auto& pTileIcons = uniticons->GetParent()->FindGameObject<TileIcons>();
-	SIZE_F_2D tileSize = pTileIcons->GetpTIcon()[0]->GetGraphSizeF_2D();
+	const auto& pMap = uniticons->GetParent()->FindGameObject<Map>();
+	const auto& pTileIcons = pMap->FindGameObject<TileIcons>();
+	SIZE_F_2D tileSize = pTileIcons->GetpTIcon()[0][0]->GetGraphSizeF_2D();
 	XMFLOAT2 DrawCenterPos = { position.x + (graphSizeF_.halfX - tileSize.halfX),
 		position.y + (graphSizeF_.halfY - tileSize.halfY) };
 

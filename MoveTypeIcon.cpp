@@ -45,16 +45,20 @@ void MoveTypeIcon::Update()
 			auto& select_uniticon = pUnitIcons->GetpSelecting_ptr();
 			VECTOR UnitPos = select_uniticon->Get3DPosition();
 			const auto& pTileIcons = GetParent()->GetParent()->GetParent()->FindGameObject<TileIcons>();
-			for (auto& itr : pTileIcons->GetpTIcon()) {
-				if (itr->Get3DPosition().x == UnitPos.x && itr->Get3DPosition().y == UnitPos.y && itr->Get3DPosition().z == UnitPos.z) {
-					CenterNum = itr->GetTileData().num;
+			for (auto& column : pTileIcons->GetpTIcon()) {
+				for (auto& row : column) {
+					if (row->Get3DPosition().x == UnitPos.x && row->Get3DPosition().y == UnitPos.y && row->Get3DPosition().z == UnitPos.z) {
+						CenterNum = row->GetTileData().num;
+					}
 				}
 			}
 			serchAroundTileNum = SerchAroundTileNum(CenterNum,2);
 			for (auto& itrs : serchAroundTileNum) {
-				for (auto& itr : pTileIcons->GetpTIcon()) {
-					if (itr->GetTileData().num == itrs) {
-						itr->SetSelect(true);
+				for (auto& column : pTileIcons->GetpTIcon()) {
+					for (auto& row : column) {
+						if (row->GetTileData().num == itrs) {
+							row->SetSelect(true);
+						}
 					}
 				}
 			}

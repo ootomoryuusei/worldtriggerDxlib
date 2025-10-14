@@ -13,10 +13,10 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	void setMoveMent(vector<int> _movement) { movement_ = _movement; }
+	void setMoveMent(vector<FLOAT3> _movement) { movement_ = _movement; }
 private:
 	void DrawMoveLine();
-	vector<int> movement_;
+	vector<FLOAT3> movement_;
 	TileIcons* pTileIcons_;
 };
 
