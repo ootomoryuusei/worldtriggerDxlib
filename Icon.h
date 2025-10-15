@@ -28,6 +28,7 @@ protected:
     float angle; //•`‰æŠp“x
 public:
     Icon(GameObject* parent);
+    Icon(GameObject* parent,const string& name);
     ~Icon();
     virtual void Update() override;
     virtual void Draw() override;

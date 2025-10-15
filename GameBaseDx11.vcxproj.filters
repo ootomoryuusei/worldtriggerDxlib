@@ -198,9 +198,6 @@
     <ClCompile Include="TileIcon.cpp">
       <Filter>Icon\MiniMap</Filter>
     </ClCompile>
-    <ClCompile Include="TileIcons.cpp">
-      <Filter>Icon\MiniMap</Filter>
-    </ClCompile>
     <ClCompile Include="UnitIcon.cpp">
       <Filter>Icon\MiniMap</Filter>
     </ClCompile>
@@ -289,6 +286,9 @@
     <ClCompile Include="Tiles.cpp" />
     <ClCompile Include="Keyboard.cpp">
       <Filter>01Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="TileIcons.cpp">
+      <Filter>Group</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -436,9 +436,6 @@
     <ClInclude Include="TileIcon.h">
       <Filter>Icon\MiniMap</Filter>
     </ClInclude>
-    <ClInclude Include="TileIcons.h">
-      <Filter>Icon\MiniMap</Filter>
-    </ClInclude>
     <ClInclude Include="UnitIcon.h">
       <Filter>Icon\MiniMap</Filter>
     </ClInclude>
@@ -563,6 +560,9 @@
     <ClInclude Include="Tiles.h" />
     <ClInclude Include="Keyboard.h">
       <Filter>01Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="TileIcons.h">
+      <Filter>Group</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,7 @@
 #include"GroupManager.h"
 
 
-Enemy::Enemy(GameObject* parent) : Object3D(parent)
+Enemy::Enemy(GameObject* parent) : Object3D(parent,"Enemey")
 {
 }
 

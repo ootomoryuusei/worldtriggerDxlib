@@ -18,7 +18,7 @@
 #include"GroupManager.h"
 #include"Keyboard.h"
 
-PlayScene::PlayScene(GameObject* parent) : GameObject(parent,"プレイシーン")
+PlayScene::PlayScene(GameObject* parent) : GameObject(parent,"playscene")
 {
 	Instantiate<Keyboard>(this); //キーボード
 	Instantiate<Mouse>(this); //マウス
@@ -29,20 +29,20 @@ PlayScene::PlayScene(GameObject* parent) : GameObject(parent,"プレイシーン")
 	/*Instantiate<rader>(this);*/
 	Instantiate<Unit>(this);
 
-	Instantiate<Tiles>(this);
+	Instantiate<Tiles>(this); //タイル群
 
-	Instantiate<Player1>(this);
+	Instantiate<Player1>(this); //プレイヤー
 
-	Instantiate<Enemy>(this);
+	Instantiate<Enemy>(this); //敵
 
-	Instantiate<Map>(this);
+	Instantiate<Map>(this); //マップ
 
 	/*Instantiate<TileIcons>(this);*/
 
 	Instantiate<MoveSelectIcon>(this); //行動選択用アイコン
 	Instantiate<MoveSetIcon>(this); //行動セット用アイコン
 
-	Instantiate<UnitIcons>(this);
+	Instantiate<UnitIcons>(this); //ユニット群
 
 	Instantiate<Camera>(this); // Playerより後に書く
 	

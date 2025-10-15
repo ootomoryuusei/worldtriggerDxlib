@@ -4,6 +4,10 @@ Icon::Icon(GameObject* parent) : Object3D(parent)
 {
 }
 
+Icon::Icon(GameObject* parent,const string& name) : Object3D(parent,name)
+{
+}
+
 Icon::~Icon()
 {
 }

@@ -198,7 +198,7 @@ inline VECTOR operator *(const VECTOR& a, float sc) {
 class Object3D : public GameObject {
 public:
 	Object3D(GameObject* parent);
-	Object3D(GameObject* parent, std::string& name);
+	Object3D(GameObject* parent,const std::string& name);
 	virtual ~Object3D();
 
 	/// <summary>

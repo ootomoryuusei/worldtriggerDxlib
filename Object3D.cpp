@@ -11,7 +11,7 @@ Object3D::Object3D(GameObject* parent) : GameObject(parent)
 	rotation = VGet(0, 0, 0);
 }
 
-Object3D::Object3D(GameObject* parent, std::string& name) : GameObject(parent, name)
+Object3D::Object3D(GameObject* parent,const std::string& name) : GameObject(parent, name)
 {
 	hModel = -1;
 	position = VGet(0, 0, 0);

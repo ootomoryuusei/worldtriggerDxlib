@@ -1,15 +1,14 @@
 #pragma once
-#include "Icon.h"
+#include "TypedGroup.h"
 #include"TileIcon.h"
 #include<vector>
 
-//class TileIcon;
 class GroupManager;
 
 using std::vector;
 
 class TileIcons :
-    public Icon
+    public TypedGroup<TileIcon>
 {
 public:
 	TileIcons(GameObject* parent);

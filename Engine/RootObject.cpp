@@ -15,7 +15,6 @@ RootObject::~RootObject()
 void RootObject::Initialize()
 {
 	SceneManager::Instance()->Initialize();
-//	Instantiate<SceneManager>(this);
 }
 
 void RootObject::Update()

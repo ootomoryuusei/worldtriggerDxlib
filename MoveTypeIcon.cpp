@@ -5,6 +5,7 @@
 #include"UnitIcons.h"
 #include"TileIcons.h"
 #include"TriggersArcIcon.h"
+#include"GroupManager.h"
 #include<algorithm>
 #include <queue>
 #include <set>
@@ -26,6 +27,8 @@ MoveTypeIcon::~MoveTypeIcon()
 
 void MoveTypeIcon::Initialize()
 {
+	const auto& pGroupManager_ = GetParent()->FindGameObject<GroupManager>();
+	pTileIcons_ = pGroupManager_->GetGroup("playerGroup");
 	Leave();
 	Invisible();
 }
@@ -44,8 +47,7 @@ void MoveTypeIcon::Update()
 			const auto& pUnitIcons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
 			auto& select_uniticon = pUnitIcons->GetpSelecting_ptr();
 			VECTOR UnitPos = select_uniticon->Get3DPosition();
-			const auto& pTileIcons = GetParent()->GetParent()->GetParent()->FindGameObject<TileIcons>();
-			for (auto& column : pTileIcons->GetpTIcon()) {
+			for (auto& column : pTileIcons_->GetpTIcon()) {
 				for (auto& row : column) {
 					if (row->Get3DPosition().x == UnitPos.x && row->Get3DPosition().y == UnitPos.y && row->Get3DPosition().z == UnitPos.z) {
 						CenterNum = row->GetTileData().num;
@@ -54,7 +56,7 @@ void MoveTypeIcon::Update()
 			}
 			serchAroundTileNum = SerchAroundTileNum(CenterNum,2);
 			for (auto& itrs : serchAroundTileNum) {
-				for (auto& column : pTileIcons->GetpTIcon()) {
+				for (auto& column : pTileIcons_->GetpTIcon()) {
 					for (auto& row : column) {
 						if (row->GetTileData().num == itrs) {
 							row->SetSelect(true);

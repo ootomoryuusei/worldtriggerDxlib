@@ -1,6 +1,8 @@
 #pragma once
 #include "Icon.h"
 
+class TileIcons;
+
 class MoveTypeIcon :
     public Icon
 {
@@ -28,6 +30,8 @@ private:
 
 	void TypeMove();
 	void SimpleMove();
+
+	TileIcons* pTileIcons_;
 
 	vector<int> serchAroundTileNum;
 };

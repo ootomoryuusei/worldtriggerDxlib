@@ -34,7 +34,7 @@ void Map::Initialize()
 
 void Map::Update()
 {
-	pTileIcons_->Set3DPosition(position);
+	pTileIcons_->SetPosition(position.x,position.y,position.z);
 
 	boxPos[0] = { position.x + boxSize[0].x,position.y + boxSize[0].y };
 	boxPos[1] = { position.x, boxPos[0].y };
