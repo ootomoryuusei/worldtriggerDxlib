@@ -14,7 +14,7 @@ TileIcons::~TileIcons()
 
 void TileIcons::Initialize()
 {
-    pGroupManager_ = GetParent()->FindGameObject<GroupManager>();
+    pGroupManager_ = GetParent()->GetParent()->FindGameObject<GroupManager>();
     auto* pTileIconGroup = pGroupManager_->CreateGroup<TileIcons>("TileIconGroup"); //グループマネージャーでTileIconGroupを作成
 
     const auto& pMap = GetParent()->GetParent()->FindGameObject<Map>();

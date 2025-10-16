@@ -37,8 +37,6 @@ PlayScene::PlayScene(GameObject* parent) : GameObject(parent,"playscene")
 
 	Instantiate<Map>(this); //マップ
 
-	/*Instantiate<TileIcons>(this);*/
-
 	Instantiate<MoveSelectIcon>(this); //行動選択用アイコン
 	Instantiate<MoveSetIcon>(this); //行動セット用アイコン
 

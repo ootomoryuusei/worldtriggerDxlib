@@ -28,7 +28,7 @@ MoveTypeIcon::~MoveTypeIcon()
 void MoveTypeIcon::Initialize()
 {
 	const auto& pGroupManager_ = GetParent()->FindGameObject<GroupManager>();
-	pTileIcons_ = pGroupManager_->GetGroup("playerGroup");
+	pTileIcons_ = dynamic_cast<TileIcons*>(pGroupManager_->GetGroup("TileIconGroup"));
 	Leave();
 	Invisible();
 }
