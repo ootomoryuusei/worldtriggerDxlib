@@ -2,6 +2,7 @@
 #include "Icon.h"
 
 class TileIcons;
+class GroupManager;
 
 class MoveMentsLoad :
     public Icon
@@ -17,6 +18,7 @@ public:
 private:
 	void DrawMoveLine();
 	vector<FLOAT3> movement_;
+	GroupManager* pGroupManager_;
 	TileIcons* pTileIcons_;
 };
 

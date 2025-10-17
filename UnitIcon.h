@@ -5,6 +5,8 @@
 class Trigger;
 class TriggersArcIcon;
 class MoveMentsLoad;
+class GroupManager;
+class TileIcons;
 
 using std::deque;
 
@@ -44,6 +46,8 @@ private:
 	MYTRIGGER myTrigger;
 	bool set;
 
+	GroupManager* pGroupManager_;
+	TileIcons* pTileIcons_;
 	TriggersArcIcon* pArcs_;
 	MoveMentsLoad* pLoad_;
 };

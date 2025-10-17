@@ -2,6 +2,7 @@
 #include "Icon.h"
 
 class TileIcons;
+class GroupManager;
 
 class Map :
     public Icon
@@ -22,5 +23,6 @@ private:
 	XMFLOAT2 boxSize[2];
 
 	TileIcons* pTileIcons_;
+	GroupManager* pGroupManager_;
 };
 

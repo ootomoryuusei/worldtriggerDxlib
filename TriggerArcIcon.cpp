@@ -1,9 +1,9 @@
 #include "TriggerArcIcon.h"
 #include"Mouse.h"
 #include"TileIcons.h"
-#include"Map.h"
 #include"UnitIcons.h"
 #include"TriggerData.h"
+#include"GroupManager.h"
 #include <algorithm>
 
 using std::clamp;
@@ -35,6 +35,8 @@ void TriggerArcIcon::Initialize()
 	trigger.arc.rangeSize = 1.5f;
 	trigger.arc.startPercent = -5.0f;
 	pData_->SetTriggerData(trigger);
+	pGroupManager_ = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<GroupManager>();
+	pTileIcons_ = dynamic_cast<TileIcons*>(pGroupManager_->GetGroup("TileIconGroup"));
 }
 
 void TriggerArcIcon::Update()
@@ -92,9 +94,7 @@ void TriggerArcIcon::Update()
 void TriggerArcIcon::Draw()
 {
 	const auto& uniticons = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
-	const auto& pMap = uniticons->GetParent()->FindGameObject<Map>();
-	const auto& pTileIcons = pMap->FindGameObject<TileIcons>();
-	SIZE_F_2D tileSize = pTileIcons->GetpTIcon()[0][0]->GetGraphSizeF_2D();
+	SIZE_F_2D tileSize = pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D();
 	XMFLOAT2 DrawCenterPos = { position.x + (graphSizeF_.halfX - tileSize.halfX),
 								position.y + (graphSizeF_.halfY - tileSize.halfY) };
 
@@ -130,9 +130,7 @@ void TriggerArcIcon::calculateArc()
 	const auto& uniticons = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
 	const auto& mouse = uniticons->GetParent()->FindGameObject<Mouse>();
 	XMFLOAT2 mousePos = mouse->GetMousePos();	
-	const auto& pMap = uniticons->GetParent()->FindGameObject<Map>();
-	const auto& pTileIcons = pMap->FindGameObject<TileIcons>();
-	SIZE_F_2D tileSize = pTileIcons->GetpTIcon()[0][0]->GetGraphSizeF_2D();
+	SIZE_F_2D tileSize = pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D();
 	XMFLOAT2 DrawCenterPos = { position.x + (graphSizeF_.halfX - tileSize.halfX),
 		position.y + (graphSizeF_.halfY - tileSize.halfY) };
 

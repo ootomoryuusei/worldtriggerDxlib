@@ -4,6 +4,8 @@
 #include<deque>
 
 class TriggerData;
+class GroupManager;
+class TileIcons;
 
 using std::array;
 using std::deque;
@@ -38,6 +40,8 @@ private:
 	deque<XMFLOAT2> dq_angle;
 	HANDS hand_;
 
+	GroupManager* pGroupManager_;
+	TileIcons* pTileIcons_;
 	TriggerData* pData_;
 	bool firstSet;
 	bool moveing;

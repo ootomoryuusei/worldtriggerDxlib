@@ -2,7 +2,7 @@
 #include"UnitIcons.h"
 #include"TileIcons.h"
 #include"TileIcon.h"
-#include"Map.h"
+#include"GroupManager.h"
 
 MoveMentsLoad::MoveMentsLoad(GameObject* parent) : Icon(parent)
 {
@@ -14,7 +14,8 @@ MoveMentsLoad::~MoveMentsLoad()
 
 void MoveMentsLoad::Initialize()
 {
-	pTileIcons_ = GetParent()->GetParent()->GetParent()->FindGameObject<Map>()->FindGameObject<TileIcons>();
+	pGroupManager_ = GetParent()->GetParent()->GetParent()->FindGameObject<GroupManager>();
+	pTileIcons_ = dynamic_cast<TileIcons*>(pGroupManager_->GetGroup("TileIconGroup"));
 }
 
 void MoveMentsLoad::Update()

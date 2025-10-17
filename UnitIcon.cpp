@@ -7,6 +7,7 @@
 #include "Mouse.h"
 #include"TriggersArcIcon.h"
 #include"MoveMentsLoad.h"
+#include"GroupManager.h"
 #include"Map.h"
 
 #include<algorithm>
@@ -46,7 +47,8 @@ void UnitIcon::Update()
 {
 
 	Mouse* pMouse_ = GetParent()->GetParent()->FindGameObject<Mouse>();
-	TileIcons* pTileIcons_ = GetParent()->GetParent()->FindGameObject<TileIcons>();
+	pGroupManager_ = GetParent()->GetParent()->FindGameObject<GroupManager>();
+	pTileIcons_ = dynamic_cast<TileIcons*>(pGroupManager_->GetGroup("TileIconGroup"));
 	
 	MoveSetIcon* pMoveSetIcon_ = GetParent()->GetParent()->FindGameObject<MoveSetIcon>();
 	MoveSelectIcon* pMoveSelectIcon_ = GetParent()->GetParent()->FindGameObject<MoveSelectIcon>();
@@ -145,9 +147,8 @@ void UnitIcon::Update()
 
 void UnitIcon::Draw()
 {
-	const auto& pTileIcons = GetParent()->GetParent()->FindGameObject<Map>()->FindGameObject<TileIcons>();
-	XMFLOAT2 TileSize = { pTileIcons->GetpTIcon()[0][0]->GetGraphSizeF_2D().x,
-		pTileIcons->GetpTIcon()[0][0]->GetGraphSizeF_2D().y};
+	XMFLOAT2 TileSize = { pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D().x,
+		pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D().y};
 	switch (step_)
 	{
 	case FIRST:
@@ -159,13 +160,13 @@ void UnitIcon::Draw()
 	{
 		if (moveMent.size() >= 2) {
 			VECTOR m_front = moveMent.front();
-			VECTOR pos = pTileIcons->GetpTIcon()[m_front.x][m_front.y]->Get3DPosition();
+			VECTOR pos = pTileIcons_->GetpTIcon()[m_front.x][m_front.y]->Get3DPosition();
 			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 / 2);
 			DrawGraph(pos.x + (TileSize.x / 2 - graphSizeF_.halfX), pos.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
 			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 		}
 		VECTOR m_back = moveMent.back();
-		position = pTileIcons->GetpTIcon()[m_back.x][m_back.y]->Get3DPosition();
+		position = pTileIcons_->GetpTIcon()[m_back.x][m_back.y]->Get3DPosition();
 		DrawGraph(position.x + (TileSize.x / 2 - graphSizeF_.halfX), position.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
 		break;
 	}

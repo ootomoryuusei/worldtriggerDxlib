@@ -1,7 +1,8 @@
 #include "Map.h"
 #include"TileIcons.h"
+#include"GroupManager.h"
 
-Map::Map(GameObject* parent) : Icon(parent)
+Map::Map(GameObject* parent) : Icon(parent,"MAP")
 {
 	/*position = { 100, 120, 0 };*/
 	position = { 700, 120, 0 };
@@ -29,7 +30,9 @@ void Map::Initialize()
 	int fontThickness = 9;
 	fontHandle_ = CreateFontToHandle("MAPフォント", fontSize, fontThickness, DX_FONTTYPE_ANTIALIASING_EDGE_4X4);
 
-	pTileIcons_ = Instantiate<TileIcons>(this);
+	/*pTileIcons_ = Instantiate<TileIcons>(this);*/
+	pGroupManager_ = GetParent()->FindGameObject<GroupManager>();
+	pTileIcons_ = pGroupManager_->CreateGroup<TileIcons>("TileIconGroup"); //グループマネージャーでTileIconGroupを作成
 }
 
 void Map::Update()

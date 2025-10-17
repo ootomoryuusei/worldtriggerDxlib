@@ -6,6 +6,7 @@
 
 class MoveSelectIcon;
 class MoveSetIcon;
+class GroupManager;
 
 using std::vector;
 
@@ -35,6 +36,7 @@ private:
 	MoveSelectIcon* pMoveSelectIcon_;
 	MoveSetIcon* pMoveSetIcon_;
 
+	GroupManager* pGroupManager_;
 	bool moveMentSet;
 };
 

@@ -3,6 +3,7 @@
 #include"Mouse.h"
 #include"MoveSelectIcon.h"
 #include"MoveSetIcon.h"
+#include"GroupManager.h"
 #include"Map.h"
 #include"Engine/Global.h"
 
@@ -19,7 +20,8 @@ UnitIcons::~UnitIcons()
 void UnitIcons::Initialize()
 {
 	const auto& pMap = GetParent()->FindGameObject<Map>();
-	const auto& pTIcons = pMap->FindGameObject<TileIcons>();
+	pGroupManager_ = GetParent()->FindGameObject<GroupManager>();
+	const auto& pTIcons = dynamic_cast<TileIcons*>(pGroupManager_->GetGroup("TileIconGroup"));
 
 	csv_ = new CsvReader();
 	csv_->Load("Assets//Character//SelectCharacter.csv");
