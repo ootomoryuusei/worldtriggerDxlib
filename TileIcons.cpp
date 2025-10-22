@@ -84,3 +84,7 @@ void TileIcons::Update()
         }
     }
 }
+
+void TileIcons::Draw()
+{
+}

@@ -24,16 +24,16 @@ void TileIcon::Update()
 	position = tile_.pos;
 
 	if (select) {
-		Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
+		Mouse* pMouse = GetParent()->GetParent()->GetParent()->FindGameObject<Mouse>();
 		XMFLOAT2 mousePos = pMouse->GetMousePos();
 
 		int num = 0;
 		if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x, graphSizeF_.y })) {
 			if (pMouse->IsDoubleClicked(Mouse::LEFT)) {
 
-				MoveTypeIcons* pMoveTypeIcons = GetParent()->GetParent()->FindGameObject<MoveTypeIcons>();
+				MoveTypeIcons* pMoveTypeIcons = GetParent()->GetParent()->GetParent()->FindGameObject<MoveTypeIcons>();
 				auto& ptr = pMoveTypeIcons->GetpSelectTypeIcon();
-				UnitIcons* pUnitIcons = GetParent()->GetParent()->FindGameObject<UnitIcons>();
+				UnitIcons* pUnitIcons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
 				pUnitIcons->GetpSelecting_ptr()->AddMoveMent(tile_.offset);
 				/*pUnitIcons->GetpMoveSetIcon()->*/
 				select = false;

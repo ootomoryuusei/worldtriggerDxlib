@@ -30,9 +30,9 @@ void Map::Initialize()
 	int fontThickness = 9;
 	fontHandle_ = CreateFontToHandle("MAPフォント", fontSize, fontThickness, DX_FONTTYPE_ANTIALIASING_EDGE_4X4);
 
-	/*pTileIcons_ = Instantiate<TileIcons>(this);*/
 	pGroupManager_ = GetParent()->FindGameObject<GroupManager>();
-	pTileIcons_ = pGroupManager_->CreateGroup<TileIcons>("TileIconGroup"); //グループマネージャーでTileIconGroupを作成
+	pTileIcons_ = Instantiate<TileIcons>(this);
+	pGroupManager_->RegisterGroup<TileIcons>("TileIconGroup",pTileIcons_); //グループマネージャーでTileIconGroupを作成
 }
 
 void Map::Update()

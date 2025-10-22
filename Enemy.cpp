@@ -40,8 +40,8 @@ void Enemy::Initialize()
     }
 
     auto* pGroupManager = GetParent()->FindGameObject<GroupManager>();
-    auto* pEnemyGroup = pGroupManager->CreateGroup<CharacterGroup>("enemyGroup");
-
+    auto* pEnemyGroup = Instantiate<CharacterGroup>(this);/*pGroupManager->RegisterGroup<CharacterGroup>("enemyGroup");*/
+    pGroupManager->RegisterGroup<CharacterGroup>("enemyGroup", pEnemyGroup);
   
     for (auto& itr : selectCharacterName) {
         for (int i = 0;i < 2;i++) {

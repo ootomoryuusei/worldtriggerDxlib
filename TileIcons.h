@@ -15,6 +15,7 @@ public:
 	~TileIcons();
 	void Initialize() override;
 	void Update() override;
+	void Draw() override;
 	const auto& GetpTIcon() const{ return pTIcons_; }
 private:
 	vector<vector<TileIcon*>> pTIcons_;

@@ -12,14 +12,20 @@ class GroupManager : public GameObject {
 public:
 	GroupManager(GameObject* parent) : GameObject(parent,"GroupManager") {}
 
-	template<class T>
+	/*template<class T>
 	T* CreateGroup(const string& name) {
 		if (groups_.count(name)) return nullptr;
 		T* group = Instantiate<T>(this);
 		groups_[name] = group;
 		return group;
+	}*/
+	template<class T>
+	bool RegisterGroup(const string& name,T* group) {
+		//assert(!groups_.count(name) && "Group with this name already registered!");
+		if (groups_.count(name)) return false;
+		groups_[name] = group;
+		return true;
 	}
-
 	GroupBase* GetGroup(const string& name) {
 		auto it = groups_.find(name);
 		return it != groups_.end() ? it->second : nullptr;

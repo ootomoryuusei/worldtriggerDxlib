@@ -41,7 +41,8 @@ Player1::~Player1()
 void Player1::Initialize()
 {
 	pGroupManager_ = GetParent()->FindGameObject<GroupManager>();
-	auto* pPlayerGroup = pGroupManager_->CreateGroup<CharacterGroup>("playerGroup"); //グループマネージャーでplayerGroupを作成
+	auto* pPlayerGroup = Instantiate<CharacterGroup>(this);
+	pGroupManager_->RegisterGroup<CharacterGroup>("playerGroup",pPlayerGroup); //グループマネージャーでplayerGroupを作成
 
 	pTiles_ = GetParent()->FindGameObject<Tiles>();
 
