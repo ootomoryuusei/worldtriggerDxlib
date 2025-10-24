@@ -3,6 +3,8 @@
 
 Trigger::Trigger(GameObject* parent) : Object3D(parent)
 {
+	Leave();
+	Invisible();
 }
 
 Trigger::~Trigger()

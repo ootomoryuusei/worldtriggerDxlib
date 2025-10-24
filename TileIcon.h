@@ -1,11 +1,15 @@
 #pragma once
 #include "Icon.h"
+
+class MoveSelectIcon;
+
 class TileIcon :
     public Icon
 {
 public:
 	TileIcon(GameObject* parent);
 	~TileIcon();
+	void Initialize() override;
 	void Update() override;
 	void Draw() override;
 
@@ -22,5 +26,7 @@ private:
 	bool selected;
 
 	int hImage;
+
+	MoveSelectIcon* pMoveSelectIcon_;
 };
 

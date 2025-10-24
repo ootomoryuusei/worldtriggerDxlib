@@ -49,9 +49,9 @@ void MoveMentsLoad::DrawMoveLine()
 		FLOAT3 prevTileNum = movement_[i - 1];
 		FLOAT3 currTileNum = movement_[i];
 
-		VECTOR startPoint = pTileIcons_->GetpTIcon()[currTileNum.x][currTileNum.y]->Get3DPosition();
+		VECTOR startPoint = pTileIcons_->GetpTIcon()[currTileNum.y][currTileNum.x]->Get3DPosition();
 
-		VECTOR endPoint = pTileIcons_->GetpTIcon()[prevTileNum.x][prevTileNum.y]->Get3DPosition();
+		VECTOR endPoint = pTileIcons_->GetpTIcon()[prevTileNum.y][prevTileNum.x]->Get3DPosition();
 		
 		VECTOR vec = endPoint - startPoint;
 

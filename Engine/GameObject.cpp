@@ -287,3 +287,30 @@ XMMATRIX GameObject::GetWorldMatrix(void)
 }
 
 
+bool GameObject::PointInBox(XMFLOAT2 _point, XMFLOAT2 _LeftUp, XMFLOAT2 _distance)
+{
+	VECTOR P1P2, P2P3, P3P4, P4P1;
+	VECTOR P1P, P2P, P3P, P4P;
+	XMFLOAT2 P1, P2, P3, P4;
+
+	P1 = { _LeftUp.x,  _LeftUp.y }; //¶ã
+	P2 = { _LeftUp.x + _distance.x,  _LeftUp.y }; //‰Eã
+	P3 = { _LeftUp.x + _distance.x,  _LeftUp.y + _distance.y }; //‰E‰º
+	P4 = { _LeftUp.x,  _LeftUp.y + _distance.y }; //¶‰º
+
+	P1P2 = { P2.x - P1.x, P2.y - P1.y };
+	P2P3 = { P3.x - P2.x, P3.y - P2.y };
+	P3P4 = { P4.x - P3.x, P4.y - P3.y };
+	P4P1 = { P1.x - P4.x, P1.y - P4.y };
+
+	P1P = { _point.x - P1.x,_point.y - P1.y };
+	P2P = { _point.x - P2.x,_point.y - P2.y };
+	P3P = { _point.x - P3.x,_point.y - P3.y };
+	P4P = { _point.x - P4.x,_point.y - P4.y };
+
+	if (VCross(P1P2, P1P).z >= 0 && VCross(P2P3, P2P).z >= 0 && VCross(P3P4, P3P).z >= 0 && VCross(P4P1, P4P).z >= 0)
+	{
+		return true;
+	}
+	return false;
+}

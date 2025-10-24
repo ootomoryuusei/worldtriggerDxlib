@@ -63,16 +63,50 @@ public:
 
 
 	//各フラグの制御
-	bool IsDead();			// 削除するかどうか
-	void KillMe();			// 自分を削除する
-	void Enter();			// Updateを許可
-	void Leave();			// Updateを拒否
-	void Visible();			// Drawを許可
-	void Invisible();		// Drawを拒否
-	bool IsInitialized();	// 初期化済みかどうか
-	void SetInitialized();	// 初期化済みにする
-	bool IsEntered();		// Update実行していいか
-	bool IsVisibled();		// Draw実行していいか
+	/// <summary>
+	/// 削除するかどうか
+	/// </summary>
+	/// <returns> state_.dead </returns>
+	bool IsDead();	
+	/// <summary>
+	/// 自分を削除する
+	/// </summary>
+	void KillMe();		
+	/// <summary>
+	/// Updateを許可
+	/// </summary>
+	void Enter();			
+	/// <summary>
+	/// Updateを拒否
+	/// </summary>
+	void Leave();
+	/// <summary>
+	/// Drawを許可
+	/// </summary>
+	void Visible();
+	/// <summary>
+	///  Drawを拒否
+	/// </summary>
+	void Invisible();
+	/// <summary>
+	/// 初期化済みかどうか
+	/// </summary>
+	/// <returns></returns>
+	bool IsInitialized();
+	/// <summary>
+	/// 初期化済みにする
+	/// </summary>
+	void SetInitialized();
+	/// <summary>
+	/// Update実行していいか
+	/// </summary>
+	/// <returns></returns>
+	bool IsEntered();
+	/// <summary>
+	///  Draw実行していいか
+	/// </summary>
+	/// <returns></returns>
+	bool IsVisibled();
 
 
 	//子オブジェクトリストを取得
@@ -196,6 +230,15 @@ public:
 	const unordered_set<GroupBase*>& GetGroups()const {
 		return groups_;
 	}
+
+	/// <summary>
+	/// 点と短形の当たり判定
+	/// </summary>
+	/// <param name="_point"> 点 </param>
+	/// <param name="_leftUp"> 短形の左上座標 </param>
+	/// <param name="_distance"> 短形の幅(x)と高さ(y) </param>
+	/// <returns></returns>
+	bool PointInBox(XMFLOAT2 point, XMFLOAT2 _leftUp, XMFLOAT2 _distance);
 private:
 
 	//オブジェクト削除（再帰）

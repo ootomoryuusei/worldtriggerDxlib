@@ -16,6 +16,8 @@ public:
 
 	void UpdateSub() override;
 	void DrawSub() override;
+
+	const auto& GetpMoveTypeIcons() const { return pMoveTypeIcons_; }
 private:
 	MoveTypeIcons* pMoveTypeIcons_;
 	/*string iconName;*/

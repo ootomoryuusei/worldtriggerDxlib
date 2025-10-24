@@ -64,6 +64,11 @@ void MoveSetIcon::Update()
 		prevMousePos_ = mousePos;
 	}
 
+	UnitIcons* pUnitIcons = GetParent()->GetParent()->FindGameObject<UnitIcons>();
+	const auto& select_unit = pUnitIcons->GetpSelecting_ptr();
+	if (select_unit != nullptr) {
+		/*select_unit->Get*/
+	}
 	/*MoveSelectIcon* pMoveSelectIcon = GetParent()->FindGameObject<MoveSelectIcon>();
 	MoveTypeIcons* pMoveTypeIcons = pMoveSelectIcon->FindGameObject<MoveTypeIcons>();
 	for (auto& itr : pMoveTypeIcons->GetpMoveTypeIcons()) {

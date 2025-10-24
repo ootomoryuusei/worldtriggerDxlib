@@ -27,7 +27,7 @@ PlayScene::PlayScene(GameObject* parent) : GameObject(parent,"playscene")
 	Instantiate<Timer>(this);
 
 	/*Instantiate<rader>(this);*/
-	Instantiate<Unit>(this);
+	/*Instantiate<Unit>(this);*/
 
 	Instantiate<Tiles>(this); //ƒ^ƒCƒ‹ŒQ
 

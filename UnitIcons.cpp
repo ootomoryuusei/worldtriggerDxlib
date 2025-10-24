@@ -1,8 +1,6 @@
 #include "UnitIcons.h"
 #include"TileIcons.h"
 #include"Mouse.h"
-#include"MoveSelectIcon.h"
-#include"MoveSetIcon.h"
 #include"GroupManager.h"
 #include"Map.h"
 #include"Engine/Global.h"

@@ -160,13 +160,13 @@ void UnitIcon::Draw()
 	{
 		if (moveMent.size() >= 2) {
 			VECTOR m_front = moveMent.front();
-			VECTOR pos = pTileIcons_->GetpTIcon()[m_front.x][m_front.y]->Get3DPosition();
+			VECTOR pos = pTileIcons_->GetpTIcon()[m_front.y][m_front.x]->Get3DPosition();
 			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 / 2);
 			DrawGraph(pos.x + (TileSize.x / 2 - graphSizeF_.halfX), pos.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
 			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 		}
 		VECTOR m_back = moveMent.back();
-		position = pTileIcons_->GetpTIcon()[m_back.x][m_back.y]->Get3DPosition();
+		position = pTileIcons_->GetpTIcon()[m_back.y][m_back.x]->Get3DPosition();
 		DrawGraph(position.x + (TileSize.x / 2 - graphSizeF_.halfX), position.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
 		break;
 	}

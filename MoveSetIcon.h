@@ -14,6 +14,8 @@ public:
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
+
+	void AddMoveName(string _moveName) { moveName.push_back(_moveName); }
 private:
 	CsvReader* csv_;
 	//string iconName;

@@ -1,6 +1,7 @@
 #include "Map.h"
 #include"TileIcons.h"
 #include"GroupManager.h"
+#include"Mouse.h"
 
 Map::Map(GameObject* parent) : Icon(parent,"MAP")
 {
@@ -37,6 +38,20 @@ void Map::Initialize()
 
 void Map::Update()
 {
+
+	/*Mouse* pMouse = GetParent()->FindGameObject<Mouse>();
+	XMFLOAT2 mousePos = pMouse->GetMousePos();
+
+	XMFLOAT2 size = { boxSize[0].x + boxSize[0].x,boxSize[1].y + boxSize[1].y };
+	if (PointInBox(mousePos, { position.x, position.y }, {size.x,size.y})) {
+		if (pMouse->IsPressed(Mouse::LEFT)) {
+			XMFLOAT2 mouseVariation = { mousePos.x - prevMousePos_.x,mousePos.y - prevMousePos_.y };
+			position = { position.x + mouseVariation.x, position.y + mouseVariation.y, 0.0f };
+
+		}
+		prevMousePos_ = mousePos;
+	}*/
+
 	pTileIcons_->SetPosition(position.x,position.y,position.z);
 
 	boxPos[0] = { position.x + boxSize[0].x,position.y + boxSize[0].y };

@@ -2,6 +2,7 @@
 //#include"TileIcon.h"
 #include"GroupManager.h"
 #include"Map.h"
+#include"Mouse.h"
 
 TileIcons::TileIcons(GameObject* parent) : TypedGroup<TileIcon>()
 {
@@ -41,6 +42,7 @@ void TileIcons::Initialize()
             pos.y = y * pTIcon->GetGraphSizeF_2D().y * transform_.scale_.y + (x % 2 == 1 ? pTIcon->GetGraphSizeF_2D().y * transform_.scale_.y / 2.0 : 0);
             tile.pos = {transform_.position_.x + pos.x,transform_.position_.y + pos.y,0 };
             tile.num = num;
+            tile.offset = VGet(x,y,0);
             pTIcon->SetTileData(tile);
             pTIcon->Set3DPosition(tile.pos);
             row.push_back(pTIcon);
@@ -48,24 +50,27 @@ void TileIcons::Initialize()
         }
         pTIcons_.push_back(row);
     }
+
+    pMouse_ = GetParent()->GetParent()->FindGameObject<Mouse>();
 }
 
 void TileIcons::Update()
 {
-   /* const auto& pMap = GetParent()->GetParent()->FindGameObject<Map>();
+
+  /*  const auto& pMap = GetParent()->GetParent()->FindGameObject<Map>();
     XMFLOAT2 boxPos = pMap->GetBoxPos(1);
     XMFLOAT2 boxSize = pMap->GetBoxSize(1);
     XMFLOAT2 space = { boxSize.x * 0.05f,boxSize.y * 0.05f };
-    position = { boxPos.x + space.x, boxPos.y + space.y, 0 };
+    transform_.position_ = { boxPos.x + space.x, boxPos.y + space.y, 0 };
     int y = 0;
     for (auto& column : pTIcons_) {
         int x = 0;
         for (auto& row : column) {
             TILEDATA tile;
             XMFLOAT2 pos;
-            pos.x = x * (3.0 / 4.0) * row->GetGraphSizeF_2D().x * scale_.x;
-            pos.y = y * row->GetGraphSizeF_2D().y * scale_.y + (x % 2 == 1 ? row->GetGraphSizeF_2D().y * scale_.y / 2.0 : 0);
-            tile.pos = { position.x + pos.x,position.y + pos.y,0 };
+            pos.x = x * (3.0 / 4.0) * row->GetGraphSizeF_2D().x * transform_.scale_.x;
+            pos.y = y * row->GetGraphSizeF_2D().y * transform_.scale_.y + (x % 2 == 1 ? row->GetGraphSizeF_2D().y * transform_.scale_.y / 2.0 : 0);
+            tile.pos = { transform_.position_.x + pos.x,transform_.position_.y + pos.y,0 };
             tile.offset = VGet(x,y,0);
             tile.num = row->GetTileData().num;
             row->SetTileData(tile);
@@ -73,13 +78,27 @@ void TileIcons::Update()
         }
         y++;
     }*/
+    /*XMFLOAT2 mousePos = pMouse_->GetMousePos();
+    for (auto& column : pTIcons_) {
+        for (auto& row : column) {
+            auto size = row->GetGraphSizeF_2D();
+            auto pos = row->Get3DPosition();
+            if (PointInBox(mousePos, { pos.x,pos.y }, { size.x,size.y })) {
+
+            }
+        }
+    }*/
+
     for (auto& column : pTIcons_) {
         for (auto& row : column) {
             if (row->GetSelected()) {
                 row->SetSelected(false);
-                for (auto& row : column) {
-                    row->SetSelect(false);
+                for (auto& column : pTIcons_) {
+                    for (auto& row : column) {
+                        row->SetSelect(false);
+                    }
                 }
+                break;
             }
         }
     }

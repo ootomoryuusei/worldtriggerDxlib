@@ -105,6 +105,11 @@ void Character::CreateTriggerInstance()
 			}
 		}
 	}
+	hands_ = { trigger_[RIGHT][0],trigger_[LEFT][0] };
+	for (int hands = 0; hands < MAX; hands++) {
+		hands_[hands]->Enter();
+		hands_[hands]->Visible();
+	}
 }
 
 void Character::DrawMyTrigger(MYTRIGGER _trigger, MATRIX _leftMatrix, MATRIX _rightMatrix)

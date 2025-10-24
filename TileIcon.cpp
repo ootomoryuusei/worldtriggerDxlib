@@ -1,6 +1,7 @@
 #include "TileIcon.h"
 #include"Mouse.h"
 #include"MoveTypeIcons.h"
+#include"MoveSelectIcon.h"
 #include"UnitIcons.h"
 
 TileIcon::TileIcon(GameObject* parent) : Icon(parent)
@@ -19,8 +20,14 @@ TileIcon::~TileIcon()
 {
 }
 
+void TileIcon::Initialize()
+{
+	
+}
+
 void TileIcon::Update()
 {
+	pMoveSelectIcon_ = GetParent()->GetParent()->GetParent()->FindGameObject<MoveSelectIcon>();
 	position = tile_.pos;
 
 	if (select) {
@@ -30,12 +37,12 @@ void TileIcon::Update()
 		int num = 0;
 		if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x, graphSizeF_.y })) {
 			if (pMouse->IsDoubleClicked(Mouse::LEFT)) {
-
-				MoveTypeIcons* pMoveTypeIcons = GetParent()->GetParent()->GetParent()->FindGameObject<MoveTypeIcons>();
-				auto& ptr = pMoveTypeIcons->GetpSelectTypeIcon();
-				UnitIcons* pUnitIcons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
+				const auto& ptr = pMoveSelectIcon_->GetpMoveTypeIcons();
+				const auto& pUnitIcons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
 				pUnitIcons->GetpSelecting_ptr()->AddMoveMent(tile_.offset);
-				/*pUnitIcons->GetpMoveSetIcon()->*/
+				auto& pMoveSetIcon = pUnitIcons->GetpMoveSetIcon();
+				string name = ptr->GetpSelectTypeIcon()->GetIconName();
+				pMoveSetIcon->AddMoveName(name);
 				select = false;
 				selected = true;
 			}

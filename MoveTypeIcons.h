@@ -20,7 +20,7 @@ public:
 	void DrawSub() override;
 
 	const auto& GetpMoveTypeIcons() const { return pMoveTypeIcons_; }
-	const auto& GetpSelectTypeIcon() const { return pMoveTypeIcons_; }
+	const auto& GetpSelectTypeIcon() const { return pSelectMovetypeIcon_; }
 private:
 	vector<MoveTypeIcon*> pMoveTypeIcons_;
 	CsvReader* csv_;

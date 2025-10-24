@@ -237,15 +237,6 @@ public:
 	// マトリクスへ変換
 	MATRIX ToMATRIX(FLOAT3 pos, FLOAT3 rot);
 
-	/// <summary>
-	/// 点と短形の当たり判定
-	/// </summary>
-	/// <param name="_point"> 点 </param>
-	/// <param name="_leftUp"> 短形の左上座標 </param>
-	/// <param name="_distance"> 短形の幅(x)と高さ(y) </param>
-	/// <returns></returns>
-	bool PointInBox(XMFLOAT2 point, XMFLOAT2 _leftUp, XMFLOAT2 _distance);
-
 	bool PointInQuad(XMFLOAT2 point, const array<XMFLOAT2, 4>& corners);
 
 	VECTOR Lerp3D(VECTOR& start, VECTOR& goal, float percent);

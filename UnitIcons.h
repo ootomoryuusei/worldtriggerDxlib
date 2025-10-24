@@ -1,11 +1,11 @@
 #pragma once
 #include "Icon.h"
 #include"UnitIcon.h"
+#include"MoveSetIcon.h"
+#include"MoveSelectIcon.h"
 #include"Engine/CsvReader.h"
 #include<vector>
 
-class MoveSelectIcon;
-class MoveSetIcon;
 class GroupManager;
 
 using std::vector;
