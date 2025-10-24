@@ -54,7 +54,8 @@ void Player1::Initialize()
 		pPlayerGroup->Add(pCharacter);
 		auto pData = pCharacter->FindGameObject<CharacterData>();
 		pData->DefaultSetStatus(selectCharacterName);
-		pData->DefaultSetMyTrigger(selectCharacterName);
+		/*pData->DefaultSetMyTrigger(selectCharacterName);*/
+		pData->SelectSetMyTrigger(selectCharacterName);
 		pData->SetTarget("enemyGroup");
 		pCharacter->CreateTriggerInstance();
 	}

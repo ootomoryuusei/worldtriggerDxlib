@@ -1,14 +1,15 @@
 #pragma once
 #include "Icon.h"
+#include"TriggersArcIcon.h"
 #include<deque>
 
 class Trigger;
-class TriggersArcIcon;
 class MoveMentsLoad;
 class GroupManager;
 class TileIcons;
 
 using std::deque;
+
 
 class UnitIcon :
     public Icon
@@ -21,7 +22,7 @@ public:
 	void Draw() override;
 
 	const auto& GetMoveMent() const{ return moveMent; }
-	void AddMoveMent(VECTOR _moveMent) { moveMent.push_back(_moveMent); }
+	void AddMoveMent(VECTOR _moveMent, string _movename) { moveMent.push_back({ _moveMent,_movename }); }
 
 	void SetMyTrigger(MYTRIGGER _myTrigger) { myTrigger = _myTrigger; }
 	bool GetSet() { return set; }
@@ -30,8 +31,8 @@ public:
 	const auto& GetpMoveMentLoad() { return pLoad_; }
 private:
 
-	vector<VECTOR> moveMent;
-	deque<VECTOR> dq_moveMent;
+	vector<MOVEMENT> moveMent;
+	deque<MOVEMENT> dq_moveMent;
 
 	array<Trigger*, MAX> hands_;
 

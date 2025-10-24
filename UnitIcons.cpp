@@ -56,7 +56,7 @@ void UnitIcons::Initialize()
 		pUIcon->SetIconName(IconName);
 		pUIcon->Set3DPosition(pos);
 		pUIcon->SetCreateNum(y - 1);
-		pUIcon->AddMoveMent(rand);
+		pUIcon->AddMoveMent(rand,"");
 		MYTRIGGER myTrigger;
 		for (int x = 0;x < 4;x++) {
 			string TriggerName = csv_->GetString(1 + x, y);
@@ -103,17 +103,6 @@ void UnitIcons::Update()
 			break;
 		}		
 	}*/
-
-	if (moveMentSet) {	
-		for (auto& itr : pUIcons_) {
-			itr->SetStep(THIRD);
-			/*moveMentSet = false;*/
-		}
-	}else {
-		for (auto& itr : pUIcons_) {
-			itr->SetCanVisible(false);
-		}
-	}
 
 	for (auto& itr : pUIcons_) {
 		if (itr->GetSet()) {

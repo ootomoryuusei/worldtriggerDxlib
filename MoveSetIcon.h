@@ -15,12 +15,12 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	void AddMoveName(string _moveName) { moveName.push_back(_moveName); }
+	/*void AddMoveName(string _moveName) { moveName.push_back(_moveName); }*/
 private:
 	CsvReader* csv_;
 	//string iconName;
 	XMFLOAT2 space;
 	int maxSetMove;
-	vector<string> moveName;
+	vector<MOVEMENT> movement;
 };
 

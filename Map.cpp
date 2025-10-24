@@ -38,7 +38,7 @@ void Map::Initialize()
 
 void Map::Update()
 {
-
+	const auto& group = pGroupManager_->GetGroup("enemyGroup");
 	/*Mouse* pMouse = GetParent()->FindGameObject<Mouse>();
 	XMFLOAT2 mousePos = pMouse->GetMousePos();
 

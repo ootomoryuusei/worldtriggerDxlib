@@ -241,7 +241,8 @@ public:
 
 	VECTOR Lerp3D(VECTOR& start, VECTOR& goal, float percent);
 
-	void SetState(int _state) { state_ = _state; }
+	void SetStep(STEP _step) { step_ = _step; }
+	int GetStep() { return step_; }
 
 	VECTOR Get3DPosition() { return position; }
 	void Set3DPosition(VECTOR _position) { position = _position; }
@@ -255,5 +256,5 @@ protected:
 	VECTOR rotation; // 回転
 	MATRIX matrix; //　行列
 	VECTOR size; // サイズ
-	int state_;
+	STEP step_; 
 };

@@ -47,7 +47,7 @@ void MoveSetIcon::Initialize()
 
 void MoveSetIcon::Update()
 {
-	scale_ = { 1.0f,1.0f + moveName.size() * 0.5f };
+	scale_ = { 1.0f,1.0f + movement.size() * 0.5f };
 
 	XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
 	space = { (graphSizeF_.x - strSize.x) / 2,(graphSizeF_.y / 2 - strSize.y) / 2 };
@@ -64,19 +64,16 @@ void MoveSetIcon::Update()
 		prevMousePos_ = mousePos;
 	}
 
-	UnitIcons* pUnitIcons = GetParent()->GetParent()->FindGameObject<UnitIcons>();
+	UnitIcons* pUnitIcons = GetParent()->FindGameObject<UnitIcons>();
 	const auto& select_unit = pUnitIcons->GetpSelecting_ptr();
 	if (select_unit != nullptr) {
-		/*select_unit->Get*/
+		auto m_ment = select_unit->GetMoveMent();
+		m_ment.erase(m_ment.begin());
+		movement = m_ment;
 	}
-	/*MoveSelectIcon* pMoveSelectIcon = GetParent()->FindGameObject<MoveSelectIcon>();
-	MoveTypeIcons* pMoveTypeIcons = pMoveSelectIcon->FindGameObject<MoveTypeIcons>();
-	for (auto& itr : pMoveTypeIcons->GetpMoveTypeIcons()) {
-		if (itr->GetClicked()) {
-			moveName.push_back(itr->GetIconName());
-			itr->SetClicked(false);
-		}
-	}*/
+	else {
+		movement.empty();
+	}
 }
 
 void MoveSetIcon::Draw()
@@ -87,8 +84,8 @@ void MoveSetIcon::Draw()
 	DrawLineAA(position.x, position.y + GetGraphSizeF_2D().y / 2
 		, position.x + GetGraphSizeF_2D().x, position.y + GetGraphSizeF_2D().y / 2, GetColor(0, 0, 0),2.0);
 	int num = 1;
-	for (auto& itr : moveName) {
-		string move = std::to_string(num) + " : " + itr;
+	for (auto& itr : movement) {
+		string move = std::to_string(num) + " : " + itr.movename;
 		XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * move.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
 		XMFLOAT2 Space = { (graphSizeF_.x - strSize.x) / 2,(graphSizeF_.y /2  - strSize.y) / 2 };
 		VECTOR moveFontPos = { position.x + Space.x, position.y + ( graphSizeF_.y / 2 ) * num + Space.y,position.z };

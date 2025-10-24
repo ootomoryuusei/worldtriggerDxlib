@@ -5,10 +5,11 @@
 #include"MoveSetIcon.h"
 #include"MoveSelectIcon.h"
 #include "Mouse.h"
-#include"TriggersArcIcon.h"
+#include"Trigger.h"
 #include"MoveMentsLoad.h"
 #include"GroupManager.h"
 #include"Map.h"
+#include"TriggerData.h"
 
 #include<algorithm>
 
@@ -19,7 +20,7 @@ UnitIcon::UnitIcon(GameObject* parent) : Icon(parent)
 	canVisible_ = true;
 
 	createNum_ = -1;
-
+	
 	step_ = SECONDE;
 
 	firstSet = false;
@@ -55,6 +56,12 @@ void UnitIcon::Update()
 	XMFLOAT2 mousePos = pMouse_->GetMousePos();
 	pLoad_->setMoveMent(moveMent);
 
+
+	auto& arcs = pArcs_->GetpTriggerArcIcon();
+	for (auto& itr : arcs) {
+		itr->Set3DPosition(position);
+	}
+
 	switch (step_)
 	{
 	case FIRST:
@@ -84,9 +91,10 @@ void UnitIcon::Update()
 	}
 	case SECONDE:
 	{
-		auto& arcs = pArcs_->GetpTriggerArcIcon();
-		for (auto& itr : arcs) {
-			itr->Set3DPosition(position);
+		for (int i = 0;i < HANDS::MAX;i++) {
+			if (hands_[i] == nullptr) continue;
+			const auto& data = arcs[i]->GetpData()->GetTriggerData();
+			hands_[i]->GetTriggerData()->SetTriggerData(data);
 		}
 
 		if (IsInMousePoint(mousePos)) {
@@ -111,8 +119,8 @@ void UnitIcon::Update()
 			for (auto& itr : moveMent) {
 				dq_moveMent.push_back(itr);
 			}
-			VECTOR m_front = dq_moveMent.front();
-			position = pTileIcons_->GetpTIcon()[m_front.y][m_front.x]->Get3DPosition();
+			auto m_front = dq_moveMent.front();
+			position = pTileIcons_->GetpTIcon()[m_front.movement.y][m_front.movement.x]->Get3DPosition();
 			firstSet = true;
 			moveing = true;
 		}
@@ -122,8 +130,8 @@ void UnitIcon::Update()
 				auto s_offset = *it;
 				auto t_offset = *(++it);
 				
-				VECTOR start = pTileIcons_->GetpTIcon()[s_offset.y][s_offset.x]->Get3DPosition();
-				VECTOR target = pTileIcons_->GetpTIcon()[t_offset.y][t_offset.x]->Get3DPosition();
+				VECTOR start = pTileIcons_->GetpTIcon()[s_offset.movement.y][s_offset.movement.x]->Get3DPosition();
+				VECTOR target = pTileIcons_->GetpTIcon()[t_offset.movement.y][t_offset.movement.x]->Get3DPosition();
 				float percent = elapsedTime / totalTime;
 				percent = clamp(percent, 0.0f, 1.0f);
 				position = Lerp3D(start, target, percent);
@@ -159,14 +167,14 @@ void UnitIcon::Draw()
 	case SECONDE:
 	{
 		if (moveMent.size() >= 2) {
-			VECTOR m_front = moveMent.front();
-			VECTOR pos = pTileIcons_->GetpTIcon()[m_front.y][m_front.x]->Get3DPosition();
+			auto m_front = moveMent.front();
+			VECTOR pos = pTileIcons_->GetpTIcon()[m_front.movement.y][m_front.movement.x]->Get3DPosition();
 			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 / 2);
 			DrawGraph(pos.x + (TileSize.x / 2 - graphSizeF_.halfX), pos.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
 			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 		}
-		VECTOR m_back = moveMent.back();
-		position = pTileIcons_->GetpTIcon()[m_back.y][m_back.x]->Get3DPosition();
+		auto m_back = moveMent.back();
+		position = pTileIcons_->GetpTIcon()[m_back.movement.y][m_back.movement.x]->Get3DPosition();
 		DrawGraph(position.x + (TileSize.x / 2 - graphSizeF_.halfX), position.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
 		break;
 	}

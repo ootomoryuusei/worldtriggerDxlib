@@ -54,7 +54,7 @@ void MoveTypeIcon::Update()
 					}
 				}
 			}
-			serchAroundTileNum = SerchAroundTileNum(CenterNum,2);
+			serchAroundTileNum = SerchAroundTileNum(CenterNum,1);
 			for (auto& itrs : serchAroundTileNum) {
 				for (auto& column : pTileIcons_->GetpTIcon()) {
 					for (auto& row : column) {

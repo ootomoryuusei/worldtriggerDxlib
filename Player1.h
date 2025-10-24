@@ -22,8 +22,6 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	void SetState_(int _state) { state_ = _state; }
-
 private:
 	CsvReader* csv_;
 	GroupManager* pGroupManager_;

@@ -20,6 +20,7 @@ void MoveMentsLoad::Initialize()
 
 void MoveMentsLoad::Update()
 {
+
 }
 
 void MoveMentsLoad::Draw()
@@ -46,12 +47,12 @@ void MoveMentsLoad::DrawMoveLine()
 	int pointIndex = 0; // ç≈å„ÇÃì_Ç™ pointIndex = 0
 
 	for (int i = static_cast<int>(movement_.size()) - 1; i > 0; --i) {
-		FLOAT3 prevTileNum = movement_[i - 1];
-		FLOAT3 currTileNum = movement_[i];
+		auto prevTileNum = movement_[i - 1];
+		auto currTileNum = movement_[i];
 
-		VECTOR startPoint = pTileIcons_->GetpTIcon()[currTileNum.y][currTileNum.x]->Get3DPosition();
+		VECTOR startPoint = pTileIcons_->GetpTIcon()[currTileNum.movement.y][currTileNum.movement.x]->Get3DPosition();
 
-		VECTOR endPoint = pTileIcons_->GetpTIcon()[prevTileNum.y][prevTileNum.x]->Get3DPosition();
+		VECTOR endPoint = pTileIcons_->GetpTIcon()[prevTileNum.movement.y][prevTileNum.movement.x]->Get3DPosition();
 		
 		VECTOR vec = endPoint - startPoint;
 

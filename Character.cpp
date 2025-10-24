@@ -56,7 +56,7 @@ void Character::Update()
 		}
 	}
 
-	switch (state_)
+	switch (step_)
 	{
 	case FIRST: break;
 	case SECONDE: break;
@@ -107,8 +107,9 @@ void Character::CreateTriggerInstance()
 	}
 	hands_ = { trigger_[RIGHT][0],trigger_[LEFT][0] };
 	for (int hands = 0; hands < MAX; hands++) {
-		hands_[hands]->Enter();
-		hands_[hands]->Visible();
+		if (hands_[hands] == nullptr) continue;
+			hands_[hands]->Enter();
+			hands_[hands]->Visible();
 	}
 }
 

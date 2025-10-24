@@ -39,10 +39,9 @@ void TileIcon::Update()
 			if (pMouse->IsDoubleClicked(Mouse::LEFT)) {
 				const auto& ptr = pMoveSelectIcon_->GetpMoveTypeIcons();
 				const auto& pUnitIcons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
-				pUnitIcons->GetpSelecting_ptr()->AddMoveMent(tile_.offset);
 				auto& pMoveSetIcon = pUnitIcons->GetpMoveSetIcon();
 				string name = ptr->GetpSelectTypeIcon()->GetIconName();
-				pMoveSetIcon->AddMoveName(name);
+				pUnitIcons->GetpSelecting_ptr()->AddMoveMent(tile_.offset,name);
 				select = false;
 				selected = true;
 			}
@@ -61,7 +60,7 @@ void TileIcon::Draw()
 	if (select) {
 		DrawGraph(position.x, position.y, hImage, TRUE);
 	}
-#if 1
+#if 0
 		DrawString(position.x + graphSizeF_.halfX / 2, position.y + graphSizeF_.halfY / 2, num.c_str(), GetColor(255, 255, 255));
 		DrawBoxAA(position.x + graphSizeF_.x/4, position.y, position.x + (graphSizeF_.x/4 * 3), position.y + graphSizeF_.y, GetColor(255, 255, 255), FALSE);
 #endif

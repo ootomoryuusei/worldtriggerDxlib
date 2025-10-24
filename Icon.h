@@ -5,6 +5,11 @@
 using std::vector;
 using std::string;
 
+struct MOVEMENT {
+    VECTOR movement;
+    string movename;
+};
+
 class Icon :
     public Object3D
 {
@@ -21,8 +26,6 @@ protected:
     VECTOR scale_; //スケール
     int fontHandle_; //フォントのハンドル
     XMFLOAT2 prevMousePos_; 
-
-    STEP step_;
 
     XMFLOAT2 center_pos; //画像を回転描画する画像上の中心座標
     float angle; //描画角度
@@ -66,8 +69,7 @@ public:
     /// <returns></returns>
     bool IsInMousePoint(XMFLOAT2 m_pos);
 
-    void SetStep(STEP _step) { step_ = _step; }
-    int GetStep() { return step_; }
+   
 
     XMFLOAT2 GetGraphPos() { return graphPos_; }
 private:

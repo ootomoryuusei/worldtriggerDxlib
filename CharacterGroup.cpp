@@ -21,12 +21,17 @@ void CharacterGroup::Update()
 
 	int index = 0;
 	if (pUnitIcons->GetMoveMentSet()) {
-		for (auto& itr : members_) {
-			for (auto& itrs : pUnitIcons->GetpUnitIcons()[index]->GetMoveMent()) {
-				itr->AddMoveMent(itrs);
+		auto& unit_icons = pUnitIcons->GetpUnitIcons();
+		for (auto& member : members_) {
+			for (auto& arc_icon : unit_icons[index]->GetpTriggersArcIcon()->GetpTriggerArcIcon()) {
+				arc_icon->SetStep(THIRD);
 			}
+			for (auto& movement : unit_icons[index]->GetMoveMent()) {
+				member->AddMoveMent(movement.movement);
+			}
+			unit_icons[index]->SetStep(THIRD);
+			member->SetStep(THIRD);
 			index++;
-			itr->SetState(THIRD);
 		}
 		pUnitIcons->SetMoveMentSet(false);
 	}

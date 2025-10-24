@@ -101,13 +101,13 @@ void TriggerArcIcon::Draw()
 	float size = pData_->GetTriggerData().arc.rangeSize;
 	DrawCircleGaugeF(DrawCenterPos.x, DrawCenterPos.y, percent, hModel, startPercent,size);
 
-	if (hand_ == RIGHT) {
-		/*DrawRotaStringF()*/
-		DrawString(boxCorners[0].x, boxCorners[0].y, "Main", GetColor(255, 255, 255), 1.5);
-	}
-	else if(hand_ == LEFT){
-		DrawString(boxCorners[0].x, boxCorners[0].y, "Sub", GetColor(255, 255, 255), 1.5);
-	}
+	//if (hand_ == RIGHT) {
+	//	/*DrawRotaStringF()*/
+	//	DrawString(boxCorners[0].x, boxCorners[0].y, "Main", GetColor(255, 255, 255), 1.5);
+	//}
+	//else if(hand_ == LEFT){
+	//	DrawString(boxCorners[0].x, boxCorners[0].y, "Sub", GetColor(255, 255, 255), 1.5);
+	//}
 #if 0
 	// éläpå`ï`âÊ
 	for (int i = 0; i < 4; i++) {

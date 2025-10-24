@@ -13,8 +13,8 @@ class GroupBase;
 using std::unordered_set;
 using namespace DirectX;
 
-const int MAX_MAP_HIGHT = 19;
-const int MAX_MAP_WIDTH = 19;
+const int MAX_MAP_HIGHT = 11;
+const int MAX_MAP_WIDTH = 11;
 
 //-----------------------------------------------------------
 //全てのゲームオブジェクト（シーンも含めて）が継承するインターフェース
