@@ -14,7 +14,6 @@ OkButton::OkButton(GameObject* parent) : Icon(parent)
 {
 	Load("Assets//Image//OkButton.png");
 	position = { 1280 / 2 - GetGraphSizeF_2D().halfX,600,0 };
-	canVisible_ = false;
 
 	// ファイルを開く（上書きモード）
 	std::ofstream file("Assets//Character//SelectCharacter.csv", std::ios::trunc);
@@ -41,33 +40,28 @@ OkButton::~OkButton()
 
 void OkButton::Update()
 {
-	if (canVisible_) {
-		Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
-		XMFLOAT2 mousePos = pMouse->GetMousePos();
-		if (PointInBox(mousePos, { position.x,position.y }, { graphSizeF_.x,graphSizeF_.y })) {
-			if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-				for (int i = 0; i < MAX_SELECT_CHARACTER; i++) {
-					CharacterIcons* pCIcons = GetParent()->FindGameObject<CharacterIcons>();
-					int num = 0;
-					for (auto itr : pCIcons->GetpCIcons()) {
-							string fileName = "Assets//Character//SelectCharacter.csv";
-							int tartgerRow = i + 1;
-							string newData = std::to_string(itr->GetNum());
-							updateCSVRow(fileName, tartgerRow, newData);
-					}
-				
+	Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
+	XMFLOAT2 mousePos = pMouse->GetMousePos();
+	if (PointInBox(mousePos, { position.x,position.y }, { graphSizeF_.x,graphSizeF_.y })) {
+		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+			for (int i = 0; i < MAX_SELECT_CHARACTER; i++) {
+				CharacterIcons* pCIcons = GetParent()->FindGameObject<CharacterIcons>();
+				int num = 0;
+				for (auto itr : pCIcons->GetpCIcons()) {
+					string fileName = "Assets//Character//SelectCharacter.csv";
+					int tartgerRow = i + 1;
+					string newData = std::to_string(itr->GetCreateNum());
+					updateCSVRow(fileName, tartgerRow, newData);
 				}
-				SceneManager::Instance()->ChangeScene(SceneManager::SCENE_ID::SCENE_ID_SET);
 			}
+		SceneManager::Instance()->ChangeScene(SceneManager::SCENE_ID::SCENE_ID_SET);
 		}
 	}
 }
 
 void OkButton::Draw()
 {
-	if (canVisible_) {
-		DrawGraph(position.x, position.y, hModel, TRUE);
-	}
+	DrawGraph(position.x, position.y, hModel, TRUE);
 }
 
 void OkButton::updateCSVRow(const string& filename, int targetRow, const string& newData)

@@ -7,6 +7,7 @@ public:
 	BackGround(GameObject* parent);
 	~BackGround();
 	void Update() override;
+	void Draw() override;
 private:
 
 };

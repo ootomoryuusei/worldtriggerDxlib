@@ -20,6 +20,7 @@ void TriggersArcIcon::Initialize()
 	pTriggerArcIcon[LEFT] = pSubTriggerArcIcon;
 	pTriggerArcIcon[RIGHT]->SetHand(RIGHT);
 	pTriggerArcIcon[LEFT]->SetHand(LEFT);
+	pFirstSelect = nullptr;
 }
 
 void TriggersArcIcon::Update()
@@ -28,19 +29,14 @@ void TriggersArcIcon::Update()
 	const auto& mouse = u_icons->GetParent()->FindGameObject<Mouse>();
 	XMFLOAT2 mousePos = mouse->GetMousePos();
 
-	// 全アイコンを初期化（表示ON・選択解除）
-	for (auto& itr : pTriggerArcIcon) {
-		if (!itr->GetCanVisible()) {
-			itr->SetCanVisible(true);
+	for (auto& arc_icon : pTriggerArcIcon) {
+		if (PointInQuad(mousePos, arc_icon->GetBoxCorners())) {
+			pFirstSelect = arc_icon;
+			pFirstSelect->SetSelecting(true);
 		}
-		itr->SetSelecting(false); // まず全て非選択にする
-	}
-
-	// 1つだけ選択処理
-	for (auto& itr : pTriggerArcIcon) {
-		if (PointInQuad(mousePos, itr->GetBoxCorners())) {
-			itr->SetSelecting(true); // 最初に見つけた1つだけ選択
-			break; // 他の円弧は無視（同時選択防止）
+		else if(pFirstSelect != nullptr){
+			pFirstSelect->SetSelecting(false);
+			pFirstSelect = nullptr;
 		}
 	}
 }

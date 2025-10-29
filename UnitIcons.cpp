@@ -69,7 +69,6 @@ void UnitIcons::Initialize()
 		pUIcon->SetMyTrigger(myTrigger);
 		pUIcons_.push_back(pUIcon);
 	}
-	canVisible_ = true;
 	moveMentSet = false;
 
 	pSelecting_ptr = nullptr;

@@ -9,7 +9,6 @@ MoveSetIcon::MoveSetIcon(GameObject* parent) : Icon(parent)
 {
 	Load("Assets/Image/moveSetIcon.png");
 	position = { 0, 0, 0 };
-	canVisible_ = false;
 	fontHandle_ = -1;
 	iconName_ = "çsìÆê›íË";
 }

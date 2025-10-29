@@ -14,7 +14,6 @@ MoveTypeIcon::MoveTypeIcon(GameObject* parent) : Icon(parent)
 {
 	Load("Assets//Image//MoveTypeButton.png");
 	position = { 0, 0, 0 };
-	canVisible_ = false;
 	fontHandle_ = -1;
 	iconName_ = "";
 	hImage = LoadGraph("Assets//Image//MoveTypeDownButton.png");

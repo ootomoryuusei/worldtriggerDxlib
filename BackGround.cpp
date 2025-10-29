@@ -3,7 +3,6 @@
 BackGround::BackGround(GameObject* parent) : Icon(parent)
 {
 	Load("Assets//Image//BackGround.png");
-	canVisible_ = true;
 }
 
 BackGround::~BackGround()
@@ -12,4 +11,9 @@ BackGround::~BackGround()
 
 void BackGround::Update()
 {
+}
+
+void BackGround::Draw()
+{
+	Icon::Draw();
 }

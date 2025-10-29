@@ -9,8 +9,6 @@ Unit::Unit(GameObject* parent) : Icon(parent)
 {
 	Load("Assets//Image//unit.png");
 
-	canVisible_ = true;
-
 	position = { 700,450 };
 
 	boxSize[0] = { 100 ,40 };
@@ -88,21 +86,20 @@ void Unit::Update()
 
 void Unit::Draw()
 {
-	if (canVisible_) {
-		//テキスト入り小box
-		XMFLOAT2 pos = { position.x,position.y };
-		DrawBoxAA(pos.x, pos.y, boxPos[0].x, boxPos[0].y, GetColor(0, 0, 0), TRUE);
+	//テキスト入り小box
+	XMFLOAT2 pos = { position.x,position.y };
+	DrawBoxAA(pos.x, pos.y, boxPos[0].x, boxPos[0].y, GetColor(0, 0, 0), TRUE);
 
-		//大box
-		DrawBoxAA(boxPos[1].x, boxPos[1].y, boxPos[1].x + boxSize[1].x, boxPos[1].y + boxSize[1].y
-			, GetColor(0, 0, 0), TRUE);
+	//大box
+	DrawBoxAA(boxPos[1].x, boxPos[1].y, boxPos[1].x + boxSize[1].x, boxPos[1].y + boxSize[1].y
+		, GetColor(0, 0, 0), TRUE);
 
-		DrawGraph(graphPos_.x, graphPos_.y, hModel, TRUE);
+	DrawGraph(graphPos_.x, graphPos_.y, hModel, TRUE);
 
-		XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
-		XMFLOAT2 space = { (boxSize[0].x - strSize.x) / 2,(boxSize[0].y - strSize.y) / 2 };
-		VECTOR fontPos = { position.x + space.x, position.y + space.y,position.z };
-		DrawStringToHandle(fontPos.x, fontPos.y, iconName_.c_str(),
-			GetColor(255, 255, 255), fontHandle_,GetColor(0,0,0));
-	}
+	XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
+	XMFLOAT2 space = { (boxSize[0].x - strSize.x) / 2,(boxSize[0].y - strSize.y) / 2 };
+	VECTOR fontPos = { position.x + space.x, position.y + space.y,position.z };
+	DrawStringToHandle(fontPos.x, fontPos.y, iconName_.c_str(),
+		GetColor(255, 255, 255), fontHandle_,GetColor(0,0,0));
 }
+

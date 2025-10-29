@@ -116,12 +116,9 @@ void TriggerArcIcon::Draw()
 			boxCorners[j].x, boxCorners[j].y,
 			GetColor(255, 0, 0), FALSE);
 	}
-	Mouse* pMouse = GetParent()->GetParent()->GetParent()->FindGameObject<Mouse>();
-	XMFLOAT2 mousePos = pMouse->GetMousePos();
 	for (int i = 0; i < 4; ++i) {
 		DrawCircle(boxCorners[i].x, boxCorners[i].y, 2,GetColor(0,255,0)); // 四隅のマーク
 	}
-	DrawCircle(mousePos.x, mousePos.y, 2, GetColor(0,0,255)); // マウス位置
 #endif
 }
 

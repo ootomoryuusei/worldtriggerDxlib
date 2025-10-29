@@ -7,7 +7,6 @@ MoveSelectIcon::MoveSelectIcon(GameObject* parent) : Icon(parent)
 {
 	Load("Assets/Image/moveTypesIcon.png");
 	position = { 100, 0, 0 };
-	canVisible_ = false;
 	fontHandle_ = -1;
 	iconName_ = "行動タイプ";
 }

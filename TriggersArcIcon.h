@@ -19,7 +19,7 @@ public:
 	const auto& GetpTriggerArcIcon() const { return pTriggerArcIcon; }
 
 private:
-	
 	array<TriggerArcIcon*,MAX> pTriggerArcIcon;
+	TriggerArcIcon* pFirstSelect;
 };
 

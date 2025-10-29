@@ -14,7 +14,6 @@ TriggerIcons::~TriggerIcons()
 
 void TriggerIcons::Initialize()
 {
-	canVisible_ = true;
 	firstSet = false;
 }
 

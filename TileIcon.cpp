@@ -8,7 +8,6 @@ TileIcon::TileIcon(GameObject* parent) : Icon(parent)
 {
 	Load("Assets//Image//tile.png");
 	position = {0, 0, 0 };
-	canVisible_ = true;
 	tile_.pos = { 0,0,0 };
 	tile_.num = -1;
 	select = false;
@@ -35,7 +34,7 @@ void TileIcon::Update()
 		XMFLOAT2 mousePos = pMouse->GetMousePos();
 
 		int num = 0;
-		if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x, graphSizeF_.y })) {
+		if (IsInMousePoint(mousePos)) {
 			if (pMouse->IsDoubleClicked(Mouse::LEFT)) {
 				const auto& ptr = pMoveSelectIcon_->GetpMoveTypeIcons();
 				const auto& pUnitIcons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();

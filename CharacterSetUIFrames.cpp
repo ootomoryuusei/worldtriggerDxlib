@@ -21,15 +21,19 @@ CharacterSetUIFrames::~CharacterSetUIFrames()
 
 void CharacterSetUIFrames::Update()
 {
-	if (pCSUIFrames_[0]->GetIsSet() && pCSUIFrames_[1]->GetIsSet() && pCSUIFrames_[2]->GetIsSet()) { //全てのフレームにキャラクターがセットされたらokボタンが見えるフラグを立てる
-		OkButton* pOkButton = GetParent()->FindGameObject<OkButton>();
-		pOkButton->SetCanVisible(true);
+	for (auto& frame : pCSUIFrames_) {
+		if (!frame->GetIsSet()) { //一つでも未セットがあれば
+			for (auto& frame : pCSUIFrames_) { //全フレームをdraw拒否
+				if (frame->IsVisibled()) frame->Invisible();
+			}
+			return;
+		}
 	}
-	else {
-		OkButton* pOkButton = GetParent()->FindGameObject<OkButton>();
-		pOkButton->SetCanVisible(false);
+	for (auto& frame : pCSUIFrames_) { //全フレームdraw許可
+		if (!frame->IsVisibled()) {
+			frame->Visible();
+		}
 	}
-
 }
 
 void CharacterSetUIFrames::Draw()

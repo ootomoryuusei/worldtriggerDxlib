@@ -10,7 +10,6 @@ AutoRegister<Icon, IconFactory> CharacterIcon::register_("CharacterIcon");
 CharacterIcon::CharacterIcon(GameObject* parent) : Icon(parent)
 {
 	position = { 0,0,0 };
-	num_ = -1;
 	createNum_ = -1;
 
 	createUI = false;

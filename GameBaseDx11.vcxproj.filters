@@ -59,6 +59,9 @@
     <Filter Include="Data">
       <UniqueIdentifier>{3e77d1db-6869-4ebd-968c-9439609300d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{01a7a2c9-91e0-4223-976d-745341d6c361}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\GameObject.cpp">
@@ -289,6 +292,10 @@
     </ClCompile>
     <ClCompile Include="TileIcons.cpp">
       <Filter>Group</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -524,9 +531,6 @@
     <ClInclude Include="CharacterGroup.h">
       <Filter>Group</Filter>
     </ClInclude>
-    <ClInclude Include="GroupManager.h">
-      <Filter>Group</Filter>
-    </ClInclude>
     <ClInclude Include="GroupBase.h">
       <Filter>Group</Filter>
     </ClInclude>
@@ -563,6 +567,13 @@
     </ClInclude>
     <ClInclude Include="TileIcons.h">
       <Filter>Group</Filter>
+    </ClInclude>
+    <ClInclude Include="GroupManager.h">
+      <Filter>Group</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h" />
+    <ClInclude Include="InputManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

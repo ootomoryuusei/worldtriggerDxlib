@@ -17,8 +17,6 @@ using std::clamp;
 
 UnitIcon::UnitIcon(GameObject* parent) : Icon(parent)
 {
-	canVisible_ = true;
-
 	createNum_ = -1;
 	
 	step_ = SECONDE;

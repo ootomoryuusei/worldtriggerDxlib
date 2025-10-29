@@ -5,7 +5,6 @@
 Timer::Timer(GameObject* parent) : Icon(parent)
 {
 	position = { 1050, 100, 0 };
-	canVisible_ = true;
 
 	/*iconName_ = "‰‰KŠJn‚Ü‚Å";*/
 
