@@ -293,8 +293,13 @@
     <ClCompile Include="TileIcons.cpp">
       <Filter>Group</Filter>
     </ClCompile>
-    <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="InputManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="InputComponent.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
@@ -571,8 +576,13 @@
     <ClInclude Include="GroupManager.h">
       <Filter>Group</Filter>
     </ClInclude>
-    <ClInclude Include="UIManager.h" />
     <ClInclude Include="InputManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="InputComponent.h">
       <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
