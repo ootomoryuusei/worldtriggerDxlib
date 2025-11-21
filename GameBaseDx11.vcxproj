@@ -312,6 +312,7 @@
     <ClInclude Include="TriggerFactory.h" />
     <ClInclude Include="IconFactory.h" />
     <ClInclude Include="GroupManager.h" />
+    <ClInclude Include="InputEvents.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc" />

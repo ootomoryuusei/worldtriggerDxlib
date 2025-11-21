@@ -50,32 +50,61 @@ void Keyboard::Update()
     m_time += Time::DeltaTime();
 }
 
-// 押している
-bool Keyboard::IsPressed(Key key) const
+void Keyboard::Update(vector<InputEvent>& events)
 {
-    return m_now[key];
+    m_prev = m_now;
+    m_time += Time::DeltaTime();
+
+    if (CheckHitKey(KEY_INPUT_UP))   m_now[UP] = true; else m_now[UP] = false;
+    if (CheckHitKey(KEY_INPUT_DOWN)) m_now[DOWN] = true; else m_now[DOWN] = false;
+    if (CheckHitKey(KEY_INPUT_LEFT)) m_now[LEFT] = true; else m_now[LEFT] = false;
+    if (CheckHitKey(KEY_INPUT_RIGHT))m_now[RIGHT] = true; else m_now[RIGHT] = false;
+    if (CheckHitKey(KEY_INPUT_SPACE))m_now[SPACE] = true; else m_now[SPACE] = false;
+
+    for (int i = 0; i < KEY_NUM; ++i) {
+        if (m_now[i] && !m_prev[i]) {
+            InputEvent e;
+            e.device = InputDeviceType::KEYBOARD;
+            e.keyCode = i;
+            e.pressed = true;
+            events.push_back(e);
+        }
+        if (!m_now[i] && m_prev[i]) {
+            InputEvent e;
+            e.device = InputDeviceType::KEYBOARD;
+            e.keyCode = i;
+            e.released = true;
+            events.push_back(e);
+        }
+    }
 }
 
-// 押した瞬間
-bool Keyboard::IsTriggered(Key key) const
-{
-    return m_now[key] && !m_prev[key];
-}
-
-// 離した瞬間
-bool Keyboard::IsReleased(Key key) const
-{
-    return !m_now[key] && m_prev[key];
-}
-
-// 長押し判定
-bool Keyboard::IsLongPressed(Key key) const
-{
-    return m_now[key] && (m_time - m_pressStartTime[key] >= LONG_PRESS_TIME);
-}
-
-// 連打（ダブルプレス）判定
-bool Keyboard::IsDoublePressed(Key key) const
-{
-    return IsTriggered(key) && m_doublePressFlag[key];
-}
+//// 押している
+//bool Keyboard::IsPressed(Key key) const
+//{
+//    return m_now[key];
+//}
+//
+//// 押した瞬間
+//bool Keyboard::IsTriggered(Key key) const
+//{
+//    return m_now[key] && !m_prev[key];
+//}
+//
+//// 離した瞬間
+//bool Keyboard::IsReleased(Key key) const
+//{
+//    return !m_now[key] && m_prev[key];
+//}
+//
+//// 長押し判定
+//bool Keyboard::IsLongPressed(Key key) const
+//{
+//    return m_now[key] && (m_time - m_pressStartTime[key] >= LONG_PRESS_TIME);
+//}
+//
+//// 連打（ダブルプレス）判定
+//bool Keyboard::IsDoublePressed(Key key) const
+//{
+//    return IsTriggered(key) && m_doublePressFlag[key];
+//}

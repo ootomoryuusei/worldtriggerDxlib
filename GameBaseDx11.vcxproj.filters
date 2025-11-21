@@ -244,9 +244,6 @@
     <ClCompile Include="SetIcons.cpp">
       <Filter>Icon</Filter>
     </ClCompile>
-    <ClCompile Include="Mouse.cpp">
-      <Filter>01Engine</Filter>
-    </ClCompile>
     <ClCompile Include="MoveMentsLoad.cpp">
       <Filter>Icon\MiniMap</Filter>
     </ClCompile>
@@ -287,9 +284,6 @@
       <Filter>Group</Filter>
     </ClCompile>
     <ClCompile Include="Tiles.cpp" />
-    <ClCompile Include="Keyboard.cpp">
-      <Filter>01Engine</Filter>
-    </ClCompile>
     <ClCompile Include="TileIcons.cpp">
       <Filter>Group</Filter>
     </ClCompile>
@@ -300,6 +294,12 @@
       <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="InputComponent.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
@@ -491,9 +491,6 @@
     <ClInclude Include="SetIcons.h">
       <Filter>Icon</Filter>
     </ClInclude>
-    <ClInclude Include="Mouse.h">
-      <Filter>01Engine</Filter>
-    </ClInclude>
     <ClInclude Include="MoveMentsLoad.h">
       <Filter>Icon\MiniMap</Filter>
     </ClInclude>
@@ -567,9 +564,6 @@
       <Filter>Group</Filter>
     </ClInclude>
     <ClInclude Include="Tiles.h" />
-    <ClInclude Include="Keyboard.h">
-      <Filter>01Engine</Filter>
-    </ClInclude>
     <ClInclude Include="TileIcons.h">
       <Filter>Group</Filter>
     </ClInclude>
@@ -583,6 +577,15 @@
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="InputComponent.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="InputEvents.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
       <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>

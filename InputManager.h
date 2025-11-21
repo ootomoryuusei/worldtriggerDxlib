@@ -2,6 +2,7 @@
 #include "Engine/GameObject.h"
 #include"Keyboard.h"
 #include"Mouse.h"
+#include "InputComponent.h"
 
 class InputManager :
     public GameObject
@@ -21,9 +22,12 @@ public:
 	const Keyboard& GetKeyboard() const { return *keyboard_; }
 	const Mouse& GetMouse() const { return *mouse_; }
 
-	bool IsActionTriggerd(std::string actionName);
+	void RegisterInputComponent(InputComponent* component);
 private:
+	vector<InputEvent> events_;
+	vector<InputComponent*> inputComponents_;
 	Keyboard* keyboard_;
 	Mouse* mouse_;
 };
+
 

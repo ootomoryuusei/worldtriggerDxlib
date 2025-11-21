@@ -1,6 +1,9 @@
 #pragma once
 #include "Engine/GameObject.h"
 #include <array>
+#include "InputEvents.h"
+
+using std::vector;
 
 class Keyboard : public GameObject
 {
@@ -19,13 +22,14 @@ public:
 
     void Initialize() override;
     void Update() override;
+    void Update(vector<InputEvent>& events);
 
-    // 状態取得
-    bool IsPressed(Key key) const;      // 押している
-    bool IsTriggered(Key key) const;    // 押した瞬間
-    bool IsReleased(Key key) const;     // 離した瞬間
-    bool IsLongPressed(Key key) const;  // 長押し
-    bool IsDoublePressed(Key key) const; // 連打（ダブルプレス）
+    //// 状態取得
+    //bool IsPressed(Key key) const;      // 押している
+    //bool IsTriggered(Key key) const;    // 押した瞬間
+    //bool IsReleased(Key key) const;     // 離した瞬間
+    //bool IsLongPressed(Key key) const;  // 長押し
+    //bool IsDoublePressed(Key key) const; // 連打（ダブルプレス）
 
 private:
     std::array<bool, KEY_NUM> m_now{};
