@@ -1,40 +1,46 @@
 #pragma once
-#include<string>
+#include<functional>
 #include<DirectXMath.h>
 
 using namespace DirectX;
+using std::function;
+typedef int KeyCode;
 
-enum InputDeviceType {
-	MOUSE,
-	KEYBOARD,
-	GAMEPAD
-};
-
-enum MouseClickType {
+enum InputEventType {
 	NONE,
-	PRESS,
-	RELEASE,
-	CLICK,
-	DOBULECLICK,
-	DRAGSTART,
-	DRAGGING,
-	DRAGEND
+	MOUSE_DOWN,
+	MOUSE_UP,
+	MOUSE_MOVE,
+	MOUSE_CLICK
 };
 
 enum MouseButton {
-	NONE,
 	LEFT,
 	RIGHT,
 	MIDDLE,
 	MOUSE_MAX
 };
 
-struct InputEvent {
-	InputDeviceType device; //入力デバイス
-	MouseButton m_Button = MouseButton::NONE;
-	MouseClickType clickType = MouseClickType::NONE;
-	int keyCode = -1; //キーコード
-	XMFLOAT2 position = { 0,0 }; //マウス座標
-	bool pressed = false; //押された
-	bool released = false; //離された
+struct MouseClickEvent
+{
+	MouseButton button;
+	XMFLOAT2 position;
+};
+
+struct MouseDragEvent
+{
+	MouseButton button;
+	XMFLOAT2 start;
+	XMFLOAT2 current;
+	XMFLOAT2 delta;
+};
+
+struct MouseWheelEvent
+{
+	float delta;
+};
+
+struct KeyEvent
+{
+	KeyCode key;
 };

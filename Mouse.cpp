@@ -17,116 +17,66 @@ void Mouse::Initialize()
 
 void Mouse::Update()
 {
-    //SetMouseDispFlag(mouseFlag); //マウスを表示させるフラグ関数
-    //GetMousePoint(&MouseX, &MouseY);
-    //mousePos = { (float)MouseX,(float)MouseY };
-
-    //m_prev = m_now;
-
-    //m_now[LEFT] = (GetMouseInput() & MOUSE_INPUT_LEFT) != 0;
-    //m_now[RIGHT] = (GetMouseInput() & MOUSE_INPUT_RIGHT) != 0;
-
-    //for (int i = 0; i < BUTTON_NUM; ++i) {
-    //    // 押し始め
-    //    if (m_now[i] && !m_prev[i]) {
-    //        if (m_time - m_lastClickTime[i] <= DOUBLE_CLICK_SPAN) {
-    //            m_doubleClickFlag[i] = true;
-    //        }
-    //        else {
-    //            m_doubleClickFlag[i] = false;
-    //        }
-
-    //        m_lastClickTime[i] = m_time;
-    //        m_pressStartTime[i] = m_time;
-    //    }
-
-    //    // ボタン離したときの処理を入れたい場合はここに
-    //}
-    //
-    //m_time += Time::DeltaTime();
-    
-}
-
-void Mouse::IsPressed(MouseButton btn, vector<InputEvent>& events)
-{
-    if (m_now[btn] && !m_prev[btn]) {
-        m_pressStartTime[btn] = m_time;
-        dragStartPos = mousePos;
-        m_dragging[btn] = false;
-
-        InputEvent e;
-        e.device = InputDeviceType::MOUSE;
-        e.m_Button = btn;
-        e.position = mousePos;
-        e.clickType = MouseClickType::PRESS;
-        events.push_back(e);
-    }
-}
-
-void Mouse::Update(vector<InputEvent>& events)
-{
     m_prev = m_now;
-    m_now[LEFT] = (GetMouseInput() & MOUSE_INPUT_LEFT) != 0;
     m_now[RIGHT] = (GetMouseInput() & MOUSE_INPUT_RIGHT) != 0;
+    m_now[LEFT] = (GetMouseInput() & MOUSE_INPUT_LEFT) != 0;
     m_now[MIDDLE] = (GetMouseInput() & MOUSE_INPUT_MIDDLE) != 0;
 
-    XMINT2 m_pos;
-    GetMousePoint(&m_pos.x, &m_pos.y);
-    mousePos = { (float)m_pos.x,(float)m_pos.y };
+    SetMouseDispFlag(mouseFlag); //マウスを表示させるフラグ関数
+    int m_posX, m_posY;
+    GetMousePoint(&m_posX, &m_posY);
+    m_pos = { (float)m_posX,(float)m_posY };
 
-    const float dt = Time::DeltaTime();
+    for (int i = 0;i < (int)MOUSE_MAX;i++) {
+        detect(i);
+    }
 
-    for (int i = 0; i < MOUSE_MAX; ++i) {
-        if (m_now[i] && !m_prev[i]) {
-            InputEvent e;
-            e.device = InputDeviceType::MOUSE;
-            e.position = mousePos;
-            e.m_Button = (MouseButton)i;
-            e.pressed = true;
-            events.push_back(e);
-        }
-        if (!m_now[i] && m_prev[i]) {
-            InputEvent e;
-            e.device = InputDeviceType::MOUSE;
-            e.position = mousePos;
-            e.m_Button = (MouseButton)i;
-            e.released = true;
-            events.push_back(e);
-        }
+    m_time += Time::DeltaTime();
+}
 
+void Mouse::detect(int btn)
+{
+    //マウスクリック、ダブルクリック
+    if (m_now[btn] && !m_prev[btn]) {
+        if (OnPress) OnPress({ (MouseButton)btn,m_pos });
 
-        // 離した瞬間
-        if (!m_now[i] && m_prev[i]) {
-            InputEvent e;
-            e.device = InputDeviceType::MOUSE;
-            e.m_Button = (MouseButton)i;
-            e.position = mousePos;
-            e.clickType = m_dragging[i] ? MouseClickType::DRAGEND : MouseClickType::RELEASE;
-            events.push_back(e);
-            // クリック判定
-            if (!m_dragging[i]) {
-                // ダブルクリック判定
-                const float diff = m_time - m_lastClickTime[i];
-                m_lastClickTime[i] = m_time;
-
-                if (diff <= DOUBLE_CLICK_SPAN) {
-                    InputEvent dc;
-                    dc.device = InputDeviceType::MOUSE;
-                    dc.m_Button = (MouseButton)i;
-                    dc.position = mousePos;
-                    dc.clickType = MouseClickType::DOBULECLICK;
-                    events.push_back(dc);
-                }
-                else {
-                    InputEvent c;
-                    c.device = InputDeviceType::MOUSE;
-                    c.m_Button = (MouseButton)i;
-                    c.position = mousePos;
-                    c.clickType = MouseClickType::CLICK;
-                    events.push_back(c);
-                }
+        float diff = m_time - lastClick[btn];
+        lastClick[btn] = m_time;
+        if (diff <= DOUBLE_CLICK_SPAN) {
+            if (OnDoubleClick) {
+                OnDoubleClick({ (MouseButton)btn,m_pos });
             }
         }
+        m_dragging[btn] = false;
+        m_dragStart[btn] = m_pos;
     }
-    m_time += dt;
+
+    if (!m_now[btn] && m_prev[btn]) {
+        if (OnRelease) OnRelease({ (MouseButton)btn,m_pos });
+
+        if (m_dragging[btn] && OnDragEnd) {
+            MouseDragEvent d_event;
+            d_event.button = (MouseButton)btn;
+            d_event.start = m_dragStart[btn];
+            d_event.current = m_pos;
+            d_event.delta = m_pos - m_dragStart[btn];
+            OnDragEnd(d_event);
+        }
+
+        if (!m_dragging[btn] && OnClick) OnClick({ (MouseButton)btn,m_pos });
+    }
+
+    if (m_now[btn] && m_prev[btn]) {
+        XMFLOAT2 diff = m_pos - m_dragStart[btn];
+
+        if (!m_dragging[btn] && (abs(diff.x) > (int)MOUSE_MAX || abs(diff.y > (int)MOUSE_MAX))) {
+            m_dragging[btn] = true;
+            if (OnDragStart) OnDragStart({ (MouseButton)btn,m_dragStart[btn],m_pos,diff });
+        }
+
+        if (m_dragging[btn] && OnDrag) {
+            OnDrag({ (MouseButton)btn,m_dragStart[btn],m_pos,diff });
+        }
+    }
 }
+

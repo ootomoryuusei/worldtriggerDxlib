@@ -281,3 +281,6 @@ T* Instantiate(GameObject* pParent)
 	return pNewObject;
 }
 
+inline XMFLOAT2 operator -(const XMFLOAT2& a, const XMFLOAT2& b) {
+	return XMFLOAT2(a.x - b.x ,a.y - b.y);
+}

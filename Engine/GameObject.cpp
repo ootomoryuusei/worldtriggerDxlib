@@ -311,3 +311,4 @@ bool GameObject::PointInBox(XMFLOAT2 _point, XMFLOAT2 _LeftUp, XMFLOAT2 _distanc
 	}
 	return false;
 }
+

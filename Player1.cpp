@@ -83,42 +83,42 @@ void Player1::Initialize()
 void Player1::Update()
 {
 	
-	if (pKeyboard_->IsTriggered(Keyboard::RIGHT)) {
-		auto it = std::find(characterlist_.begin(), characterlist_.end(), pSelectingCharacter_);
-		if (it != characterlist_.end()) {
-			// 次の要素が存在するか確認
-			auto nextIt = std::next(it);
-			if (nextIt != characterlist_.end()) {
-				pSelectingCharacter_ = *nextIt;  // 次のキャラクターに切り替え
-			}
-			// 末尾だったら何もしない or 最初に戻すなども可能
-		}
+	//if (pKeyboard_->IsTriggered(Keyboard::RIGHT)) {
+	//	auto it = std::find(characterlist_.begin(), characterlist_.end(), pSelectingCharacter_);
+	//	if (it != characterlist_.end()) {
+	//		// 次の要素が存在するか確認
+	//		auto nextIt = std::next(it);
+	//		if (nextIt != characterlist_.end()) {
+	//			pSelectingCharacter_ = *nextIt;  // 次のキャラクターに切り替え
+	//		}
+	//		// 末尾だったら何もしない or 最初に戻すなども可能
+	//	}
+	//}
+	//if (pKeyboard_->IsTriggered(Keyboard::LEFT)) {
+	//	auto it = std::find(characterlist_.begin(), characterlist_.end(), pSelectingCharacter_);
+	//	if (it != characterlist_.end()) {
+	//		// itがbegin()より後ろなら前に戻せる
+	//		if (it != characterlist_.begin()) {
+	//			auto prevIt = std::prev(it);  // 1つ前のイテレータ
+	//			pSelectingCharacter_ = *prevIt;
+	//		}
+	//		// 先頭だった場合は何もしない or 末尾に戻すなども可能
+	//	}
 	}
-	if (pKeyboard_->IsTriggered(Keyboard::LEFT)) {
-		auto it = std::find(characterlist_.begin(), characterlist_.end(), pSelectingCharacter_);
-		if (it != characterlist_.end()) {
-			// itがbegin()より後ろなら前に戻せる
-			if (it != characterlist_.begin()) {
-				auto prevIt = std::prev(it);  // 1つ前のイテレータ
-				pSelectingCharacter_ = *prevIt;
-			}
-			// 先頭だった場合は何もしない or 末尾に戻すなども可能
-		}
-	}
-	XMFLOAT3 c_rota = pSelectingCharacter_->GetRotate();
-	VECTOR c_position = pSelectingCharacter_->Get3DPosition();
-	// カメラの設定
-	MATRIX mRot = MGetRotY(c_rota.y);  // 回転行列
-	// 回ってないとき、プレイヤーからどれぐらい後ろ？→ベクトル
-	VECTOR tmpP = VGet(0, 5, 10);
-	// これに回転行列をかける
-	VECTOR pRot = tmpP * mRot;
-	// これにプレイヤーの座標を足すと、カメラ位置が出る
-	VECTOR vRot = VGet(0, 3, -5) * mRot;
+	//XMFLOAT3 c_rota = pSelectingCharacter_->GetRotate();
+	//VECTOR c_position = pSelectingCharacter_->Get3DPosition();
+	//// カメラの設定
+	//MATRIX mRot = MGetRotY(c_rota.y);  // 回転行列
+	//// 回ってないとき、プレイヤーからどれぐらい後ろ？→ベクトル
+	//VECTOR tmpP = VGet(0, 5, 10);
+	//// これに回転行列をかける
+	//VECTOR pRot = tmpP * mRot;
+	//// これにプレイヤーの座標を足すと、カメラ位置が出る
+	//VECTOR vRot = VGet(0, 3, -5) * mRot;
 
-	VECTOR cam_position = c_position + pRot;
-	VECTOR cam_target = c_position + vRot;
-	SetCameraPositionAndTarget_UpVecY(cam_position,cam_target);
+	//VECTOR cam_position = c_position + pRot;
+	//VECTOR cam_target = c_position + vRot;
+	//SetCameraPositionAndTarget_UpVecY(cam_position,cam_target);
 }
 
 void Player1::Draw()

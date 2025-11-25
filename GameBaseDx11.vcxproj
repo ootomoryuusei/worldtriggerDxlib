@@ -179,6 +179,7 @@
     <ClCompile Include="MoveSelectIcon.cpp" />
     <ClCompile Include="MoveTypeIcon.cpp" />
     <ClCompile Include="MoveTypeIcons.cpp" />
+    <ClCompile Include="Object2D.cpp" />
     <ClCompile Include="Object3D.cpp" />
     <ClCompile Include="OkButton.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -272,6 +273,7 @@
     <ClInclude Include="MoveSelectIcon.h" />
     <ClInclude Include="MoveTypeIcon.h" />
     <ClInclude Include="MoveTypeIcons.h" />
+    <ClInclude Include="Object2D.h" />
     <ClInclude Include="Object3D.h" />
     <ClInclude Include="OkButton.h" />
     <ClInclude Include="Player.h" />
@@ -313,6 +315,8 @@
     <ClInclude Include="IconFactory.h" />
     <ClInclude Include="GroupManager.h" />
     <ClInclude Include="InputEvents.h" />
+    <ClInclude Include="HitInfo.h" />
+    <ClInclude Include="UIRaycaster.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc" />

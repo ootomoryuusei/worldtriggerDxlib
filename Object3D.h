@@ -38,7 +38,12 @@ struct SIZE_2D {
 };
 
 struct SIZE_F_2D {
-	float x, y, halfX, halfY;
+	float x, y;
+	void set(float _x, float _y) {
+		x = x; y = _y;
+	}
+	float halfX() const { return x / 2; }
+	float halfY() const { return y / 2; }
 };
 
 struct SIZE_F_3D {

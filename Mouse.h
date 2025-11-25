@@ -3,6 +3,7 @@
 #include <array>
 #include "InputEvents.h"
 
+using std::array;
 using std::vector;
 
 class Mouse : public GameObject
@@ -13,37 +14,29 @@ public:
 
     void Initialize() override;
     void Update() override;
-    void Update(vector<InputEvent>& events);
-    // マウス状態
 
-    /// <summary>
-    /// 押下した瞬間
-    /// </summary>
-    /// <param name="btn"></param>
-    void IsPressed(MouseButton btn, vector<InputEvent>& events);
-    void IsClicked(MouseButton btn, vector<InputEvent>& events);
-    void IsDoubleClicked(MouseButton btn, vector<InputEvent>& events);
-
-    //マウス位置取得
-    XMFLOAT2 GetMousePos() { return mousePos; }
+    function<void(const MouseClickEvent&)> OnClick;
+    function<void(const MouseClickEvent&)> OnDoubleClick;
+    function<void(const MouseClickEvent&)> OnPress;
+    function<void(const MouseClickEvent&)> OnRelease;
+    function<void(const MouseDragEvent&)> OnDrag;
+    function<void(const MouseDragEvent&)> OnDragStart;
+    function<void(const MouseDragEvent&)> OnDragEnd;
+    function<void(const MouseWheelEvent&)> OnWheel;
 
     //マウスの表示フラグセット
     void SetMouseFlag(bool _flag) { mouseFlag = _flag; }
-
 private:
-    std::array<int, MOUSE_MAX> m_now{}; //現在のマウス降下状態
-    std::array<int, MOUSE_MAX> m_prev{}; //1f前のマウス降下状態
-    std::array<float, MOUSE_MAX> m_pressStartTime{}; 
-    std::array<float, MOUSE_MAX> m_lastClickTime{}; 
-    std::array<bool, MOUSE_MAX> m_dragging{};
+    array<bool, MOUSE_MAX> m_now{}; //現在のマウス降下状態
+    array<bool, MOUSE_MAX> m_prev{}; //1f前のマウス降下状態
+    array<bool, MOUSE_MAX> m_dragging{}; //ドラッグ状態
+    array<XMFLOAT2, MOUSE_MAX> m_dragStart{}; //ドラッグ開始位置
 
     const float DOUBLE_CLICK_SPAN = 0.7; // 経過時間でダブルクリック判定
-    const float DRAG_THRESOHLD = 4.0f; //ずれたらドラッグ開始(ピクセル)
-
-    XMFLOAT2 mousePos;
-    XMFLOAT2 dragStartPos;
-    bool mouseFlag;
-
-    float m_time;
+    float lastClick[MOUSE_MAX]{};
+    XMFLOAT2 m_pos; //マウス位置
+    float m_time; //時間
+    bool mouseFlag; //マウス表示フラグ
+    void detect(int btn);
 };
 
