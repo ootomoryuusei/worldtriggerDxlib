@@ -1,40 +1,49 @@
 #pragma once
-#include "Engine/GameObject.h" // your existing GameObject base
+#include "Engine/GameObject.h" 
 #include <DirectXMath.h>
 #include <string>
 #include <functional>
 
 using namespace DirectX;
+using std::string;
 
-class UIRaycaster; // forward
+class UIRaycaster;
+
+struct SIZE_2D {
+    int x, y, halfX, halfY;
+    void set(int _x, int _y) {
+        x = _x, y = _y;
+    }
+    int halfX() const { return x / 2; }
+    int halfY() const { return y / 2; }
+};
+
+struct SIZE_F_2D {
+    float x, y;
+    void set(float _x, float _y) {
+        x = _x; y = _y;
+    }
+    float halfX() const { return x / 2; }
+    float halfY() const { return y / 2; }
+};
+
 
 class Object2D : public GameObject
 {
 public:
-    // Basic construction: parent can be null
     Object2D(GameObject* parent, const std::string& name = "Object2D");
     virtual ~Object2D();
 
-    // lifecycle
-    virtual void Initialize() override; // registers to UIRaycaster
+    virtual void Initialize() override; 
     virtual void Update() override;
     virtual void Draw() override;
-    virtual void Release() override; // unregisters
+    virtual void Release() override;
 
-    // sprite / visual properties (kept similar to your Icon)
-    void LoadSprite(const std::string& filePath);
-    void SetPosition(float x, float y) { graphPos_.x = x; graphPos_.y = y; }
-    XMFLOAT2 GetPosition() const { return graphPos_; }
-    void SetSize(float w, float h) { graphSizeF_.x = w; graphSizeF_.y = h; graphSize_.x = (int)w; graphSize_.y = (int)h; }
-    XMFLOAT2 GetSize() const { return graphSizeF_; }
+    void LoadSprite(const string& filePath);
     void SetScale(float sx, float sy) { scale_ = { sx, sy }; }
-    void SetAngle(float radians) { angle_ = radians; }
 
-    // hit test: returns true if screen-space mouse point is inside the drawn quad
-    // takes rotation and scale into account (pivot = center by default, pivot can be set)
     virtual bool IsInMousePoint(const XMFLOAT2& mpos) const;
 
-    // event virtuals: override in subclasses to react to input
     virtual void OnPress(const XMFLOAT2& pos) {}
     virtual void OnRelease(const XMFLOAT2& pos) {}
     virtual void OnClick(const XMFLOAT2& pos) {}
@@ -59,17 +68,18 @@ public:
     bool GetSelecting() const { return selecting_; }
 
 protected:
-    XMFLOAT2 graphSizeF_ = { 64.0f, 64.0f };
-    struct Int2 { int x, y; } graphSize_ = { 64, 64 };
-    XMFLOAT2 graphPos_ = { 0.0f, 0.0f }; 
-    std::string fileName_;
-    std::string object2DName_;
-
-    bool selecting_ = false;
-    int createNum_ = 0;
-    XMFLOAT2 scale_ = { 1.0f, 1.0f };
-    XMFLOAT2 pivot_ = { 0.5f, 0.5f }; 
-    float angle_ = 0.0f;
+    int hModel_; //モデルハンドル
+    SIZE_F_2D graphSizeF_; //アイコンの画像サイズ(float)
+    SIZE_2D graphSize_; //アイコンの画像サイズ(int)
+    XMFLOAT2 graphPos_; //アイコン座標
+    string fileName_; //ファイル名
+    string iconName_; //アイコン名
+    bool selecting_; //セレクトされているかどうか
+    int createNum_; //作成番号
+    VECTOR scale_; //スケール
+    int fontHandle_; //フォントハンドル
+    XMFLOAT2 pivot_; //回転軸
+    float angle_; //回転
 
     bool hovered_ = false;
     bool pressed_ = false;

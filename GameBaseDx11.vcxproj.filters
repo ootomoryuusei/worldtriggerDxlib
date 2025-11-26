@@ -62,6 +62,9 @@
     <Filter Include="Manager">
       <UniqueIdentifier>{01a7a2c9-91e0-4223-976d-745341d6c361}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BaseObject">
+      <UniqueIdentifier>{9a42c05f-73b1-4fca-9249-1c910b4142ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\GameObject.cpp">
@@ -107,9 +110,6 @@
       <Filter>10PlayScene</Filter>
     </ClCompile>
     <ClCompile Include="Ground.cpp">
-      <Filter>10PlayScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Object3D.cpp">
       <Filter>10PlayScene</Filter>
     </ClCompile>
     <ClCompile Include="Animator.cpp">
@@ -290,9 +290,6 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="UIManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="InputComponent.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -302,7 +299,15 @@
     <ClCompile Include="Mouse.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Object2D.cpp" />
+    <ClCompile Include="Object2D.cpp">
+      <Filter>BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Object3D.cpp">
+      <Filter>BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="RaycastManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -354,9 +359,6 @@
       <Filter>10PlayScene</Filter>
     </ClInclude>
     <ClInclude Include="Ground.h">
-      <Filter>10PlayScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Object3D.h">
       <Filter>10PlayScene</Filter>
     </ClInclude>
     <ClInclude Include="Animator.h">
@@ -574,9 +576,6 @@
     <ClInclude Include="InputManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="UIManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="InputComponent.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -595,7 +594,15 @@
     <ClInclude Include="UIRaycaster.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Object2D.h" />
+    <ClInclude Include="Object2D.h">
+      <Filter>BaseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Object3D.h">
+      <Filter>BaseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="RaycastManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc">

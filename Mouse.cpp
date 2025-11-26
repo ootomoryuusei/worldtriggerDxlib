@@ -69,7 +69,7 @@ void Mouse::detect(int btn)
     if (m_now[btn] && m_prev[btn]) {
         XMFLOAT2 diff = m_pos - m_dragStart[btn];
 
-        if (!m_dragging[btn] && (abs(diff.x) > (int)MOUSE_MAX || abs(diff.y > (int)MOUSE_MAX))) {
+        if (!m_dragging[btn] && (abs(diff.x) > DRAG_THRESHOLD || abs(diff.y > DRAG_THRESHOLD))) {
             m_dragging[btn] = true;
             if (OnDragStart) OnDragStart({ (MouseButton)btn,m_dragStart[btn],m_pos,diff });
         }

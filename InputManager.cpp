@@ -13,3 +13,15 @@ void InputManager::Initialize()
 void InputManager::Update()
 {
 }
+
+void InputManager::CollectRawEvents()
+{
+}
+
+void InputManager::DoHitTest()
+{
+}
+
+void InputManager::DispatchEvents()
+{
+}

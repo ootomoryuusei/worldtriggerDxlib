@@ -33,6 +33,7 @@ private:
     array<XMFLOAT2, MOUSE_MAX> m_dragStart{}; //ドラッグ開始位置
 
     const float DOUBLE_CLICK_SPAN = 0.7; // 経過時間でダブルクリック判定
+    const int DRAG_THRESHOLD = 3; //ドラッグの閾値(pix)
     float lastClick[MOUSE_MAX]{};
     XMFLOAT2 m_pos; //マウス位置
     float m_time; //時間

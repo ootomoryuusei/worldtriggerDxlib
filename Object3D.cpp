@@ -6,36 +6,61 @@ using std::lerp;
 
 Object3D::Object3D(GameObject* parent) : GameObject(parent)
 {
-	hModel = -1;
-	position = VGet(0, 0, 0);
-	rotation = VGet(0, 0, 0);
+	hModel_ = -1;
+	position_ = VGet(0, 0, 0);
+	rotation_ = VGet(0, 0, 0);
 }
 
 Object3D::Object3D(GameObject* parent,const std::string& name) : GameObject(parent, name)
 {
-	hModel = -1;
-	position = VGet(0, 0, 0);
-	rotation = VGet(0, 0, 0);
+	hModel_ = -1;
+	position_ = VGet(0, 0, 0);
+	rotation_ = VGet(0, 0, 0);
 }
 
 Object3D::~Object3D()
 {
-	if (hModel > 0) { // モデルがロードされていれば
-		MV1DeleteModel(hModel);
-		hModel = -1;
+	if (hModel_ > 0) { // モデルがロードされていれば
+		MV1DeleteModel(hModel_);
+		hModel_ = -1;
 	}
+}
+
+void Object3D::Initialize()
+{
+}
+
+void Object3D::Update()
+{
+	if (hModel_ < 0) return; //モデルがロード済みならば
+	position_ = VGet(transform_.position_.x, transform_.position_.y, transform_.position_.z);
+	rotation_ = VGet(transform_.rotate_.x, transform_.rotate_.y, transform_.rotate_.z);
+	matrix_ = ToMATRIX(position_, rotation_);
 }
 
 void Object3D::Draw()
 {
-	if (hModel > 0) { // モデルがロードされていれば
-		MATRIX mTrans = MGetTranslate(position); // 移動行列
-		MATRIX mRotX = MGetRotX(rotation.x); // X軸の回転行列
-		MATRIX mRotY = MGetRotY(rotation.y); // Y軸の回転行列
-		MATRIX mRotZ = MGetRotZ(rotation.z); // Z軸の回転行列
-		MATRIX m = mRotZ * mRotX * mRotY * mTrans;
-		MV1SetMatrix(hModel, m);
-		MV1DrawModel(hModel);
+	if (hModel_ < 0) return; // モデルがロード済みならば
+	MV1SetMatrix(hModel_, matrix_);
+	MV1DrawModel(hModel_);
+}
+
+void Object3D::Release()
+{
+}
+
+void Object3D::LoadModel(const string& path)
+{
+	hModel_ = MV1LoadModel(path.c_str());
+}
+
+bool Object3D::Raycast(const VECTOR& rayOrigin, const VECTOR& rayDir, float& outDist)
+{
+	if (hModel_ < 0) return false;
+
+	MV1_COLL_RESULT_POLY res = MV1CollCheck_Line(hModel_, -1, rayOrigin, rayDir);
+	if (res.HitFlag) {
+		outDist = res.HitPosition
 	}
 }
 
@@ -59,12 +84,12 @@ bool Object3D::InRight(VECTOR pos)
 
 void Object3D::HeadingTo(VECTOR vec)
 {
-	rotation.y = atan2(vec.x, vec.y);
+	rotation_.y = atan2(vec.x, vec.y);
 }
 
 void Object3D::MoveTo(VECTOR vec, float speed)
 {
-	position += VNorm(vec) * speed;
+	position_ += VNorm(vec) * speed;
 }
 
 MATRIX Object3D::ToMATRIX(FLOAT3 pos, FLOAT3 rot)
@@ -103,19 +128,19 @@ VECTOR Object3D::Lerp3D(VECTOR& start, VECTOR& goal, float percent)
 
 VECTOR Object3D::CalculateModelSize()
 {
-	if (hModel <= 0) {
+	if (hModel_ <= 0) {
 		return {0,0,0};
 	}
 	
 	VECTOR overallMin = { FLT_MAX,FLT_MAX,FLT_MAX };
 	VECTOR overallMax = { -FLT_MAX,-FLT_MAX,-FLT_MAX };
 
-	VECTOR scale = MV1GetScale(hModel);
-	int meshCount = MV1GetMeshNum(hModel);
+	VECTOR scale = MV1GetScale(hModel_);
+	int meshCount = MV1GetMeshNum(hModel_);
 
 	for (int i = 0;i < meshCount;i++) {
-		VECTOR minV = MV1GetMeshMinPosition(hModel, i);
-		VECTOR maxV = MV1GetMeshMaxPosition(hModel, i);
+		VECTOR minV = MV1GetMeshMinPosition(hModel_, i);
+		VECTOR maxV = MV1GetMeshMaxPosition(hModel_, i);
 
 		if (minV.x < overallMin.x) overallMin.x = minV.x;
 		if (minV.y < overallMin.y) overallMin.y = minV.y;

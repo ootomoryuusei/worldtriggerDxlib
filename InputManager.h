@@ -17,9 +17,13 @@ public:
 	void Initialize() override;
 	void Update() override;
 
+	void CollectRawEvents();
+	void DoHitTest();
+	void DispatchEvents();
 private:
 	Keyboard* keyboard_;
 	Mouse* mouse_;
+	vector<InputEventType>
 };
 
 

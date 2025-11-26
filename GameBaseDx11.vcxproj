@@ -186,6 +186,7 @@
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="rader.cpp" />
+    <ClCompile Include="RaycastManager.cpp" />
     <ClCompile Include="SelectIcons.cpp" />
     <ClCompile Include="SelectScene.cpp" />
     <ClCompile Include="SetIcons.cpp" />
@@ -210,7 +211,6 @@
     <ClCompile Include="TriggerSetUIFrame.cpp" />
     <ClCompile Include="TriggerSetUIFrames.cpp" />
     <ClCompile Include="TriggerSetUIs.cpp" />
-    <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitIcon.cpp" />
     <ClCompile Include="UnitIcons.cpp" />
@@ -280,6 +280,7 @@
     <ClInclude Include="Player1.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="rader.h" />
+    <ClInclude Include="RaycastManager.h" />
     <ClInclude Include="SelectIcons.h" />
     <ClInclude Include="SelectScene.h" />
     <ClInclude Include="SetIcons.h" />
@@ -307,7 +308,6 @@
     <ClInclude Include="TriggerSetUIs.h" />
     <ClInclude Include="TriggerStatusFactory.h" />
     <ClInclude Include="TypedGroup.h" />
-    <ClInclude Include="UIManager.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitIcon.h" />
     <ClInclude Include="UnitIcons.h" />

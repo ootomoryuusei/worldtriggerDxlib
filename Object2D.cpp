@@ -9,7 +9,7 @@
 UIRaycaster* Object2D::s_uiRaycaster = nullptr;
 
 Object2D::Object2D(GameObject* parent, const std::string& name)
-    : GameObject(parent, name), object2DName_(name)
+    : GameObject(parent, name)
 {
 }
 
@@ -20,7 +20,7 @@ Object2D::~Object2D()
 void Object2D::Initialize()
 {
     GameObject::SetInitialized();
-    // register to global UIRaycaster (create if missing)
+
     RegisterToRaycaster();
 }
 
@@ -67,9 +67,13 @@ void Object2D::Draw()
     DrawRotaGraph2F((int)drawX, (int)drawY, pivot_.x, pivot_.y, 1.0f, angle_, handle, TRUE);
 }
 
-void Object2D::LoadSprite(const std::string& filePath)
+void Object2D::LoadSprite(const std::string& _filePath)
 {
-    fileName_ = filePath;
+    fileName_ = _filePath;
+    hModel_ = LoadGraph(fileName_.c_str());
+    assert(hModel_ >= 0);
+    GetGraphSize(hModel_, &graphSize_.x, &graphSize_.y);
+    graphSizeF_ = { (float)graphSize_.x,(float)graphSize_.y };
 }
 
 XMFLOAT2 Object2D::ScreenToLocal(const XMFLOAT2& screenPos) const

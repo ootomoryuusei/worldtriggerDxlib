@@ -33,19 +33,6 @@ struct MYTRIGGER {
 	TRIGGERS myTrigger[2];
 };
 
-struct SIZE_2D {
-	int x, y, halfX, halfY;
-};
-
-struct SIZE_F_2D {
-	float x, y;
-	void set(float _x, float _y) {
-		x = x; y = _y;
-	}
-	float halfX() const { return x / 2; }
-	float halfY() const { return y / 2; }
-};
-
 struct SIZE_F_3D {
 	float x, y, z;
 	void set(float _x, float _y, float _z) {
@@ -201,31 +188,43 @@ inline VECTOR operator *(const VECTOR& a, float sc) {
 /// GameObjectを継承して3Dモデルに必要な変数と描画をする基底クラス
 /// </summary>
 class Object3D : public GameObject {
+protected:
+	int hModel_;  // モデルハンドル
+	VECTOR position_; // 座標
+	VECTOR rotation_; // 回転
+	VECTOR scale_; // スケール
+	VECTOR size_; // サイズ
+	MATRIX matrix_; //　行列
+	/*STEP step_;*/
 public:
 	Object3D(GameObject* parent);
 	Object3D(GameObject* parent,const std::string& name);
 	virtual ~Object3D();
 
-	/// <summary>
-	/// 3Dモデルの描画を行う
-	/// </summary>
+	virtual void Initialize() override;
+	virtual void Update() override;
 	virtual void Draw() override;
+	virtual void Release() override;
+
+	void LoadModel(const string& path);
+
+	bool Raycast(const VECTOR& rayOrigin, const VECTOR& rayDir, float& outDist);
 
 	VECTOR ToTarget(VECTOR targetPos) {
-		return targetPos - position;
+		return targetPos - position_;
 	}
 
 	VECTOR FrontVec() {
-		return VGet(0, 0, 1) * MGetRotY(rotation.y);
+		return VGet(0, 0, 1) * MGetRotY(position_.y);
 	}
 
 	VECTOR RightVec() {
-		return VGet(1, 0, 0) * MGetRotY(rotation.y);
+		return VGet(1, 0, 0) * MGetRotY(position_.y);
 	}
 
-	VECTOR GetPosition() { return position; }
+	VECTOR GetPosition() { return position_; }
 
-	VECTOR GetRotation() { return rotation; }
+	VECTOR GetRotation() { return rotation_; }
 
 	// 自分の正面か？
 	bool InFront(VECTOR pos, float range);
@@ -246,20 +245,13 @@ public:
 
 	VECTOR Lerp3D(VECTOR& start, VECTOR& goal, float percent);
 
-	void SetStep(STEP _step) { step_ = _step; }
-	int GetStep() { return step_; }
+	/*void SetStep(STEP _step) { step_ = _step; }
+	int GetStep() { return step_; }*/
 
-	VECTOR Get3DPosition() { return position; }
-	void Set3DPosition(VECTOR _position) { position = _position; }
+	VECTOR Get3DPosition() { return position_; }
+	void Set3DPosition(VECTOR _position) { position_ = _position; }
 
 	VECTOR CalculateModelSize();
 
-	VECTOR GetModelSize() { return size; }
-protected:
-	int hModel;  // モデルデータ
-	VECTOR position; // 座標
-	VECTOR rotation; // 回転
-	MATRIX matrix; //　行列
-	VECTOR size; // サイズ
-	STEP step_; 
+	VECTOR GetModelSize() { return size_; }
 };
