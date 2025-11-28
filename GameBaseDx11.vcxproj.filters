@@ -65,6 +65,9 @@
     <Filter Include="BaseObject">
       <UniqueIdentifier>{9a42c05f-73b1-4fca-9249-1c910b4142ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Device">
+      <UniqueIdentifier>{4ece9f60-6a24-45f2-a674-e2d68736cb0e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\GameObject.cpp">
@@ -293,12 +296,6 @@
     <ClCompile Include="InputComponent.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Keyboard.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Mouse.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Object2D.cpp">
       <Filter>BaseObject</Filter>
     </ClCompile>
@@ -307,6 +304,12 @@
     </ClCompile>
     <ClCompile Include="RaycastManager.cpp">
       <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>Device</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -582,12 +585,6 @@
     <ClInclude Include="InputEvents.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Keyboard.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Mouse.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="HitInfo.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -602,6 +599,12 @@
     </ClInclude>
     <ClInclude Include="RaycastManager.h">
       <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>Device</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

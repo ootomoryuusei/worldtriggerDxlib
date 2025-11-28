@@ -9,8 +9,8 @@ enum HitTargetType {
 
 struct HitInfo {
 	HitTargetType type = HitTargetType::NONE;
-	void* target = nullptr; 
-	float distance = 0.0f;
+	void* target = nullptr;  
+	float distance = 0.0f; 
 
 	bool IsHit() const { return type != HitTargetType::NONE; }
 };

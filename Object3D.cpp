@@ -58,10 +58,15 @@ bool Object3D::Raycast(const VECTOR& rayOrigin, const VECTOR& rayDir, float& out
 {
 	if (hModel_ < 0) return false;
 
-	MV1_COLL_RESULT_POLY res = MV1CollCheck_Line(hModel_, -1, rayOrigin, rayDir);
+	VECTOR rayEnd = rayOrigin + rayDir * 10000.0f; // 適当な長さのレイを作成
+
+	MV1_COLL_RESULT_POLY res = MV1CollCheck_Line(hModel_,-1,rayOrigin, rayEnd);
+
 	if (res.HitFlag) {
-		outDist = res.HitPosition
+		outDist = res.HitPosition.z - rayOrigin.z; // レイの始点からの距離を計算
+		return true;
 	}
+	return false;
 }
 
 bool Object3D::InFront(VECTOR pos, float range)

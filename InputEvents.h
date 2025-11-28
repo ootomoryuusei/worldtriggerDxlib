@@ -1,18 +1,14 @@
 #pragma once
 #include<functional>
 #include<DirectXMath.h>
+#include<variant>
 
 using namespace DirectX;
 using std::function;
+using std::variant;
 typedef int KeyCode;
 
-enum InputEventType {
-	NONE,
-	MOUSE_DOWN,
-	MOUSE_UP,
-	MOUSE_MOVE,
-	MOUSE_CLICK
-};
+using InputEvents = variant<MouseClickEvent, MouseDragEvent, MouseWheelEvent, KeyEvent>;
 
 enum MouseButton {
 	LEFT,

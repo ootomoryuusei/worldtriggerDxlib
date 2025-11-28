@@ -1,21 +1,32 @@
 #pragma once
 #include"DxLib.h"
 #include"Object3D.h"
+#include"HitInfo.h"
 #include<vector>
 
 using std::vector;
 
-class RaycastHit {
-public:
-	Object3D* object = nullptr; //ヒットオブジェクト
-	float distance = 0.0f; //距離
-};
-
 class RaycastManager
 {
 public:
-	static void CreateRayFromMouse(VECTOR& outOrigin, VECTOR& outDir);
+	vector<Object3D*> objects_; // 3Dオブジェクトリスト
 
-	static bool RaycastFromMouse(const vector<Object3D*>& objects, RaycastHit& hit);
+	HitInfo Raycast(const VECTOR& origin,const VECTOR& dir) {
+		HitInfo top_hit;
+		float top_dist = 1e9f;
+
+		for (auto& obj : objects_) {
+			float dist;
+			if (obj->Raycast(origin, dir, dist)) {
+				if (dist < top_dist) {
+					top_dist = dist;
+					top_hit.type = HitTargetType::OBJECT_3D;
+					top_hit.target = obj;
+					top_hit.distance = dist;
+				}
+			}
+		}
+		return top_hit;
+	}
 };
 
