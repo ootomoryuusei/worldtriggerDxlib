@@ -5,9 +5,9 @@
 #include "InputComponent.h"
 #include<functional>
 #include<variant>
+#include<type_traits>
 
 using std::function;
-using std::visit;
 
 class InputManager :
     public GameObject
@@ -19,20 +19,17 @@ public:
 	void Initialize() override;
 	void Update() override;
 
-	void AddEvent(const InputEvents& event) {
+	void AddEvent(const DeviceEvents& event) {
 		events_.push_back(event);
 	}
 
-	void EventDispatch(GameObject* obj, const InputEvents& events) {
-		visit([&](auto&& event) {
-			obj->DeviceEvent(event)
-			}, events);
+	void EventDispatch(GameObject* obj, const DeviceEvents& events) {
+		std::visit([&](auto const& event) {obj->DeviceEvent(event);},events);
 	}
-
 private:
 	Keyboard* keyboard_;
 	Mouse* mouse_;
-	vector<InputEvents> events_;
+	vector<DeviceEvents> events_;
 };
 
 

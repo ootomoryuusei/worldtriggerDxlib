@@ -1,5 +1,5 @@
 #pragma once
-#include "Object3D.h"
+#include "Object2D.h"
 #include<vector>
 
 using std::vector;
@@ -11,7 +11,7 @@ struct MOVEMENT {
 };
 
 class Icon :
-    public Object3D
+    public Object2D
 {
 protected:
     SIZE_F_2D graphSizeF_; //アイコンの画像サイズ(float)

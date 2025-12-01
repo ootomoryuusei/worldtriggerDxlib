@@ -186,7 +186,6 @@
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="rader.cpp" />
-    <ClCompile Include="RaycastManager.cpp" />
     <ClCompile Include="SelectIcons.cpp" />
     <ClCompile Include="SelectScene.cpp" />
     <ClCompile Include="SetIcons.cpp" />

@@ -44,7 +44,7 @@ public:
 
     virtual bool IsInMousePoint(const XMFLOAT2& mpos) const;
 
-    virtual void OnPress(const XMFLOAT2& pos) {}
+   /* virtual void OnPress(const XMFLOAT2& pos) {}
     virtual void OnRelease(const XMFLOAT2& pos) {}
     virtual void OnClick(const XMFLOAT2& pos) {}
     virtual void OnDoubleClick(const XMFLOAT2& pos) {}
@@ -62,7 +62,7 @@ public:
     std::function<void(const XMFLOAT2&, const XMFLOAT2&)> onDrag;
     std::function<void(const XMFLOAT2&)> onDragEnd;
     std::function<void()> onHoverEnter;
-    std::function<void()> onHoverExit;
+    std::function<void()> onHoverExit;*/
 
     void SetSelecting(bool s) { selecting_ = s; }
     bool GetSelecting() const { return selecting_; }

@@ -9,7 +9,7 @@ public:
     InputComponent(GameObject* parent);
     virtual ~InputComponent(){}
     
-    virtual void onInputEvent(InputEventType type) = 0;
+    virtual void onInputEvent(DeviceEvents type) = 0;
 private:
 
 };

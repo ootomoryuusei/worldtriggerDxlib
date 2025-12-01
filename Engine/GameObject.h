@@ -7,7 +7,7 @@
 #include <DxLib.h>
 #include "time.h"
 #include<unordered_set>
-
+#include"../InputEvents.h"
 class GroupBase;
 
 using std::unordered_set;
@@ -242,14 +242,17 @@ public:
 	/// <param name="_distance"> 短形の幅(x)と高さ(y) </param>
 	/// <returns></returns>
 	bool PointInBox(XMFLOAT2 point, XMFLOAT2 _leftUp, XMFLOAT2 _distance);
+
+	virtual void DeviceEvent(const MouseClickEvent& event){}
+	virtual void DeviceEvent(const MouseDragEvent& event){}
+	virtual void DeviceEvent(const MouseWheelEvent& event) {}
+	virtual void DeviceEvent(const KeyEvent& event) {}
 private:
 
 	//オブジェクト削除（再帰）
 	//引数：obj　削除するオブジェクト
 	void KillObjectSub(GameObject* obj);
 
-
-private:
 	//フラグ
 	struct OBJECT_STATE
 	{

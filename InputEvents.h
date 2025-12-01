@@ -2,13 +2,12 @@
 #include<functional>
 #include<DirectXMath.h>
 #include<variant>
+#include<type_traits>
 
 using namespace DirectX;
 using std::function;
 using std::variant;
 typedef int KeyCode;
-
-using InputEvents = variant<MouseClickEvent, MouseDragEvent, MouseWheelEvent, KeyEvent>;
 
 enum MouseButton {
 	LEFT,
@@ -40,3 +39,5 @@ struct KeyEvent
 {
 	KeyCode key;
 };
+
+using DeviceEvents = variant<MouseClickEvent, MouseDragEvent, MouseWheelEvent, KeyEvent>;
