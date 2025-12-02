@@ -10,8 +10,8 @@ class CharacterSetUIFrame :
 public:
     CharacterSetUIFrame(GameObject* parent);
     ~CharacterSetUIFrame();
+	void Initialize() override;
     void Update() override;
-    void Draw() override;
 
     void SetIsSet(bool _isSet) { isSet_ = _isSet; }
     bool GetIsSet() { return isSet_; }

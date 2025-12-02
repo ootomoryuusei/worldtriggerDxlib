@@ -2,12 +2,12 @@
 #include "Engine/GameObject.h"
 #include"Keyboard.h"
 #include"Mouse.h"
-#include "InputComponent.h"
 #include<functional>
 #include<variant>
 #include<type_traits>
 
 using std::function;
+using std::visit;
 
 class InputManager :
     public GameObject
@@ -24,7 +24,7 @@ public:
 	}
 
 	void EventDispatch(GameObject* obj, const DeviceEvents& events) {
-		std::visit([&](auto const& event) {obj->DeviceEvent(event);},events);
+		visit([&](auto const& event) {obj->DeviceEvent(event);},events);
 	}
 private:
 	Keyboard* keyboard_;

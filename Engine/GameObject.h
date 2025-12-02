@@ -213,16 +213,16 @@ public:
 	XMFLOAT3 GetWorldScale() { return Transform::Float3Add(GetParent()->transform_.scale_, transform_.scale_); }
 	void SetPosition(XMFLOAT3 position) { transform_.position_ = position; }
 	void SetPosition(float x, float y, float z) { SetPosition(XMFLOAT3( x, y, z )); }
-	/*void SetPosition(VECTOR position) { SetPosition(position.x,position.y,position.z); }*/
+	void SetPosition(VECTOR position) { SetPosition(position.x,position.y,position.z); }
 	void SetRotate(XMFLOAT3 rotate) { transform_.rotate_ = rotate; }
 	void SetRotate(float x, float y, float z) { SetRotate(XMFLOAT3( x, y, z )); }
-	/*void SetRotate(VECTOR rotate) { SetRotate(rotate.x,rotate.y,rotate.z ); }*/
+	void SetRotate(VECTOR rotate) { SetRotate(rotate.x,rotate.y,rotate.z ); }
 	void SetRotateX(float x) { SetRotate(x, transform_.rotate_.y, transform_.rotate_.z); }
 	void SetRotateY(float y) { SetRotate(transform_.rotate_.x, y, transform_.rotate_.z); }
 	void SetRotateZ(float z) { SetRotate(transform_.rotate_.x, transform_.rotate_.y, z); }
 	void SetScale(XMFLOAT3 scale) { transform_.scale_ = scale; }
 	void SetScale(float x, float y, float z) { SetScale(XMFLOAT3(x, y, z)); }
-	/*void SetScale(VECTOR scale) { SetScale(scale.x, scale.y, scale.z); }*/
+	void SetScale(VECTOR scale) { SetScale(scale.x, scale.y, scale.z); }
 
 	void AddGroup(GroupBase* group) {
 		groups_.insert(group);

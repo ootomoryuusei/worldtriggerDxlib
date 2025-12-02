@@ -3,8 +3,12 @@
 #include "Object2D.h"
 #include "HitInfo.h"
 
-class UIRaycaster {
+using std::vector;
+
+class Raycaster2D {
 public:
+    vector<Object2D*> elements_; // UI—v‘f
+
     // UI ‚ğ“o˜^
     void Register(Object2D* ui) {
         elements_.push_back(ui);
@@ -13,7 +17,7 @@ public:
     // UI ‚ğíœ
     void Unregister(Object2D* ui) {
         elements_.erase(
-            std::remove(elements_.begin(), elements_.end(), ui),
+            remove(elements_.begin(), elements_.end(), ui),
             elements_.end()
         );
     }
@@ -42,6 +46,4 @@ public:
         }
         return best;
     }
-private:
-    std::vector<Object2D*> elements_; // UI—v‘f
 };

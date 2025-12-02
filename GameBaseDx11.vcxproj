@@ -166,7 +166,6 @@
     <ClCompile Include="ImGui\imgui_ja_gryph_ranges.cpp" />
     <ClCompile Include="ImGui\imgui_tables.cpp" />
     <ClCompile Include="ImGui\imgui_widgets.cpp" />
-    <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Kogetsu.cpp" />
@@ -213,6 +212,7 @@
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitIcon.cpp" />
     <ClCompile Include="UnitIcons.cpp" />
+    <ClCompile Include="RaycastManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Amatori_Chika.h" />
@@ -259,7 +259,6 @@
     <ClInclude Include="ImGui\imstb_rectpack.h" />
     <ClInclude Include="ImGui\imstb_textedit.h" />
     <ClInclude Include="ImGui\imstb_truetype.h" />
-    <ClInclude Include="InputComponent.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Kogetsu.h" />
@@ -315,7 +314,9 @@
     <ClInclude Include="GroupManager.h" />
     <ClInclude Include="InputEvents.h" />
     <ClInclude Include="HitInfo.h" />
-    <ClInclude Include="UIRaycaster.h" />
+    <ClInclude Include="Raycaster2D.h" />
+    <ClInclude Include="GameInfo.h" />
+    <ClInclude Include="Raycaster3D.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc" />

@@ -40,4 +40,4 @@ struct KeyEvent
 	KeyCode key;
 };
 
-using DeviceEvents = variant<MouseClickEvent, MouseDragEvent, MouseWheelEvent, KeyEvent>;
+using DeviceEvents = variant<MouseClickEvent,MouseDragEvent, MouseWheelEvent, KeyEvent>;

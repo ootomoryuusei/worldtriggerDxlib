@@ -50,6 +50,9 @@ void Object2D::Release()
 
 void Object2D::Update()
 {
+    position_ = { transform_.position_.x,transform_.position_.y };
+    scale_ = { transform_.rotate_.x,transform_.rotate_.y };
+
 }
 
 void Object2D::Draw()
@@ -61,8 +64,8 @@ void Object2D::Draw()
 
     float w = graphSizeF_.x * scale_.x;
     float h = graphSizeF_.y * scale_.y;
-    float drawX = graphPos_.x - pivot_.x * w;
-    float drawY = graphPos_.y - pivot_.y * h;
+    float drawX = position_.x - pivot_.x * w;
+    float drawY = position_.y - pivot_.y * h;
 
     DrawRotaGraph2F((int)drawX, (int)drawY, pivot_.x, pivot_.y, 1.0f, angle_, handle, TRUE);
 }
@@ -80,8 +83,8 @@ XMFLOAT2 Object2D::ScreenToLocal(const XMFLOAT2& screenPos) const
 {
     float w = graphSizeF_.x * scale_.x;
     float h = graphSizeF_.y * scale_.y;
-    float cx = graphPos_.x; 
-    float cy = graphPos_.y;
+    float cx = position_.x; 
+    float cy = position_.y;
 
     float dx = screenPos.x - cx;
     float dy = screenPos.y - cy;
@@ -105,8 +108,8 @@ bool Object2D::IsInMousePoint(const XMFLOAT2& mpos) const
     if (fabsf(angle_) < 1e-5f) {
         float w = graphSizeF_.x * scale_.x;
         float h = graphSizeF_.y * scale_.y;
-        float left = graphPos_.x - pivot_.x * w;
-        float top = graphPos_.y - pivot_.y * h;
+        float left = position_.x - pivot_.x * w;
+        float top = position_.y - pivot_.y * h;
         if (mpos.x >= left && mpos.x <= left + w && mpos.y >= top && mpos.y <= top + h) return true;
         return false;
     }

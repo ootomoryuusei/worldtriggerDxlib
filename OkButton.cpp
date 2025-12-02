@@ -12,8 +12,8 @@ using std::ios;
 
 OkButton::OkButton(GameObject* parent) : Icon(parent)
 {
-	Load("Assets//Image//OkButton.png");
-	position = { 1280 / 2 - GetGraphSizeF_2D().halfX,600,0 };
+	LoadSprite("Assets//Image//OkButton.png");
+	transform_.position_ = { 1280 / 2 - graphSizeF_.halfX(),600,0};
 
 	// ファイルを開く（上書きモード）
 	std::ofstream file("Assets//Character//SelectCharacter.csv", std::ios::trunc);

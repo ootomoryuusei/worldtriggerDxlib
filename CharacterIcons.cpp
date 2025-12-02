@@ -18,10 +18,10 @@ CharacterIcons::CharacterIcons(GameObject* parent) : Icon(parent)
 		std::string flPath;
 		flPath = DLC + graphName;
 		CharacterIcon* pCIcon = Instantiate<CharacterIcon>(this);
-		pCIcon->Load(flPath);
+		pCIcon->LoadSprite(flPath);
 		SIZE_F_2D IconSize = pCIcon->GetGraphSizeF_2D();
 		VECTOR graphPos = { 0,300 + IconSize.y * (y - 1) ,0 };
-		pCIcon->Set3DPosition(graphPos);
+		pCIcon->SetPosition(graphPos);
 		pCIcon->SetCreateNum(y);
 		pCIcon->SetIconName(csv_->GetString(0, y));
 		pCIcons_.push_back(pCIcon);
@@ -34,18 +34,18 @@ CharacterIcons::~CharacterIcons()
 
 void CharacterIcons::Update()
 {
-	Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
-	XMFLOAT2 mousePos = pMouse->GetMousePos();
+	//Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
+	//XMFLOAT2 mousePos = pMouse->GetMousePos();
 
-	// 1つだけ選択処理
-	for (auto& itr : pCIcons_) {
-		XMFLOAT2 leftUp = { itr->Get3DPosition().x,itr->Get3DPosition().y };
-		XMFLOAT2 distance = { itr->GetGraphSizeF_2D().x,itr->GetGraphSizeF_2D().y };
-		if (PointInBox(mousePos, leftUp, distance)) {
-			itr->SetSelecting(true); // 最初に見つけた1つだけ選択
-			break; // 他の円弧は無視（同時選択防止）
-		}
-	}
+	//// 1つだけ選択処理
+	//for (auto& itr : pCIcons_) {
+	//	XMFLOAT2 leftUp = { itr->GetPosition().x,itr->GetPosition().y };
+	//	XMFLOAT2 distance = { itr->GetGraphSizeF_2D().x,itr->GetGraphSizeF_2D().y };
+	//	if (PointInBox(mousePos, leftUp, distance)) {
+	//		itr->SetSelecting(true); // 最初に見つけた1つだけ選択
+	//		break; // 他の円弧は無視（同時選択防止）
+	//	}
+	//}
 }
 
 void CharacterIcons::Draw()

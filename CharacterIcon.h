@@ -19,7 +19,6 @@ public:
     ~CharacterIcon();
     void Initialize() override;
     void Update() override;
-    void Draw() override;
 
     const auto& GetpData()const { return pData_; }
 private:

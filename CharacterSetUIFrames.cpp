@@ -6,7 +6,7 @@ CharacterSetUIFrames::CharacterSetUIFrames(GameObject* parent)
 	for (int x = 0; x < MAX_SELECT_CHARACTER; x++) { //CharacerSetのフレームの位置決めとButtonの位置決め
 		CharacterSetUIFrame* pCsuif = Instantiate<CharacterSetUIFrame>(this);
 		VECTOR graphPos = { 780.0f + (pCsuif->GetGraphSizeF_2D().x + 30.0f) * x, 500 ,0 };
-		pCsuif->Set3DPosition(graphPos);
+		pCsuif->SetPosition(graphPos);
 		pCSUIFrames_.push_back(pCsuif);
 	/*	TriggerSetButton* pTsb = Instantiate<TriggerSetButton>(this);
 		VECTOR ButtonPos = { graphPos.x + 10,graphPos.y + pCsuif->GetGraphSizeF_2D().y + 10 };

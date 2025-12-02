@@ -9,7 +9,7 @@ AutoRegister<Icon, IconFactory> CharacterIcon::register_("CharacterIcon");
 
 CharacterIcon::CharacterIcon(GameObject* parent) : Icon(parent)
 {
-	position = { 0,0,0 };
+	transform_.position_ = { 0,0,0 };
 	createNum_ = -1;
 
 	createUI = false;
@@ -58,30 +58,25 @@ void CharacterIcon::Update()
 		//	}
 		//	prevMousePos_ = mousePos;
 		//}
-		Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
-		XMFLOAT2 mousePos = pMouse->GetMousePos();
-		if (IsInMousePoint(mousePos)) { 
-			if (pMouse->IsDoubleClicked(Mouse::LEFT)) { //範囲内をダブルクリックしたらセット用UI生成
-				if (!createUI && pT_SetUI_ == nullptr && pT_Icons_ == nullptr) { 
-					pT_SetUI_ = Instantiate<TriggerSetUI>(this);
-					pT_Icons_ = Instantiate<TriggerIcons>(this);
-					pT_Icons_->SetpCharacterIcon_(this);
-					createUI = true;
-				}
-			}
-		}else if (pMouse->IsClicked(Mouse::LEFT)) { //範囲外をクリックしたら消す
-			if (createUI) { 
-				pT_SetUI_->KillMe();
-				pT_Icons_->KillMe();
-				createUI = false;
-				pT_SetUI_ = nullptr;
-				pT_Icons_ = nullptr;
-			}			
-		}
-}
-
-void CharacterIcon::Draw()
-{
-	DrawGraph(position.x, position.y, hModel, TRUE);
+		//Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
+		//XMFLOAT2 mousePos = pMouse->GetMousePos();
+		//if (IsInMousePoint(mousePos)) { 
+		//	if (pMouse->IsDoubleClicked(Mouse::LEFT)) { //範囲内をダブルクリックしたらセット用UI生成
+		//		if (!createUI && pT_SetUI_ == nullptr && pT_Icons_ == nullptr) { 
+		//			pT_SetUI_ = Instantiate<TriggerSetUI>(this);
+		//			pT_Icons_ = Instantiate<TriggerIcons>(this);
+		//			pT_Icons_->SetpCharacterIcon_(this);
+		//			createUI = true;
+		//		}
+		//	}
+		//}else if (pMouse->IsClicked(Mouse::LEFT)) { //範囲外をクリックしたら消す
+		//	if (createUI) { 
+		//		pT_SetUI_->KillMe();
+		//		pT_Icons_->KillMe();
+		//		createUI = false;
+		//		pT_SetUI_ = nullptr;
+		//		pT_Icons_ = nullptr;
+		//	}			
+		//}
 }
 

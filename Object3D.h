@@ -1,37 +1,13 @@
 #pragma once
 // GameObject→Object3D→Player/Groundの関係にする
 #include "Engine/GameObject.h"
+#include"GameInfo.h"
 #include<array>
 #include<unordered_map>
 
 using std::string;
 using std::array;
 using std::unordered_map;
-
-const int MAX_SELECT_CHARACTER = 3;
-const int MAX_TRIGGER_HANDS = 2;
-const int MAX_CAN_SET_TRIGGER = 4;
-
-struct ARC_DATA {
-	float percent;
-	float startPercent;
-	float angle;
-	float rangeSize;
-};
-
-struct TRIGGER {
-	string triggerName; //トリガー名
-	bool IsSelected; //選択されているかどうか
-	ARC_DATA arc; //トリガーの範囲(円弧のデータ)
-};
-
-struct TRIGGERS {
-	TRIGGER trigger[4];
-};
-
-struct MYTRIGGER {
-	TRIGGERS myTrigger[2];
-};
 
 struct SIZE_F_3D {
 	float x, y, z;
@@ -43,105 +19,19 @@ struct SIZE_F_3D {
 	float halfZ() const{ return z / 2; }
 };
 
-struct TILEDATA {
-	VECTOR pos;
-	VECTOR offset;
-	int num;
-};
-
-enum STATUS {
-	MOVE = 0,
-	TRION,
-	ATTACK,
-	AVOIDANCE,
-	DEFENCE,
-	SUPPORT,
-	TECHNIQUE,
-	STATUS_MAX
-};
-struct CHARACTER_STATUS
-{
-	int status[STATUS_MAX];
-};
-
-enum STEP {
-	FIRST = 0,
-	SECONDE,
-	THIRD,
-	STEP_MAX
-};
-
-
-enum HANDS {
-	RIGHT = 0,
-	LEFT,
-	MAX
-};
-
-enum WEAPON {
-	FREE,
-	KOGETSU,
-	SHIELD,
-	ASTEROID,
-	EAGLET,
-	WEAPON_MAX
-};
-
-/// <summary>
-/// 
-/// </summary>
-/// <param name="_handle"> ハンドル </param>
-/// <param name="type"> graph : 0 , model : 1</param>
-inline void DEL(int _handle ,int type) {
-	switch (type) {
-	case 0:
-	{
-		if (_handle > 0) {
-			DeleteGraph(_handle);
-			_handle = -1;
-		}
-		break;
-	}
-	case 1: 
-	{
-		if (_handle > 0) {
-			MV1DeleteModel(_handle);
-			_handle = -1;
-		}
-		break;
-	}
-	default:
-		break;
+inline void DEL(int _handle) {
+	if (_handle > 0) {
+		MV1DeleteModel(_handle);
+		_handle = -1;
 	}
 }
 
-/// <summary>
-/// モデルがロードされていれば
-/// </summary>
-/// <param name="_handle"> ハンドル</param>
-/// <param name="_matrix"> マトリクス </param>
-/// <param name="type"> graph : 0 , model : 1 </param>
-inline void IsLoaded(int _handle, MATRIX _matrix , int type = 1) {
-	switch (type) {
-	case 0:
-	{
-		if (_handle > 0) {
-		}
-		break;
-	}
-	case 1:
-	{
-		if (_handle > 0) {
-			MV1SetMatrix(_handle,_matrix);
-			MV1DrawModel(_handle);
-		}
-		break;
-	}
-	default:
-		break;
+inline void IsLoaded(int _handle, MATRIX _matrix) {
+	if (_handle > 0) {
+		MV1SetMatrix(_handle, _matrix);
+		MV1DrawModel(_handle);
 	}
 }
-
 
 /// <summary>
 /// 度に変換
@@ -247,9 +137,6 @@ public:
 
 	/*void SetStep(STEP _step) { step_ = _step; }
 	int GetStep() { return step_; }*/
-
-	VECTOR Get3DPosition() { return position_; }
-	void Set3DPosition(VECTOR _position) { position_ = _position; }
 
 	VECTOR CalculateModelSize();
 

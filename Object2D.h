@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine/GameObject.h" 
+#include"GameInfo.h"
 #include <DirectXMath.h>
 #include <string>
 #include <functional>
@@ -42,6 +43,21 @@ public:
     void LoadSprite(const string& filePath);
     void SetScale(float sx, float sy) { scale_ = { sx, sy }; }
 
+    string GetFileName() { return fileName_; }
+    SIZE_F_2D GetGraphSizeF_2D() { return graphSizeF_; }
+    SIZE_2D GetGraphSize_2D() { return graphSize_; }
+
+    void SetSelecting(bool _selecting) { selecting_ = _selecting; }
+    bool GetSelecting() { return selecting_; }
+
+    void SetCreateNum(int _createNum) { createNum_ = _createNum; }
+    int GetCreateNum() { return createNum_; }
+
+    void SetIconName(string _iconName) { iconName_ = _iconName; }
+    string GetIconName() { return iconName_; }
+
+    void SetFontHandle(int _fontHandle) { fontHandle_ = _fontHandle; }
+
     virtual bool IsInMousePoint(const XMFLOAT2& mpos) const;
 
    /* virtual void OnPress(const XMFLOAT2& pos) {}
@@ -63,20 +79,16 @@ public:
     std::function<void(const XMFLOAT2&)> onDragEnd;
     std::function<void()> onHoverEnter;
     std::function<void()> onHoverExit;*/
-
-    void SetSelecting(bool s) { selecting_ = s; }
-    bool GetSelecting() const { return selecting_; }
-
 protected:
     int hModel_; //モデルハンドル
     SIZE_F_2D graphSizeF_; //アイコンの画像サイズ(float)
     SIZE_2D graphSize_; //アイコンの画像サイズ(int)
-    XMFLOAT2 graphPos_; //アイコン座標
+    XMFLOAT2 position_; //座標
+    XMFLOAT2 scale_; //スケール
     string fileName_; //ファイル名
     string iconName_; //アイコン名
     bool selecting_; //セレクトされているかどうか
     int createNum_; //作成番号
-    VECTOR scale_; //スケール
     int fontHandle_; //フォントハンドル
     XMFLOAT2 pivot_; //回転軸
     float angle_; //回転

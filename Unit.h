@@ -13,5 +13,6 @@ private:
 	XMFLOAT2 boxPos[2];
 	XMFLOAT2 boxSize[2];
 
+	void DeviceEvent(const MouseClickEvent& event) override;
 };
 

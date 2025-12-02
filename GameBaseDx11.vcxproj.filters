@@ -293,23 +293,20 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="InputComponent.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Object2D.cpp">
       <Filter>BaseObject</Filter>
     </ClCompile>
     <ClCompile Include="Object3D.cpp">
       <Filter>BaseObject</Filter>
     </ClCompile>
-    <ClCompile Include="RaycastManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Keyboard.cpp">
       <Filter>Device</Filter>
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
       <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="RaycastManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -579,16 +576,13 @@
     <ClInclude Include="InputManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="InputComponent.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="InputEvents.h">
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="HitInfo.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="UIRaycaster.h">
+    <ClInclude Include="Raycaster2D.h">
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="Object2D.h">
@@ -605,6 +599,10 @@
     </ClInclude>
     <ClInclude Include="Mouse.h">
       <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="GameInfo.h" />
+    <ClInclude Include="Raycaster3D.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

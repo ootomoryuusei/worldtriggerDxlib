@@ -7,17 +7,17 @@
 
 Unit::Unit(GameObject* parent) : Icon(parent)
 {
-	Load("Assets//Image//unit.png");
+	LoadSprite("Assets//Image//unit.png");
 
-	position = { 700,450 };
+	transform_.position_ = { 700,450 ,0};
 
 	boxSize[0] = { 100 ,40 };
 	boxSize[1] = { graphSizeF_.x + 10,graphSizeF_.y + 10 };
 
-	boxPos[0] = { position.x + boxSize[0].x,position.y + boxSize[0].y };
-	boxPos[1] = { position.x, boxPos[0].y };
+	boxPos[0] = { transform_.position_.x + boxSize[0].x,transform_.position_.y + boxSize[0].y };
+	boxPos[1] = { transform_.position_.x, boxPos[0].y };
 
-	graphPos_ = { boxPos[1].x + 10 / 2, boxPos[1].y + 10 / 2 };
+	transform_.position_ = { boxPos[1].x + 10 / 2, boxPos[1].y + 10 / 2 ,0};
 
 	iconName_ = "出撃ユニット";
 }
@@ -52,18 +52,18 @@ void Unit::Initialize()
 		string DLC = "Assets//Image//CharacterIcon//selectCIcon//";
 		flPath = DLC + graphName;
 		CharacterIcon* pCIcon = Instantiate<CharacterIcon>(this);
-		pCIcon->Load(flPath);
+		pCIcon->LoadSprite(flPath);
 		auto& data = pCIcon->GetpData();
 		data->DefaultSetStatus(itr);
 		SIZE_F_2D g_pos = pCIcon->GetGraphSizeF_2D();
 		VECTOR graphPos = { 0,0,0 };
 		if (num % 2 == 0) {
-			graphPos = { graphPos_.x + g_pos.x * (num / 2),graphPos_.y + g_pos.y * 1 ,0 };
+			graphPos = { transform_.position_.x + g_pos.x * (num / 2),transform_.position_.y + g_pos.y * 1 ,0 };
 		}
 		else {
-			graphPos = { graphPos_.x + g_pos.x * (num / 2),graphPos_.y + g_pos.y * 0 ,0 };
+			graphPos = { transform_.position_.x + g_pos.x * (num / 2),transform_.position_.y + g_pos.y * 0 ,0 };
 		}
-		pCIcon->Set3DPosition(graphPos);
+		pCIcon->SetPosition(graphPos);
 		pCIcon->SetCreateNum(num);
 		MYTRIGGER myTrigger;
 		data->SelectSetMyTrigger(itr);
@@ -73,33 +73,39 @@ void Unit::Initialize()
 
 void Unit::Update()
 {
-	/*if (canVisible_) {
-		Mouse* pMouse = GetParent()->GetParent()->FindGameObject<Mouse>();
-		XMFLOAT2 mousePos = pMouse->GetMousePos();
-		XMFLOAT2 pos = { position.x,position.y };
-		XMFLOAT2 distance = {}
-		if (PointInBox(mousePos,pos,)) {
-
-		}
-	}*/
+	Icon::Update();
 }
 
 void Unit::Draw()
 {
 	//テキスト入り小box
-	XMFLOAT2 pos = { position.x,position.y };
+	XMFLOAT2 pos = { position_.x,position_.y };
 	DrawBoxAA(pos.x, pos.y, boxPos[0].x, boxPos[0].y, GetColor(0, 0, 0), TRUE);
 
 	//大box
 	DrawBoxAA(boxPos[1].x, boxPos[1].y, boxPos[1].x + boxSize[1].x, boxPos[1].y + boxSize[1].y
 		, GetColor(0, 0, 0), TRUE);
 
-	DrawGraph(graphPos_.x, graphPos_.y, hModel, TRUE);
+	Icon::Draw();
 
 	XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
 	XMFLOAT2 space = { (boxSize[0].x - strSize.x) / 2,(boxSize[0].y - strSize.y) / 2 };
-	VECTOR fontPos = { position.x + space.x, position.y + space.y,position.z };
+	VECTOR fontPos = { position_.x + space.x, position_.y + space.y,0 };
 	DrawStringToHandle(fontPos.x, fontPos.y, iconName_.c_str(),
 		GetColor(255, 255, 255), fontHandle_,GetColor(0,0,0));
+}
+
+void Unit::DeviceEvent(const MouseClickEvent& event)
+{
+	switch (event.button)
+	{
+	case RIGHT:
+		break;
+	case LEFT:
+		break;
+	case MIDDLE:
+	default:
+		break;
+	}
 }
 
