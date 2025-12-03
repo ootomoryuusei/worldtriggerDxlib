@@ -153,6 +153,7 @@
     <ClCompile Include="Engine\SceneManager.cpp" />
     <ClCompile Include="Engine\time.cpp" />
     <ClCompile Include="Engine\Transform.cpp" />
+    <ClCompile Include="FocusManager.cpp" />
     <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Icon.cpp" />
@@ -243,6 +244,7 @@
     <ClInclude Include="Engine\SceneManager.h" />
     <ClInclude Include="Engine\time.h" />
     <ClInclude Include="Engine\Transform.h" />
+    <ClInclude Include="FocusManager.h" />
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="GroupBase.h" />

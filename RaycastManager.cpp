@@ -16,6 +16,4 @@ void RaycastManager::Initialize()
 
 void RaycastManager::Update()
 {
-	raycaster2D_->Raycast();
-	raycaster3D_->Raycast();
 }
