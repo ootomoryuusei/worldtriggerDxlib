@@ -29,6 +29,9 @@ public:
 
 		for (auto& obj : objects_) {
 			float dist;
+
+			if (!obj->IsVisibled()) continue; //非表示ならスキップ
+
 			if (obj->Raycast(origin, dir, dist)) {
 				if (dist < top_dist) {
 					top_dist = dist;

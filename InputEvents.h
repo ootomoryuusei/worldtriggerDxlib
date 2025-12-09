@@ -16,28 +16,15 @@ enum MouseButton {
 	MOUSE_MAX
 };
 
-struct MouseClickEvent
-{
-	MouseButton button;
-	XMFLOAT2 position;
-};
-
-struct MouseDragEvent
-{
-	MouseButton button;
-	XMFLOAT2 start;
-	XMFLOAT2 current;
-	XMFLOAT2 delta;
-};
-
-struct MouseWheelEvent
-{
-	float delta;
-};
+struct ClickEvent{MouseButton button;XMFLOAT2 position;}; //マウスクリックイベント
+struct DoubleClickEvent { MouseButton button; XMFLOAT2 position; }; //マウスダブルクリックイベント;
+struct PressEvent { MouseButton button; XMFLOAT2 position; }; //マウスプレスイベント
+struct DragEvent { MouseButton button;XMFLOAT2 start;XMFLOAT2 current;XMFLOAT2 delta; }; //マウスドラッグイベント
+struct WheelEvent { float delta; }; //マウスホイールイベント
 
 struct KeyEvent
 {
 	KeyCode key;
 };
 
-using DeviceEvents = variant<MouseClickEvent,MouseDragEvent, MouseWheelEvent, KeyEvent>;
+using DeviceEvents = variant<ClickEvent,DoubleClickEvent,PressEvent,DragEvent, WheelEvent, KeyEvent>;

@@ -32,7 +32,7 @@ public:
 
         for (auto* element : elements_) {
 
-            if (!element->IsVisibled()) continue;
+            if (!element->IsVisibled()) continue; //非表示ならスキップ
 
             if (element->IsInMousePoint({ mx, my })) {
 

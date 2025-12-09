@@ -15,14 +15,14 @@ public:
     void Initialize() override;
     void Update() override;
 
-    function<void(const MouseClickEvent&)> OnClick;
-    function<void(const MouseClickEvent&)> OnDoubleClick;
-    function<void(const MouseClickEvent&)> OnPress;
-    function<void(const MouseClickEvent&)> OnRelease;
-    function<void(const MouseDragEvent&)> OnDrag;
-    function<void(const MouseDragEvent&)> OnDragStart;
-    function<void(const MouseDragEvent&)> OnDragEnd;
-    function<void(const MouseWheelEvent&)> OnWheel;
+    function<void(const ClickEvent&)> OnClick;
+    function<void(const DoubleClickEvent&)> OnDoubleClick;
+    function<void(const PressEvent&)> OnPress;
+    function<void(const PressEvent&)> OnRelease;
+    function<void(const DragEvent&)> OnDrag;
+    function<void(const DragEvent&)> OnDragStart;
+    function<void(const DragEvent&)> OnDragEnd;
+    function<void(const WheelEvent&)> OnWheel;
 
     //マウスの表示フラグセット
     void SetMouseFlag(bool _flag) { mouseFlag = _flag; }

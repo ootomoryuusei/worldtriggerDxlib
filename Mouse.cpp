@@ -32,6 +32,7 @@ void Mouse::Update()
     }
 
     m_time += Time::DeltaTime();
+	SetPosition(m_pos.x,m_pos.y,0.0f);
 }
 
 void Mouse::detect(int btn)
@@ -55,7 +56,7 @@ void Mouse::detect(int btn)
         if (OnRelease) OnRelease({ (MouseButton)btn,m_pos });
 
         if (m_dragging[btn] && OnDragEnd) {
-            MouseDragEvent d_event;
+            DragEvent d_event;
             d_event.button = (MouseButton)btn;
             d_event.start = m_dragStart[btn];
             d_event.current = m_pos;

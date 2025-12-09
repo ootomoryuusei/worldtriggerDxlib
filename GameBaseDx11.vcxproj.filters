@@ -308,7 +308,9 @@
     <ClCompile Include="RaycastManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="FocusManager.cpp" />
+    <ClCompile Include="FocusManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -605,7 +607,9 @@
     <ClInclude Include="Raycaster3D.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="FocusManager.h" />
+    <ClInclude Include="FocusManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc">

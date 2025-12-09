@@ -13,7 +13,3 @@ void RaycastManager::Initialize()
 	raycaster2D_ = Instantiate<Raycaster2D>(this);
 	raycaster3D_ = Instantiate<Raycaster3D>(this); 
 }
-
-void RaycastManager::Update()
-{
-}

@@ -10,7 +10,6 @@ public:
 	~RaycastManager();
 
 	void Initialize() override;
-	void Update() override;
 
 	HitInfo RaycastFromMouse(float mx, float my, const VECTOR& rayOrigin, const VECTOR& rayDir) {
 		HitInfo hit;

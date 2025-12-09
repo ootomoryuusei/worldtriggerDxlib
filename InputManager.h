@@ -2,6 +2,7 @@
 #include "Engine/GameObject.h"
 #include"Keyboard.h"
 #include"Mouse.h"
+#include"RaycastManager.h"
 #include<functional>
 #include<variant>
 #include<type_traits>
@@ -27,9 +28,10 @@ public:
 		visit([&](auto const& event) {obj->DeviceEvent(event);},events);
 	}
 private:
-	Keyboard* keyboard_;
-	Mouse* mouse_;
-	vector<DeviceEvents> events_;
+	Keyboard* keyboard_; //キーボード
+	Mouse* mouse_; //マウス
+	RaycastManager* raycastManager_; //レイキャストマネージャー
+	vector<DeviceEvents> events_; //イベントリスト
 };
 
 

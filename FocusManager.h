@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include "HitInfo.h"
 class FocusManager :
     public GameObject
 {
