@@ -2,7 +2,7 @@
 #include"MoveSelectIcon.h"
 #include"MoveTypeIcon.h"
 
-MoveTypeIcons::MoveTypeIcons(GameObject* parent) : Icon(parent)
+MoveTypeIcons::MoveTypeIcons(GameObject* parent) : Object2D(parent)
 {
 }
 
@@ -30,9 +30,9 @@ void MoveTypeIcons::Initialize()
 		typeName = csv_->GetString(FNMTLine, y);
 		MoveTypeIcon* pMoveTypeIcon = Instantiate<MoveTypeIcon>(this);
 		MoveSelectIcon* pMoveSelectIcon = GetParent()->GetParent()->FindGameObject<MoveSelectIcon>();
-		VECTOR pos = pMoveSelectIcon->Get3DPosition();
-		XMFLOAT2 graphSize = { pMoveSelectIcon->GetGraphSizeF_2D().x, pMoveSelectIcon->GetGraphSizeF_2D().y };
-		pMoveTypeIcon->Set3DPosition({ pos.x, pos.y + (graphSize.y / 2) * y, pos.z });
+		XMFLOAT3 pos = pMoveSelectIcon->GetPosition();
+		SIZE_F_2D graphSize = pMoveSelectIcon->GetGraphSizeF_2D();
+		pMoveTypeIcon->SetPosition(pos.x, pos.y + graphSize.halfY() * y, pos.z );
 		pMoveTypeIcon->SetIconName(typeName);
 		pMoveTypeIcon->SetFontHandle(fontHandle_);
 		pMoveTypeIcons_.push_back(pMoveTypeIcon);
@@ -44,9 +44,9 @@ void MoveTypeIcons::Update()
 {
 	for (int y = 1; y < csv_->GetHeight(); y++) {
 		MoveSelectIcon* pMoveSelectIcon = GetParent()->GetParent()->FindGameObject<MoveSelectIcon>();
-		VECTOR pos = pMoveSelectIcon->Get3DPosition();
-		XMFLOAT2 graphSize = { pMoveSelectIcon->GetGraphSizeF_2D().x, pMoveSelectIcon->GetGraphSizeF_2D().y };
-		pMoveTypeIcons_[y - 1]->Set3DPosition({ pos.x, pos.y + (graphSize.y / 2) * y, pos.z });
+		XMFLOAT3 pos = pMoveSelectIcon->GetPosition();
+		SIZE_F_2D graphSize = pMoveSelectIcon->GetGraphSizeF_2D();
+		pMoveTypeIcons_[y - 1]->SetPosition(pos.x, pos.y + graphSize.halfY() * y, pos.z);
 	}
 
 	for (auto& itr : pMoveTypeIcons_) {
@@ -55,6 +55,8 @@ void MoveTypeIcons::Update()
 			return;
 		}
 	}
+
+	Object2D::Update();
 }
 
 void MoveTypeIcons::Draw()

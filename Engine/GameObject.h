@@ -243,10 +243,12 @@ public:
 	/// <returns></returns>
 	bool PointInBox(XMFLOAT2 point, XMFLOAT2 _leftUp, XMFLOAT2 _distance);
 
-	virtual void DeviceEvent(const MouseClickEvent& event){}
-	virtual void DeviceEvent(const MouseDragEvent& event){}
-	virtual void DeviceEvent(const MouseWheelEvent& event) {}
-	virtual void DeviceEvent(const KeyEvent& event) {}
+	virtual void DeviceEvent(const ClickEvent& event) {} //マウスクリックイベント
+	virtual void DeviceEvent(const DoubleClickEvent& event) {} //マウスダブルクリックイベント
+	virtual void DeviceEvent(const PressEvent& event) {} //マウスプレスイベント
+	virtual void DeviceEvent(const DragEvent& event) {} //マウスドラッグイベント
+	virtual void DeviceEvent(const WheelEvent& event) {} //マウスホイールイベント
+	virtual void DeviceEvent(const KeyEvent& event) {} //キーボードイベント
 private:
 
 	//オブジェクト削除（再帰）
@@ -284,6 +286,14 @@ T* Instantiate(GameObject* pParent)
 	return pNewObject;
 }
 
+inline XMFLOAT2 operator+ (const XMFLOAT2& a, const XMFLOAT2& b) {
+	return XMFLOAT2(a.x + b.x, a.y + b.y);
+}
+
 inline XMFLOAT2 operator -(const XMFLOAT2& a, const XMFLOAT2& b) {
 	return XMFLOAT2(a.x - b.x ,a.y - b.y);
+}
+
+inline bool operator ==(const XMFLOAT3& a, const XMFLOAT3& b) {
+	return (a.x == b.x && a.y == b.y && a.z == b.z);
 }

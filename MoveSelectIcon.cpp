@@ -3,10 +3,10 @@
 #include"MoveTypeIcons.h"
 #include "Engine/Global.h"
 
-MoveSelectIcon::MoveSelectIcon(GameObject* parent) : Icon(parent)
+MoveSelectIcon::MoveSelectIcon(GameObject* parent) : Object2D(parent)
 {
-	Load("Assets/Image/moveTypesIcon.png");
-	position = { 100, 0, 0 };
+	LoadSprite("Assets/Image/moveTypesIcon.png");
+	transform_.position_ = { 100, 0, 0 };
 	fontHandle_ = -1;
 	iconName_ = "行動タイプ";
 }
@@ -33,26 +33,16 @@ void MoveSelectIcon::Update()
 	XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
 	space = { (graphSizeF_.x - strSize.x) / 2,(graphSizeF_.y / 2 - strSize.y) / 2 };
 
-	Mouse* pMouse = GetParent()->FindGameObject<Mouse>();
-	XMFLOAT2 mousePos = pMouse->GetMousePos();
-		
-	if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x * scale_.x, graphSizeF_.y * scale_.y })) {
-		if (pMouse->IsPressed(Mouse::LEFT)) {
-			XMFLOAT2 mouseVariation = { mousePos.x - prevMousePos_.x,mousePos.y - prevMousePos_.y };
-			position = { position.x + mouseVariation.x, position.y + mouseVariation.y, 0.0f };
-
-		}
-		prevMousePos_ = mousePos;
-	}
+	Object2D::Update();
 }
 
 void MoveSelectIcon::Draw()
 {
-	DrawRotaGraph3(position.x, position.y,0,0, scale_.x,scale_.y,0.0,hModel, TRUE,FALSE);
-	VECTOR fontPos = { position.x + space.x, position.y + space.y,position.z };
+	Object2D::Draw();
+	XMFLOAT2 fontPos = position_ + space;
 	DrawStringToHandle(fontPos.x, fontPos.y, iconName_.c_str(), GetColor(0, 0, 0), fontHandle_);
-	DrawLineAA(position.x, position.y + GetGraphSizeF_2D().y / 2
-		, position.x + GetGraphSizeF_2D().x, position.y + GetGraphSizeF_2D().y / 2, GetColor(0, 0, 0), 2.0);
+	DrawLineAA(position_.x, position_.y + GetGraphSizeF_2D().y / 2
+		, position_.x + GetGraphSizeF_2D().x, position_.y + GetGraphSizeF_2D().y / 2, GetColor(0, 0, 0), 2.0);
 #if 0
 		DrawBoxAA(position.x, position.y, position.x + graphSizeF_.x * scale_.x, position.y + graphSizeF_.y * scale_.y, GetColor(255, 0, 0), FALSE);
 #endif
@@ -88,5 +78,24 @@ void MoveSelectIcon::DrawSub()
 	}
 
 	GameObject::DrawSub();
+}
+
+void MoveSelectIcon::DeviceEvent(const DragEvent& event)
+{
+	XMFLOAT2 current_pos = event.current;
+	XMFLOAT2 prev_pos = event.start;
+	switch (event.button)
+	{
+	case LEFT:
+		XMFLOAT2 mouseVariation = { current_pos.x - prev_pos.x,current_pos.y - prev_pos.y };
+		SetPosition(transform_.position_.x + mouseVariation.x, transform_.position_.y + mouseVariation.y, transform_.position_.z);
+		break;
+	case RIGHT:
+		break;
+	case MIDDLE:
+		break;
+	default:
+		break;
+	}
 }
 

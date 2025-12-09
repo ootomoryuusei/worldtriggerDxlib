@@ -95,11 +95,11 @@ void TriggerArcIcon::Draw()
 {
 	const auto& uniticons = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
 	SIZE_F_2D tileSize = pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D();
-	XMFLOAT2 DrawCenterPos = { position.x + (graphSizeF_.halfX - tileSize.halfX),
-								position.y + (graphSizeF_.halfY - tileSize.halfY) };
+	XMFLOAT2 DrawCenterPos = { position.x + (graphSizeF_.halfX() - tileSize.halfX()),
+								position.y + (graphSizeF_.halfY() - tileSize.halfY())};
 
 	float size = pData_->GetTriggerData().arc.rangeSize;
-	DrawCircleGaugeF(DrawCenterPos.x, DrawCenterPos.y, percent, hModel, startPercent,size);
+	DrawCircleGaugeF(DrawCenterPos.x, DrawCenterPos.y, percent, hModel_, startPercent,size);
 
 	//if (hand_ == RIGHT) {
 	//	/*DrawRotaStringF()*/
@@ -128,8 +128,8 @@ void TriggerArcIcon::calculateArc()
 	const auto& mouse = uniticons->GetParent()->FindGameObject<Mouse>();
 	XMFLOAT2 mousePos = mouse->GetMousePos();	
 	SIZE_F_2D tileSize = pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D();
-	XMFLOAT2 DrawCenterPos = { position.x + (graphSizeF_.halfX - tileSize.halfX),
-		position.y + (graphSizeF_.halfY - tileSize.halfY) };
+	XMFLOAT2 DrawCenterPos = { position.x + (graphSizeF_.halfX() - tileSize.halfX()),
+		position.y + (graphSizeF_.halfY() - tileSize.halfY())};
 
 
 	// 扇形の角度と中心角の向きを取得
@@ -141,8 +141,8 @@ void TriggerArcIcon::calculateArc()
 	// 四角形サイズ（幅は角度に応じて、高さは固定）
 	float angleSpanDeg = endAngleDeg - startAngleDeg;
 	float size = pData_->GetTriggerData().arc.rangeSize;
-	float width = graphSizeF_.halfX * size * sqrtf(2 * (1 - cos(XMConvertToRadians(angleSpanDeg))));
-	float height = graphSizeF_.halfY * size;
+	float width = graphSizeF_.halfX() * size * sqrtf(2 * (1 - cos(XMConvertToRadians(angleSpanDeg))));
+	float height = graphSizeF_.halfY() * size;
 
 	// 四角形のローカル座標（原点は底辺中央）
 	XMFLOAT2 localCorners[4] = {

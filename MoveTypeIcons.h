@@ -7,7 +7,7 @@
 using std::vector;
 
 class MoveTypeIcons :
-    public Icon
+    public Object2D
 {
 public:
 	MoveTypeIcons(GameObject* parent);

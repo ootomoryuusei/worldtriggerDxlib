@@ -4,6 +4,8 @@
 #include <DirectXMath.h>
 #include <string>
 #include <functional>
+#include"InputManager.h"
+#include "Raycaster2D.h"
 
 using namespace DirectX;
 using std::string;
@@ -59,26 +61,6 @@ public:
     void SetFontHandle(int _fontHandle) { fontHandle_ = _fontHandle; }
 
     virtual bool IsInMousePoint(const XMFLOAT2& mpos) const;
-
-   /* virtual void OnPress(const XMFLOAT2& pos) {}
-    virtual void OnRelease(const XMFLOAT2& pos) {}
-    virtual void OnClick(const XMFLOAT2& pos) {}
-    virtual void OnDoubleClick(const XMFLOAT2& pos) {}
-    virtual void OnDragStart(const XMFLOAT2& startPos) {}
-    virtual void OnDrag(const XMFLOAT2& currentPos, const XMFLOAT2& delta) {}
-    virtual void OnDragEnd(const XMFLOAT2& endPos) {}
-    virtual void OnHoverEnter() {}
-    virtual void OnHoverExit() {}
-
-    std::function<void(const XMFLOAT2&)> onPress;
-    std::function<void(const XMFLOAT2&)> onRelease;
-    std::function<void(const XMFLOAT2&)> onClick;
-    std::function<void(const XMFLOAT2&)> onDoubleClick;
-    std::function<void(const XMFLOAT2&)> onDragStart;
-    std::function<void(const XMFLOAT2&, const XMFLOAT2&)> onDrag;
-    std::function<void(const XMFLOAT2&)> onDragEnd;
-    std::function<void()> onHoverEnter;
-    std::function<void()> onHoverExit;*/
 protected:
     int hModel_; //モデルハンドル
     SIZE_F_2D graphSizeF_; //アイコンの画像サイズ(float)
@@ -98,7 +80,7 @@ protected:
     XMFLOAT2 pressStartPos_ = { 0,0 };
     XMFLOAT2 lastMousePos_ = { 0,0 };
 
-    static UIRaycaster* s_uiRaycaster;
+	Raycaster2D* raycaster2D_ = nullptr; //2Dレイキャスター
 
     void RegisterToRaycaster();
     void UnregisterFromRaycaster();

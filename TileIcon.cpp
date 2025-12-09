@@ -46,16 +46,15 @@ void TileIcon::Update()
 			}
 		}
 	}
-	center_pos.x = graphSizeF_.halfX;
-	center_pos.y = graphSizeF_.halfY;
+	center_pos.x = graphSizeF_.halfX();
+	center_pos.y = graphSizeF_.halfY();
 	angle = 0;
 }
-
 
 void TileIcon::Draw()
 {
 	string num = std::to_string(tile_.num);
-	DrawRotaGraph3(position.x + graphSizeF_.halfX, position.y + graphSizeF_.halfY, center_pos.x, center_pos.y,scale_.x,scale_.y, angle,hModel, TRUE, FALSE);
+	DrawRotaGraph3(position.x + graphSizeF_.halfX(), position.y + graphSizeF_.halfY(), center_pos.x, center_pos.y, scale_.x, scale_.y, angle, hModel, TRUE, FALSE);
 	if (select) {
 		DrawGraph(position.x, position.y, hImage, TRUE);
 	}

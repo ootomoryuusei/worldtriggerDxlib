@@ -15,13 +15,13 @@
 #include"MoveSelectIcon.h"
 #include"MoveSetIcon.h"
 
+#include"InputManager.h"
 #include"GroupManager.h"
 #include"Keyboard.h"
 
 PlayScene::PlayScene(GameObject* parent) : GameObject(parent,"playscene")
 {
-	Instantiate<Keyboard>(this); //キーボード
-	Instantiate<Mouse>(this); //マウス
+	Instantiate<InputManager>(this); //入力管理クラス
 	Instantiate<BackGround>(this); //背景
 	Instantiate<GroupManager>(this); //グループ管理クラス
 	Instantiate<Timer>(this);

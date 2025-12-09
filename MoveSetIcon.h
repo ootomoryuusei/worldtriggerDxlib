@@ -6,7 +6,7 @@
 using std::vector;
 
 class MoveSetIcon :
-    public Icon
+    public Object2D
 {
 public:
 	MoveSetIcon(GameObject* parent);
@@ -15,6 +15,7 @@ public:
 	void Update() override;
 	void Draw() override;
 
+	void DeviceEvent(const DragEvent& event) override;
 	/*void AddMoveName(string _moveName) { moveName.push_back(_moveName); }*/
 private:
 	CsvReader* csv_;

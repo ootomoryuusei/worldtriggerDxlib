@@ -2,6 +2,9 @@
 // GameObject¨Object3D¨Player/Ground‚ÌŠÖŒW‚É‚·‚é
 #include "Engine/GameObject.h"
 #include"GameInfo.h"
+#include"Raycaster3D.h"
+#include"RaycastManager.h"
+#include"InputManager.h"
 #include<array>
 #include<unordered_map>
 
@@ -86,6 +89,11 @@ protected:
 	VECTOR size_; // ƒTƒCƒY
 	MATRIX matrix_; //@s—ñ
 	/*STEP step_;*/
+
+	Raycaster3D* raycaster3D_; // Raycaster3D
+
+	void RegisterToRaycaster(); // Raycaster‚É“o˜^
+	void UnregisterFromRaycaster(); // Raycaster‚©‚ç“o˜^‰ğœ
 public:
 	Object3D(GameObject* parent);
 	Object3D(GameObject* parent,const std::string& name);

@@ -4,7 +4,7 @@
 class MoveTypeIcons;
 
 class MoveSelectIcon :
-    public Icon
+    public Object2D
 {
 public:
 	MoveSelectIcon(GameObject* parent);
@@ -17,6 +17,7 @@ public:
 	void UpdateSub() override;
 	void DrawSub() override;
 
+	void DeviceEvent(const DragEvent& event) override;
 	const auto& GetpMoveTypeIcons() const { return pMoveTypeIcons_; }
 private:
 	MoveTypeIcons* pMoveTypeIcons_;

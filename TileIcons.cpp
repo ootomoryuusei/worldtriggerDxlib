@@ -27,7 +27,7 @@ void TileIcons::Initialize()
             TileIcon* pTIcon = Instantiate<TileIcon>(this);
             XMFLOAT2 size;
             size.x = (MAX_MAP_WIDTH - 1) * (3.0 / 4.0) * pTIcon->GetGraphSizeF_2D().x + pTIcon->GetGraphSizeF_2D().x;
-            size.y = MAX_MAP_HIGHT * pTIcon->GetGraphSizeF_2D().y + pTIcon->GetGraphSizeF_2D().halfY;
+            size.y = MAX_MAP_HIGHT * pTIcon->GetGraphSizeF_2D().y + pTIcon->GetGraphSizeF_2D().halfY();
 
             XMFLOAT2 scale;
             scale.x = (boxSize.x - space.x * 2) / size.x;

@@ -95,17 +95,3 @@ void Unit::Draw()
 		GetColor(255, 255, 255), fontHandle_,GetColor(0,0,0));
 }
 
-void Unit::DeviceEvent(const MouseClickEvent& event)
-{
-	switch (event.button)
-	{
-	case RIGHT:
-		break;
-	case LEFT:
-		break;
-	case MIDDLE:
-	default:
-		break;
-	}
-}
-

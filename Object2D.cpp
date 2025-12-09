@@ -1,12 +1,9 @@
 #include "Object2D.h"
-#include "UIRaycaster.h"
+#include "Raycaster2D.h"
 #include "Time.h"
 #include <DxLib.h>
 #include <algorithm>
 #include <cmath>
-
-// static
-UIRaycaster* Object2D::s_uiRaycaster = nullptr;
 
 Object2D::Object2D(GameObject* parent, const std::string& name)
     : GameObject(parent, name)
@@ -20,36 +17,35 @@ Object2D::~Object2D()
 void Object2D::Initialize()
 {
     GameObject::SetInitialized();
-
-    RegisterToRaycaster();
+	RegisterToRaycaster(); // Raycaster2D  ìoò^
 }
 
 void Object2D::RegisterToRaycaster()
 {
-    if (!s_uiRaycaster) {
-        return;
-    }
+	raycaster2D_ = GetParent()->FindGameObject<InputManager>()->GetRaycastManager()->GetRaycaster2D();
+	if (!raycaster2D_) return; // Raycaster2DÇ™ë∂ç›ÇµÇ»Ç¢èÍçáÇÕìoò^ÇµÇ»Ç¢
 
-    auto& list = s_uiRaycaster->elements_;
+    auto& list = raycaster2D_->elements_;
     if (std::find(list.begin(), list.end(), this) == list.end()) list.push_back(this);
 }
 
 void Object2D::UnregisterFromRaycaster()
 {
-    if (!s_uiRaycaster) return;
-    auto& list = s_uiRaycaster->elements_;
+	if (!raycaster2D_) return; // Raycaster2DÇ™ë∂ç›ÇµÇ»Ç¢èÍçáÇÕìoò^âèúÇµÇ»Ç¢
+    auto& list = raycaster2D_->elements_;
     auto it = std::find(list.begin(), list.end(), this);
     if (it != list.end()) list.erase(it);
 }
 
 void Object2D::Release()
 {
-    UnregisterFromRaycaster();
+	UnregisterFromRaycaster(); // Raycaster2D  ìoò^âèú
     GameObject::Release();
 }
 
 void Object2D::Update()
 {
+	if (hModel_ < 0)return;
     position_ = { transform_.position_.x,transform_.position_.y };
     scale_ = { transform_.rotate_.x,transform_.rotate_.y };
 
@@ -57,26 +53,17 @@ void Object2D::Update()
 
 void Object2D::Draw()
 {
-    if (fileName_.empty()) return;
-
-    int handle = LoadGraph(fileName_.c_str());
-    if (handle == -1) return;
-
-    float w = graphSizeF_.x * scale_.x;
-    float h = graphSizeF_.y * scale_.y;
-    float drawX = position_.x - pivot_.x * w;
-    float drawY = position_.y - pivot_.y * h;
-
-    DrawRotaGraph2F((int)drawX, (int)drawY, pivot_.x, pivot_.y, 1.0f, angle_, handle, TRUE);
+	if (hModel_ < 0) return;
+    DrawRotaGraph3(position_.x, position_.y, pivot_.x, pivot_.y, scale_.x, scale_.y, 0.0, hModel_, TRUE, FALSE);
 }
 
 void Object2D::LoadSprite(const std::string& _filePath)
 {
     fileName_ = _filePath;
     hModel_ = LoadGraph(fileName_.c_str());
-    assert(hModel_ >= 0);
+    assert(hModel_ >= 0); //ÉAÉTÅ[ÉVÉáÉì
     GetGraphSize(hModel_, &graphSize_.x, &graphSize_.y);
-    graphSizeF_ = { (float)graphSize_.x,(float)graphSize_.y };
+    graphSizeF_.set(graphSize_.x,graphSize_.y);
 }
 
 XMFLOAT2 Object2D::ScreenToLocal(const XMFLOAT2& screenPos) const

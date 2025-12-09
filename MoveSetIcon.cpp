@@ -5,10 +5,10 @@
 #include"UnitIcons.h"
 #include "Mouse.h"
 
-MoveSetIcon::MoveSetIcon(GameObject* parent) : Icon(parent)
+MoveSetIcon::MoveSetIcon(GameObject* parent) : Object2D(parent)
 {
-	Load("Assets/Image/moveSetIcon.png");
-	position = { 0, 0, 0 };
+	LoadSprite("Assets/Image/moveSetIcon.png");
+	transform_.position_ = { 0, 0, 0 };
 	fontHandle_ = -1;
 	iconName_ = "s“®Ý’è";
 }
@@ -51,18 +51,6 @@ void MoveSetIcon::Update()
 	XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
 	space = { (graphSizeF_.x - strSize.x) / 2,(graphSizeF_.y / 2 - strSize.y) / 2 };
 
-	Mouse* pMouse = GetParent()->FindGameObject<Mouse>();
-	XMFLOAT2 mousePos = pMouse->GetMousePos();
-
-	if (PointInBox(mousePos, { position.x, position.y }, { graphSizeF_.x * scale_.x, graphSizeF_.y * scale_.y})) {
-		if (pMouse->IsPressed(Mouse::LEFT)) {
-			XMFLOAT2 mouseVariation = { mousePos.x - prevMousePos_.x,mousePos.y - prevMousePos_.y };
-			position = { position.x + mouseVariation.x, position.y + mouseVariation.y, 0.0f };
-
-		}
-		prevMousePos_ = mousePos;
-	}
-
 	UnitIcons* pUnitIcons = GetParent()->FindGameObject<UnitIcons>();
 	const auto& select_unit = pUnitIcons->GetpSelecting_ptr();
 	if (select_unit != nullptr) {
@@ -73,21 +61,22 @@ void MoveSetIcon::Update()
 	else {
 		movement.empty();
 	}
+	Object2D::Update();
 }
 
 void MoveSetIcon::Draw()
 {
-	DrawRotaGraph3(position.x, position.y,0,0, scale_.x, scale_.y, 0.0, hModel, TRUE, FALSE);
-	VECTOR fontPos = { position.x + space.x, position.y + space.y,position.z };
+	Object2D::Draw();
+	XMFLOAT2 fontPos = position_ + space;
 	DrawStringToHandle(fontPos.x, fontPos.y, iconName_.c_str(), GetColor(0, 0, 0), fontHandle_);
-	DrawLineAA(position.x, position.y + GetGraphSizeF_2D().y / 2
-		, position.x + GetGraphSizeF_2D().x, position.y + GetGraphSizeF_2D().y / 2, GetColor(0, 0, 0),2.0);
+	DrawLineAA(position_.x, position_.y + graphSizeF_.halfY()
+		, position_.x + graphSizeF_.halfX(), position_.y + graphSizeF_.halfY(), GetColor(0, 0, 0), 2.0);
 	int num = 1;
 	for (auto& itr : movement) {
 		string move = std::to_string(num) + " : " + itr.movename;
 		XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * move.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
 		XMFLOAT2 Space = { (graphSizeF_.x - strSize.x) / 2,(graphSizeF_.y /2  - strSize.y) / 2 };
-		VECTOR moveFontPos = { position.x + Space.x, position.y + ( graphSizeF_.y / 2 ) * num + Space.y,position.z };
+		XMFLOAT2 moveFontPos = { position_.x + Space.x, position_.y + graphSizeF_.halfY() * num + Space.y};
 
 		DrawStringToHandle(moveFontPos.x,moveFontPos.y,move.c_str(), GetColor(0, 0, 0), fontHandle_);
 		num++;
@@ -95,4 +84,23 @@ void MoveSetIcon::Draw()
 #if 0
 		DrawBoxAA(position.x, position.y, position.x + graphSizeF_.x * scale_.x, position.y + graphSizeF_.y * scale_.y, GetColor(255, 0, 0), FALSE);
 #endif
+}
+
+void MoveSetIcon::DeviceEvent(const DragEvent& event)
+{
+	XMFLOAT2 current_pos = event.current;
+	XMFLOAT2 prev_pos = event.start;
+	switch (event.button)
+	{
+	case LEFT:
+		XMFLOAT2 mouseVariation = { current_pos.x - prev_pos.x,current_pos.y - prev_pos.y };
+		SetPosition(transform_.position_.x + mouseVariation.x, transform_.position_.y + mouseVariation.y, transform_.position_.z);
+		break;
+	case RIGHT:
+		break;
+	case MIDDLE:
+		break;
+	default:
+		break;
+	}
 }

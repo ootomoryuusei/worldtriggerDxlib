@@ -21,6 +21,9 @@ public:
 
 		return hit;
 	}
+
+	const auto& GetRaycaster2D()const { return raycaster2D_; }
+	const auto& GetRaycaster3D()const { return raycaster3D_; }
 private:
 	Raycaster2D* raycaster2D_;
 	Raycaster3D* raycaster3D_;

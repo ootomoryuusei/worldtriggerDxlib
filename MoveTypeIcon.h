@@ -4,7 +4,7 @@
 class TileIcons;
 
 class MoveTypeIcon :
-    public Icon
+    public Object2D
 {
 public:
 	MoveTypeIcon(GameObject* parent);
@@ -12,6 +12,8 @@ public:
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
+
+	void DeviceEvent(const DoubleClickEvent& event) override;
 
 	bool GetClicked() { return clicked; }
 	void SetClicked(bool _clicked) { clicked = _clicked; }

@@ -6,9 +6,9 @@ InputManager::InputManager(GameObject* parent)
 
 void InputManager::Initialize()
 {
-	keyboard_ = Instantiate<Keyboard>(this);
-	mouse_ = Instantiate<Mouse>(this);
-	raycastManager_ = Instantiate<RaycastManager>(this);
+	keyboard_ = Instantiate<Keyboard>(this); //キーボード
+	mouse_ = Instantiate<Mouse>(this); //マウス
+	raycastManager_ = Instantiate<RaycastManager>(this); //レイキャストマネージャー
 
 	mouse_->OnClick = [&](const ClickEvent& e) {AddEvent(e);};
 	mouse_->OnDoubleClick = [&](const DoubleClickEvent& e) {AddEvent(e);};
@@ -28,7 +28,10 @@ void InputManager::Update()
 	XMFLOAT3 m_pos = mouse_->GetPosition();
 	VECTOR rayOrigin = VGet(m_pos.x, m_pos.y, 0);
 	VECTOR rayDir = VGet(m_pos.x, m_pos.y, 1);
-	const auto& hit_obj = raycastManager_->RaycastFromMouse(m_pos.x,m_pos.y,rayOrigin,rayDir);
-	EventDispatch(hit_obj.target, events_);
+	HitInfo hit_obj;
+	hit_obj = raycastManager_->RaycastFromMouse(m_pos.x, m_pos.y, rayOrigin, rayDir);
+	for (auto& event : events_) {
+		EventDispatch(hit_obj.target, event); // イベントを対象オブジェクトに送る
+	}
 	events_.clear();
 }

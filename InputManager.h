@@ -6,7 +6,9 @@
 #include<functional>
 #include<variant>
 #include<type_traits>
+#include<vector>
 
+using std::vector;
 using std::function;
 using std::visit;
 
@@ -27,6 +29,8 @@ public:
 	void EventDispatch(GameObject* obj, const DeviceEvents& events) {
 		visit([&](auto const& event) {obj->DeviceEvent(event);},events);
 	}
+
+	const auto& GetRaycastManager()const { return raycastManager_; }
 private:
 	Keyboard* keyboard_; //キーボード
 	Mouse* mouse_; //マウス

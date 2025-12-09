@@ -159,7 +159,7 @@ void UnitIcon::Draw()
 	{
 	case FIRST:
 	{
-		DrawGraph(position.x + (TileSize.x / 2 - graphSizeF_.halfX), position.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
+		DrawGraph(position.x + (TileSize.x / 2 - graphSizeF_.halfX()), position.y + (TileSize.y / 2 - graphSizeF_.halfY()), hModel_, TRUE);
 		break;
 	}
 	case SECONDE:
@@ -168,17 +168,17 @@ void UnitIcon::Draw()
 			auto m_front = moveMent.front();
 			VECTOR pos = pTileIcons_->GetpTIcon()[m_front.movement.y][m_front.movement.x]->Get3DPosition();
 			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 / 2);
-			DrawGraph(pos.x + (TileSize.x / 2 - graphSizeF_.halfX), pos.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
+			DrawGraph(pos.x + (TileSize.x / 2 - graphSizeF_.halfX()), pos.y + (TileSize.y / 2 - graphSizeF_.halfY()), hModel_, TRUE);
 			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 		}
 		auto m_back = moveMent.back();
 		position = pTileIcons_->GetpTIcon()[m_back.movement.y][m_back.movement.x]->Get3DPosition();
-		DrawGraph(position.x + (TileSize.x / 2 - graphSizeF_.halfX), position.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
+		DrawGraph(position.x + (TileSize.x / 2 - graphSizeF_.halfX()), position.y + (TileSize.y / 2 - graphSizeF_.halfY()), hModel_, TRUE);
 		break;
 	}
 	case THIRD:
 	{
-		DrawGraph(position.x + (TileSize.x / 2 - graphSizeF_.halfX), position.y + (TileSize.y / 2 - graphSizeF_.halfY), hModel, TRUE);
+		DrawGraph(position.x + (TileSize.x / 2 - graphSizeF_.halfX()), position.y + (TileSize.y / 2 - graphSizeF_.halfY()), hModel_, TRUE);
 		break;
 	}	
 	default:

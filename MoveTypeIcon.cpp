@@ -10,10 +10,10 @@
 #include <queue>
 #include <set>
 
-MoveTypeIcon::MoveTypeIcon(GameObject* parent) : Icon(parent)
+MoveTypeIcon::MoveTypeIcon(GameObject* parent) : Object2D(parent)
 {
-	Load("Assets//Image//MoveTypeButton.png");
-	position = { 0, 0, 0 };
+	LoadSprite("Assets//Image//MoveTypeButton.png");
+	transform_.position_ = { 0, 0, 0 };
 	fontHandle_ = -1;
 	iconName_ = "";
 	hImage = LoadGraph("Assets//Image//MoveTypeDownButton.png");
@@ -37,60 +37,68 @@ void MoveTypeIcon::Update()
 	XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
 	space = { (graphSizeF_.x - strSize.x) / 2,(graphSizeF_.y - strSize.y) / 2 };
 
-	Mouse* pMouse = GetParent()->GetParent()->GetParent()->FindGameObject<Mouse>();
-	XMFLOAT2 mousePos = pMouse->GetMousePos();
+	clicked = false;
 
-	if (pMouse->IsDoubleClicked(Mouse::LEFT)) {
-		if (IsInMousePoint(mousePos)) {
-			int CenterNum = -1;
-			const auto& pUnitIcons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
-			auto& select_uniticon = pUnitIcons->GetpSelecting_ptr();
-			VECTOR UnitPos = select_uniticon->Get3DPosition();
-			for (auto& column : pTileIcons_->GetpTIcon()) {
-				for (auto& row : column) {
-					if (row->Get3DPosition().x == UnitPos.x && row->Get3DPosition().y == UnitPos.y && row->Get3DPosition().z == UnitPos.z) {
-						CenterNum = row->GetTileData().num;
-					}
-				}
-			}
-			serchAroundTileNum = SerchAroundTileNum(CenterNum,1);
-			for (auto& itrs : serchAroundTileNum) {
-				for (auto& column : pTileIcons_->GetpTIcon()) {
-					for (auto& row : column) {
-						if (row->GetTileData().num == itrs) {
-							row->SetSelect(true);
-						}
-					}
-				}
-			}
-			clicked = true;
-
-			auto& arcs_icon = select_uniticon->GetpTriggersArcIcon();
-			for(auto& itr : arcs_icon->GetpTriggerArcIcon()){
-				itr->SetAngle({ itr->GetStartPercent(),itr->GetPercent() });
-			}
-		}
-	}else {
-		clicked = false;
-	}
+	Object2D::Update();
 }
 
 void MoveTypeIcon::Draw()
 {
-	Mouse* pMouse = GetParent()->GetParent()->GetParent()->FindGameObject<Mouse>();
-	XMFLOAT2 mousePos = pMouse->GetMousePos();
+	Object2D::Draw();
 
-	if (IsInMousePoint(mousePos)) {
+	/*if (IsInMousePoint(mousePos)) {
 		DrawGraph(position.x, position.y, hImage, TRUE);
 	}
 	else {
 		DrawGraph(position.x, position.y, hModel, TRUE);
-	}
-	VECTOR fontPos = { position.x + space.x, position.y + space.y,position.z };
+	}*/
+	XMFLOAT2 fontPos = position_ + space;
 	DrawStringToHandle(fontPos.x, fontPos.y, iconName_.c_str(), GetColor(0, 0, 0), fontHandle_);
 #if 0
 		DrawBoxAA(position.x, position.y, position.x + graphSizeF_.x, position.y + graphSizeF_.y, GetColor(255, 0, 0), FALSE);
 #endif
+}
+
+void MoveTypeIcon::DeviceEvent(const DoubleClickEvent& event)
+{
+	switch (event.button)
+	{
+	case LEFT:
+		int CenterNum = -1;
+		const auto& pUnitIcons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
+		auto& select_uniticon = pUnitIcons->GetpSelecting_ptr();
+		XMFLOAT3 UnitPos = select_uniticon->GetPosition();
+		for (auto& column : pTileIcons_->GetpTIcon()) {
+			for (auto& row : column) {
+				if (row->GetPosition() == UnitPos) {
+					CenterNum = row->GetTileData().num;
+				}
+			}
+		}
+		serchAroundTileNum = SerchAroundTileNum(CenterNum, 1);
+		for (auto& itrs : serchAroundTileNum) {
+			for (auto& column : pTileIcons_->GetpTIcon()) {
+				for (auto& row : column) {
+					if (row->GetTileData().num == itrs) {
+						row->SetSelect(true);
+					}
+				}
+			}
+		}
+		clicked = true;
+
+		auto& arcs_icon = select_uniticon->GetpTriggersArcIcon();
+		for (auto& itr : arcs_icon->GetpTriggerArcIcon()) {
+			itr->SetAngle({ itr->GetStartPercent(),itr->GetPercent() });
+		}
+		break;
+	case RIGHT:
+		break;
+	case MIDDLE:
+		break;
+	default:
+		break;
+	}
 }
 
 vector<int> MoveTypeIcon::SerchAroundTileNum(int _CenterNum, int _range)

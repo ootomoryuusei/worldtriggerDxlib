@@ -4,6 +4,25 @@
 
 using std::lerp;
 
+void Object3D::RegisterToRaycaster()
+{
+	raycaster3D_ = GetParent()->FindGameObject<InputManager>()->GetRaycastManager()->GetRaycaster3D();
+	if (!raycaster3D_) return; // Raycaster3D‚ª‘¶İ‚µ‚È‚¢ê‡‚Í“o˜^‚µ‚È‚¢
+
+	auto& list = raycaster3D_->objects_;
+	if (std::find(list.begin(), list.end(), this) == list.end()) list.push_back(this);
+}
+
+void Object3D::UnregisterFromRaycaster()
+{
+	if (!raycaster3D_) return; // Raycaster3D‚ª‘¶İ‚µ‚È‚¢ê‡‚Í“o˜^‚µ‚È‚¢
+	auto& list = raycaster3D_->objects_;
+	list.erase(
+		std::remove(list.begin(), list.end(), this),
+		list.end()
+	);
+}
+
 Object3D::Object3D(GameObject* parent) : GameObject(parent)
 {
 	hModel_ = -1;
@@ -28,6 +47,7 @@ Object3D::~Object3D()
 
 void Object3D::Initialize()
 {
+	RegisterToRaycaster(); // Raycaster3D‚É“o˜^
 }
 
 void Object3D::Update()
@@ -47,11 +67,14 @@ void Object3D::Draw()
 
 void Object3D::Release()
 {
+	UnregisterFromRaycaster(); // Raycaster3D‚©‚ç“o˜^‰ğœ
 }
 
 void Object3D::LoadModel(const string& path)
 {
 	hModel_ = MV1LoadModel(path.c_str());
+	assert(hModel_ >= 0); //ƒAƒT[ƒVƒ‡ƒ“
+	size_ = CalculateModelSize();
 }
 
 bool Object3D::Raycast(const VECTOR& rayOrigin, const VECTOR& rayDir, float& outDist)
