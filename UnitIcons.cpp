@@ -5,7 +5,7 @@
 #include"Map.h"
 #include"Engine/Global.h"
 
-UnitIcons::UnitIcons(GameObject* parent) : Icon(parent)
+UnitIcons::UnitIcons(GameObject* parent) : Object2D(parent)
 {
 
 }
@@ -30,20 +30,20 @@ void UnitIcons::Initialize()
 		std::string flPath;
 		DLC = "Assets//Image//CharacterIcon//CIcon//";
 		flPath = DLC + graphName + ".png";
-		VECTOR pos;
+		XMFLOAT3 pos;
 		int tilenum;
 		bool isSeted = false;
 		UnitIcon* pUIcon = Instantiate<UnitIcon>(this);
-		pUIcon->Load(flPath);
+		pUIcon->LoadSprite(flPath);
 		VECTOR rand = {0,0,0};
 		while (!isSeted) {
 			rand.x = GetRand(MAX_MAP_WIDTH - 1);
 			rand.y = MAX_MAP_HIGHT -1;
-			pos = pTIcons->GetpTIcon()[rand.y][rand.x]->Get3DPosition();
+			pos = pTIcons->GetpTIcon()[rand.y][rand.x]->GetPosition();
 
 			bool isOk = false;
 			for (auto& itr : pUIcons_) {
-				if (itr->Get3DPosition().x == pos.x && itr->Get3DPosition().y == pos.y && itr->Get3DPosition().z == pos.z) {
+				if (itr->GetPosition() == pos) {
 					isOk = true;
 					break;
 				}
@@ -54,7 +54,7 @@ void UnitIcons::Initialize()
 		}
 		string IconName = graphName;
 		pUIcon->SetIconName(IconName);
-		pUIcon->Set3DPosition(pos);
+		pUIcon->SetPosition(pos);
 		pUIcon->SetCreateNum(y - 1);
 		pUIcon->AddMoveMent(rand,"");
 		MYTRIGGER myTrigger;
@@ -79,9 +79,6 @@ void UnitIcons::Initialize()
 
 void UnitIcons::Update()
 {
-	Mouse* pMouse = GetParent()->FindGameObject<Mouse>();
-	XMFLOAT2 mousePos = pMouse->GetMousePos();
-
 	// 1‚Â‚¾‚¯‘I‘ðˆ—
 	/*if (pSelecting_ptr != nullptr) {
 		if (pMouse->IsPressed(Mouse::LEFT)) {

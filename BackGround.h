@@ -1,7 +1,7 @@
 #pragma once
-#include "Icon.h"
+#include "Object2D.h"
 class BackGround :
-    public Icon
+    public Object2D
 {
 public:
 	BackGround(GameObject* parent);

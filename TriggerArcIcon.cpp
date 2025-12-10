@@ -8,7 +8,7 @@
 
 using std::clamp;
 
-TriggerArcIcon::TriggerArcIcon(GameObject* parent) : Icon(parent)
+TriggerArcIcon::TriggerArcIcon(GameObject* parent) : Object2D(parent)
 {
 	step_ = SECONDE;
 
@@ -67,8 +67,8 @@ void TriggerArcIcon::Update()
 					auto startIndex = *it;
 					auto targetIndex = *(++it);
 
-					VECTOR start = {startIndex.x,startIndex.y,0};
-					VECTOR target = {targetIndex.x,targetIndex.y,0};
+					XMFLOAT3 start = {startIndex.x,startIndex.y,0};
+					XMFLOAT3 target = {targetIndex.x,targetIndex.y,0};
 					float Percent = elapsedTime / totalTime;
 					Percent = clamp(Percent, 0.0f, 1.0f);
 					startPercent = Lerp3D(start, target, Percent).x;
@@ -95,8 +95,8 @@ void TriggerArcIcon::Draw()
 {
 	const auto& uniticons = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
 	SIZE_F_2D tileSize = pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D();
-	XMFLOAT2 DrawCenterPos = { position.x + (graphSizeF_.halfX() - tileSize.halfX()),
-								position.y + (graphSizeF_.halfY() - tileSize.halfY())};
+	XMFLOAT2 DrawCenterPos = { position_.x + (graphSizeF_.halfX() - tileSize.halfX()),
+								position_.y + (graphSizeF_.halfY() - tileSize.halfY())};
 
 	float size = pData_->GetTriggerData().arc.rangeSize;
 	DrawCircleGaugeF(DrawCenterPos.x, DrawCenterPos.y, percent, hModel_, startPercent,size);
@@ -122,68 +122,79 @@ void TriggerArcIcon::Draw()
 #endif
 }
 
+void TriggerArcIcon::DeviceEvent(const DragEvent& event)
+{
+	switch (event.button)
+	{
+	case LEFT:
+		const auto& uniticons = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
+		const auto& mouse = uniticons->GetParent()->FindGameObject<Mouse>();
+		SIZE_F_2D tileSize = pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D();
+		XMFLOAT2 DrawCenterPos = { transform_.position_.x + (graphSizeF_.halfX() - tileSize.halfX()),
+			transform_.position_.y + (graphSizeF_.halfY() - tileSize.halfY()) };
+
+
+		// 扇形の角度と中心角の向きを取得
+		float startAngleDeg = startPercent * 3.6f;
+		float endAngleDeg = percent * 3.6f;
+		float centerAngleDeg = (startAngleDeg + endAngleDeg) / 2.0f;
+		float angleRad = XMConvertToRadians(centerAngleDeg);
+
+		// 四角形サイズ（幅は角度に応じて、高さは固定）
+		float angleSpanDeg = endAngleDeg - startAngleDeg;
+		float size = pData_->GetTriggerData().arc.rangeSize;
+		float width = graphSizeF_.halfX() * size * sqrtf(2 * (1 - cos(XMConvertToRadians(angleSpanDeg))));
+		float height = graphSizeF_.halfY() * size;
+
+		// 四角形のローカル座標（原点は底辺中央）
+		XMFLOAT2 localCorners[4] = {
+			{-width / 2, -height}, // 左上（←ここからスタート）
+			{ width / 2, -height}, // 右上
+			{ width / 2, 0},       // 右下
+			{-width / 2, 0}        // 左下
+		};
+
+		// 回転中心（DrawCircleGauge と同じ）
+		center = DrawCenterPos;
+
+		// ローカル→ワールド座標へ変換（回転あり）
+		for (int i = 0; i < 4; i++) {
+			float x = localCorners[i].x;
+			float y = localCorners[i].y;
+			boxCorners[i].x = center.x + x * cos(angleRad) - y * sin(angleRad);
+			boxCorners[i].y = center.y + x * sin(angleRad) + y * cos(angleRad);
+		}
+
+		VECTOR nowVec, centerVec;
+		if (!selecting_) return;
+		nowVec = { event.current.x, event.current.y, 0 };
+		centerVec = { center.x, center.y, 0 };
+
+		VECTOR startVec = nowVec - centerVec;
+		VECTOR nextVec = prevVec - centerVec;
+
+		VECTOR cross = VCross(nextVec, startVec);
+		if (cross.z < 0) { // 時計回り
+			startPercent -= 0.5;
+			percent -= 0.5;
+		}
+		else if (cross.z > 0) { // 反時計回り
+			startPercent += 0.5;
+			percent += 0.5;
+		}
+		// 次フレームのために保存
+		prevVec = nowVec;
+		break;
+	case RIGHT:
+		break;
+	case MIDDLE:
+		break;
+	default:
+		break;
+	}
+}
+
 void TriggerArcIcon::calculateArc()
 {
-	const auto& uniticons = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
-	const auto& mouse = uniticons->GetParent()->FindGameObject<Mouse>();
-	XMFLOAT2 mousePos = mouse->GetMousePos();	
-	SIZE_F_2D tileSize = pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D();
-	XMFLOAT2 DrawCenterPos = { position.x + (graphSizeF_.halfX() - tileSize.halfX()),
-		position.y + (graphSizeF_.halfY() - tileSize.halfY())};
-
-
-	// 扇形の角度と中心角の向きを取得
-	float startAngleDeg = startPercent * 3.6f;
-	float endAngleDeg = percent * 3.6f;
-	float centerAngleDeg = (startAngleDeg + endAngleDeg) / 2.0f;
-	float angleRad = XMConvertToRadians(centerAngleDeg);
-
-	// 四角形サイズ（幅は角度に応じて、高さは固定）
-	float angleSpanDeg = endAngleDeg - startAngleDeg;
-	float size = pData_->GetTriggerData().arc.rangeSize;
-	float width = graphSizeF_.halfX() * size * sqrtf(2 * (1 - cos(XMConvertToRadians(angleSpanDeg))));
-	float height = graphSizeF_.halfY() * size;
-
-	// 四角形のローカル座標（原点は底辺中央）
-	XMFLOAT2 localCorners[4] = {
-		{-width / 2, -height}, // 左上（←ここからスタート）
-		{ width / 2, -height}, // 右上
-		{ width / 2, 0},       // 右下
-		{-width / 2, 0}        // 左下
-	};
-
-	// 回転中心（DrawCircleGauge と同じ）
-	center = DrawCenterPos;
-
-	// ローカル→ワールド座標へ変換（回転あり）
-	for (int i = 0; i < 4; i++) {
-		float x = localCorners[i].x;
-		float y = localCorners[i].y;
-		boxCorners[i].x = center.x + x * cos(angleRad) - y * sin(angleRad);
-		boxCorners[i].y = center.y + x * sin(angleRad) + y * cos(angleRad);
-	}
-
-	VECTOR nowVec, centerVec;
-	if (selecting_) { //選択中
-		if (mouse->IsPressed(Mouse::LEFT)) {
-			nowVec = { mousePos.x, mousePos.y, 0 };
-			centerVec = { center.x, center.y, 0 };
-
-			VECTOR startVec = nowVec - centerVec;
-			VECTOR nextVec = prevVec - centerVec;
-
-			VECTOR cross = VCross(nextVec, startVec);
-			if (cross.z < 0) { // 時計回り
-				startPercent -= 0.5;
-				percent -= 0.5;
-			}
-			else if (cross.z > 0) { // 反時計回り
-				startPercent += 0.5;
-				percent += 0.5;
-			}
-
-			// 次フレームのために保存
-			prevVec = nowVec;
-		}
-	}
+	
 }

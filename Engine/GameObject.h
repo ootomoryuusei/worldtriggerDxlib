@@ -13,9 +13,6 @@ class GroupBase;
 using std::unordered_set;
 using namespace DirectX;
 
-const int MAX_MAP_HIGHT = 11;
-const int MAX_MAP_WIDTH = 11;
-
 //-----------------------------------------------------------
 //全てのゲームオブジェクト（シーンも含めて）が継承するインターフェース
 // ゲームオブジェクトは、親子構造になっていて、
@@ -243,6 +240,8 @@ public:
 	/// <returns></returns>
 	bool PointInBox(XMFLOAT2 point, XMFLOAT2 _leftUp, XMFLOAT2 _distance);
 
+	XMFLOAT3 Lerp3D(XMFLOAT3& start, XMFLOAT3& goal, float percent);
+
 	virtual void DeviceEvent(const ClickEvent& event) {} //マウスクリックイベント
 	virtual void DeviceEvent(const DoubleClickEvent& event) {} //マウスダブルクリックイベント
 	virtual void DeviceEvent(const PressEvent& event) {} //マウスプレスイベント
@@ -292,6 +291,14 @@ inline XMFLOAT2 operator+ (const XMFLOAT2& a, const XMFLOAT2& b) {
 
 inline XMFLOAT2 operator -(const XMFLOAT2& a, const XMFLOAT2& b) {
 	return XMFLOAT2(a.x - b.x ,a.y - b.y);
+}
+
+inline XMFLOAT2 operator /(const XMFLOAT2& a, const float b) {
+	return XMFLOAT2(a.x / b, a.y / b);
+}
+
+inline XMFLOAT3 operator -(const XMFLOAT3& a, const XMFLOAT3& b) {
+	return XMFLOAT3(a.x - b.x, a.y - b.y, a.z - b.z);
 }
 
 inline bool operator ==(const XMFLOAT3& a, const XMFLOAT3& b) {

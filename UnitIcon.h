@@ -1,5 +1,5 @@
 #pragma once
-#include "Icon.h"
+#include"Object2D.h"
 #include"TriggersArcIcon.h"
 #include<deque>
 
@@ -12,7 +12,7 @@ using std::deque;
 
 
 class UnitIcon :
-    public Icon
+    public Object2D
 {
 public:
 	UnitIcon(GameObject* parent);
@@ -20,6 +20,10 @@ public:
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
+
+	void DeviceEvent(const ClickEvent& event) override;
+	void DeviceEvent(const DoubleClickEvent& event) override;
+	void DeviceEvent(const DragEvent& event) override;
 
 	const auto& GetMoveMent() const{ return moveMent; }
 	void AddMoveMent(VECTOR _moveMent, string _movename) { moveMent.push_back({ _moveMent,_movename }); }

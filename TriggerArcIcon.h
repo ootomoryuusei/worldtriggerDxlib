@@ -1,5 +1,5 @@
 #pragma once
-#include "Icon.h"
+#include "Object2D.h"
 #include<array>
 #include<deque>
 
@@ -11,7 +11,7 @@ using std::array;
 using std::deque;
 
 class TriggerArcIcon :
-    public Icon
+    public Object2D
 {
 public:
 	TriggerArcIcon(GameObject* parent);
@@ -19,6 +19,8 @@ public:
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
+
+	void DeviceEvent(const DragEvent& event) override;
 	
 	const auto& GetBoxCorners() const { return boxCorners; }
 

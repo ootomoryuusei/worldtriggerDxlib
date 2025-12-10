@@ -1,8 +1,8 @@
 #include "BackGround.h"
 
-BackGround::BackGround(GameObject* parent) : Icon(parent)
+BackGround::BackGround(GameObject* parent) : Object2D(parent)
 {
-	Load("Assets//Image//BackGround.png");
+	LoadSprite("Assets//Image//BackGround.png");
 }
 
 BackGround::~BackGround()
@@ -11,9 +11,10 @@ BackGround::~BackGround()
 
 void BackGround::Update()
 {
+	Object2D::Update();
 }
 
 void BackGround::Draw()
 {
-	Icon::Draw();
+	Object2D::Draw();
 }

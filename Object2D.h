@@ -13,12 +13,13 @@ using std::string;
 class UIRaycaster;
 
 struct SIZE_2D {
-    int x, y, halfX, halfY;
+    int x, y;
     void set(int _x, int _y) {
         x = _x, y = _y;
     }
     int halfX() const { return x / 2; }
     int halfY() const { return y / 2; }
+    XMINT2 half() const { return { x / 2, y / 2 }; }
 };
 
 struct SIZE_F_2D {
@@ -28,6 +29,7 @@ struct SIZE_F_2D {
     }
     float halfX() const { return x / 2; }
     float halfY() const { return y / 2; }
+    XMFLOAT2 half() const { return { x / 2,y / 2 }; }
 };
 
 
@@ -61,6 +63,8 @@ public:
     void SetFontHandle(int _fontHandle) { fontHandle_ = _fontHandle; }
 
     virtual bool IsInMousePoint(const XMFLOAT2& mpos) const;
+
+    bool PointInQuad(XMFLOAT2 point, const array<XMFLOAT2, 4>& corners);
 protected:
     int hModel_; //モデルハンドル
     SIZE_F_2D graphSizeF_; //アイコンの画像サイズ(float)

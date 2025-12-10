@@ -1,7 +1,7 @@
 #pragma once
-#include "Icon.h"
+#include "Object2D.h"
 class Unit :
-    public Icon
+    public Object2D
 {
 public:
 	Unit(GameObject* parent);
@@ -12,7 +12,5 @@ public:
 private:
 	XMFLOAT2 boxPos[2];
 	XMFLOAT2 boxSize[2];
-
-	void DeviceEvent(const MouseClickEvent& event) override;
 };
 

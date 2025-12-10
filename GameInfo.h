@@ -3,6 +3,8 @@
 
 using std::string;
 
+const int MAX_MAP_HIGHT = 11;
+const int MAX_MAP_WIDTH = 11;
 const int MAX_SELECT_CHARACTER = 3;
 const int MAX_TRIGGER_HANDS = 2;
 const int MAX_CAN_SET_TRIGGER = 4;
@@ -34,6 +36,11 @@ struct TILEDATA {
 	int num;
 };
 
+struct MOVEMENT {
+	VECTOR movement;
+	string movename;
+};
+
 enum STATUS {
 	MOVE = 0,
 	TRION,
@@ -58,8 +65,8 @@ enum STEP {
 
 
 enum HANDS {
-	RIGHT = 0,
-	LEFT,
+	RIGHT_HAND = 0,
+	LEFT_HAND,
 	MAX
 };
 

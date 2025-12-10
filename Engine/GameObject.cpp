@@ -1,6 +1,9 @@
 #include "gameObject.h"
 #include <assert.h>
+#include<cmath>
 #include "global.h"
+
+using std::lerp;
 
 //コンストラクタ（親も名前もなし）
 GameObject::GameObject(void) :
@@ -310,5 +313,13 @@ bool GameObject::PointInBox(XMFLOAT2 _point, XMFLOAT2 _LeftUp, XMFLOAT2 _distanc
 		return true;
 	}
 	return false;
+}
+
+XMFLOAT3 GameObject::Lerp3D(XMFLOAT3& start, XMFLOAT3& goal, float percent)
+{
+	return XMFLOAT3{ lerp(start.x,goal.x,percent),
+				  lerp(start.y,goal.y,percent),
+				  lerp(start.z,goal.z,percent)
+	};
 }
 

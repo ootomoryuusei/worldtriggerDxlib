@@ -5,11 +5,6 @@
 using std::vector;
 using std::string;
 
-struct MOVEMENT {
-    VECTOR movement;
-    string movename;
-};
-
 class Icon :
     public Object2D
 {

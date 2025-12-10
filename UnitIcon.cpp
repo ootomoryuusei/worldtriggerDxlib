@@ -15,7 +15,7 @@
 
 using std::clamp;
 
-UnitIcon::UnitIcon(GameObject* parent) : Icon(parent)
+UnitIcon::UnitIcon(GameObject* parent) : Object2D(parent)
 {
 	createNum_ = -1;
 	
@@ -44,47 +44,35 @@ void UnitIcon::Initialize()
 
 void UnitIcon::Update()
 {
-
-	Mouse* pMouse_ = GetParent()->GetParent()->FindGameObject<Mouse>();
 	pGroupManager_ = GetParent()->GetParent()->FindGameObject<GroupManager>();
 	pTileIcons_ = dynamic_cast<TileIcons*>(pGroupManager_->GetGroup("TileIconGroup"));
 	
 	MoveSetIcon* pMoveSetIcon_ = GetParent()->GetParent()->FindGameObject<MoveSetIcon>();
 	MoveSelectIcon* pMoveSelectIcon_ = GetParent()->GetParent()->FindGameObject<MoveSelectIcon>();
-	XMFLOAT2 mousePos = pMouse_->GetMousePos();
 	pLoad_->setMoveMent(moveMent);
 
 
 	auto& arcs = pArcs_->GetpTriggerArcIcon();
 	for (auto& itr : arcs) {
-		itr->Set3DPosition(position);
+		itr->SetPosition(transform_.position_);
 	}
 
 	switch (step_)
 	{
 	case FIRST:
 	{
-		if (IsInMousePoint(mousePos)) {
-			if (selecting_) {
-				//unitIconの移動処理
-				if (pMouse_->IsPressed(Mouse::LEFT)) {
-					XMFLOAT2 mouseVariation = { mousePos.x - prevMousePos_.x,mousePos.y - prevMousePos_.y };
-					position = { position.x + mouseVariation.x, position.y + mouseVariation.y, 0.0f };
-				}else {
-					for (auto& colmun : pTileIcons_->GetpTIcon()) {//タイルとの当たり判定
-						for (auto& row : colmun) {
-							XMFLOAT2 leftUp = { row->Get3DPosition().x + row->GetGraphSizeF_2D().x / 4, row->Get3DPosition().y };
-							XMFLOAT2 graphSize = { row->GetGraphSizeF_2D().x / 4 * 2, row->GetGraphSizeF_2D().y };
-							XMFLOAT2 graphCenter = { position.x + graphSizeF_.halfX,position.y + graphSizeF_.halfY };
-							if (PointInBox({ graphCenter.x, graphCenter.y }, leftUp, graphSize)) {
-								position = { row->Get3DPosition() };
-							}
-						}
-					}
+		if (!selecting_) return;
+		//unitIconの移動処理
+		for (auto& colmun : pTileIcons_->GetpTIcon()) {//タイルとの当たり判定
+			for (auto& row : colmun) {
+				XMFLOAT2 leftUp = { row->GetPosition().x + row->GetGraphSizeF_2D().x / 4, row->GetPosition().y };
+				XMFLOAT2 graphSize = { row->GetGraphSizeF_2D().x / 4 * 2, row->GetGraphSizeF_2D().y };
+				XMFLOAT2 graphCenter = { transform_.position_.x + graphSizeF_.halfX(),transform_.position_.y + graphSizeF_.halfY()};
+				if (PointInBox({ graphCenter.x, graphCenter.y }, leftUp, graphSize)) {
+					transform_.position_ = { row->GetPosition() };
 				}
 			}
-		}
-		prevMousePos_ = mousePos;
+		}	
 		break;
 	}
 	case SECONDE:
@@ -94,21 +82,10 @@ void UnitIcon::Update()
 			const auto& data = arcs[i]->GetpData()->GetTriggerData();
 			hands_[i]->GetTriggerData()->SetTriggerData(data);
 		}
-
-		if (IsInMousePoint(mousePos)) {
-			//unitIconの選択処理
-			if (pMouse_->IsDoubleClicked(Mouse::LEFT)) { //ダブルクリック処理
-				//行動選択、行動一覧を生成
-				set = true;
-			}else if (pMouse_->IsClicked(Mouse::LEFT)) { //シングルクリック処理
-				//行動選択、行動一覧、ユニットの範囲外だった場合消去
-				set = false;
-			}
 			/*	if (!moveMent.empty()) {
 		        VECTOR pos = pTileIcons_->GetpTIcon()[moveMent.back()]->Get3DPosition();
 				position = pos;
 			}*/
-		}
 		break;
 	}
 	case THIRD:
@@ -118,7 +95,7 @@ void UnitIcon::Update()
 				dq_moveMent.push_back(itr);
 			}
 			auto m_front = dq_moveMent.front();
-			position = pTileIcons_->GetpTIcon()[m_front.movement.y][m_front.movement.x]->Get3DPosition();
+			transform_.position_ = pTileIcons_->GetpTIcon()[m_front.movement.y][m_front.movement.x]->GetPosition();
 			firstSet = true;
 			moveing = true;
 		}
@@ -128,11 +105,11 @@ void UnitIcon::Update()
 				auto s_offset = *it;
 				auto t_offset = *(++it);
 				
-				VECTOR start = pTileIcons_->GetpTIcon()[s_offset.movement.y][s_offset.movement.x]->Get3DPosition();
-				VECTOR target = pTileIcons_->GetpTIcon()[t_offset.movement.y][t_offset.movement.x]->Get3DPosition();
+				XMFLOAT3 start = pTileIcons_->GetpTIcon()[s_offset.movement.y][s_offset.movement.x]->GetPosition();
+				XMFLOAT3 target = pTileIcons_->GetpTIcon()[t_offset.movement.y][t_offset.movement.x]->GetPosition();
 				float percent = elapsedTime / totalTime;
 				percent = clamp(percent, 0.0f, 1.0f);
-				position = Lerp3D(start, target, percent);
+				transform_.position_ = Lerp3D(start, target, percent);
 				if (percent >= 1.0f) {
 					// 移動完了 → 次の区間へ
 					elapsedTime = 0.0f;
@@ -149,6 +126,7 @@ void UnitIcon::Update()
 	default:
 		break;
 	}
+	Object2D::Update();
 }
 
 void UnitIcon::Draw()
@@ -159,26 +137,26 @@ void UnitIcon::Draw()
 	{
 	case FIRST:
 	{
-		DrawGraph(position.x + (TileSize.x / 2 - graphSizeF_.halfX()), position.y + (TileSize.y / 2 - graphSizeF_.halfY()), hModel_, TRUE);
+		DrawGraph(transform_.position_.x + (TileSize.x / 2 - graphSizeF_.halfX()), transform_.position_.y + (TileSize.y / 2 - graphSizeF_.halfY()), hModel_, TRUE);
 		break;
 	}
 	case SECONDE:
 	{
 		if (moveMent.size() >= 2) {
 			auto m_front = moveMent.front();
-			VECTOR pos = pTileIcons_->GetpTIcon()[m_front.movement.y][m_front.movement.x]->Get3DPosition();
+			XMFLOAT3 pos = pTileIcons_->GetpTIcon()[m_front.movement.y][m_front.movement.x]->GetPosition();
 			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 / 2);
 			DrawGraph(pos.x + (TileSize.x / 2 - graphSizeF_.halfX()), pos.y + (TileSize.y / 2 - graphSizeF_.halfY()), hModel_, TRUE);
 			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 		}
 		auto m_back = moveMent.back();
-		position = pTileIcons_->GetpTIcon()[m_back.movement.y][m_back.movement.x]->Get3DPosition();
-		DrawGraph(position.x + (TileSize.x / 2 - graphSizeF_.halfX()), position.y + (TileSize.y / 2 - graphSizeF_.halfY()), hModel_, TRUE);
+		transform_.position_ = pTileIcons_->GetpTIcon()[m_back.movement.y][m_back.movement.x]->GetPosition();
+		DrawGraph(transform_.position_.x + (TileSize.x / 2 - graphSizeF_.halfX()), transform_.position_.y + (TileSize.y / 2 - graphSizeF_.halfY()), hModel_, TRUE);
 		break;
 	}
 	case THIRD:
 	{
-		DrawGraph(position.x + (TileSize.x / 2 - graphSizeF_.halfX()), position.y + (TileSize.y / 2 - graphSizeF_.halfY()), hModel_, TRUE);
+		DrawGraph(transform_.position_.x + (TileSize.x / 2 - graphSizeF_.halfX()), transform_.position_.y + (TileSize.y / 2 - graphSizeF_.halfY()), hModel_, TRUE);
 		break;
 	}	
 	default:
@@ -187,4 +165,59 @@ void UnitIcon::Draw()
 #if 0
 	DrawBoxAA(position.x, position.y, position.x + graphSizeF_.x , position.y + graphSizeF_.y, GetColor(255, 0, 0), FALSE);
 #endif
+}
+
+void UnitIcon::DeviceEvent(const ClickEvent& event)
+{
+	switch (event.button)
+	{
+	case LEFT:
+		//行動選択、行動一覧を生成
+		set = false;
+		break;
+	case RIGHT:
+		break;
+	case MIDDLE:
+		break;
+	default:
+		break;
+	}
+}
+
+void UnitIcon::DeviceEvent(const DoubleClickEvent& event)
+{
+	switch (event.button)
+	{
+	case LEFT:
+		//行動選択、行動一覧、ユニットの範囲外だった場合消去
+		set = true;
+		break;
+	case RIGHT:
+		break;
+	case MIDDLE:
+		break;
+	default:
+		break;
+	}
+}
+
+void UnitIcon::DeviceEvent(const DragEvent& event)
+{
+	switch (event.button)
+	{
+	case LEFT:
+		if (!selecting_) return;
+		XMFLOAT2 current_pos = event.current;
+		XMFLOAT2 prev_pos = event.start;
+		XMFLOAT2 mouseVariation = { current_pos.x - prev_pos.x,current_pos.y - prev_pos.y };
+		transform_.position_ = { transform_.position_.x + mouseVariation.x, transform_.position_.y + mouseVariation.y, 0.0f };
+		prev_pos = current_pos;
+		break;
+	case RIGHT:
+		break;
+	case MIDDLE:
+		break;
+	default:
+		break;
+	}
 }

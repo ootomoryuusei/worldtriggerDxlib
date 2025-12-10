@@ -120,10 +120,6 @@ public:
 		return VGet(1, 0, 0) * MGetRotY(position_.y);
 	}
 
-	VECTOR GetPosition() { return position_; }
-
-	VECTOR GetRotation() { return rotation_; }
-
 	// 自分の正面か？
 	bool InFront(VECTOR pos, float range);
 
@@ -138,10 +134,6 @@ public:
 
 	// マトリクスへ変換
 	MATRIX ToMATRIX(FLOAT3 pos, FLOAT3 rot);
-
-	bool PointInQuad(XMFLOAT2 point, const array<XMFLOAT2, 4>& corners);
-
-	VECTOR Lerp3D(VECTOR& start, VECTOR& goal, float percent);
 
 	/*void SetStep(STEP _step) { step_ = _step; }
 	int GetStep() { return step_; }*/

@@ -1,11 +1,11 @@
 #pragma once
-#include "Icon.h"
+#include "Object2D.h"
 
 class TileIcons;
 class GroupManager;
 
 class Map :
-    public Icon
+    public Object2D
 {
 public:
 	Map(GameObject* parent);

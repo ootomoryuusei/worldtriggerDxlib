@@ -1,6 +1,6 @@
 #include "rader.h"
 
-rader::rader(GameObject* parent) : Icon(parent)
+rader::rader(GameObject* parent) : Object2D(parent)
 {
 	/*Load("Assets//Image//rader.png");*/
 	/*position = { 1000, 20, 0 };*/
@@ -8,7 +8,7 @@ rader::rader(GameObject* parent) : Icon(parent)
 	boxSize[0] = { 80 ,30 };
 	boxSize[1] = {300,300};
 
-	position = { 700,100 };
+	transform_.position_ = { 700,100 ,0};
 
 	iconName_ = "レーダー";
 }
@@ -28,13 +28,14 @@ void rader::Initialize()
 
 void rader::Update()
 {
+	Object2D::Update();
 }
 
 void rader::Draw()
 {
 	//テキスト入り小box
-	XMFLOAT2 pos = { position.x,position.y };
-	boxPos[0] = { pos.x + boxSize[0].x,pos.y + boxSize[0].y };
+	XMFLOAT2 pos = { position_.x,position_.y };
+	boxPos[0] = pos + boxSize[0];
 	DrawBoxAA(pos.x, pos.y, boxPos[0].x, boxPos[0].y, GetColor(0, 0, 0), TRUE);
 	//大box
 	boxPos[1] = { pos.x, boxPos[0].y };
@@ -43,8 +44,8 @@ void rader::Draw()
 	/*	DrawGraph(boxPos[1].x + 10 / 2, boxPos[1].y + 10 / 2, hModel, TRUE);*/
 
 	XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
-	XMFLOAT2 space = { (boxSize[0].x - strSize.x) / 2,(boxSize[0].y - strSize.y) / 2 };
-	VECTOR fontPos = { position.x + space.x, position.y + space.y,position.z };
+	XMFLOAT2 space = (boxSize[0] - strSize) / 2;
+	XMFLOAT2 fontPos = position_ + space;
 	DrawStringToHandle(fontPos.x, fontPos.y, iconName_.c_str(),
 	GetColor(255, 255, 255), fontHandle_, GetColor(0, 0, 0));
 }

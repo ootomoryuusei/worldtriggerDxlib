@@ -1,7 +1,7 @@
 #pragma once
-#include "Icon.h"
+#include "Object2D.h"
 class Timer :
-    public Icon
+    public Object2D
 {
 public:
 	Timer(GameObject* parent);
@@ -9,6 +9,8 @@ public:
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
+
+	void DeviceEvent(const DoubleClickEvent& event) override;
 private:
 	XMFLOAT2 boxSize;
 };

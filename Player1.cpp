@@ -68,8 +68,8 @@ void Player1::Initialize()
 		int x = placementIndex % MAX_MAP_WIDTH;
 		int y = placementIndex / MAX_MAP_WIDTH;
 
-		VECTOR initialPosition = pTiles_->GetpTiles()[y-1][x]->Get3DPosition();
-		itr->Set3DPosition(initialPosition);
+		XMFLOAT3 initialPosition = pTiles_->GetpTiles()[y-1][x]->GetPosition();
+		itr->SetPosition(initialPosition);
 		index++;
 	}
 
@@ -104,7 +104,7 @@ void Player1::Update()
 	//		}
 	//		// æ“ª‚¾‚Á‚½ê‡‚Í‰½‚à‚µ‚È‚¢ or ––”ö‚É–ß‚·‚È‚Ç‚à‰Â”\
 	//	}
-	}
+	//}
 	//XMFLOAT3 c_rota = pSelectingCharacter_->GetRotate();
 	//VECTOR c_position = pSelectingCharacter_->Get3DPosition();
 	//// ƒJƒƒ‰‚Ìİ’è

@@ -5,28 +5,27 @@
 
 Tile::Tile(GameObject* parent) : Object3D(parent)
 {
-	hModel = MV1LoadModel("Assets//Model//Tile.mv1");
-	assert(hModel >= 0);
-	
-	position = VGet(0, 0, 0);
-	rotation = VGet(0, XMConvertToRadians(90.0f), 0);
-	size = CalculateModelSize();
+	LoadModel("Assets//Model//Tile.mv1");
+
+	transform_.position_ = { 0, 0, 0 };
+	transform_.rotate_ = { 0,90,0 };
+	size_ = CalculateModelSize();
 }
 
 Tile::~Tile()
 {
-	if(hModel > 0) {
-		MV1DeleteModel(hModel);
-		hModel = -1;
+	if(hModel_ > 0) {
+		MV1DeleteModel(hModel_);
+		hModel_ = -1;
 	}
 }
 
 void Tile::Update()
 {
+	Object3D::Update();
 }
 
 void Tile::Draw()
 {
-	MV1SetMatrix(hModel,ToMATRIX(position, rotation));
-	MV1DrawModel(hModel);
+	Object3D::Draw();
 }

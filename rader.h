@@ -1,7 +1,7 @@
 #pragma once
-#include "Icon.h"
+#include "Object2D.h"
 class rader :
-    public Icon
+    public Object2D
 {
 public:
 	rader(GameObject* parent);

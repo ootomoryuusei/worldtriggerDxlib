@@ -16,11 +16,11 @@ void Tiles::Initialize()
 		for (int x = 0; x < MAX_MAP_WIDTH; x++) {
 			Tile* pTile = Instantiate<Tile>(this);
 			VECTOR size = pTile->GetModelSize();
-			VECTOR pos = { position.x - (size.x * (3.0/4.0)) * x,position.y,position.z + size.z * y };
+			VECTOR pos = { transform_.position_.x - (size.x * (3.0/4.0)) * x,transform_.position_.y,transform_.position_.z + size.z * y };
 			if (x % 2 == 1) {
 				pos.z += size.z / 2;
 			}
-			pTile->Set3DPosition(pos);
+			pTile->SetPosition(pos);
 			row.push_back(pTile);
 		}
 		pTiles.push_back(row);

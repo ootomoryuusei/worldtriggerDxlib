@@ -3,10 +3,10 @@
 #include"GroupManager.h"
 #include"Mouse.h"
 
-Map::Map(GameObject* parent) : Icon(parent,"MAP")
+Map::Map(GameObject* parent) : Object2D(parent,"MAP")
 {
 	/*position = { 100, 120, 0 };*/
-	position = { 700, 120, 0 };
+	transform_.position_ = { 700, 120, 0 };
 
 	boxSize[0] = { 90 ,40 };
 	boxSize[1].x = 450;
@@ -15,8 +15,8 @@ Map::Map(GameObject* parent) : Icon(parent,"MAP")
 	float H = MAX_MAP_HIGHT * h;
 	boxSize[1] = { boxSize[1].x,H };
 
-	boxPos[0] = { position.x + boxSize[0].x,position.y + boxSize[0].y };
-	boxPos[1] = { position.x ,boxPos[0].y };
+	boxPos[0] = { transform_.position_.x + boxSize[0].x,transform_.position_.y + boxSize[0].y };
+	boxPos[1] = { transform_.position_.x ,boxPos[0].y };
 	iconName_ = "MAP";
 }
 
@@ -51,24 +51,25 @@ void Map::Update()
 		prevMousePos_ = mousePos;
 	}*/
 
-	pTileIcons_->SetPosition(position.x,position.y,position.z);
+	pTileIcons_->SetPosition(transform_.position_);
 
-	boxPos[0] = { position.x + boxSize[0].x,position.y + boxSize[0].y };
-	boxPos[1] = { position.x, boxPos[0].y };
+	boxPos[0] = { transform_.position_.x + boxSize[0].x,transform_.position_.y + boxSize[0].y };
+	boxPos[1] = { transform_.position_.x, boxPos[0].y };
+	Object2D::Update();
 }
 
 void Map::Draw()
 {
 	//テキスト入り小box
-	DrawBoxAA(position.x, position.y, boxPos[0].x, boxPos[0].y, GetColor(0, 0, 0), TRUE);
+	DrawBoxAA(position_.x, position_.y, boxPos[0].x, boxPos[0].y, GetColor(0, 0, 0), TRUE);
 	//大box
 	DrawBoxAA(boxPos[1].x, boxPos[1].y, boxPos[1].x + boxSize[1].x, boxPos[1].y + boxSize[1].y
 		, GetColor(0, 0, 0), TRUE);
 	DrawGraph(boxPos[1].x + 10 / 2, boxPos[1].y + 10 / 2, hModel_, TRUE);
 
 	XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
-	XMFLOAT2 space = { (boxSize[0].x - strSize.x) / 2,(boxSize[0].y - strSize.y) / 2 };
-	VECTOR fontPos = { position.x + space.x, position.y + space.y,position.z };
+	XMFLOAT2 space = (boxSize[0] - strSize) / 2;
+	XMFLOAT2 fontPos = position_ + space;
 	DrawStringToHandle(fontPos.x, fontPos.y, iconName_.c_str(),
 		GetColor(255, 255, 255), fontHandle_/*, GetColor(0, 0, 0)*/);
 }

@@ -2,7 +2,7 @@
 #include"UnitIcons.h"
 #include"Mouse.h"
 
-TriggersArcIcon::TriggersArcIcon(GameObject* parent) : Icon(parent)
+TriggersArcIcon::TriggersArcIcon(GameObject* parent) : Object2D(parent)
 {
 }
 
@@ -13,19 +13,19 @@ TriggersArcIcon::~TriggersArcIcon()
 void TriggersArcIcon::Initialize()
 {
 	const auto& pMainTriggerArcIcon = Instantiate<TriggerArcIcon>(this);
-	pMainTriggerArcIcon->Load("Assets//Image//MainTriggerCircle.png");
+	pMainTriggerArcIcon->LoadSprite("Assets//Image//MainTriggerCircle.png");
 	const auto& pSubTriggerArcIcon = Instantiate<TriggerArcIcon>(this);
-	pSubTriggerArcIcon->Load("Assets//Image//SubTriggerCircle.png");
-	pTriggerArcIcon[RIGHT] = pMainTriggerArcIcon;
-	pTriggerArcIcon[LEFT] = pSubTriggerArcIcon;
-	pTriggerArcIcon[RIGHT]->SetHand(RIGHT);
-	pTriggerArcIcon[LEFT]->SetHand(LEFT);
+	pSubTriggerArcIcon->LoadSprite("Assets//Image//SubTriggerCircle.png");
+	pTriggerArcIcon[RIGHT_HAND] = pMainTriggerArcIcon;
+	pTriggerArcIcon[LEFT_HAND] = pSubTriggerArcIcon;
+	pTriggerArcIcon[RIGHT_HAND]->SetHand(RIGHT_HAND);
+	pTriggerArcIcon[LEFT_HAND]->SetHand(LEFT_HAND);
 	pFirstSelect = nullptr;
 }
 
 void TriggersArcIcon::Update()
 {
-	const auto& u_icons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
+	/*const auto& u_icons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
 	const auto& mouse = u_icons->GetParent()->FindGameObject<Mouse>();
 	XMFLOAT2 mousePos = mouse->GetMousePos();
 
@@ -38,5 +38,5 @@ void TriggersArcIcon::Update()
 			pFirstSelect->SetSelecting(false);
 			pFirstSelect = nullptr;
 		}
-	}
+	}*/
 }

@@ -5,7 +5,7 @@
 #include"GroupManager.h"
 #include"CharacterData.h"
 
-Unit::Unit(GameObject* parent) : Icon(parent)
+Unit::Unit(GameObject* parent) : Object2D(parent)
 {
 	LoadSprite("Assets//Image//unit.png");
 
@@ -73,7 +73,7 @@ void Unit::Initialize()
 
 void Unit::Update()
 {
-	Icon::Update();
+	Object2D::Update();
 }
 
 void Unit::Draw()
@@ -86,7 +86,7 @@ void Unit::Draw()
 	DrawBoxAA(boxPos[1].x, boxPos[1].y, boxPos[1].x + boxSize[1].x, boxPos[1].y + boxSize[1].y
 		, GetColor(0, 0, 0), TRUE);
 
-	Icon::Draw();
+	Object2D::Draw();
 
 	XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
 	XMFLOAT2 space = { (boxSize[0].x - strSize.x) / 2,(boxSize[0].y - strSize.y) / 2 };

@@ -1,5 +1,5 @@
 #pragma once
-#include "Icon.h"
+#include"Object2D.h"
 #include"UnitIcon.h"
 #include"MoveSetIcon.h"
 #include"MoveSelectIcon.h"
@@ -11,7 +11,7 @@ class GroupManager;
 using std::vector;
 
 class UnitIcons :
-	public Icon
+	public Object2D
 {
 public:
 	UnitIcons(GameObject* parent);

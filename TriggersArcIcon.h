@@ -1,12 +1,12 @@
 #pragma once
-#include "Icon.h"
+#include "Object2D.h"
 #include"TriggerArcIcon.h"
 #include<array>
 
 using std::array;
 
 class TriggersArcIcon :
-    public Icon
+    public Object2D
 {
 public:
 

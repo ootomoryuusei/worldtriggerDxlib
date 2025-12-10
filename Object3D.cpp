@@ -1,9 +1,5 @@
 #include "Object3D.h"
 
-#include<cmath>
-
-using std::lerp;
-
 void Object3D::RegisterToRaycaster()
 {
 	raycaster3D_ = GetParent()->FindGameObject<InputManager>()->GetRaycastManager()->GetRaycaster3D();
@@ -128,30 +124,6 @@ MATRIX Object3D::ToMATRIX(FLOAT3 pos, FLOAT3 rot)
 	MATRIX mRotZ = MGetRotZ(rot.z); // Z軸の回転行列
 	MATRIX matrix = mRotZ * mRotX * mRotY * mTrans;
 	return matrix;
-}
-
-bool Object3D::PointInQuad(XMFLOAT2 point, const array<XMFLOAT2, 4>& corners) {
-	// 4つの三角形に分けて、それぞれの符号を確認（外積ベース）
-	for (int i = 0; i < 4; i++) {
-		int j = (i + 1) % 4;
-		float dx1 = corners[j].x - corners[i].x;
-		float dy1 = corners[j].y - corners[i].y;
-		float dx2 = point.x - corners[i].x;
-		float dy2 = point.y - corners[i].y;
-		VECTOR In1, In2;
-		In1 = { dx1,dy1 };
-		In2 = { dx2,dy2 };
-		if (VCross(In1,In2).z < 0) return false;
-	}
-	return true;
-}
-
-VECTOR Object3D::Lerp3D(VECTOR& start, VECTOR& goal, float percent)
-{
-	return VECTOR{ lerp(start.x,goal.x,percent),
-				  lerp(start.y,goal.y,percent),
-				  lerp(start.z,goal.z,percent)
-	};
 }
 
 VECTOR Object3D::CalculateModelSize()

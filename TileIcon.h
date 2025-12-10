@@ -1,10 +1,10 @@
 #pragma once
-#include "Icon.h"
+#include "Object2D.h"
 
 class MoveSelectIcon;
 
 class TileIcon :
-    public Icon
+    public Object2D
 {
 public:
 	TileIcon(GameObject* parent);
@@ -12,6 +12,8 @@ public:
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
+
+	void DeviceEvent(const DoubleClickEvent& event) override;
 
 	void SetTileData(TILEDATA _tile) { tile_ = _tile; }
 	TILEDATA GetTileData() { return tile_; }

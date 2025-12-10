@@ -1,11 +1,11 @@
 #pragma once
-#include "Icon.h"
+#include "Object2D.h"
 
 class TileIcons;
 class GroupManager;
 
 class MoveMentsLoad :
-    public Icon
+    public Object2D
 {
 public:
 	MoveMentsLoad(GameObject* parent);
