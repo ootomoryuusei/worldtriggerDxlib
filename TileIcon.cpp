@@ -54,14 +54,16 @@ void TileIcon::DeviceEvent(const DoubleClickEvent& event)
 	{
 	case LEFT:
 		if (!select) return;
-		const auto& ptr = pMoveSelectIcon_->GetpMoveTypeIcons();
-		const auto& pUnitIcons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
-		auto& pMoveSetIcon = pUnitIcons->GetpMoveSetIcon();
-		string name = "";
-		name = ptr->GetpSelectTypeIcon()->GetIconName();
-		pUnitIcons->GetpSelecting_ptr()->AddMoveMent(tile_.offset, name);
-		select = false;
-		selected = true;
+		{
+			const auto& ptr = pMoveSelectIcon_->GetpMoveTypeIcons();
+			const auto& pUnitIcons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
+			auto& pMoveSetIcon = pUnitIcons->GetpMoveSetIcon();
+			string name = "";
+			name = ptr->GetpSelectTypeIcon()->GetIconName();
+			pUnitIcons->GetpSelecting_ptr()->AddMoveMent(tile_.offset, name);
+			select = false;
+			selected = true;
+		}
 		break;
 	case RIGHT:
 		break;

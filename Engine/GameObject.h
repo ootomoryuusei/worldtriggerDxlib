@@ -8,6 +8,7 @@
 #include "time.h"
 #include<unordered_set>
 #include"../InputEvents.h"
+#include "../GameInfo.h"
 class GroupBase;
 
 using std::unordered_set;
@@ -28,6 +29,8 @@ protected:
 	std::string				objectName_;
 
 	unordered_set<GroupBase*> groups_;
+
+	STEP step_;
 public:
 	//コンストラクタ
 	GameObject();
@@ -248,6 +251,9 @@ public:
 	virtual void DeviceEvent(const DragEvent& event) {} //マウスドラッグイベント
 	virtual void DeviceEvent(const WheelEvent& event) {} //マウスホイールイベント
 	virtual void DeviceEvent(const KeyEvent& event) {} //キーボードイベント
+
+	void SetStep(STEP _step) { step_ = _step; }
+	STEP GetStep()const { return step_; }
 private:
 
 	//オブジェクト削除（再帰）
@@ -269,6 +275,8 @@ private:
 
 	//子オブジェクトリスト
 	std::list<GameObject*> childList_;
+
+	
 };
 
 

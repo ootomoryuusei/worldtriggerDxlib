@@ -214,6 +214,8 @@
     <ClCompile Include="UnitIcon.cpp" />
     <ClCompile Include="UnitIcons.cpp" />
     <ClCompile Include="RaycastManager.cpp" />
+    <ClCompile Include="Raycaster2D.cpp" />
+    <ClCompile Include="Raycaster3D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Amatori_Chika.h" />

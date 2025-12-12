@@ -127,6 +127,7 @@ void TriggerArcIcon::DeviceEvent(const DragEvent& event)
 	switch (event.button)
 	{
 	case LEFT:
+	{
 		const auto& uniticons = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
 		const auto& mouse = uniticons->GetParent()->FindGameObject<Mouse>();
 		SIZE_F_2D tileSize = pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D();
@@ -184,6 +185,7 @@ void TriggerArcIcon::DeviceEvent(const DragEvent& event)
 		}
 		// ŸƒtƒŒ[ƒ€‚Ì‚½‚ß‚É•Û‘¶
 		prevVec = nowVec;
+	}
 		break;
 	case RIGHT:
 		break;

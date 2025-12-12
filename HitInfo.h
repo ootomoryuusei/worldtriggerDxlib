@@ -1,6 +1,8 @@
 #pragma once
 #include<string>
 
+class GameObject;
+
 enum HitTargetType {
 	NONE,
 	UI,

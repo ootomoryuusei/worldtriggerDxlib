@@ -1,16 +1,17 @@
 #pragma once
 #include "Engine/GameObject.h" 
 #include"GameInfo.h"
+#include"InputManager.h"
 #include <DirectXMath.h>
 #include <string>
+#include<array>
 #include <functional>
-#include"InputManager.h"
-#include "Raycaster2D.h"
+
+class Raycaster2D;
 
 using namespace DirectX;
 using std::string;
-
-class UIRaycaster;
+using std::array;
 
 struct SIZE_2D {
     int x, y;

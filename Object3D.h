@@ -1,12 +1,11 @@
 #pragma once
-// GameObject¨Object3D¨Player/Ground‚ÌŠÖŒW‚É‚·‚é
 #include "Engine/GameObject.h"
 #include"GameInfo.h"
-#include"Raycaster3D.h"
-#include"RaycastManager.h"
 #include"InputManager.h"
 #include<array>
 #include<unordered_map>
+
+class Raycaster3D;
 
 using std::string;
 using std::array;
