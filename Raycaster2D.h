@@ -1,4 +1,5 @@
 #pragma once  
+#include"Engine/GameObject.h"
 #include"HitInfo.h"
 #include <vector>
 
@@ -6,8 +7,14 @@ class Object2D;
 
 using std::vector;
 
-class Raycaster2D {  
+class Raycaster2D :
+	public GameObject
+{  
 public:  
+	Raycaster2D(GameObject* parent);
+	~Raycaster2D();
+
+	void Initialize() override;
    vector<Object2D*> elements_; // UI—v‘f  
 
    // UI ‚ð“o˜^  

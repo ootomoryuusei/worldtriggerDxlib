@@ -5,11 +5,10 @@ AutoRegister<Amatori_Chika,CharacterFactory> Amatori_Chika::register_("Amatori_C
 
 Amatori_Chika::Amatori_Chika(GameObject* parent) : Character(parent)
 {
-	hModel = MV1LoadModel("Assets//Model//human.mv1");
-	assert(hModel >= 0);
+	LoadModel("Assets//Model//human.mv1");
 
-	position = VGet(0, 0, 0);
-	rotation = VGet(0, 0, 0);
+	transform_.position_ = { 0, 0, 0 };
+	transform_.rotate_ = { 0, 0, 0 };
 
 	movetime = 5.0f;
 	flame = 1.0f / 60.0f;
@@ -22,7 +21,5 @@ Amatori_Chika::~Amatori_Chika()
 
 void Amatori_Chika::Draw()
 {
-	MATRIX mModel = ToMATRIX(position, rotation);
-	MV1SetMatrix(hModel, mModel);
-	MV1DrawModel(hModel);
+	Object3D::Draw();
 }

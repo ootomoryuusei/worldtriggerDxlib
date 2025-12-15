@@ -16,7 +16,7 @@ public:
     void Update() override;
     void Draw() override;
 
-    bool ArcInPoint(VECTOR _targer_pos,VECTOR _dir,float _fov);
+    bool ArcInPoint(XMFLOAT3 _targer_pos,VECTOR _dir,float _fov);
 
     const auto& GetTriggerData() const { return pData_; }
 private:

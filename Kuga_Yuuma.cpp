@@ -4,11 +4,10 @@ AutoRegister<Kuga_Yuuma,CharacterFactory> Kuga_Yuuma::register_("Kuga_Yuuma");
 
 Kuga_Yuuma::Kuga_Yuuma(GameObject* parent) : Character(parent)
 {
-	hModel = MV1LoadModel("Assets//Model//human.mv1");
-	assert(hModel >= 0);
+	LoadModel("Assets//Model//human.mv1");
 
-	position = VGet(0, 0, 0);
-	rotation = VGet(0, 0, 0);
+	transform_.position_ = {0,0,0};
+	transform_.rotate_ = { 0,0,0 };
 
 	
 	movetime = 5.0f;
@@ -22,7 +21,5 @@ Kuga_Yuuma::~Kuga_Yuuma()
 
 void Kuga_Yuuma::Draw()
 {
-	MATRIX mModel = ToMATRIX(position, rotation);
-	MV1SetMatrix(hModel, mModel);
-	MV1DrawModel(hModel);
+	Object3D::Draw();
 }

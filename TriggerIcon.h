@@ -1,13 +1,15 @@
 #pragma once
-#include"Icon.h"
+#include"Object2D.h"
 class TriggerIcon :
-    public Icon
+    public Object2D
 {
 public:
     TriggerIcon(GameObject* parent);
     ~TriggerIcon();
     void Update() override;
     void Draw() override;
+
+    void DeviceEvent(const DragEvent& event) override;
 
     void SetInitialPosition(VECTOR _initialPosition) { initialPosition_ = _initialPosition; }
     int GetSettingNum() { return settingNum_; }

@@ -3,7 +3,7 @@
 
 void Object3D::RegisterToRaycaster()
 {
-	raycaster3D_ = GetParent()->FindGameObject<InputManager>()->GetRaycastManager()->GetRaycaster3D();
+	raycaster3D_ = GetParent()->GetParent()->FindGameObject<InputManager>()->GetRaycastManager()->GetRaycaster3D();
 	if (!raycaster3D_) return; // Raycaster3Dが存在しない場合は登録しない
 
 	auto& list = raycaster3D_->objects_;
@@ -89,7 +89,7 @@ bool Object3D::Raycast(const VECTOR& rayOrigin, const VECTOR& rayDir, float& out
 	return false;
 }
 
-bool Object3D::InFront(VECTOR pos, float range)
+bool Object3D::InFront(XMFLOAT3 pos, float range)
 //                     相手の座標  範囲（ラジアン）
 {
 	VECTOR targetVec = ToTarget(pos); // 相手へのベクトルを求める（相手の座標ー自分の座標）
@@ -102,7 +102,7 @@ bool Object3D::InFront(VECTOR pos, float range)
 	return false;
 }
 
-bool Object3D::InRight(VECTOR pos)
+bool Object3D::InRight(XMFLOAT3 pos)
 {
 	return VDot(ToTarget(pos), RightVec()) >= 0.0f;
 }

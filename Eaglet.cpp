@@ -8,8 +8,7 @@ AutoRegister<Eaglet, TriggerFactory> Eaglet::register_("EAGLET");
 
 Eaglet::Eaglet(GameObject* parent) : Trigger(parent)
 {
-	hModel = MV1LoadModel("Assets//Model//SampleEaglet.mv1");
-	assert(hModel >= 0);
+	LoadModel("Assets//Model//SampleEaglet.mv1");
 }
 
 Eaglet::~Eaglet()
@@ -29,16 +28,14 @@ void Eaglet::Update()
 	list<Character*> target_list = target_group->FindGameObjects<Character>();
 	float angle = pData_->GetTriggerData().arc.angle;
 	for (auto& itr : target_list) {
-		if (ArcInPoint(itr->Get3DPosition(), { 0,0,1 },angle)) {
+		if (ArcInPoint(itr->GetPosition(), { 0,0,1 },angle)) {
 
 		}
 	}
-	matrix = ToMATRIX(position, rotation);
+	Object3D::Update();
 }
 
 void Eaglet::Draw()
 {
-	
-	MV1SetMatrix(hModel, matrix);
-	MV1DrawModel(hModel);
+	Object3D::Draw();
 }

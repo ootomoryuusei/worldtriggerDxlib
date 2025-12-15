@@ -49,13 +49,22 @@ void Timer::DeviceEvent(const DoubleClickEvent& event)
 	switch (event.button)
 	{
 	case LEFT:
+	{
 		UnitIcons* pUnitIcons = GetParent()->FindGameObject<UnitIcons>();
 		pUnitIcons->SetMoveMentSet(true);
+	}
 		break;
 	case RIGHT:
+	{
+
+	}
 		break;
 	case MIDDLE:
+	{
+
+	}
 		break;
 	default:
 		break;
+	}
 }

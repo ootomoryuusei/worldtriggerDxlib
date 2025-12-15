@@ -2,23 +2,22 @@
 
 Ground::Ground(GameObject* parent) : Object3D(parent)
 {
-	hModel = MV1LoadModel("Assets/Stage/Stage00.mv1");
-	assert(hModel > 0);
-	position = VGet(0, 0, 0);
-	rotation = VGet(0, 0, 0);
+	LoadModel("Assets/Stage/Stage00.mv1");
+	transform_.position_ = {0,0,0};
+	transform_.rotate_ = { 0,0,0 };
 }
 
 Ground::~Ground()
 {
-	if (hModel > 0) {
-		MV1DeleteModel(hModel);
-		hModel = -1;
+	if (hModel_ > 0) {
+		MV1DeleteModel(hModel_);
+		hModel_ = -1;
 	}
 }
 
 bool Ground::CheckRayCollision(const VECTOR& begin, const VECTOR& end, VECTOR* hit)
 {
-	MV1_COLL_RESULT_POLY ret = MV1CollCheck_Line(hModel, 0, begin, end);
+	MV1_COLL_RESULT_POLY ret = MV1CollCheck_Line(hModel_, 0, begin, end);
 	if (ret.HitFlag != 0) {
 		if (hit != nullptr) {
 			*hit = ret.HitPosition;

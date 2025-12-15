@@ -8,13 +8,12 @@ Player::Player(GameObject* parent) : Object3D(parent)
 {
 	
 	/*static const std::string folder = "Assets/Character/Player/";*/
-	hModel = MV1LoadModel("Assets//human.mv1");
-	assert(hModel > 0);
-	int root = MV1SearchFrame(hModel, "root");
-	MV1SetFrameUserLocalMatrix(hModel, root, MGetRotY(DX_PI_F));
+	LoadModel("Assets//human.mv1");
+	int root = MV1SearchFrame(hModel_, "root");
+	MV1SetFrameUserLocalMatrix(hModel_, root, MGetRotY(DX_PI_F));
 
-	position = VGet(0, 0, 0);
-	rotation = VGet(0, 0, 0);
+	transform_.position_ = { 0,0,0 };
+	transform_.rotate_ = { 0,0,0 };
 
 	hSabel = MV1LoadModel("Assets//blade.mv1");
 	assert(hSabel > 0);
@@ -38,9 +37,9 @@ Player::Player(GameObject* parent) : Object3D(parent)
 
 Player::~Player()
 {
-	if (hModel > 0) {
-		MV1DeleteModel(hModel);
-		hModel = -1;
+	if (hModel_ > 0) {
+		MV1DeleteModel(hModel_);
+		hModel_ = -1;
 	}
 	if (hSabel > 0) {
 		MV1DeleteModel(hSabel);
@@ -85,7 +84,7 @@ void Player::Update()
 void Player::updateNormal()
 {
 	Camera* pCam = GetParent()->FindGameObject<Camera>();
-	float camRotY = pCam->GetRotation().y;
+	float camRotY = pCam->GetRotate().y;
 
 	VECTOR inputDirection = VGet(0, 0, 0);
 	{
@@ -129,8 +128,8 @@ void Player::updateNormal()
 		// 方法２：inputDirectionから、移動ベクトルを作る
 		VECTOR move = inputDirection * 300.0f * Time::DeltaTime();
 		VECTOR add = move * MGetRotY(camRotY);
-		position += add;
-		rotation.y = atan2f(add.x, add.z);
+		position_ += add;
+		rotation_.y = atan2f(add.x, add.z);
 		// 方法３：入力から回転角を求めて、行列を使って移動ベクトルを作る
 		/*animator->Play(hAnimData[RUN]);*/
 	}
@@ -178,8 +177,8 @@ void Player::updateNormal()
 	Ground* pG = GetParent()->FindGameObject<Ground>();
 	if (pG != nullptr) {
 		VECTOR hit;
-		if (pG->CheckRayCollision(position + VGet(0, 100, 0), position + VGet(0, -30, 0), &hit)) {
-			position = hit;
+		if (pG->CheckRayCollision(position_ + VGet(0, 100, 0), position_ + VGet(0, -30, 0), &hit)) {
+			position_ = hit;
 		}
 	}
 }
@@ -241,7 +240,7 @@ void Player::updateAttack3()
 void Player::attack(VECTOR p1, VECTOR p2)
 {
 	Goblin* pGob = GetParent()->FindGameObject<Goblin>();
-	pGob->CheckAttacked(position, prevP1, prevP2, p1, p2);
+	pGob->CheckAttacked(position_, prevP1, prevP2, p1, p2);
 	prevP1 = p1;
 	prevP2 = p2;
 }
@@ -252,8 +251,8 @@ void Player::Draw()
 
 	/*DrawCapsule3D(position, position + VGet(0, 160, 0), 30, 20, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);*/
 
-	int wp = MV1SearchFrame(hModel, "wp");
-	MATRIX mSabel = MV1GetFrameLocalWorldMatrix(hModel, wp);
+	int wp = MV1SearchFrame(hModel_, "wp");
+	MATRIX mSabel = MV1GetFrameLocalWorldMatrix(hModel_, wp);
 
 	// サーベルを描画する
 	MV1SetMatrix(hSabel, mSabel);

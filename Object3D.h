@@ -107,8 +107,9 @@ public:
 
 	bool Raycast(const VECTOR& rayOrigin, const VECTOR& rayDir, float& outDist);
 
-	VECTOR ToTarget(VECTOR targetPos) {
-		return targetPos - position_;
+	VECTOR ToTarget(XMFLOAT3 targetPos) {
+		XMFLOAT3 toTarget = targetPos - transform_.position_;
+		return VGet(toTarget.x,toTarget.y,toTarget.z);
 	}
 
 	VECTOR FrontVec() {
@@ -120,10 +121,10 @@ public:
 	}
 
 	// 自分の正面か？
-	bool InFront(VECTOR pos, float range);
+	bool InFront(XMFLOAT3 pos, float range);
 
 	// 自分の右か？
-	bool InRight(VECTOR pos);
+	bool InRight(XMFLOAT3 pos);
 
 	// ベクトルの方を向く
 	void HeadingTo(VECTOR vec);

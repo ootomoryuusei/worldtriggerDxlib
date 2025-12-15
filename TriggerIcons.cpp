@@ -20,8 +20,8 @@ void TriggerIcons::Initialize()
 void TriggerIcons::Update()
 {
 	if (!firstSet) { 
-		DefaultSetTriggers(pCharacterIcon_,RIGHT);
-		DefaultSetTriggers(pCharacterIcon_, LEFT);
+		DefaultSetTriggers(pCharacterIcon_,RIGHT_HAND);
+		DefaultSetTriggers(pCharacterIcon_, LEFT_HAND);
 		/*CreateCanSet(pCharacterIcon_,MAIN);
 		CreateCanSet(pCharacterIcon_, SUB);*/
 		firstSet = true;
@@ -33,8 +33,8 @@ void TriggerIcons::Update()
 	for (int i = 0; i < (int)HANDS::MAX;i++) {
 		int index = 0;
 		for (auto& itr : pTIcons_[i]) {
-			VECTOR position = pUI->GetpFrames()->GetpUIFrames()[i][index]->Get3DPosition();
-			itr->Set3DPosition(position);
+			XMFLOAT3 position = pUI->GetpFrames()->GetpUIFrames()[i][index]->GetPosition();
+			itr->SetPosition(position);
 			index++;
 		}
 	
@@ -43,7 +43,6 @@ void TriggerIcons::Update()
 
 void TriggerIcons::Draw()
 {
-
 }
 
 void TriggerIcons::DefaultSetTriggers(CharacterIcon* pCharacterIcon,HANDS hands)

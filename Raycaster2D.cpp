@@ -4,6 +4,18 @@
 
 using std::remove;
 
+Raycaster2D::Raycaster2D(GameObject* parent) : GameObject(parent,"Raycaster2D")
+{
+}
+
+Raycaster2D::~Raycaster2D()
+{
+}
+
+void Raycaster2D::Initialize()
+{
+}
+
 void Raycaster2D::Register(Object2D* ui)
 {
     elements_.push_back(ui);

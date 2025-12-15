@@ -23,9 +23,9 @@ Character::Character(GameObject* parent) : Object3D(parent)
 
 Character::~Character()
 {
-	if (hModel > 0) {
-		MV1DeleteModel(hModel);
-		hModel = -1;
+	if (hModel_ > 0) {
+		MV1DeleteModel(hModel_);
+		hModel_ = -1;
 	}
 }
 
@@ -37,21 +37,21 @@ void Character::Initialize()
 
 void Character::Update()
 {
-	int RightHand = MV1SearchFrame(hModel, "RightHand");
+	int RightHand = MV1SearchFrame(hModel_, "RightHand");
 	assert(RightHand >= 0);
-	VECTOR righthand_position = MV1GetFramePosition(hModel, RightHand);
+	VECTOR righthand_position = MV1GetFramePosition(hModel_, RightHand);
 	handsPostion_[RIGHT] = righthand_position;
 	//MATRIX mBlade = MV1GetFrameLocalWorldMatrix(hModel, RightHand);
 
-	int LeftHand = MV1SearchFrame(hModel, "LeftHand");
+	int LeftHand = MV1SearchFrame(hModel_, "LeftHand");
 	assert(LeftHand >= 0);
-	VECTOR lefthand_postion = MV1GetFramePosition(hModel, LeftHand);
+	VECTOR lefthand_postion = MV1GetFramePosition(hModel_, LeftHand);
 	handsPostion_[LEFT] = lefthand_postion;
 
 	for (int hands = 0;hands < MAX;hands++) {
 		for (int i = 0;i < 4;i++) {
 			if (trigger_[hands][i] != nullptr) {
-				trigger_[hands][i]->Set3DPosition(handsPostion_[hands]);
+				trigger_[hands][i]->SetPosition(handsPostion_[hands]);
 			}
 		}
 	}
@@ -69,20 +69,21 @@ void Character::Update()
 		break;
 	}
 	/*MATRIX mAsteroid = Object3D::ChangeFLOAT3ToMATRIX(VGet(mLeftHand.m[3][0], mLeftHand.m[3][1] - 0.2f, mLeftHand.m[3][2]), rotation);*/
+	Object3D::Update();
 }
 
 void Character::Draw()
 {
 	//Object3D::Draw(); // Šî’êƒNƒ‰ƒX‚ÌŠÖ”‚ğŒÄ‚Ô¨PlayerƒLƒƒƒ‰‚ğ•`‰æ‚·‚é
-	MATRIX mModel = Object3D::ToMATRIX(position, rotation);
-	MV1SetMatrix(hModel, mModel);
-	MV1DrawModel(hModel);
+	MATRIX mModel = Object3D::ToMATRIX(position_, rotation_);
+	MV1SetMatrix(hModel_, mModel);
+	MV1DrawModel(hModel_);
 
 	/*DrawCapsule3D(position, position + VGet(0, 160, 0), 30, 20, GetColor(255, 0, 0), GetColor(255, 0, 0), FALSE);*/
 
 	
 
-	MATRIX mShield = Object3D::ToMATRIX({ position.x,position.y,position.z - 1.0f }, rotation);
+	MATRIX mShield = Object3D::ToMATRIX({ position_.x,position_.y,position_.z - 1.0f }, rotation_);
 
 	/*DrawMyTrigger(myTrigger_, mLeftHand, mRightHand);*/
 
@@ -125,7 +126,7 @@ void Character::MoveMent()
 		}
 
 		VECTOR f_offset = moveMent.front();
-		position = pTiles_->GetpTiles()[f_offset.y][f_offset.x]->Get3DPosition();
+		transform_.position_ = pTiles_->GetpTiles()[f_offset.y][f_offset.x]->GetPosition();
 		firstSet = true;
 		moveing = true;
 	}
@@ -135,11 +136,11 @@ void Character::MoveMent()
 			auto s_offset = *it;
 			auto t_offset = *(++it);
 
-			VECTOR start = pTiles_->GetpTiles()[s_offset.y][s_offset.x]->Get3DPosition();
-			VECTOR target = pTiles_->GetpTiles()[t_offset.y][t_offset.x]->Get3DPosition();
+			XMFLOAT3 start = pTiles_->GetpTiles()[s_offset.y][s_offset.x]->GetPosition();
+			XMFLOAT3 target = pTiles_->GetpTiles()[t_offset.y][t_offset.x]->GetPosition();
 			float percent = elapsedTime / totalTime;
 			percent = clamp(percent, 0.0f, 1.0f);
-			position = Lerp3D(start, target, percent);
+			transform_.position_ = Lerp3D(start, target, percent);
 			if (percent >= 1.0f) {
 				// ˆÚ“®Š®—¹ ¨ Ÿ‚Ì‹æŠÔ‚Ö
 				elapsedTime = 0.0f;

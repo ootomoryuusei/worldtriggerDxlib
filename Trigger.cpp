@@ -24,7 +24,7 @@ void Trigger::Draw()
 {
 }
 
-bool Trigger::ArcInPoint(VECTOR _targer_pos,VECTOR _dir,float _fov)
+bool Trigger::ArcInPoint(XMFLOAT3 _targer_pos,VECTOR _dir,float _fov)
 {
 	VECTOR toTarget = ToTarget(_targer_pos);
 	toTarget = VNorm(toTarget);

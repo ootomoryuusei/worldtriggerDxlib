@@ -35,7 +35,7 @@ void TileIcons::Initialize()
             float m_scale = min(scale.x, scale.y);
 
             transform_.scale_ = { m_scale ,m_scale ,m_scale };
-            pTIcon->SetScale(VGet(transform_.scale_.x,transform_.scale_.y,transform_.scale_.z));
+            pTIcon->SetScale(transform_.scale_.x,transform_.scale_.y);
             TILEDATA tile;
             XMFLOAT2 pos;
             pos.x = x * (3.0 / 4.0) * pTIcon->GetGraphSizeF_2D().x * transform_.scale_.x;
@@ -44,7 +44,7 @@ void TileIcons::Initialize()
             tile.num = num;
             tile.offset = VGet(x,y,0);
             pTIcon->SetTileData(tile);
-            pTIcon->Set3DPosition(tile.pos);
+            pTIcon->SetPosition(tile.pos);
             row.push_back(pTIcon);
             num++;
         }

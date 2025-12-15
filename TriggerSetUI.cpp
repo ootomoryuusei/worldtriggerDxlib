@@ -7,8 +7,8 @@
 
 TriggerSetUI::TriggerSetUI(GameObject* parent) : Icon(parent)
 {
-	Load("Assets//Image//TriggerSetUI.png");
-	position = { 750,0 , 0 };
+	LoadSprite("Assets//Image//TriggerSetUI.png");
+	transform_.position_ = { 750,0 , 0 };
 }
 
 TriggerSetUI::~TriggerSetUI()
@@ -22,10 +22,10 @@ void TriggerSetUI::Initialize()
 
 void TriggerSetUI::Update()
 {
-
+	Object2D::Update();
 }
 
 void TriggerSetUI::Draw()
 {
-	DrawGraph(position.x, position.y, hModel, TRUE);
+	Object2D::Draw();
 }

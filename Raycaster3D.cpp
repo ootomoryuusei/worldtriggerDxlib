@@ -4,6 +4,18 @@
 
 using std::remove;
 
+Raycaster3D::Raycaster3D(GameObject* parent) : GameObject(parent,"Raycaster3D")
+{
+}
+
+Raycaster3D::~Raycaster3D()
+{
+}
+
+void Raycaster3D::Initialize()
+{
+}
+
 void Raycaster3D::Register(Object3D* object)
 {
 	objects_.push_back(object);

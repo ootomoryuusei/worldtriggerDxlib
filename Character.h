@@ -54,8 +54,6 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	VECTOR GetPosition() { return position; }
-
 	void CreateTriggerInstance();
 	void AddMoveMent(VECTOR _movement) { moveMent.push_back(_movement); }
 

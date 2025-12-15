@@ -64,6 +64,7 @@ void MoveTypeIcon::DeviceEvent(const DoubleClickEvent& event)
 	switch (event.button)
 	{
 	case LEFT:
+	{
 		int CenterNum = -1;
 		const auto& pUnitIcons = GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
 		auto& select_uniticon = pUnitIcons->GetpSelecting_ptr();
@@ -91,10 +92,15 @@ void MoveTypeIcon::DeviceEvent(const DoubleClickEvent& event)
 		for (auto& itr : arcs_icon->GetpTriggerArcIcon()) {
 			itr->SetAngle({ itr->GetStartPercent(),itr->GetPercent() });
 		}
+	}
 		break;
 	case RIGHT:
+	{
+	}
 		break;
 	case MIDDLE:
+	{
+	}
 		break;
 	default:
 		break;

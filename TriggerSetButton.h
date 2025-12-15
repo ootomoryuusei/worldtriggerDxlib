@@ -15,6 +15,8 @@ public:
 	void Update() override;
 	void Draw() override;
 
+	void DeviceEvent(const ClickEvent& event) override;
+
 	bool GetClicked() { return clicked_; }
 private:
 	//SIZE_2D graphSize_; //アイコンの画像サイズ

@@ -69,7 +69,7 @@ bool Goblin::PushByPlayer(VECTOR p1, VECTOR p2, float rad)
 	//	return true;
 	//}
 	//// “–‚½‚Á‚Ä‚È‚¢
-	//return false;
+	return false;
 }
 
 bool Goblin::CheckAttacked(VECTOR playerPos, VECTOR p1, VECTOR p2, VECTOR p3, VECTOR p4)
@@ -90,7 +90,7 @@ bool Goblin::CheckAttacked(VECTOR playerPos, VECTOR p1, VECTOR p2, VECTOR p3, VE
 	//	position += push;
 	//	return true;
 	//}
-	//return false;
+	return false;
 }
 
 void Goblin::updateNormal()

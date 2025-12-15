@@ -112,7 +112,7 @@ void Camera::Update()
 void Camera::Draw()
 {
 	SetCameraNearFar(0.1f, 1000.0f);
-	SetCameraPositionAndTarget_UpVecY(position, lookTarget);
+	SetCameraPositionAndTarget_UpVecY(position_, lookTarget);
 }
 
 void Camera::Vibration(VECTOR v)
