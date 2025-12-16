@@ -283,6 +283,7 @@
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="rader.h" />
     <ClInclude Include="RaycastManager.h" />
+    <ClInclude Include="SceneContext.h" />
     <ClInclude Include="SelectIcons.h" />
     <ClInclude Include="SelectScene.h" />
     <ClInclude Include="SetIcons.h" />

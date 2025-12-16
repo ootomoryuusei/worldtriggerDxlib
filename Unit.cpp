@@ -55,7 +55,7 @@ void Unit::Initialize()
 		pCIcon->LoadSprite(flPath);
 		auto& data = pCIcon->GetpData();
 		data->DefaultSetStatus(itr);
-		SIZE_F_2D g_pos = pCIcon->GetGraphSizeF_2D();
+		OBJ_SIZE_F g_pos = pCIcon->GetGraphSizeF_2D();
 		VECTOR graphPos = { 0,0,0 };
 		if (num % 2 == 0) {
 			graphPos = { transform_.position_.x + g_pos.x * (num / 2),transform_.position_.y + g_pos.y * 1 ,0 };

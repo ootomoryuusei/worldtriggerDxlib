@@ -26,6 +26,7 @@ MoveTypeIcon::~MoveTypeIcon()
 
 void MoveTypeIcon::Initialize()
 {
+	Object2D::Initialize(); //raycaster2D‚Ö“o˜^
 	const auto& pGroupManager_ = GetParent()->GetParent()->GetParent()->FindGameObject<GroupManager>();
 	pTileIcons_ = dynamic_cast<TileIcons*>(pGroupManager_->GetGroup("TileIconGroup"));
 	Leave();

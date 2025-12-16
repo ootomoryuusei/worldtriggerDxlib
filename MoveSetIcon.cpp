@@ -19,6 +19,7 @@ MoveSetIcon::~MoveSetIcon()
 
 void MoveSetIcon::Initialize()
 {
+	Object2D::Initialize();
 	int fontSize = 32;
 	int fontThickness = 5;
 	fontHandle_ = CreateFontToHandle("行動設定フォント", fontSize, fontThickness, DX_FONTTYPE_NORMAL);
@@ -88,13 +89,11 @@ void MoveSetIcon::Draw()
 
 void MoveSetIcon::DeviceEvent(const DragEvent& event)
 {
-	XMFLOAT2 current_pos = event.current;
-	XMFLOAT2 prev_pos = event.start;
+	XMFLOAT2 offset = event.delta;
 	switch (event.button)
 	{
 	case LEFT:
-		XMFLOAT2 mouseVariation = { current_pos.x - prev_pos.x,current_pos.y - prev_pos.y };
-		SetPosition(transform_.position_.x + mouseVariation.x, transform_.position_.y + mouseVariation.y, transform_.position_.z);
+		SetPosition(transform_.position_.x + offset.x, transform_.position_.y + offset.y, transform_.position_.z);
 		break;
 	case RIGHT:
 		break;

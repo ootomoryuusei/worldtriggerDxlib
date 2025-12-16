@@ -1,9 +1,12 @@
 #include "Object3D.h"
 #include"Raycaster3D.h"
+#include"SceneContext.h"
 
 void Object3D::RegisterToRaycaster()
 {
-	raycaster3D_ = GetParent()->GetParent()->FindGameObject<InputManager>()->GetRaycastManager()->GetRaycaster3D();
+	auto* context = (SceneContext*)FindObject("SceneContext");
+	if (!context) return;
+	raycaster3D_ = context->raycastManager->GetRaycaster3D();
 	if (!raycaster3D_) return; // Raycaster3D‚ª‘¶Ý‚µ‚È‚¢ê‡‚Í“o˜^‚µ‚È‚¢
 
 	auto& list = raycaster3D_->objects_;
@@ -52,6 +55,7 @@ void Object3D::Update()
 	if (hModel_ < 0) return; //ƒ‚ƒfƒ‹‚ªƒ[ƒhÏ‚Ý‚È‚ç‚Î
 	position_ = VGet(transform_.position_.x, transform_.position_.y, transform_.position_.z);
 	rotation_ = VGet(transform_.rotate_.x, transform_.rotate_.y, transform_.rotate_.z);
+	modelSize_ = VGet(size_.x, size_.y, size_.z);
 	matrix_ = ToMATRIX(position_, rotation_);
 }
 
@@ -127,16 +131,16 @@ MATRIX Object3D::ToMATRIX(FLOAT3 pos, FLOAT3 rot)
 	return matrix;
 }
 
-VECTOR Object3D::CalculateModelSize()
+XMFLOAT3 Object3D::CalculateModelSize()
 {
 	if (hModel_ <= 0) {
 		return {0,0,0};
 	}
 	
-	VECTOR overallMin = { FLT_MAX,FLT_MAX,FLT_MAX };
-	VECTOR overallMax = { -FLT_MAX,-FLT_MAX,-FLT_MAX };
+	XMFLOAT3 overallMin = { FLT_MAX,FLT_MAX,FLT_MAX };
+	XMFLOAT3 overallMax = { -FLT_MAX,-FLT_MAX,-FLT_MAX };
 
-	VECTOR scale = MV1GetScale(hModel_);
+	XMFLOAT3 scale = { MV1GetScale(hModel_).x, MV1GetScale(hModel_).y, MV1GetScale(hModel_).z };
 	int meshCount = MV1GetMeshNum(hModel_);
 
 	for (int i = 0;i < meshCount;i++) {
@@ -152,7 +156,7 @@ VECTOR Object3D::CalculateModelSize()
 		if (maxV.z > overallMax.z) overallMax.z = maxV.z;
 	}
 
-	VECTOR modelSize;
+	XMFLOAT3 modelSize;
 	modelSize = (overallMax - overallMin) * scale;
 
 	return modelSize;

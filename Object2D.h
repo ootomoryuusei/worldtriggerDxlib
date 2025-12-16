@@ -13,27 +13,6 @@ using namespace DirectX;
 using std::string;
 using std::array;
 
-struct SIZE_2D {
-    int x, y;
-    void set(int _x, int _y) {
-        x = _x, y = _y;
-    }
-    int halfX() const { return x / 2; }
-    int halfY() const { return y / 2; }
-    XMINT2 half() const { return { x / 2, y / 2 }; }
-};
-
-struct SIZE_F_2D {
-    float x, y;
-    void set(float _x, float _y) {
-        x = _x; y = _y;
-    }
-    float halfX() const { return x / 2; }
-    float halfY() const { return y / 2; }
-    XMFLOAT2 half() const { return { x / 2,y / 2 }; }
-};
-
-
 class Object2D : public GameObject
 {
 public:
@@ -46,11 +25,10 @@ public:
     virtual void Release() override;
 
     void LoadSprite(const string& filePath);
-    void SetScale(float sx, float sy) { scale_ = { sx, sy }; }
 
     string GetFileName() { return fileName_; }
-    SIZE_F_2D GetGraphSizeF_2D() { return graphSizeF_; }
-    SIZE_2D GetGraphSize_2D() { return graphSize_; }
+    OBJ_SIZE_F GetGraphSizeF_2D() { return graphSizeF_; }
+    OBJ_SIZE GetGraphSize_2D() { return graphSize_; }
 
     void SetSelecting(bool _selecting) { selecting_ = _selecting; }
     bool GetSelecting() { return selecting_; }
@@ -68,8 +46,8 @@ public:
     bool PointInQuad(XMFLOAT2 point, const array<XMFLOAT2, 4>& corners);
 protected:
     int hModel_; //モデルハンドル
-    SIZE_F_2D graphSizeF_; //アイコンの画像サイズ(float)
-    SIZE_2D graphSize_; //アイコンの画像サイズ(int)
+    OBJ_SIZE_F graphSizeF_; //アイコンの画像サイズ(float)
+    OBJ_SIZE graphSize_; //アイコンの画像サイズ(int)
     XMFLOAT2 position_; //座標
     XMFLOAT2 scale_; //スケール
     string fileName_; //ファイル名

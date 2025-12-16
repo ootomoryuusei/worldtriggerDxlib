@@ -1,4 +1,5 @@
 #include "InputManager.h"
+#include"SceneContext.h"
 
 InputManager::InputManager(GameObject* parent)
 {
@@ -8,7 +9,8 @@ void InputManager::Initialize()
 {
 	keyboard_ = Instantiate<Keyboard>(this); //キーボード
 	mouse_ = Instantiate<Mouse>(this); //マウス
-	raycastManager_ = Instantiate<RaycastManager>(this); //レイキャストマネージャー
+	auto* context = GetParent()->FindGameObject<SceneContext>();
+	raycastManager_ = context->raycastManager;
 
 	mouse_->OnClick = [&](const ClickEvent& e) {AddEvent(e);};
 	mouse_->OnDoubleClick = [&](const DoubleClickEvent& e) {AddEvent(e);};
@@ -30,6 +32,7 @@ void InputManager::Update()
 	VECTOR rayDir = VGet(m_pos.x, m_pos.y, 1);
 	HitInfo hit_obj;
 	hit_obj = raycastManager_->RaycastFromMouse(m_pos.x, m_pos.y, rayOrigin, rayDir);
+	if (!hit_obj.IsHit()) return;
 	for (auto& event : events_) {
 		EventDispatch(hit_obj.target, event); // イベントを対象オブジェクトに送る
 	}

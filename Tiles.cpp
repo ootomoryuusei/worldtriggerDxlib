@@ -15,7 +15,7 @@ void Tiles::Initialize()
 		vector<Tile*> row;
 		for (int x = 0; x < MAX_MAP_WIDTH; x++) {
 			Tile* pTile = Instantiate<Tile>(this);
-			VECTOR size = pTile->GetModelSize();
+			XMFLOAT3 size = pTile->GetSize();
 			VECTOR pos = { transform_.position_.x - (size.x * (3.0/4.0)) * x,transform_.position_.y,transform_.position_.z + size.z * y };
 			if (x % 2 == 1) {
 				pos.z += size.z / 2;

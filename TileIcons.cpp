@@ -35,7 +35,7 @@ void TileIcons::Initialize()
             float m_scale = min(scale.x, scale.y);
 
             transform_.scale_ = { m_scale ,m_scale ,m_scale };
-            pTIcon->SetScale(transform_.scale_.x,transform_.scale_.y);
+            pTIcon->SetScale(transform_.scale_);
             TILEDATA tile;
             XMFLOAT2 pos;
             pos.x = x * (3.0 / 4.0) * pTIcon->GetGraphSizeF_2D().x * transform_.scale_.x;
@@ -50,8 +50,7 @@ void TileIcons::Initialize()
         }
         pTIcons_.push_back(row);
     }
-
-    pMouse_ = GetParent()->GetParent()->FindGameObject<Mouse>();
+    
 }
 
 void TileIcons::Update()

@@ -65,7 +65,7 @@ void Map::Draw()
 	//‘åbox
 	DrawBoxAA(boxPos[1].x, boxPos[1].y, boxPos[1].x + boxSize[1].x, boxPos[1].y + boxSize[1].y
 		, GetColor(0, 0, 0), TRUE);
-	DrawGraph(boxPos[1].x + 10 / 2, boxPos[1].y + 10 / 2, hModel_, TRUE);
+	Object2D::Draw();
 
 	XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
 	XMFLOAT2 space = (boxSize[0] - strSize) / 2;

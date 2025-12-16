@@ -11,16 +11,6 @@ using std::string;
 using std::array;
 using std::unordered_map;
 
-struct SIZE_F_3D {
-	float x, y, z;
-	void set(float _x, float _y, float _z) {
-		x = _x; y = _y; z = _z;
-	}
-	float halfX() const{ return x / 2; }
-	float halfY() const{ return y / 2; }
-	float halfZ() const{ return z / 2; }
-};
-
 inline void DEL(int _handle) {
 	if (_handle > 0) {
 		MV1DeleteModel(_handle);
@@ -85,7 +75,7 @@ protected:
 	VECTOR position_; // 座標
 	VECTOR rotation_; // 回転
 	VECTOR scale_; // スケール
-	VECTOR size_; // サイズ
+	VECTOR modelSize_; // サイズ
 	MATRIX matrix_; //　行列
 	/*STEP step_;*/
 
@@ -138,7 +128,5 @@ public:
 	/*void SetStep(STEP _step) { step_ = _step; }
 	int GetStep() { return step_; }*/
 
-	VECTOR CalculateModelSize();
-
-	VECTOR GetModelSize() { return size_; }
+	XMFLOAT3 CalculateModelSize();
 };

@@ -9,6 +9,28 @@ const int MAX_SELECT_CHARACTER = 3;
 const int MAX_TRIGGER_HANDS = 2;
 const int MAX_CAN_SET_TRIGGER = 4;
 
+struct OBJ_SIZE {
+	int x, y, z;
+	void set(int _x, int _y, int _z) {
+		x = _x, y = _y, z = _z;
+	}
+	int halfX() const { return x / 2; }
+	int halfY() const { return y / 2; }
+	int halfZ() const { return z / 2; }
+	XMINT3 half() const { return { halfX(),halfY(),halfZ() }; }
+};
+
+struct OBJ_SIZE_F {
+	float x, y, z;
+	void set(float _x, float _y, float _z) {
+		x = _x; y = _y; z = _z;
+	}
+	float halfX() const { return x / 2; }
+	float halfY() const { return y / 2; }
+	float halfZ() const { return z / 2; }
+	XMFLOAT3 half() const { return { halfX(), halfY(), halfZ() }; }
+};
+
 struct ARC_DATA {
 	float percent;
 	float startPercent;

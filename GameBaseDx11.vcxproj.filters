@@ -616,6 +616,9 @@
     <ClInclude Include="FocusManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
+    <ClInclude Include="SceneContext.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc">

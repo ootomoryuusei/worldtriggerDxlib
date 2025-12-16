@@ -31,6 +31,8 @@ protected:
 	unordered_set<GroupBase*> groups_;
 
 	STEP step_;
+
+	XMFLOAT3 size_; //オブジェクトサイズ
 public:
 	//コンストラクタ
 	GameObject();
@@ -208,6 +210,7 @@ public:
 	XMFLOAT3 GetPosition() { return transform_.position_; }
 	XMFLOAT3 GetRotate() { return transform_.rotate_; }
 	XMFLOAT3 GetScale() { return transform_.scale_; }
+	XMFLOAT3 GetSize() { return size_; }
 	XMFLOAT3 GetWorldPosition() { return Transform::Float3Add(GetParent()->transform_.position_ , transform_.position_); }
 	XMFLOAT3 GetWorldRotate() { return Transform::Float3Add(GetParent()->transform_.rotate_, transform_.rotate_); }
 	XMFLOAT3 GetWorldScale() { return Transform::Float3Add(GetParent()->transform_.scale_, transform_.scale_); }
@@ -223,6 +226,9 @@ public:
 	void SetScale(XMFLOAT3 scale) { transform_.scale_ = scale; }
 	void SetScale(float x, float y, float z) { SetScale(XMFLOAT3(x, y, z)); }
 	void SetScale(VECTOR scale) { SetScale(scale.x, scale.y, scale.z); }
+	void SetSize(XMFLOAT3 size) { size_ = size; }
+	void SetSize(float x, float y, float z) { SetSize(XMFLOAT3(x, y, z)); }
+	void SetSize(VECTOR size) { SetSize(size.x, size.y, size.z); }
 
 	void AddGroup(GroupBase* group) {
 		groups_.insert(group);
@@ -307,6 +313,10 @@ inline XMFLOAT2 operator /(const XMFLOAT2& a, const float b) {
 
 inline XMFLOAT3 operator -(const XMFLOAT3& a, const XMFLOAT3& b) {
 	return XMFLOAT3(a.x - b.x, a.y - b.y, a.z - b.z);
+}
+
+inline XMFLOAT3 operator *(const XMFLOAT3& a, const XMFLOAT3& b) {
+	return XMFLOAT3(a.x * b.x, a.y * b.y, a.z * b.z);
 }
 
 inline bool operator ==(const XMFLOAT3& a, const XMFLOAT3& b) {

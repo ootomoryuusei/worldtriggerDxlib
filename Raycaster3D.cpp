@@ -34,9 +34,10 @@ HitInfo Raycaster3D::Raycast(const VECTOR& origin, const VECTOR& dir)
 	HitInfo top_hit;
 	float top_dist = 1e9f;
 
-	for (auto& obj : objects_) {
+	for (auto i = objects_.rbegin(); i != objects_.rend(); ++i) {
 		float dist;
 
+		auto* obj = *i;
 		if (!obj->IsVisibled()) continue; //非表示ならスキップ
 
 		if (obj->Raycast(origin, dir, dist)) {

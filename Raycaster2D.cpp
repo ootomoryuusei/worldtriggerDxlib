@@ -37,8 +37,9 @@ HitInfo Raycaster2D::Raycast(float mx, float my)
     int index = 0;
     int bestZ = -99999;
 
-    for (auto* element : elements_) {
+    for (auto i = elements_.rbegin(); i != elements_.rend(); ++i) {
 
+        auto* element = *i;
         if (!element->IsVisibled()) continue; //非表示ならスキップ  
 
         if (element->IsInMousePoint({ mx, my })) {

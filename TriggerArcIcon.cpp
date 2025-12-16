@@ -89,12 +89,13 @@ void TriggerArcIcon::Update()
 		default:
 			break;
 		}
+		Object2D::Update();
 }
 
 void TriggerArcIcon::Draw()
 {
 	const auto& uniticons = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
-	SIZE_F_2D tileSize = pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D();
+	OBJ_SIZE_F tileSize = pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D();
 	XMFLOAT2 DrawCenterPos = { position_.x + (graphSizeF_.halfX() - tileSize.halfX()),
 								position_.y + (graphSizeF_.halfY() - tileSize.halfY())};
 
@@ -130,7 +131,7 @@ void TriggerArcIcon::DeviceEvent(const DragEvent& event)
 	{
 		const auto& uniticons = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
 		const auto& mouse = uniticons->GetParent()->FindGameObject<Mouse>();
-		SIZE_F_2D tileSize = pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D();
+		OBJ_SIZE_F tileSize = pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D();
 		XMFLOAT2 DrawCenterPos = { transform_.position_.x + (graphSizeF_.halfX() - tileSize.halfX()),
 			transform_.position_.y + (graphSizeF_.halfY() - tileSize.halfY()) };
 

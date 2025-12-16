@@ -28,9 +28,6 @@ void TileIcon::Update()
 {
 	pMoveSelectIcon_ = GetParent()->GetParent()->GetParent()->FindGameObject<MoveSelectIcon>();
 	transform_.position_ = { tile_.pos.x,tile_.pos.y,tile_.pos.z };
-
-	pivot_.x = graphSizeF_.halfX();
-	pivot_.y = graphSizeF_.halfY();
 	angle_ = 0;
 	Object2D::Update();
 }
@@ -38,7 +35,7 @@ void TileIcon::Update()
 void TileIcon::Draw()
 {
 	string num = std::to_string(tile_.num);
-	DrawRotaGraph3(position_.x + pivot_.x, position_.y + pivot_.y, pivot_.x, pivot_.y, scale_.x, scale_.y, angle_, hModel_, TRUE, FALSE);
+	Object2D::Draw();
 	if (select) {
 		DrawGraph(position_.x, position_.y, hImage, TRUE);
 	}

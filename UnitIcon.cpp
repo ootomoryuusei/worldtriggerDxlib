@@ -37,6 +37,7 @@ UnitIcon::~UnitIcon()
 
 void UnitIcon::Initialize()
 {
+	Object2D::Initialize(); //raycaster2Dへ登録
 	maxMoveMent = 10;
 	pArcs_ = Instantiate<TriggersArcIcon>(this);
 	pLoad_ = Instantiate<MoveMentsLoad>(this);
@@ -46,10 +47,12 @@ void UnitIcon::Update()
 {
 	pGroupManager_ = GetParent()->GetParent()->FindGameObject<GroupManager>();
 	pTileIcons_ = dynamic_cast<TileIcons*>(pGroupManager_->GetGroup("TileIconGroup"));
+	SetScale(pTileIcons_->GetScale());
 	
 	MoveSetIcon* pMoveSetIcon_ = GetParent()->GetParent()->FindGameObject<MoveSetIcon>();
 	MoveSelectIcon* pMoveSelectIcon_ = GetParent()->GetParent()->FindGameObject<MoveSelectIcon>();
 	pLoad_->setMoveMent(moveMent);
+	
 
 
 	auto& arcs = pArcs_->GetpTriggerArcIcon();
@@ -126,6 +129,8 @@ void UnitIcon::Update()
 	default:
 		break;
 	}
+	XMFLOAT3 tileSize = pTileIcons_->GetSize();
+	transform_.position_ = transform_.position_ + (tileSize / 2 - graphSizeF_.half());
 	Object2D::Update();
 }
 
@@ -137,7 +142,8 @@ void UnitIcon::Draw()
 	{
 	case FIRST:
 	{
-		DrawGraph(transform_.position_.x + (TileSize.x / 2 - graphSizeF_.halfX()), transform_.position_.y + (TileSize.y / 2 - graphSizeF_.halfY()), hModel_, TRUE);
+		
+		Object2D::Draw();
 		break;
 	}
 	case SECONDE:
@@ -146,6 +152,7 @@ void UnitIcon::Draw()
 			auto m_front = moveMent.front();
 			XMFLOAT3 pos = pTileIcons_->GetpTIcon()[m_front.movement.y][m_front.movement.x]->GetPosition();
 			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 / 2);
+			/*DrawRotaGraph3(position_.x, position_.y, pivot_.x, pivot_.y, scale_.x, scale_.y, 0.0, hModel_, TRUE, FALSE)*/
 			DrawGraph(pos.x + (TileSize.x / 2 - graphSizeF_.halfX()), pos.y + (TileSize.y / 2 - graphSizeF_.halfY()), hModel_, TRUE);
 			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 		}
@@ -171,9 +178,11 @@ void UnitIcon::DeviceEvent(const ClickEvent& event)
 {
 	switch (event.button)
 	{
-	case LEFT:
+	case LEFT: 
+	{
 		//行動選択、行動一覧を生成
 		set = false;
+	}
 		break;
 	case RIGHT:
 		break;
@@ -189,8 +198,10 @@ void UnitIcon::DeviceEvent(const DoubleClickEvent& event)
 	switch (event.button)
 	{
 	case LEFT:
+	{
 		//行動選択、行動一覧、ユニットの範囲外だった場合消去
 		set = true;
+	}
 		break;
 	case RIGHT:
 		break;
@@ -203,15 +214,12 @@ void UnitIcon::DeviceEvent(const DoubleClickEvent& event)
 
 void UnitIcon::DeviceEvent(const DragEvent& event)
 {
+	XMFLOAT2 offset = event.delta;
 	switch (event.button)
 	{
 	case LEFT:
 		if (!selecting_) return;
-		XMFLOAT2 current_pos = event.current;
-		XMFLOAT2 prev_pos = event.start;
-		XMFLOAT2 mouseVariation = { current_pos.x - prev_pos.x,current_pos.y - prev_pos.y };
-		transform_.position_ = { transform_.position_.x + mouseVariation.x, transform_.position_.y + mouseVariation.y, 0.0f };
-		prev_pos = current_pos;
+		SetPosition(transform_.position_.x + offset.x, transform_.position_.y + offset.y, transform_.position_.z);
 		break;
 	case RIGHT:
 		break;

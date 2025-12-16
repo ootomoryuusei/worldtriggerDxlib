@@ -43,13 +43,11 @@ void TriggerIcon::Draw()
 
 void TriggerIcon::DeviceEvent(const DragEvent& event)
 {
+	XMFLOAT2 offset = event.delta;
 	switch (event.button)
 	{
 	case LEFT:
-		XMFLOAT2 current_pos = event.current;
-		XMFLOAT2 prev_pos = event.start;
-		XMFLOAT2 mouseVariation = { current_pos.x - prev_pos.x,current_pos.y - prev_pos.y };
-		transform_.position_ = { transform_.position_.x + mouseVariation.x, transform_.position_.y + mouseVariation.y, 0.0f };
+		transform_.position_ = { transform_.position_.x + offset.x, transform_.position_.y + offset.y, 0.0f };
 		break;
 	case RIGHT:
 		break;
