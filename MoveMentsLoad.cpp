@@ -35,8 +35,8 @@ void MoveMentsLoad::DrawMoveLine()
 	
 
 	XMFLOAT2 half_t_IconSize = {
-		pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D().halfX(),
-		pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D().halfY()
+		pTileIcons_->GetpTIcon()[0][0]->GetBaseSizeF().halfX(),
+		pTileIcons_->GetpTIcon()[0][0]->GetBaseSizeF().halfY()
 	};
 
 	int pointNum = 5;

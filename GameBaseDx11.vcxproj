@@ -306,7 +306,6 @@
     <ClInclude Include="TriggerSetButton.h" />
     <ClInclude Include="TriggerSetUI.h" />
     <ClInclude Include="TriggerSetUIFrame.h" />
-    <ClInclude Include="globals.h" />
     <ClInclude Include="TriggerSetUIFrames.h" />
     <ClInclude Include="TriggerSetUIs.h" />
     <ClInclude Include="TriggerStatusFactory.h" />
@@ -322,6 +321,7 @@
     <ClInclude Include="Raycaster2D.h" />
     <ClInclude Include="GameInfo.h" />
     <ClInclude Include="Raycaster3D.h" />
+    <ClInclude Include="MathOperator.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc" />

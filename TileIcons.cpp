@@ -26,20 +26,21 @@ void TileIcons::Initialize()
         for (int x = 0; x < MAX_MAP_WIDTH; x++) {
             TileIcon* pTIcon = Instantiate<TileIcon>(this);
             XMFLOAT2 size;
-            size.x = (MAX_MAP_WIDTH - 1) * (3.0 / 4.0) * pTIcon->GetGraphSizeF_2D().x + pTIcon->GetGraphSizeF_2D().x;
-            size.y = MAX_MAP_HIGHT * pTIcon->GetGraphSizeF_2D().y + pTIcon->GetGraphSizeF_2D().halfY();
+            size.x = (MAX_MAP_WIDTH - 1) * (3.0 / 4.0) * pTIcon->GetBaseSizeF().x + pTIcon->GetBaseSizeF().x;
+            size.y = MAX_MAP_HIGHT * pTIcon->GetBaseSizeF().y + pTIcon->GetBaseSizeF().halfY();
 
             XMFLOAT2 scale;
             scale.x = (boxSize.x - space.x * 2) / size.x;
             scale.y = (boxSize.y - space.y * 2) / size.y;
             float m_scale = min(scale.x, scale.y);
 
-            transform_.scale_ = { m_scale ,m_scale ,m_scale };
+            SetScale(m_scale, m_scale, m_scale); //タイルアイコンのスケールをセット
+            SetBaseSizeF(pTIcon->GetBaseSizeF()); //タイルアイコンのサイズをセット
             pTIcon->SetScale(transform_.scale_);
             TILEDATA tile;
             XMFLOAT2 pos;
-            pos.x = x * (3.0 / 4.0) * pTIcon->GetGraphSizeF_2D().x * transform_.scale_.x;
-            pos.y = y * pTIcon->GetGraphSizeF_2D().y * transform_.scale_.y + (x % 2 == 1 ? pTIcon->GetGraphSizeF_2D().y * transform_.scale_.y / 2.0 : 0);
+            pos.x = x * (3.0 / 4.0) * pTIcon->GetBaseSizeF().x * transform_.scale_.x;
+            pos.y = y * pTIcon->GetBaseSizeF().y * transform_.scale_.y + (x % 2 == 1 ? pTIcon->GetBaseSizeF().y * transform_.scale_.y / 2.0 : 0);
             tile.pos = {transform_.position_.x + pos.x,transform_.position_.y + pos.y,0 };
             tile.num = num;
             tile.offset = VGet(x,y,0);

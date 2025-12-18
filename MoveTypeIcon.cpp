@@ -36,7 +36,7 @@ void MoveTypeIcon::Initialize()
 void MoveTypeIcon::Update()
 {
 	XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
-	space = { (graphSizeF_.x - strSize.x) / 2,(graphSizeF_.y - strSize.y) / 2 };
+	space = { (baseSize_.x - strSize.x) / 2,(baseSize_.y - strSize.y) / 2 };
 
 	clicked = false;
 

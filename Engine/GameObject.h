@@ -9,6 +9,7 @@
 #include<unordered_set>
 #include"../InputEvents.h"
 #include "../GameInfo.h"
+#include"../MathOperator.h"
 class GroupBase;
 
 using std::unordered_set;
@@ -32,7 +33,8 @@ protected:
 
 	STEP step_;
 
-	XMFLOAT3 size_; //オブジェクトサイズ
+	OBJ_SIZE_F baseSize_; //ロード時のベースサイズ
+	OBJ_SIZE_F hitSize_; //当たり判定用サイズ
 public:
 	//コンストラクタ
 	GameObject();
@@ -61,8 +63,6 @@ public:
 	//ワールド行列の取得（親の影響を受けた最終的な行列）
 	//戻値：ワールド行列
 	XMMATRIX GetWorldMatrix();
-
-
 
 	//各フラグの制御
 	/// <summary>
@@ -210,7 +210,8 @@ public:
 	XMFLOAT3 GetPosition() { return transform_.position_; }
 	XMFLOAT3 GetRotate() { return transform_.rotate_; }
 	XMFLOAT3 GetScale() { return transform_.scale_; }
-	XMFLOAT3 GetSize() { return size_; }
+	OBJ_SIZE_F GetBaseSizeF() { return baseSize_; }
+	OBJ_SIZE_F GetHitSizeF() { return hitSize_; }
 	XMFLOAT3 GetWorldPosition() { return Transform::Float3Add(GetParent()->transform_.position_ , transform_.position_); }
 	XMFLOAT3 GetWorldRotate() { return Transform::Float3Add(GetParent()->transform_.rotate_, transform_.rotate_); }
 	XMFLOAT3 GetWorldScale() { return Transform::Float3Add(GetParent()->transform_.scale_, transform_.scale_); }
@@ -226,9 +227,14 @@ public:
 	void SetScale(XMFLOAT3 scale) { transform_.scale_ = scale; }
 	void SetScale(float x, float y, float z) { SetScale(XMFLOAT3(x, y, z)); }
 	void SetScale(VECTOR scale) { SetScale(scale.x, scale.y, scale.z); }
-	void SetSize(XMFLOAT3 size) { size_ = size; }
-	void SetSize(float x, float y, float z) { SetSize(XMFLOAT3(x, y, z)); }
-	void SetSize(VECTOR size) { SetSize(size.x, size.y, size.z); }
+	void SetHitSizeF(OBJ_SIZE_F size) { hitSize_ = size; }
+	void SetHitSizeF(XMFLOAT3 size) { hitSize_.set(size.x, size.y, size.z); }
+	void SetHitSizeF(float x, float y, float z) { hitSize_.set(x,y,z); }
+	void SetHitSizeF(VECTOR size) { hitSize_.set(size.x, size.y, size.z); }
+	void SetBaseSizeF(OBJ_SIZE_F size) { baseSize_ = size; }
+	void SetBaseSizeF(XMFLOAT3 size) { hitSize_.set(size.x, size.y, size.z); }
+	void SetBaseSizeF(float x, float y, float z) { baseSize_.set(x, y, z); }
+	void SetBaseSizeF(VECTOR size) { baseSize_.set(size.x, size.y, size.z); }
 
 	void AddGroup(GroupBase* group) {
 		groups_.insert(group);
@@ -297,28 +303,4 @@ T* Instantiate(GameObject* pParent)
 	}
 	pNewObject->Initialize();
 	return pNewObject;
-}
-
-inline XMFLOAT2 operator+ (const XMFLOAT2& a, const XMFLOAT2& b) {
-	return XMFLOAT2(a.x + b.x, a.y + b.y);
-}
-
-inline XMFLOAT2 operator -(const XMFLOAT2& a, const XMFLOAT2& b) {
-	return XMFLOAT2(a.x - b.x ,a.y - b.y);
-}
-
-inline XMFLOAT2 operator /(const XMFLOAT2& a, const float b) {
-	return XMFLOAT2(a.x / b, a.y / b);
-}
-
-inline XMFLOAT3 operator -(const XMFLOAT3& a, const XMFLOAT3& b) {
-	return XMFLOAT3(a.x - b.x, a.y - b.y, a.z - b.z);
-}
-
-inline XMFLOAT3 operator *(const XMFLOAT3& a, const XMFLOAT3& b) {
-	return XMFLOAT3(a.x * b.x, a.y * b.y, a.z * b.z);
-}
-
-inline bool operator ==(const XMFLOAT3& a, const XMFLOAT3& b) {
-	return (a.x == b.x && a.y == b.y && a.z == b.z);
 }

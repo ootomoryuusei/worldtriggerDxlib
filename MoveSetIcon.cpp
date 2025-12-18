@@ -50,7 +50,7 @@ void MoveSetIcon::Update()
 	scale_ = { 1.0f,1.0f + movement.size() * 0.5f };
 
 	XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
-	space = { (graphSizeF_.x - strSize.x) / 2,(graphSizeF_.y / 2 - strSize.y) / 2 };
+	space = { (baseSize_.x - strSize.x) / 2,(baseSize_.y / 2 - strSize.y) / 2 };
 
 	UnitIcons* pUnitIcons = GetParent()->FindGameObject<UnitIcons>();
 	const auto& select_unit = pUnitIcons->GetpSelecting_ptr();
@@ -70,14 +70,14 @@ void MoveSetIcon::Draw()
 	Object2D::Draw();
 	XMFLOAT2 fontPos = position_ + space;
 	DrawStringToHandle(fontPos.x, fontPos.y, iconName_.c_str(), GetColor(0, 0, 0), fontHandle_);
-	DrawLineAA(position_.x, position_.y + graphSizeF_.halfY()
-		, position_.x + graphSizeF_.halfX(), position_.y + graphSizeF_.halfY(), GetColor(0, 0, 0), 2.0);
+	DrawLineAA(position_.x, position_.y + baseSize_.halfY()
+		, position_.x + baseSize_.halfX(), position_.y + baseSize_.halfY(), GetColor(0, 0, 0), 2.0);
 	int num = 1;
 	for (auto& itr : movement) {
 		string move = std::to_string(num) + " : " + itr.movename;
 		XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * move.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
-		XMFLOAT2 Space = { (graphSizeF_.x - strSize.x) / 2,(graphSizeF_.y /2  - strSize.y) / 2 };
-		XMFLOAT2 moveFontPos = { position_.x + Space.x, position_.y + graphSizeF_.halfY() * num + Space.y};
+		XMFLOAT2 Space = { (baseSize_.x - strSize.x) / 2,(baseSize_.y /2  - strSize.y) / 2 };
+		XMFLOAT2 moveFontPos = { position_.x + Space.x, position_.y + baseSize_.halfY() * num + Space.y};
 
 		DrawStringToHandle(moveFontPos.x,moveFontPos.y,move.c_str(), GetColor(0, 0, 0), fontHandle_);
 		num++;

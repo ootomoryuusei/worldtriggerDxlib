@@ -27,8 +27,6 @@ public:
     void LoadSprite(const string& filePath);
 
     string GetFileName() { return fileName_; }
-    OBJ_SIZE_F GetGraphSizeF_2D() { return graphSizeF_; }
-    OBJ_SIZE GetGraphSize_2D() { return graphSize_; }
 
     void SetSelecting(bool _selecting) { selecting_ = _selecting; }
     bool GetSelecting() { return selecting_; }
@@ -46,8 +44,6 @@ public:
     bool PointInQuad(XMFLOAT2 point, const array<XMFLOAT2, 4>& corners);
 protected:
     int hModel_; //モデルハンドル
-    OBJ_SIZE_F graphSizeF_; //アイコンの画像サイズ(float)
-    OBJ_SIZE graphSize_; //アイコンの画像サイズ(int)
     XMFLOAT2 position_; //座標
     XMFLOAT2 scale_; //スケール
     string fileName_; //ファイル名

@@ -31,7 +31,7 @@ void MoveTypeIcons::Initialize()
 		MoveTypeIcon* pMoveTypeIcon = Instantiate<MoveTypeIcon>(this);
 		MoveSelectIcon* pMoveSelectIcon = GetParent()->GetParent()->FindGameObject<MoveSelectIcon>();
 		XMFLOAT3 pos = pMoveSelectIcon->GetPosition();
-		OBJ_SIZE_F graphSize = pMoveSelectIcon->GetGraphSizeF_2D();
+		OBJ_SIZE_F graphSize = pMoveSelectIcon->GetBaseSizeF();
 		pMoveTypeIcon->SetPosition(pos.x, pos.y + graphSize.halfY() * y, pos.z );
 		pMoveTypeIcon->SetIconName(typeName);
 		pMoveTypeIcon->SetFontHandle(fontHandle_);
@@ -45,7 +45,7 @@ void MoveTypeIcons::Update()
 	for (int y = 1; y < csv_->GetHeight(); y++) {
 		MoveSelectIcon* pMoveSelectIcon = GetParent()->GetParent()->FindGameObject<MoveSelectIcon>();
 		XMFLOAT3 pos = pMoveSelectIcon->GetPosition();
-		OBJ_SIZE_F graphSize = pMoveSelectIcon->GetGraphSizeF_2D();
+		OBJ_SIZE_F graphSize = pMoveSelectIcon->GetBaseSizeF();
 		pMoveTypeIcons_[y - 1]->SetPosition(pos.x, pos.y + graphSize.halfY() * y, pos.z);
 	}
 

@@ -12,7 +12,7 @@ Unit::Unit(GameObject* parent) : Object2D(parent)
 	transform_.position_ = { 700,450 ,0};
 
 	boxSize[0] = { 100 ,40 };
-	boxSize[1] = { graphSizeF_.x + 10,graphSizeF_.y + 10 };
+	boxSize[1] = { baseSize_.x + 10,baseSize_.y + 10 };
 
 	boxPos[0] = { transform_.position_.x + boxSize[0].x,transform_.position_.y + boxSize[0].y };
 	boxPos[1] = { transform_.position_.x, boxPos[0].y };
@@ -55,7 +55,7 @@ void Unit::Initialize()
 		pCIcon->LoadSprite(flPath);
 		auto& data = pCIcon->GetpData();
 		data->DefaultSetStatus(itr);
-		OBJ_SIZE_F g_pos = pCIcon->GetGraphSizeF_2D();
+		OBJ_SIZE_F g_pos = pCIcon->GetBaseSizeF();
 		VECTOR graphPos = { 0,0,0 };
 		if (num % 2 == 0) {
 			graphPos = { transform_.position_.x + g_pos.x * (num / 2),transform_.position_.y + g_pos.y * 1 ,0 };

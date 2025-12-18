@@ -9,7 +9,9 @@ Tile::Tile(GameObject* parent) : Object3D(parent)
 
 	transform_.position_ = { 0, 0, 0 };
 	transform_.rotate_ = { 0,90,0 };
-	size_ = CalculateModelSize();
+	XMFLOAT3 baseSize = CalculateModelSize();
+	SetBaseSizeF(baseSize);
+	SetHitSizeF(baseSize);
 }
 
 Tile::~Tile()

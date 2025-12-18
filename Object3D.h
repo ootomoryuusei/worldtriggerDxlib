@@ -75,7 +75,6 @@ protected:
 	VECTOR position_; // 座標
 	VECTOR rotation_; // 回転
 	VECTOR scale_; // スケール
-	VECTOR modelSize_; // サイズ
 	MATRIX matrix_; //　行列
 	/*STEP step_;*/
 

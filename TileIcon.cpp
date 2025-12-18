@@ -39,9 +39,11 @@ void TileIcon::Draw()
 	if (select) {
 		DrawGraph(position_.x, position_.y, hImage, TRUE);
 	}
-#if 0
-		DrawString(position.x + graphSizeF_.halfX / 2, position.y + graphSizeF_.halfY / 2, num.c_str(), GetColor(255, 255, 255));
-		DrawBoxAA(position.x + graphSizeF_.x/4, position.y, position.x + (graphSizeF_.x/4 * 3), position.y + graphSizeF_.y, GetColor(255, 255, 255), FALSE);
+#if 1
+		/*DrawString(position.x + graphSizeF_.halfX / 2, position.y + graphSizeF_.halfY / 2, num.c_str(), GetColor(255, 255, 255));*/
+		DrawBoxAA(position_.x, position_.y,
+			position_.x + baseSize_.x * transform_.scale_.x, position_.y + baseSize_.y * transform_.scale_.x, GetColor(255, 0, 0), FALSE);
+		/*DrawBoxAA(position.x + graphSizeF_.x/4, position.y, position.x + (graphSizeF_.x/4 * 3), position.y + graphSizeF_.y, GetColor(255, 255, 255), FALSE);*/
 #endif
 }
 

@@ -22,8 +22,8 @@ void TriggerIcon::Update()
 	for (int index = 0;index < (int)MAX;index++) {
 		for (auto& itr : pUI->GetpFrames()->GetpUIFrames()[index]) {
 			XMFLOAT2 leftUp = { itr->GetPosition().x,itr->GetPosition().y };
-			XMFLOAT2 distance = { itr->GetGraphSizeF_2D().x,itr->GetGraphSizeF_2D().y };
-			XMFLOAT2 center = { transform_.position_.x + graphSizeF_.halfX() ,transform_.position_.y + graphSizeF_.halfY()};
+			XMFLOAT2 distance = { itr->GetBaseSizeF().x,itr->GetBaseSizeF().y };
+			XMFLOAT2 center = { transform_.position_.x + baseSize_.halfX() ,transform_.position_.y + baseSize_.halfY()};
 			if (PointInBox(center, leftUp, distance)) {
 				transform_.position_ = { itr->GetPosition() };
 				break;

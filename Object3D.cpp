@@ -55,7 +55,6 @@ void Object3D::Update()
 	if (hModel_ < 0) return; //モデルがロード済みならば
 	position_ = VGet(transform_.position_.x, transform_.position_.y, transform_.position_.z);
 	rotation_ = VGet(transform_.rotate_.x, transform_.rotate_.y, transform_.rotate_.z);
-	modelSize_ = VGet(size_.x, size_.y, size_.z);
 	matrix_ = ToMATRIX(position_, rotation_);
 }
 
@@ -75,7 +74,9 @@ void Object3D::LoadModel(const string& path)
 {
 	hModel_ = MV1LoadModel(path.c_str());
 	assert(hModel_ >= 0); //アサーション
-	size_ = CalculateModelSize();
+	XMFLOAT3 baseSize = CalculateModelSize();
+	SetHitSizeF(baseSize);
+	SetBaseSizeF(baseSize);
 }
 
 bool Object3D::Raycast(const VECTOR& rayOrigin, const VECTOR& rayDir, float& outDist)

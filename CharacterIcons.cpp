@@ -19,7 +19,7 @@ CharacterIcons::CharacterIcons(GameObject* parent) : Icon(parent)
 		flPath = DLC + graphName;
 		CharacterIcon* pCIcon = Instantiate<CharacterIcon>(this);
 		pCIcon->LoadSprite(flPath);
-		OBJ_SIZE_F IconSize = pCIcon->GetGraphSizeF_2D();
+		OBJ_SIZE_F IconSize = pCIcon->GetBaseSizeF();
 		VECTOR graphPos = { 0,300 + IconSize.y * (y - 1) ,0 };
 		pCIcon->SetPosition(graphPos);
 		pCIcon->SetCreateNum(y);

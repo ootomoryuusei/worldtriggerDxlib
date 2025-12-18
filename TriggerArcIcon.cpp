@@ -95,9 +95,9 @@ void TriggerArcIcon::Update()
 void TriggerArcIcon::Draw()
 {
 	const auto& uniticons = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
-	OBJ_SIZE_F tileSize = pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D();
-	XMFLOAT2 DrawCenterPos = { position_.x + (graphSizeF_.halfX() - tileSize.halfX()),
-								position_.y + (graphSizeF_.halfY() - tileSize.halfY())};
+	OBJ_SIZE_F tileSize = pTileIcons_->GetpTIcon()[0][0]->GetBaseSizeF();
+	XMFLOAT2 DrawCenterPos = { position_.x + (baseSize_.halfX() - tileSize.halfX()),
+								position_.y + (baseSize_.halfY() - tileSize.halfY())};
 
 	float size = pData_->GetTriggerData().arc.rangeSize;
 	DrawCircleGaugeF(DrawCenterPos.x, DrawCenterPos.y, percent, hModel_, startPercent,size);
@@ -131,9 +131,9 @@ void TriggerArcIcon::DeviceEvent(const DragEvent& event)
 	{
 		const auto& uniticons = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
 		const auto& mouse = uniticons->GetParent()->FindGameObject<Mouse>();
-		OBJ_SIZE_F tileSize = pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D();
-		XMFLOAT2 DrawCenterPos = { transform_.position_.x + (graphSizeF_.halfX() - tileSize.halfX()),
-			transform_.position_.y + (graphSizeF_.halfY() - tileSize.halfY()) };
+		OBJ_SIZE_F tileSize = pTileIcons_->GetpTIcon()[0][0]->GetBaseSizeF();
+		XMFLOAT2 DrawCenterPos = { transform_.position_.x + (baseSize_.halfX() - tileSize.halfX()),
+			transform_.position_.y + (baseSize_.halfY() - tileSize.halfY()) };
 
 
 		// 扇形の角度と中心角の向きを取得
@@ -145,8 +145,8 @@ void TriggerArcIcon::DeviceEvent(const DragEvent& event)
 		// 四角形サイズ（幅は角度に応じて、高さは固定）
 		float angleSpanDeg = endAngleDeg - startAngleDeg;
 		float size = pData_->GetTriggerData().arc.rangeSize;
-		float width = graphSizeF_.halfX() * size * sqrtf(2 * (1 - cos(XMConvertToRadians(angleSpanDeg))));
-		float height = graphSizeF_.halfY() * size;
+		float width = baseSize_.halfX() * size * sqrtf(2 * (1 - cos(XMConvertToRadians(angleSpanDeg))));
+		float height = baseSize_.halfY() * size;
 
 		// 四角形のローカル座標（原点は底辺中央）
 		XMFLOAT2 localCorners[4] = {

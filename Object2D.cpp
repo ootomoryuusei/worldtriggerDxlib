@@ -66,14 +66,15 @@ void Object2D::LoadSprite(const std::string& _filePath)
     fileName_ = _filePath;
     hModel_ = LoadGraph(fileName_.c_str());
     assert(hModel_ >= 0); //アサーション
-    GetGraphSize(hModel_, &graphSize_.x, &graphSize_.y);
-    graphSizeF_.set(graphSize_.x,graphSize_.y,0);
+    int sizeX, sizeY;
+    GetGraphSize(hModel_, &sizeX, &sizeY);
+    hitSize_.set(sizeX,sizeY,0);
 }
 
 XMFLOAT2 Object2D::ScreenToLocal(const XMFLOAT2& screenPos) const
 {
-    float w = graphSizeF_.x * scale_.x;
-    float h = graphSizeF_.y * scale_.y;
+    float w = baseSize_.x * scale_.x;
+    float h = baseSize_.y * scale_.y;
     float cx = position_.x; 
     float cy = position_.y;
 
@@ -88,8 +89,8 @@ XMFLOAT2 Object2D::ScreenToLocal(const XMFLOAT2& screenPos) const
     float localX = rx / (scale_.x);
     float localY = ry / (scale_.y);
 
-    localX += (graphSizeF_.x * 0.5f);
-    localY += (graphSizeF_.y * 0.5f);
+    localX += (baseSize_.x * 0.5f);
+    localY += (baseSize_.y * 0.5f);
 
     return { localX, localY };
 }
@@ -97,8 +98,8 @@ XMFLOAT2 Object2D::ScreenToLocal(const XMFLOAT2& screenPos) const
 bool Object2D::IsInMousePoint(const XMFLOAT2& mpos) const
 {
     if (fabsf(angle_) < 1e-5f) {
-        float w = graphSizeF_.x * scale_.x;
-        float h = graphSizeF_.y * scale_.y;
+        float w = baseSize_.x * scale_.x;
+        float h = baseSize_.y * scale_.y;
         float left = position_.x - pivot_.x * w;
         float top = position_.y - pivot_.y * h;
         if (mpos.x >= left && mpos.x <= left + w && mpos.y >= top && mpos.y <= top + h) return true;
@@ -106,7 +107,7 @@ bool Object2D::IsInMousePoint(const XMFLOAT2& mpos) const
     }
 
     XMFLOAT2 local = ScreenToLocal(mpos);
-    if (local.x >= 0 && local.x <= graphSizeF_.x && local.y >= 0 && local.y <= graphSizeF_.y) return true;
+    if (local.x >= 0 && local.x <= baseSize_.x && local.y >= 0 && local.y <= baseSize_.y) return true;
     return false;
 }
 

@@ -32,7 +32,7 @@ void MoveSelectIcon::Update()
 	scale_ = { 1.0f,1.0f + num * 0.5f };
 
 	XMFLOAT2 strSize = { (float)GetFontSizeToHandle(fontHandle_) * iconName_.size() / 2,(float)GetFontSizeToHandle(fontHandle_) };
-	space = { (graphSizeF_.x - strSize.x) / 2,(graphSizeF_.y / 2 - strSize.y) / 2 };
+	space = { (baseSize_.x - strSize.x) / 2,(baseSize_.y / 2 - strSize.y) / 2 };
 
 	Object2D::Update();
 }
@@ -42,8 +42,8 @@ void MoveSelectIcon::Draw()
 	Object2D::Draw();
 	XMFLOAT2 fontPos = position_ + space;
 	DrawStringToHandle(fontPos.x, fontPos.y, iconName_.c_str(), GetColor(0, 0, 0), fontHandle_);
-	DrawLineAA(position_.x, position_.y + GetGraphSizeF_2D().y / 2
-		, position_.x + GetGraphSizeF_2D().x, position_.y + GetGraphSizeF_2D().y / 2, GetColor(0, 0, 0), 2.0);
+	DrawLineAA(position_.x, position_.y + GetBaseSizeF().y / 2
+		, position_.x + GetBaseSizeF().x, position_.y + GetBaseSizeF().y / 2, GetColor(0, 0, 0), 2.0);
 #if 0
 		DrawBoxAA(position.x, position.y, position.x + graphSizeF_.x * scale_.x, position.y + graphSizeF_.y * scale_.y, GetColor(255, 0, 0), FALSE);
 #endif

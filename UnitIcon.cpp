@@ -47,7 +47,7 @@ void UnitIcon::Update()
 {
 	pGroupManager_ = GetParent()->GetParent()->FindGameObject<GroupManager>();
 	pTileIcons_ = dynamic_cast<TileIcons*>(pGroupManager_->GetGroup("TileIconGroup"));
-	SetScale(pTileIcons_->GetScale());
+	SetScale(pTileIcons_->GetScale()); //タイルと同じscaleに
 	
 	MoveSetIcon* pMoveSetIcon_ = GetParent()->GetParent()->FindGameObject<MoveSetIcon>();
 	MoveSelectIcon* pMoveSelectIcon_ = GetParent()->GetParent()->FindGameObject<MoveSelectIcon>();
@@ -68,9 +68,9 @@ void UnitIcon::Update()
 		//unitIconの移動処理
 		for (auto& colmun : pTileIcons_->GetpTIcon()) {//タイルとの当たり判定
 			for (auto& row : colmun) {
-				XMFLOAT2 leftUp = { row->GetPosition().x + row->GetGraphSizeF_2D().x / 4, row->GetPosition().y };
-				XMFLOAT2 graphSize = { row->GetGraphSizeF_2D().x / 4 * 2, row->GetGraphSizeF_2D().y };
-				XMFLOAT2 graphCenter = { transform_.position_.x + graphSizeF_.halfX(),transform_.position_.y + graphSizeF_.halfY()};
+				XMFLOAT2 leftUp = { row->GetPosition().x + row->GetBaseSizeF().x / 4, row->GetPosition().y };
+				XMFLOAT2 graphSize = { row->GetBaseSizeF().x / 4 * 2, row->GetBaseSizeF().y };
+				XMFLOAT2 graphCenter = { transform_.position_.x + GetBaseSizeF().halfX(),transform_.position_.y + GetBaseSizeF().halfY()};
 				if (PointInBox({ graphCenter.x, graphCenter.y }, leftUp, graphSize)) {
 					transform_.position_ = { row->GetPosition() };
 				}
@@ -129,48 +129,48 @@ void UnitIcon::Update()
 	default:
 		break;
 	}
-	XMFLOAT3 tileSize = pTileIcons_->GetSize();
-	transform_.position_ = transform_.position_ + (tileSize / 2 - graphSizeF_.half());
+	OBJ_SIZE_F tileSize = pTileIcons_->GetBaseSizeF();
+	/*if (moveMent.size() >= 2) {
+		auto m_front = moveMent.front();
+		transform_.position_ = pTileIcons_->GetpTIcon()[m_front.movement.y][m_front.movement.x]->GetPosition();
+	}*/
+	auto m_back = moveMent.back();
+	transform_.position_ = pTileIcons_->GetpTIcon()[m_back.movement.y][m_back.movement.x]->GetPosition();
+	/*transform_.position_ +=  (tileSize / 2 - graphSizeF_.half());*/
+	transform_.position_ += tileSize.half() * GetScale();
 	Object2D::Update();
 }
 
 void UnitIcon::Draw()
 {
-	XMFLOAT2 TileSize = { pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D().x,
-		pTileIcons_->GetpTIcon()[0][0]->GetGraphSizeF_2D().y};
 	switch (step_)
 	{
 	case FIRST:
 	{
-		
 		Object2D::Draw();
 		break;
 	}
 	case SECONDE:
 	{
 		if (moveMent.size() >= 2) {
-			auto m_front = moveMent.front();
-			XMFLOAT3 pos = pTileIcons_->GetpTIcon()[m_front.movement.y][m_front.movement.x]->GetPosition();
 			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 / 2);
-			/*DrawRotaGraph3(position_.x, position_.y, pivot_.x, pivot_.y, scale_.x, scale_.y, 0.0, hModel_, TRUE, FALSE)*/
-			DrawGraph(pos.x + (TileSize.x / 2 - graphSizeF_.halfX()), pos.y + (TileSize.y / 2 - graphSizeF_.halfY()), hModel_, TRUE);
+			Object2D::Draw();
 			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 		}
-		auto m_back = moveMent.back();
-		transform_.position_ = pTileIcons_->GetpTIcon()[m_back.movement.y][m_back.movement.x]->GetPosition();
-		DrawGraph(transform_.position_.x + (TileSize.x / 2 - graphSizeF_.halfX()), transform_.position_.y + (TileSize.y / 2 - graphSizeF_.halfY()), hModel_, TRUE);
+		Object2D::Draw();
 		break;
 	}
 	case THIRD:
 	{
-		DrawGraph(transform_.position_.x + (TileSize.x / 2 - graphSizeF_.halfX()), transform_.position_.y + (TileSize.y / 2 - graphSizeF_.halfY()), hModel_, TRUE);
+		Object2D::Draw();
 		break;
 	}	
 	default:
 		break;
 	}
-#if 0
-	DrawBoxAA(position.x, position.y, position.x + graphSizeF_.x , position.y + graphSizeF_.y, GetColor(255, 0, 0), FALSE);
+#if 1
+	DrawBoxAA(position_.x, position_.y, 
+		position_.x + baseSize_.x * transform_.scale_.x, position_.y + baseSize_.y * transform_.scale_.x, GetColor(255, 0, 0), FALSE);
 #endif
 }
 

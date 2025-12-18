@@ -17,10 +17,10 @@ void TriggerSetUIFrame::Update()
 	TriggerIcons* pTriggerIcons = GetParent()->GetParent()->GetParent()->FindGameObject<TriggerIcons>();
 	for (auto& itr : pTriggerIcons->GetpTIcons()) {
 		XMFLOAT2 ti_pos = { itr->GetPosition().x,itr->GetPosition().y };
-		XMFLOAT2 ti_gSize = { itr->GetGraphSizeF_2D().halfX(),itr->GetGraphSizeF_2D().halfY()};
+		XMFLOAT2 ti_gSize = { itr->GetBaseSizeF().halfX(),itr->GetBaseSizeF().halfY()};
 		XMFLOAT2 ti_center = {ti_pos.x + ti_gSize.x , ti_pos.y + ti_gSize.y};
 		XMFLOAT2 leftUp = { transform_.position_.x, transform_.position_.y };
-		XMFLOAT2 distance = { graphSizeF_.x,graphSizeF_.y };
+		XMFLOAT2 distance = { baseSize_.x,baseSize_.y };
 		if(PointInBox(ti_center,leftUp,distance)){
 			trigger = itr->GetIconName();
 		}
