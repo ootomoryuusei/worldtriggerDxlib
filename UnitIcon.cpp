@@ -137,7 +137,7 @@ void UnitIcon::Update()
 	auto m_back = moveMent.back();
 	transform_.position_ = pTileIcons_->GetpTIcon()[m_back.movement.y][m_back.movement.x]->GetPosition();
 	/*transform_.position_ +=  (tileSize / 2 - graphSizeF_.half());*/
-	transform_.position_ += tileSize.half() * GetScale();
+	transform_.position_ += tileSize.half() * pTileIcons_->GetScale() - hitSize_.half();
 	Object2D::Update();
 }
 
@@ -168,7 +168,7 @@ void UnitIcon::Draw()
 	default:
 		break;
 	}
-#if 1
+#if 0
 	DrawBoxAA(position_.x, position_.y, 
 		position_.x + baseSize_.x * transform_.scale_.x, position_.y + baseSize_.y * transform_.scale_.x, GetColor(255, 0, 0), FALSE);
 #endif

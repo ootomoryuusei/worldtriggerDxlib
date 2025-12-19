@@ -15,26 +15,35 @@ void Object3D::RegisterToRaycaster()
 
 void Object3D::UnregisterFromRaycaster()
 {
-	if (!raycaster3D_) return; // Raycaster3DÇ™ë∂ç›ÇµÇ»Ç¢èÍçáÇÕìoò^ÇµÇ»Ç¢
-	auto& list = raycaster3D_->objects_;
-	list.erase(
-		std::remove(list.begin(), list.end(), this),
-		list.end()
-	);
+	//if (!raycaster3D_) return; // Raycaster3DÇ™ë∂ç›ÇµÇ»Ç¢èÍçáÇÕìoò^ÇµÇ»Ç¢
+	//auto& list = raycaster3D_->objects_;
+	//list.erase(
+	//	std::remove(list.begin(), list.end(), this),
+	//	list.end()
+	//);
 }
 
 Object3D::Object3D(GameObject* parent) : GameObject(parent)
 {
+	transform_.position_ = { 0,0,0 };
+	transform_.rotate_ = { 0,0,0 };
+	transform_.scale_ = { 1,1,1 };
 	hModel_ = -1;
 	position_ = VGet(0, 0, 0);
 	rotation_ = VGet(0, 0, 0);
+	scale_ = VGet(1, 1, 1);
 }
 
 Object3D::Object3D(GameObject* parent,const std::string& name) : GameObject(parent, name)
 {
+	transform_.position_ = { 0,0,0 };
+	transform_.rotate_ = { 0,0,0 };
+	transform_.scale_ = { 1,1,1 };
+	
 	hModel_ = -1;
 	position_ = VGet(0, 0, 0);
 	rotation_ = VGet(0, 0, 0);
+	scale_ = VGet(1, 1, 1);
 }
 
 Object3D::~Object3D()
@@ -75,8 +84,8 @@ void Object3D::LoadModel(const string& path)
 	hModel_ = MV1LoadModel(path.c_str());
 	assert(hModel_ >= 0); //ÉAÉTÅ[ÉVÉáÉì
 	XMFLOAT3 baseSize = CalculateModelSize();
-	SetHitSizeF(baseSize);
-	SetBaseSizeF(baseSize);
+	baseSize_.set(baseSize);
+	hitSize_.set(baseSize_.size());
 }
 
 bool Object3D::Raycast(const VECTOR& rayOrigin, const VECTOR& rayDir, float& outDist)

@@ -20,6 +20,5 @@ public:
 	const auto& GetpTIcon() const{ return pTIcons_; }
 private:
 	vector<vector<TileIcon*>> pTIcons_;
-	Mouse* pMouse_;
 };
 

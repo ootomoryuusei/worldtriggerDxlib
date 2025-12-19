@@ -35,7 +35,7 @@ void TileIcons::Initialize()
             float m_scale = min(scale.x, scale.y);
 
             SetScale(m_scale, m_scale, m_scale); //タイルアイコンのスケールをセット
-            SetBaseSizeF(pTIcon->GetBaseSizeF()); //タイルアイコンのサイズをセット
+            baseSize_.set(pTIcon->GetBaseSizeF().size()); //タイルアイコンのサイズをセット
             pTIcon->SetScale(transform_.scale_);
             TILEDATA tile;
             XMFLOAT2 pos;

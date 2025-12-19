@@ -14,10 +14,14 @@ struct OBJ_SIZE {
 	void set(int _x, int _y, int _z) {
 		x = _x, y = _y, z = _z;
 	}
+	void set(XMFLOAT3 size) {
+		x = size.x; y = size.y; z = size.z;
+	}
 	int halfX() const { return x / 2; }
 	int halfY() const { return y / 2; }
 	int halfZ() const { return z / 2; }
 	XMINT3 half() const { return { halfX(),halfY(),halfZ() }; }
+	XMINT3 size() const { return { x,y,z }; }
 };
 
 struct OBJ_SIZE_F {
@@ -25,10 +29,14 @@ struct OBJ_SIZE_F {
 	void set(float _x, float _y, float _z) {
 		x = _x; y = _y; z = _z;
 	}
+	void set(XMFLOAT3 size) {
+		x = size.x; y = size.y; z = size.z;
+	}
 	float halfX() const { return x / 2; }
 	float halfY() const { return y / 2; }
 	float halfZ() const { return z / 2; }
 	XMFLOAT3 half() const { return { halfX(), halfY(), halfZ() }; }
+	XMFLOAT3 size() const { return { x,y,z }; }
 };
 
 struct ARC_DATA {

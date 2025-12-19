@@ -9,7 +9,11 @@
 Object2D::Object2D(GameObject* parent, const std::string& name)
     : GameObject(parent, name)
 {
-   /* position_ = {0,0};
+   /* transform_.position_ = { 0,0,0 };
+    transform_.rotate_ = { 0,0,0 };
+    transform_.scale_ = { 1,1,1 };
+    hModel_ = -1;
+    position_ = {0,0};
     pivot_ = { 0.5,0.5 };
     scale_ = { 1,1 };*/
 }
@@ -36,23 +40,23 @@ void Object2D::RegisterToRaycaster()
 
 void Object2D::UnregisterFromRaycaster()
 {
-	if (!raycaster2D_) return; // Raycaster2DÇ™ë∂ç›ÇµÇ»Ç¢èÍçáÇÕìoò^âèúÇµÇ»Ç¢
-    auto& list = raycaster2D_->elements_;
-    auto it = std::find(list.begin(), list.end(), this);
-    if (it != list.end()) list.erase(it);
+	//if (!raycaster2D_) return; // Raycaster2DÇ™ë∂ç›ÇµÇ»Ç¢èÍçáÇÕìoò^âèúÇµÇ»Ç¢
+ //   auto& list = raycaster2D_->elements_;
+ //   auto it = std::find(list.begin(), list.end(), this);
+ //   if (it != list.end()) list.erase(it);
 }
 
 void Object2D::Release()
 {
 	UnregisterFromRaycaster(); // Raycaster2D  ìoò^âèú
-    GameObject::Release();
 }
 
 void Object2D::Update()
 {
-	if (hModel_ < 0)return;
+    if (hModel_ < 0)return;
     position_ = { transform_.position_.x,transform_.position_.y };
     scale_ = { transform_.scale_.x,transform_.scale_.y };
+    hitSize_.set(baseSize_.size() * transform_.scale_);
 }
 
 void Object2D::Draw()
@@ -68,7 +72,8 @@ void Object2D::LoadSprite(const std::string& _filePath)
     assert(hModel_ >= 0); //ÉAÉTÅ[ÉVÉáÉì
     int sizeX, sizeY;
     GetGraphSize(hModel_, &sizeX, &sizeY);
-    hitSize_.set(sizeX,sizeY,0);
+    baseSize_.set(sizeX,sizeY,0);
+    hitSize_.set(baseSize_.size());
 }
 
 XMFLOAT2 Object2D::ScreenToLocal(const XMFLOAT2& screenPos) const

@@ -227,14 +227,6 @@ public:
 	void SetScale(XMFLOAT3 scale) { transform_.scale_ = scale; }
 	void SetScale(float x, float y, float z) { SetScale(XMFLOAT3(x, y, z)); }
 	void SetScale(VECTOR scale) { SetScale(scale.x, scale.y, scale.z); }
-	void SetHitSizeF(OBJ_SIZE_F size) { hitSize_ = size; }
-	void SetHitSizeF(XMFLOAT3 size) { hitSize_.set(size.x, size.y, size.z); }
-	void SetHitSizeF(float x, float y, float z) { hitSize_.set(x,y,z); }
-	void SetHitSizeF(VECTOR size) { hitSize_.set(size.x, size.y, size.z); }
-	void SetBaseSizeF(OBJ_SIZE_F size) { baseSize_ = size; }
-	void SetBaseSizeF(XMFLOAT3 size) { hitSize_.set(size.x, size.y, size.z); }
-	void SetBaseSizeF(float x, float y, float z) { baseSize_.set(x, y, z); }
-	void SetBaseSizeF(VECTOR size) { baseSize_.set(size.x, size.y, size.z); }
 
 	void AddGroup(GroupBase* group) {
 		groups_.insert(group);
