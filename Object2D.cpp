@@ -116,7 +116,7 @@ bool Object2D::IsInMousePoint(const XMFLOAT2& mpos) const
     return false;
 }
 
-bool Object2D::PointInQuad(XMFLOAT2 point, const array<XMFLOAT2, 4>& corners) {
+bool Object2D::PointInPolygon(XMFLOAT2 point, const vector<XMFLOAT2>& corners) {
     // 4つの三角形に分けて、それぞれの符号を確認（外積ベース）
     for (int i = 0; i < 4; i++) {
         int j = (i + 1) % 4;

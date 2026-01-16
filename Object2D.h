@@ -41,7 +41,7 @@ public:
 
     virtual bool IsInMousePoint(const XMFLOAT2& mpos) const;
 
-    bool PointInQuad(XMFLOAT2 point, const array<XMFLOAT2, 4>& corners);
+    bool PointInPolygon(XMFLOAT2 point, const vector<XMFLOAT2>& corners);
 protected:
     int hModel_; //モデルハンドル
     XMFLOAT2 position_; //座標

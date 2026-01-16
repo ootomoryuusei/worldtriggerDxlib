@@ -68,6 +68,9 @@
     <Filter Include="Device">
       <UniqueIdentifier>{4ece9f60-6a24-45f2-a674-e2d68736cb0e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HitShape">
+      <UniqueIdentifier>{a17cf9bd-410a-418b-bbfa-e628097aa43f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\GameObject.cpp">
@@ -622,6 +625,12 @@
     </ClInclude>
     <ClInclude Include="GameInfo.h">
       <Filter>リソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseHitShape.h">
+      <Filter>HitShape</Filter>
+    </ClInclude>
+    <ClInclude Include="HitHexagon.h">
+      <Filter>HitShape</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
