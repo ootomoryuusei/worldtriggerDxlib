@@ -4,6 +4,7 @@
 #include"UnitIcons.h"
 #include"TriggerData.h"
 #include"GroupManager.h"
+#include"HitSquare.h"
 #include <algorithm>
 
 using std::clamp;
@@ -38,6 +39,8 @@ void TriggerArcIcon::Initialize()
 	pData_->SetTriggerData(trigger);
 	pGroupManager_ = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<GroupManager>();
 	pTileIcons_ = dynamic_cast<TileIcons*>(pGroupManager_->GetGroup("TileIconGroup"));
+
+	hitShape_ = Instantiate<HitSquare>(this); // “–‚½‚è”»’èŒ`ó‚ğlŠpŒ`‚Éİ’è
 }
 
 void TriggerArcIcon::Update()

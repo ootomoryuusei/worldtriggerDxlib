@@ -1,6 +1,7 @@
 #pragma once
 #include"Engine/Transform.h"
 #include"Object2D.h"
+#include"GameInfo.h"
 class BaseHitShape { //“–‚½‚è”»’èŒ`óŠî’êƒNƒ‰ƒX
 public :
 	virtual ~BaseHitShape() = default;

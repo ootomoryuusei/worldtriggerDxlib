@@ -324,6 +324,7 @@
     <ClInclude Include="MathOperator.h" />
     <ClInclude Include="BaseHitShape.h" />
     <ClInclude Include="HitHexagon.h" />
+    <ClInclude Include="HitSquare.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc" />

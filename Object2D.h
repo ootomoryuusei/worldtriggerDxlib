@@ -2,6 +2,7 @@
 #include "Engine/GameObject.h" 
 #include"GameInfo.h"
 #include"InputManager.h"
+#include"BaseHitShape.h"
 #include <DirectXMath.h>
 #include <string>
 #include<array>
@@ -53,6 +54,7 @@ protected:
     int fontHandle_; //フォントハンドル
     XMFLOAT2 pivot_; //回転軸
     float angle_; //回転
+	BaseHitShape* hitShape_ = nullptr; //当たり判定形状
 
     bool hovered_ = false;
     bool pressed_ = false;
