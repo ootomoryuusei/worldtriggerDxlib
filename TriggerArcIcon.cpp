@@ -40,7 +40,8 @@ void TriggerArcIcon::Initialize()
 	pGroupManager_ = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<GroupManager>();
 	pTileIcons_ = dynamic_cast<TileIcons*>(pGroupManager_->GetGroup("TileIconGroup"));
 
-	hitShape_ = Instantiate<HitSquare>(this); // 当たり判定形状を四角形に設定
+	SetScale(trigger.arc.rangeSize, trigger.arc.rangeSize, 0);
+	hitShape_ = new HitSquare(); // 当たり判定形状を四角形に設定
 }
 
 void TriggerArcIcon::Update()
@@ -53,7 +54,6 @@ void TriggerArcIcon::Update()
 			break;
 		case SECONDE:
 		{
-			calculateArc();
 			break;
 		}
 		case THIRD:
@@ -100,11 +100,10 @@ void TriggerArcIcon::Draw()
 {
 	const auto& uniticons = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
 	OBJ_SIZE_F tileSize = pTileIcons_->GetpTIcon()[0][0]->GetBaseSizeF();
-	XMFLOAT2 DrawCenterPos = { position_.x + (baseSize_.halfX() - tileSize.halfX()),
-								position_.y + (baseSize_.halfY() - tileSize.halfY())};
+	XMFLOAT2 DrawCenterPos = { position_.x + (hitSize_.halfX() - tileSize.halfX()),
+								position_.y + (hitSize_.halfY() - tileSize.halfY())};
 
-	float size = pData_->GetTriggerData().arc.rangeSize;
-	DrawCircleGaugeF(DrawCenterPos.x, DrawCenterPos.y, percent, hModel_, startPercent,size);
+	DrawCircleGaugeF(DrawCenterPos.x, DrawCenterPos.y, percent, hModel_, startPercent,scale_.x);
 
 	//if (hand_ == RIGHT) {
 	//	/*DrawRotaStringF()*/
@@ -134,7 +133,7 @@ void TriggerArcIcon::DeviceEvent(const DragEvent& event)
 	case LEFT:
 	{
 		OBJ_SIZE_F tileSize = pTileIcons_->GetpTIcon()[0][0]->GetBaseSizeF();
-		XMFLOAT3 DrawCenterPos = transform_.position_ + (baseSize_.half() - tileSize.half());
+		XMFLOAT3 DrawCenterPos = transform_.position_ + (baseSize_.half() * transform_.scale_ - tileSize.half());
 
 		// 扇形の角度と中心角の向きを取得
 		float startAngleDeg = startPercent * 3.6f;
@@ -144,12 +143,10 @@ void TriggerArcIcon::DeviceEvent(const DragEvent& event)
 
 		// 四角形サイズ（幅は角度に応じて、高さは固定）
 		float angleSpanDeg = endAngleDeg - startAngleDeg;
-		float size = pData_->GetTriggerData().arc.rangeSize;
-		float width = baseSize_.halfX() * size * sqrtf(2 * (1 - cos(XMConvertToRadians(angleSpanDeg))));
-		float height = baseSize_.halfY() * size;
+		float width = baseSize_.halfX() * transform_.scale_.x * sqrtf(2 * (1 - cos(XMConvertToRadians(angleSpanDeg))));
+		float height = baseSize_.halfY() * transform_.scale_.y;
 
-		hitSize_.set(width, height, 0);
-
+		hitSize_.set(width,height,0);
 		// 四角形のローカル座標（原点は底辺中央）
 		XMFLOAT2 localCorners[4] = {
 			{-width / 2, -height}, // 左上（←ここからスタート）
@@ -170,7 +167,6 @@ void TriggerArcIcon::DeviceEvent(const DragEvent& event)
 		}
 
 		VECTOR nowVec, centerVec;
-		/*if (!selecting_) return;*/
 		nowVec = { event.current.x, event.current.y, 0 };
 		centerVec = { center.x, center.y, 0 };
 

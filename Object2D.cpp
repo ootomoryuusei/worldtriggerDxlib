@@ -78,21 +78,21 @@ void Object2D::LoadSprite(const std::string& _filePath)
 
 XMFLOAT2 Object2D::ScreenToLocal(const XMFLOAT2& screenPos) const
 {
-    float w = baseSize_.x * scale_.x;
-    float h = baseSize_.y * scale_.y;
-    float cx = position_.x; 
-    float cy = position_.y;
+    float w = hitSize_.x;
+    float h = hitSize_.y;
+    float cx = transform_.position_.x; 
+    float cy = transform_.position_.y;
 
     float dx = screenPos.x - cx;
     float dy = screenPos.y - cy;
 
-    float ca = cosf(-angle_);
-    float sa = sinf(-angle_);
+    float ca = cosf(-transform_.rotate_.z);
+    float sa = sinf(-transform_.rotate_.z);
     float rx = dx * ca - dy * sa;
     float ry = dx * sa + dy * ca;
 
-    float localX = rx / (scale_.x);
-    float localY = ry / (scale_.y);
+    float localX = rx / (transform_.scale_.x);
+    float localY = ry / (transform_.scale_.y);
 
     localX += (baseSize_.x * 0.5f);
     localY += (baseSize_.y * 0.5f);
@@ -102,17 +102,17 @@ XMFLOAT2 Object2D::ScreenToLocal(const XMFLOAT2& screenPos) const
 
 bool Object2D::IsInMousePoint(const XMFLOAT2& mpos) const
 {
-    if (fabsf(angle_) < 1e-5f) {
-        float w = baseSize_.x * scale_.x;
-        float h = baseSize_.y * scale_.y;
-        float left = position_.x - pivot_.x * w;
-        float top = position_.y - pivot_.y * h;
+   /* if (fabsf(angle_) < 1e-5f) {
+        float w = hitSize_.x;
+        float h = hitSize_.y;
+        float left = transform_.position_.x - pivot_.x * w;
+        float top = transform_.position_.y - pivot_.y * h;
         if (mpos.x >= left && mpos.x <= left + w && mpos.y >= top && mpos.y <= top + h) return true;
         return false;
-    }
+    }*/
 
     XMFLOAT2 local = ScreenToLocal(mpos);
-    if (local.x >= 0 && local.x <= baseSize_.x && local.y >= 0 && local.y <= baseSize_.y) return true;
+    if (local.x >= 0 && local.x <= hitSize_.x && local.y >= 0 && local.y <= hitSize_.y) return true;
     return false;
 }
 
@@ -130,4 +130,11 @@ bool Object2D::PointInPolygon(XMFLOAT2 point, const vector<XMFLOAT2>& corners) {
         if (VCross(In1, In2).z < 0) return false;
     }
     return true;
+}
+
+bool Object2D::HitTest(const XMFLOAT2& point){
+    if (hitShape_) {
+        return hitShape_->IsHit(point, *this);
+    }
+    return false;
 }

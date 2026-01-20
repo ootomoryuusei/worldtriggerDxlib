@@ -40,9 +40,11 @@ public:
 
     void SetFontHandle(int _fontHandle) { fontHandle_ = _fontHandle; }
 
-    virtual bool IsInMousePoint(const XMFLOAT2& mpos) const;
+    bool IsInMousePoint(const XMFLOAT2& mpos) const;
 
     bool PointInPolygon(XMFLOAT2 point, const vector<XMFLOAT2>& corners);
+
+    bool HitTest(const XMFLOAT2& point);
 protected:
     int hModel_; //モデルハンドル
     XMFLOAT2 position_; //座標

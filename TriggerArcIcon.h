@@ -21,8 +21,6 @@ public:
 	void Draw() override;
 
 	void DeviceEvent(const DragEvent& event) override;
-	
-	const auto& GetBoxCorners() const { return boxCorners; }
 
 	const float GetPercent() { return percent; }
 	const float GetStartPercent() { return startPercent; }

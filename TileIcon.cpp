@@ -3,6 +3,7 @@
 #include"MoveTypeIcons.h"
 #include"MoveSelectIcon.h"
 #include"UnitIcons.h"
+#include"HitHexagon.h"
 
 TileIcon::TileIcon(GameObject* parent) : Object2D(parent)
 {
@@ -21,7 +22,8 @@ TileIcon::~TileIcon()
 
 void TileIcon::Initialize()
 {
-	
+	/*Object2D::Initialize();*/
+	hitShape_ = new HitHexagon(); // “–‚½‚è”»’èŒ`ó‚ğ˜ZŠpŒ`‚Éİ’è
 }
 
 void TileIcon::Update()

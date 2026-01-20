@@ -42,7 +42,7 @@ HitInfo Raycaster2D::Raycast(float mx, float my)
         auto* element = *i;
         if (!element->IsVisibled()) continue; //非表示ならスキップ  
 
-        if (element->IsInMousePoint({ mx, my })) {
+        if (element->HitTest({mx,my})) { //ヒット形状に合わせてヒット判定
 
             if (!best.IsHit()) {
                 best.type = HitTargetType::UI;

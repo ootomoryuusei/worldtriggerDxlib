@@ -249,12 +249,37 @@ public:
 
 	XMFLOAT3 Lerp3D(XMFLOAT3& start, XMFLOAT3& goal, float percent);
 
-	virtual void DeviceEvent(const ClickEvent& event) {} //マウスクリックイベント
-	virtual void DeviceEvent(const DoubleClickEvent& event) {} //マウスダブルクリックイベント
-	virtual void DeviceEvent(const PressEvent& event) {} //マウスプレスイベント
-	virtual void DeviceEvent(const DragEvent& event) {} //マウスドラッグイベント
-	virtual void DeviceEvent(const WheelEvent& event) {} //マウスホイールイベント
-	virtual void DeviceEvent(const KeyEvent& event) {} //キーボードイベント
+	//デバイスイベント受け取り用仮想関数群
+	/// <summary>
+	/// マウスクリックイベント
+	/// </summary>
+	/// <param name="event">button,position</param>
+	virtual void DeviceEvent(const ClickEvent& event) {}
+	/// <summary>
+	/// マウスダブルクリックイベント
+	/// </summary>
+	/// <param name="event">button,position</param>
+	virtual void DeviceEvent(const DoubleClickEvent& event) {}
+	/// <summary>
+	/// マウスプレスイベント
+	/// </summary>
+	/// <param name="event">button,position</param>
+	virtual void DeviceEvent(const PressEvent& event) {}
+	/// <summary>
+	/// マウスドラッグイベント
+	/// </summary>
+	/// <param name="event">button,start,current,delta</param>
+	virtual void DeviceEvent(const DragEvent& event) {}
+	/// <summary>
+	/// マウスホイールイベント
+	/// </summary>
+	/// <param name="event">delta</param>
+	virtual void DeviceEvent(const WheelEvent& event) {}
+	/// <summary>
+	/// キーボードイベント
+	/// </summary>
+	/// <param name="event">key</param>
+	virtual void DeviceEvent(const KeyEvent& event) {}
 
 	void SetStep(STEP _step) { step_ = _step; }
 	STEP GetStep()const { return step_; }
