@@ -26,5 +26,16 @@ public:
 		return element.PointInPolygon(point, corners_);
 	}
 
-	const auto& GetCorners() const { return corners_; }
+	void DrawJudgmentRange(Object2D& element) override {
+		const auto& corners = corners_;
+		for (int i = 0; i < 6; i++) {
+			int j = (i + 1) % 6;
+			DrawLineAA(corners[i].x, corners[i].y,
+				corners[j].x, corners[j].y,
+				GetColor(255, 0, 0), FALSE);
+		}
+		for (int i = 0; i < 6; ++i) {
+			DrawCircle(corners[i].x, corners[i].y, 2, GetColor(0, 255, 0)); // 六角形の頂点のマーク
+		}
+	}
 };

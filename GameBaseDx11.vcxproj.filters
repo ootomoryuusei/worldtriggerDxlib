@@ -320,6 +320,9 @@
     <ClCompile Include="Raycaster3D.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
+    <ClCompile Include="ArcIcon.cpp">
+      <Filter>Icon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -631,6 +634,15 @@
     </ClInclude>
     <ClInclude Include="HitHexagon.h">
       <Filter>HitShape</Filter>
+    </ClInclude>
+    <ClInclude Include="HitSquare.h">
+      <Filter>HitShape</Filter>
+    </ClInclude>
+    <ClInclude Include="HitSquareArc.h">
+      <Filter>HitShape</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcIcon.h">
+      <Filter>Icon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

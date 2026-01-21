@@ -100,8 +100,7 @@ void TriggerArcIcon::Draw()
 {
 	const auto& uniticons = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
 	OBJ_SIZE_F tileSize = pTileIcons_->GetpTIcon()[0][0]->GetBaseSizeF();
-	XMFLOAT2 DrawCenterPos = { position_.x + (hitSize_.halfX() - tileSize.halfX()),
-								position_.y + (hitSize_.halfY() - tileSize.halfY())};
+	XMFLOAT2 DrawCenterPos = { position_.x + tileSize.halfX(),position_.y + tileSize.halfY()};
 
 	DrawCircleGaugeF(DrawCenterPos.x, DrawCenterPos.y, percent, hModel_, startPercent,scale_.x);
 
@@ -132,8 +131,8 @@ void TriggerArcIcon::DeviceEvent(const DragEvent& event)
 	{
 	case LEFT:
 	{
-		OBJ_SIZE_F tileSize = pTileIcons_->GetpTIcon()[0][0]->GetBaseSizeF();
-		XMFLOAT3 DrawCenterPos = transform_.position_ + (baseSize_.half() * transform_.scale_ - tileSize.half());
+		OBJ_SIZE_F tileSize = pTileIcons_->GetpTIcon()[0][0]->GetHitSizeF();
+		XMFLOAT3 DrawCenterPos = transform_.position_ + tileSize.half();
 
 		// îŒ`‚ÌŠp“x‚Æ’†SŠp‚ÌŒü‚«‚ğæ“¾
 		float startAngleDeg = startPercent * 3.6f;

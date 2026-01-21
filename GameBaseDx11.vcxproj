@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="Amatori_Chika.cpp" />
     <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="ArcIcon.cpp" />
     <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -220,6 +221,7 @@
   <ItemGroup>
     <ClInclude Include="Amatori_Chika.h" />
     <ClInclude Include="Animator.h" />
+    <ClInclude Include="ArcIcon.h" />
     <ClInclude Include="Asteroid.h" />
     <ClInclude Include="AutoRegister.h" />
     <ClInclude Include="BackGround.h" />
@@ -325,6 +327,7 @@
     <ClInclude Include="BaseHitShape.h" />
     <ClInclude Include="HitHexagon.h" />
     <ClInclude Include="HitSquare.h" />
+    <ClInclude Include="HitSquareArc.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameBaseDx11.rc" />
