@@ -3,6 +3,8 @@
 class ArcIcon :
     public Object2D
 {
+protected:
+	ARC_DATA arcData_;
 public:
     ArcIcon(GameObject* parent, const std::string& name = "ArcIcon");
     virtual ~ArcIcon();
@@ -11,5 +13,7 @@ public:
     virtual void Update() override;
     virtual void Draw() override;
     virtual void Release() override;
+
+    const auto& GetArcData() const { return arcData_; }
 };
 

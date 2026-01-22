@@ -1,5 +1,5 @@
 #pragma once
-#include "Object2D.h"
+#include "ArcIcon.h"
 #include<array>
 #include<deque>
 
@@ -11,7 +11,7 @@ using std::array;
 using std::deque;
 
 class TriggerArcIcon :
-    public Object2D
+    public ArcIcon
 {
 public:
 	TriggerArcIcon(GameObject* parent);
@@ -22,16 +22,11 @@ public:
 
 	void DeviceEvent(const DragEvent& event) override;
 
-	const float GetPercent() { return percent; }
-	const float GetStartPercent() { return startPercent; }
-
 	void SetAngle(XMFLOAT2 _angle) { angle.push_back(_angle); }
 
 	const auto& GetpData()const { return pData_; }
 	void SetHand(HANDS _hand) { hand_ = _hand; }
 private:
-	float percent;
-	float startPercent;
 	VECTOR prevVec;
 	XMFLOAT2 center;
 	array<XMFLOAT2, 4> boxCorners{};

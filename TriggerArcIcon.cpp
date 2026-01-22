@@ -9,7 +9,7 @@
 
 using std::clamp;
 
-TriggerArcIcon::TriggerArcIcon(GameObject* parent) : Object2D(parent)
+TriggerArcIcon::TriggerArcIcon(GameObject* parent) : ArcIcon(parent)
 {
 	step_ = SECONDE;
 
@@ -28,14 +28,13 @@ TriggerArcIcon::~TriggerArcIcon()
 void TriggerArcIcon::Initialize()
 {
 	Object2D::Initialize(); //Raycaster2Dへ登録
-	percent = 5.0f;
-	startPercent = -5.0f;
 	VECTOR prevVec = { 0,0,0 };
 	pData_ = Instantiate<TriggerData>(this);
 	TRIGGER trigger;
 	trigger.arc.percent = 5.0f;
 	trigger.arc.rangeSize = 1.5f;
 	trigger.arc.startPercent = -5.0f;
+	arcData_ = trigger.arc;
 	pData_->SetTriggerData(trigger);
 	pGroupManager_ = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<GroupManager>();
 	pTileIcons_ = dynamic_cast<TileIcons*>(pGroupManager_->GetGroup("TileIconGroup"));
@@ -75,8 +74,8 @@ void TriggerArcIcon::Update()
 					XMFLOAT3 target = {targetIndex.x,targetIndex.y,0};
 					float Percent = elapsedTime / totalTime;
 					Percent = clamp(Percent, 0.0f, 1.0f);
-					startPercent = Lerp3D(start, target, Percent).x;
-					percent = Lerp3D(start, target, Percent).y;
+					arcData_.startPercent = Lerp3D(start, target, Percent).x;
+					arcData_.percent = Lerp3D(start, target, Percent).y;
 					if (Percent >= 1.0f) {
 						// 移動完了 → 次の区間へ
 						elapsedTime = 0.0f;
@@ -93,7 +92,7 @@ void TriggerArcIcon::Update()
 		default:
 			break;
 		}
-		Object2D::Update();
+		ArcIcon::Update();
 }
 
 void TriggerArcIcon::Draw()
@@ -102,7 +101,8 @@ void TriggerArcIcon::Draw()
 	OBJ_SIZE_F tileSize = pTileIcons_->GetpTIcon()[0][0]->GetBaseSizeF();
 	XMFLOAT2 DrawCenterPos = { position_.x + tileSize.halfX(),position_.y + tileSize.halfY()};
 
-	DrawCircleGaugeF(DrawCenterPos.x, DrawCenterPos.y, percent, hModel_, startPercent,scale_.x);
+	ArcIcon::Draw();
+	/*DrawCircleGaugeF(DrawCenterPos.x, DrawCenterPos.y, percent, hModel_, startPercent,scale_.x);*/
 
 	//if (hand_ == RIGHT) {
 	//	/*DrawRotaStringF()*/
@@ -135,8 +135,8 @@ void TriggerArcIcon::DeviceEvent(const DragEvent& event)
 		XMFLOAT3 DrawCenterPos = transform_.position_ + tileSize.half();
 
 		// 扇形の角度と中心角の向きを取得
-		float startAngleDeg = startPercent * 3.6f;
-		float endAngleDeg = percent * 3.6f;
+		float startAngleDeg = arcData_.startPercent * 3.6f;
+		float endAngleDeg = arcData_.percent * 3.6f;
 		float centerAngleDeg = (startAngleDeg + endAngleDeg) / 2.0f;
 		float angleRad = XMConvertToRadians(centerAngleDeg);
 
@@ -174,12 +174,12 @@ void TriggerArcIcon::DeviceEvent(const DragEvent& event)
 
 		VECTOR cross = VCross(nextVec, startVec);
 		if (cross.z < 0) { // 時計回り
-			startPercent -= 0.5;
-			percent -= 0.5;
+			arcData_.startPercent -= 0.5;
+			arcData_.percent -= 0.5;
 		}
 		else if (cross.z > 0) { // 反時計回り
-			startPercent += 0.5;
-			percent += 0.5;
+			arcData_.startPercent += 0.5;
+			arcData_.percent += 0.5;
 		}
 		// 次フレームのために保存
 		prevVec = nowVec;

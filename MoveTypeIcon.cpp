@@ -91,7 +91,7 @@ void MoveTypeIcon::DeviceEvent(const DoubleClickEvent& event)
 
 		auto& arcs_icon = select_uniticon->GetpTriggersArcIcon();
 		for (auto& itr : arcs_icon->GetpTriggerArcIcon()) {
-			itr->SetAngle({ itr->GetStartPercent(),itr->GetPercent() });
+			itr->SetAngle({ itr->GetArcData().startPercent,itr->GetArcData().percent });
 		}
 	}
 		break;
