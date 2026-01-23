@@ -27,15 +27,14 @@ public:
 	}
 
 	void DrawJudgmentRange(Object2D& element) override {
-		const auto& corners = corners_;
 		for (int i = 0; i < 6; i++) {
 			int j = (i + 1) % 6;
-			DrawLineAA(corners[i].x, corners[i].y,
-				corners[j].x, corners[j].y,
+			DrawLineAA(corners_[i].x, corners_[i].y,
+				corners_[j].x, corners_[j].y,
 				GetColor(255, 0, 0), FALSE);
 		}
 		for (int i = 0; i < 6; ++i) {
-			DrawCircle(corners[i].x, corners[i].y, 2, GetColor(0, 255, 0)); // 六角形の頂点のマーク
+			DrawCircle(corners_[i].x, corners_[i].y, 2, GetColor(0, 255, 0)); // 六角形の頂点のマーク
 		}
 	}
 };

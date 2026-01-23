@@ -4,7 +4,6 @@
 #include"UnitIcons.h"
 #include"TriggerData.h"
 #include"GroupManager.h"
-#include"HitSquare.h"
 #include <algorithm>
 
 using std::clamp;
@@ -27,7 +26,7 @@ TriggerArcIcon::~TriggerArcIcon()
 
 void TriggerArcIcon::Initialize()
 {
-	Object2D::Initialize(); //Raycaster2Dへ登録
+	ArcIcon::Initialize(); // 当たり判定形状を円弧専用四角形に設定
 	VECTOR prevVec = { 0,0,0 };
 	pData_ = Instantiate<TriggerData>(this);
 	TRIGGER trigger;
@@ -40,7 +39,6 @@ void TriggerArcIcon::Initialize()
 	pTileIcons_ = dynamic_cast<TileIcons*>(pGroupManager_->GetGroup("TileIconGroup"));
 
 	SetScale(trigger.arc.rangeSize, trigger.arc.rangeSize, 0);
-	hitShape_ = new HitSquare(); // 当たり判定形状を四角形に設定
 }
 
 void TriggerArcIcon::Update()
@@ -111,18 +109,6 @@ void TriggerArcIcon::Draw()
 	//else if(hand_ == LEFT){
 	//	DrawString(boxCorners[0].x, boxCorners[0].y, "Sub", GetColor(255, 255, 255), 1.5);
 	//}
-#if 1
-	// 四角形描画
-	for (int i = 0; i < 4; i++) {
-		int j = (i + 1) % 4;
-		DrawLineAA(boxCorners[i].x, boxCorners[i].y,
-			boxCorners[j].x, boxCorners[j].y,
-			GetColor(255, 0, 0), FALSE);
-	}
-	for (int i = 0; i < 4; ++i) {
-		DrawCircle(boxCorners[i].x, boxCorners[i].y, 2,GetColor(0,255,0)); // 四隅のマーク
-	}
-#endif
 }
 
 void TriggerArcIcon::DeviceEvent(const DragEvent& event)
@@ -133,37 +119,9 @@ void TriggerArcIcon::DeviceEvent(const DragEvent& event)
 	{
 		OBJ_SIZE_F tileSize = pTileIcons_->GetpTIcon()[0][0]->GetHitSizeF();
 		XMFLOAT3 DrawCenterPos = transform_.position_ + tileSize.half();
-
-		// 扇形の角度と中心角の向きを取得
-		float startAngleDeg = arcData_.startPercent * 3.6f;
-		float endAngleDeg = arcData_.percent * 3.6f;
-		float centerAngleDeg = (startAngleDeg + endAngleDeg) / 2.0f;
-		float angleRad = XMConvertToRadians(centerAngleDeg);
-
-		// 四角形サイズ（幅は角度に応じて、高さは固定）
-		float angleSpanDeg = endAngleDeg - startAngleDeg;
-		float width = baseSize_.halfX() * transform_.scale_.x * sqrtf(2 * (1 - cos(XMConvertToRadians(angleSpanDeg))));
-		float height = baseSize_.halfY() * transform_.scale_.y;
-
-		hitSize_.set(width,height,0);
-		// 四角形のローカル座標（原点は底辺中央）
-		XMFLOAT2 localCorners[4] = {
-			{-width / 2, -height}, // 左上（←ここからスタート）
-			{ width / 2, -height}, // 右上
-			{ width / 2, 0},       // 右下
-			{-width / 2, 0}        // 左下
-		};
-
+		
 		// 回転中心（DrawCircleGauge と同じ）
 		center = { DrawCenterPos.x,DrawCenterPos.y };
-
-		// ローカル→ワールド座標へ変換（回転あり）
-		for (int i = 0; i < 4; i++) {
-			float x = localCorners[i].x;
-			float y = localCorners[i].y;
-			boxCorners[i].x = center.x + x * cos(angleRad) - y * sin(angleRad);
-			boxCorners[i].y = center.y + x * sin(angleRad) + y * cos(angleRad);
-		}
 
 		VECTOR nowVec, centerVec;
 		nowVec = { event.current.x, event.current.y, 0 };

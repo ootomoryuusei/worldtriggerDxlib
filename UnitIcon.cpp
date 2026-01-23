@@ -56,8 +56,8 @@ void UnitIcon::Update()
 
 
 	auto& arcs = pArcs_->GetpTriggerArcIcon();
-	for (auto& itr : arcs) {
-		itr->SetPosition(transform_.position_);
+	for (auto& arc : arcs) {
+		arc->SetPosition(transform_.position_);
 	}
 
 	switch (step_)
