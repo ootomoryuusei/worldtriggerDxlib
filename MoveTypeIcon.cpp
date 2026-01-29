@@ -6,12 +6,15 @@
 #include"TileIcons.h"
 #include"TriggersArcIcon.h"
 #include"GroupManager.h"
+#include"HitSquare.h"
 #include<algorithm>
 #include <queue>
 #include <set>
 
 MoveTypeIcon::MoveTypeIcon(GameObject* parent) : Object2D(parent)
 {
+	Object2D::Initialize(); //raycaster2D‚Ö“o˜^
+	hitShape_ = new HitSquare(); // “–‚½‚è”»’èŒ`ó‚ğlŠpŒ`‚Éİ’è
 	LoadSprite("Assets//Image//MoveTypeButton.png");
 	transform_.position_ = { 0, 0, 0 };
 	fontHandle_ = -1;

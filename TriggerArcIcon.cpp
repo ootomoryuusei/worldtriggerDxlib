@@ -90,14 +90,16 @@ void TriggerArcIcon::Update()
 		default:
 			break;
 		}
+		OBJ_SIZE_F tileSize = pTileIcons_->GetpTIcon()[0][0]->GetBaseSizeF();
+		transform_.position_ += tileSize.half();
 		ArcIcon::Update();
+		
 }
 
 void TriggerArcIcon::Draw()
 {
 	const auto& uniticons = GetParent()->GetParent()->GetParent()->GetParent()->FindGameObject<UnitIcons>();
-	OBJ_SIZE_F tileSize = pTileIcons_->GetpTIcon()[0][0]->GetBaseSizeF();
-	XMFLOAT2 DrawCenterPos = { position_.x + tileSize.halfX(),position_.y + tileSize.halfY()};
+	
 
 	ArcIcon::Draw();
 	/*DrawCircleGaugeF(DrawCenterPos.x, DrawCenterPos.y, percent, hModel_, startPercent,scale_.x);*/
@@ -120,27 +122,28 @@ void TriggerArcIcon::DeviceEvent(const DragEvent& event)
 		OBJ_SIZE_F tileSize = pTileIcons_->GetpTIcon()[0][0]->GetHitSizeF();
 		XMFLOAT3 DrawCenterPos = transform_.position_ + tileSize.half();
 		
-		// 回転中心（DrawCircleGauge と同じ）
+		//回転中心（DrawCircleGauge と同じ）
 		center = { DrawCenterPos.x,DrawCenterPos.y };
 
-		VECTOR nowVec, centerVec;
-		nowVec = { event.current.x, event.current.y, 0 };
-		centerVec = { center.x, center.y, 0 };
+		VECTOR nowVec, prevVec;
+		nowVec = { event.current.x - center.x, event.current.y - center.y, 0 };
+		prevVec = { nowVec.x - event.delta.x, nowVec.y - event.delta.y, 0 };
 
-		VECTOR startVec = nowVec - centerVec;
-		VECTOR nextVec = prevVec - centerVec;
+		float lenNow = sqrtf(nowVec.x * nowVec.x + nowVec.y * nowVec.y);
+		float lenPrev = sqrtf(prevVec.x * prevVec.x + prevVec.y * prevVec.y);
 
-		VECTOR cross = VCross(nextVec, startVec);
-		if (cross.z < 0) { // 時計回り
-			arcData_.startPercent -= 0.5;
-			arcData_.percent -= 0.5;
-		}
-		else if (cross.z > 0) { // 反時計回り
-			arcData_.startPercent += 0.5;
-			arcData_.percent += 0.5;
-		}
-		// 次フレームのために保存
-		prevVec = nowVec;
+		if (lenNow < 10.0f || lenPrev < 10.0f)
+			return;
+
+		float newAngle = atan2f(nowVec.y, nowVec.x);
+		float prevAngle = atan2f(prevVec.y, prevVec.x);
+
+		float deltaAngle = remainder(newAngle - prevAngle, DX_TWO_PI_F); //-パイ～パイの範囲に収める(ラップ)
+
+		float deltaPercent = deltaAngle * (100.0f / DX_TWO_PI_F); //ラジアンをパーセントに変換 
+
+		arcData_.startPercent += deltaPercent;
+		arcData_.percent = arcData_.startPercent + 10.0f;
 	}
 		break;
 	case RIGHT:

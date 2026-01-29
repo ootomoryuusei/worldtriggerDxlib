@@ -27,7 +27,6 @@ public:
 	const auto& GetpData()const { return pData_; }
 	void SetHand(HANDS _hand) { hand_ = _hand; }
 private:
-	VECTOR prevVec;
 	XMFLOAT2 center;
 	array<XMFLOAT2, 4> boxCorners{};
 

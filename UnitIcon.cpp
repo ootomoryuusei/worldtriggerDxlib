@@ -10,7 +10,7 @@
 #include"GroupManager.h"
 #include"Map.h"
 #include"TriggerData.h"
-
+#include"HitSquare.h"
 #include<algorithm>
 
 using std::clamp;
@@ -38,6 +38,7 @@ UnitIcon::~UnitIcon()
 void UnitIcon::Initialize()
 {
 	Object2D::Initialize(); //raycaster2D‚Ö“o˜^
+	hitShape_ = new HitSquare(); // “–‚½‚è”»’èŒ`ó‚ğlŠpŒ`‚Éİ’è
 	maxMoveMent = 10;
 	pArcs_ = Instantiate<TriggersArcIcon>(this);
 	pLoad_ = Instantiate<MoveMentsLoad>(this);

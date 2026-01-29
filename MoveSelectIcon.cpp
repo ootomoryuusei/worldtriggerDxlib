@@ -2,9 +2,12 @@
 #include "Mouse.h"
 #include"MoveTypeIcons.h"
 #include "Engine/Global.h"
+#include"HitSquare.h"
 
 MoveSelectIcon::MoveSelectIcon(GameObject* parent) : Object2D(parent)
 {
+	Object2D::Initialize(); //raycaster2D‚Ö“o˜^
+	hitShape_ = new HitSquare(); // “–‚½‚è”»’èŒ`ó‚ğlŠpŒ`‚Éİ’è
 	LoadSprite("Assets/Image/moveTypesIcon.png");
 	transform_.position_ = { 100, 0, 0 };
 	fontHandle_ = -1;

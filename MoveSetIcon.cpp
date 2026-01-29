@@ -3,10 +3,12 @@
 #include"MoveSelectIcon.h"
 #include"MoveTypeIcons.h"
 #include"UnitIcons.h"
-#include "Mouse.h"
+#include"HitSquare.h"
 
 MoveSetIcon::MoveSetIcon(GameObject* parent) : Object2D(parent)
 {
+	Object2D::Initialize(); //raycaster2D‚Ö“o˜^
+	hitShape_ = new HitSquare(); // “–‚½‚è”»’èŒ`ó‚ğlŠpŒ`‚Éİ’è
 	LoadSprite("Assets/Image/moveSetIcon.png");
 	transform_.position_ = { 0, 0, 0 };
 	fontHandle_ = -1;

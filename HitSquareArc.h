@@ -13,21 +13,8 @@ public:
 		
 		const size_t cornersNum = 4;
 		const auto& ui = dynamic_cast<ArcIcon*> (&element);
-		OBJ_SIZE_F hitSize = element.GetHitSizeF();
-		XMFLOAT3 position = element.GetPosition();
-		XMFLOAT3 scale = element.GetScale();
 		ARC_DATA arc = ui->GetArcData();
-
-		XMFLOAT2 center = { position.x + hitSize.halfX(),position.y + hitSize.halfY() };
-
-		float startAngle = -XM_PI / 2.0f;
-		float radius = element.GetScale().x * 0.5f;
-
-		for (int i = 0; i < cornersNum;i++) {
-			float angle = startAngle + element.GetRotate().x + i * (2.0f * XM_PI / 6.0f);
-			corners_.push_back({ center.x + cosf(angle) * radius,
-								 center.y + sinf(angle) * radius });
-		}
+		OBJ_SIZE_F hitSize = element.GetHitSizeF();
 
 		// 扇形の角度と中心角の向きを取得
 		float startAngleDeg = arc.startPercent * 3.6f;
@@ -37,7 +24,7 @@ public:
 
 		// 四角形サイズ（幅は角度に応じて、高さは固定）
 		float angleSpanDeg = endAngleDeg - startAngleDeg;
-		float width =  sqrtf(2 * (1 - cos(XMConvertToRadians(angleSpanDeg))));
+		float width =  hitSize.halfX() * sqrtf(2 * (1 - cos(XMConvertToRadians(angleSpanDeg))));
 		float height = hitSize.halfY();
 
 		/*hitSize_.set(width, height, 0);*/
@@ -49,15 +36,15 @@ public:
 			{-width / 2, 0}        // 左下
 		};
 
-		// 回転中心（DrawCircleGauge と同じ）
-		center = { position.x,position.y };
+		XMFLOAT2 center = {element.GetPosition().x,element.GetPosition().y};
 
 		// ローカル→ワールド座標へ変換（回転あり）
 		for (int i = 0; i < cornersNum; i++) {
 			float x = localCorners[i].x;
 			float y = localCorners[i].y;
-			corners_[i].x = center.x + x * cos(angleRad) - y * sin(angleRad);
-			corners_[i].y = center.y + x * sin(angleRad) + y * cos(angleRad);
+			float cornerX = center.x + x * cos(angleRad) - y * sin(angleRad);
+			float cornerY = center.y + x * sin(angleRad) + y * cos(angleRad);
+			corners_.push_back({cornerX,cornerY});
 		}
 		return element.PointInPolygon(point, corners_);
 	}
