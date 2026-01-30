@@ -63,6 +63,9 @@ void Object2D::Draw()
 {
 	if (hModel_ < 0) return;
     DrawRotaGraph3(position_.x, position_.y, pivot_.x, pivot_.y, scale_.x, scale_.y, 0.0, hModel_, TRUE, FALSE);
+
+	if (!hitShape_) return;
+	hitShape_->DrawJudgmentRange(*this);
 }
 
 void Object2D::LoadSprite(const std::string& _filePath)

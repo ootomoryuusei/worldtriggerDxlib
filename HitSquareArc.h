@@ -4,14 +4,10 @@
 #include"TriggerData.h"
 class HitSquareArc : public BaseHitShape { //円弧専用四角形当たり判定形状クラス
 public:
-	vector<XMFLOAT2> corners_;
-
-	void Rebulid(const Transform& tranform) override {
-	}
-	bool IsHit(const XMFLOAT2& point, Object2D& element) override {
+	void Rebuild(Object2D& element) override {
 		corners_.clear();
-		
-		const size_t cornersNum = 4;
+
+		cornersNum_ = 4;
 		const auto& ui = dynamic_cast<ArcIcon*> (&element);
 		ARC_DATA arc = ui->GetArcData();
 		OBJ_SIZE_F hitSize = element.GetHitSizeF();
@@ -24,7 +20,7 @@ public:
 
 		// 四角形サイズ（幅は角度に応じて、高さは固定）
 		float angleSpanDeg = endAngleDeg - startAngleDeg;
-		float width =  hitSize.halfX() * sqrtf(2 * (1 - cos(XMConvertToRadians(angleSpanDeg))));
+		float width = hitSize.halfX() * sqrtf(2 * (1 - cos(XMConvertToRadians(angleSpanDeg))));
 		float height = hitSize.halfY();
 
 		/*hitSize_.set(width, height, 0);*/
@@ -36,30 +32,32 @@ public:
 			{-width / 2, 0}        // 左下
 		};
 
-		XMFLOAT2 center = {element.GetPosition().x,element.GetPosition().y};
+		XMFLOAT2 center = { element.GetPosition().x,element.GetPosition().y };
 
 		// ローカル→ワールド座標へ変換（回転あり）
-		for (int i = 0; i < cornersNum; i++) {
+		for (int i = 0; i < cornersNum_; i++) {
 			float x = localCorners[i].x;
 			float y = localCorners[i].y;
 			float cornerX = center.x + x * cos(angleRad) - y * sin(angleRad);
 			float cornerY = center.y + x * sin(angleRad) + y * cos(angleRad);
-			corners_.push_back({cornerX,cornerY});
+			corners_.push_back({ cornerX,cornerY });
 		}
+	}
+
+	bool IsHit(const XMFLOAT2& point, Object2D& element) override {
+		Rebuild(element);
 		return element.PointInPolygon(point, corners_);
 	}
 
 	void DrawJudgmentRange(Object2D& element) override {
-		const size_t cornersNum = 4;
-		for (int i = 0; i < cornersNum; i++) {
-			int j = (i + 1) % cornersNum;
+		for (int i = 0; i < cornersNum_; i++) {
+			int j = (i + 1) % cornersNum_;
 			DrawLineAA(corners_[i].x, corners_[i].y,
 				corners_[j].x, corners_[j].y,
 				GetColor(255, 0, 0), FALSE);
 		}
-		for (int i = 0; i < cornersNum; ++i) {
+		for (int i = 0; i < cornersNum_; ++i) {
 			DrawCircle(corners_[i].x, corners_[i].y, 2, GetColor(0, 255, 0)); // 六角形の頂点のマーク
 		}
 	}
-
 };
