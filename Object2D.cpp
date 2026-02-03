@@ -105,14 +105,14 @@ XMFLOAT2 Object2D::ScreenToLocal(const XMFLOAT2& screenPos) const
 
 bool Object2D::IsInMousePoint(const XMFLOAT2& mpos) const
 {
-   /* if (fabsf(angle_) < 1e-5f) {
+    if (fabsf(angle_) < 1e-5f) {
         float w = hitSize_.x;
         float h = hitSize_.y;
         float left = transform_.position_.x - pivot_.x * w;
         float top = transform_.position_.y - pivot_.y * h;
         if (mpos.x >= left && mpos.x <= left + w && mpos.y >= top && mpos.y <= top + h) return true;
         return false;
-    }*/
+    }
 
     XMFLOAT2 local = ScreenToLocal(mpos);
     if (local.x >= 0 && local.x <= hitSize_.x && local.y >= 0 && local.y <= hitSize_.y) return true;

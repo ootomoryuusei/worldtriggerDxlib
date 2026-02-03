@@ -72,8 +72,7 @@ void MoveSetIcon::Draw()
 	Object2D::Draw();
 	XMFLOAT2 fontPos = position_ + space;
 	DrawStringToHandle(fontPos.x, fontPos.y, iconName_.c_str(), GetColor(0, 0, 0), fontHandle_);
-	DrawLineAA(position_.x, position_.y + baseSize_.halfY()
-		, position_.x + baseSize_.halfX(), position_.y + baseSize_.halfY(), GetColor(0, 0, 0), 2.0);
+
 	int num = 1;
 	for (auto& itr : movement) {
 		string move = std::to_string(num) + " : " + itr.movename;

@@ -5,11 +5,11 @@
 using std::string;
 
 struct TriggerStatus {
-    std::string name;
-    float startPercent;
-    float percent;
-    float angle;
-    float rangeSize;
+    std::string name; //トリガー名
+    float startPercent; //開始パーセント
+    float percent; //パーセント
+    float angle; //角度
+    float rangeSize; //レンジサイズ
 };
 
 class TriggerStatusFactory {

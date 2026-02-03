@@ -30,11 +30,15 @@ public:
 
 	void SetTarget(string _target) { target_ = _target; }
 	const string& GetTarget()const { return target_; }
+
+	void SetTileData(TILEDATA _tileData) { tileData_ = _tileData; }
+	const TILEDATA& GetTileData()const { return tileData_; }
 private: 
 	CsvReader* csv_;
 	MYTRIGGER myTrigger_; //持っているトリガーのデータ
 	string target_; //敵対しているターゲット群
 	CharacterStatus c_status_; //キャラクターのステータス
 	TriggerStatus t_status_; //トリガーのステータス
+	TILEDATA tileData_; //キャラクターのいるタイルデータ
 };
 

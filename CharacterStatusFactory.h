@@ -5,14 +5,14 @@
 using std::string;
 
 struct CharacterStatus {
-    std::string name;
-    int action;
-    int trion;
-    int attack;
-    int defense;
-    int avoidance;
-    int support;
-    int technique;
+    std::string name; //ƒLƒƒƒ‰–¼
+    int action; //s“®—Í
+    int trion; //ƒgƒŠƒIƒ“
+    int attack; //UŒ‚
+    int defense; //–hŒä
+    int avoidance; //‰ñ”ğ
+    int support; //‰‡Œì
+    int technique; //‹Zp
 };
 
 class CharacterStatusFactory {

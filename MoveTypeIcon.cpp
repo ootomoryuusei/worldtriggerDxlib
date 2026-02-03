@@ -50,12 +50,6 @@ void MoveTypeIcon::Draw()
 {
 	Object2D::Draw();
 
-	/*if (IsInMousePoint(mousePos)) {
-		DrawGraph(position.x, position.y, hImage, TRUE);
-	}
-	else {
-		DrawGraph(position.x, position.y, hModel, TRUE);
-	}*/
 	XMFLOAT2 fontPos = position_ + space;
 	DrawStringToHandle(fontPos.x, fontPos.y, iconName_.c_str(), GetColor(0, 0, 0), fontHandle_);
 #if 0

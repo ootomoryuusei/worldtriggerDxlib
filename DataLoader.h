@@ -7,7 +7,7 @@
 using std::string;
 using std::vector;
 
-class DataLoader {
+class DataLoader { 
 public:
     static vector<Data> Load(CsvReader& reader) {
         vector<Data> result;
@@ -36,5 +36,14 @@ public:
                 return Factroy::CreateFromStatusData(itr);
             }
         }
+    }
+    
+    int GetByIndex(const string& key,const string& name, const vector<Data>& list) {
+        for (size_t i = 0; i < list.size();i++) {
+            if (list[i].GetString(key) == name) {
+                return static_cast<int>(i);
+            };
+        }
+        return -1;
     }
 };

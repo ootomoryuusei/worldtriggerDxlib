@@ -17,9 +17,9 @@ public:
 	void SetTarget(string _target) { target_ = _target; }
 	const string& GetTarget()const { return target_; }
 private:
-	string target_;
-	TRIGGER trigger_;
+	string target_; //敵対しているターゲット群
+	TRIGGER trigger_; //トリガーデータ
 
-	TriggerStatus t_status_;
+	TriggerStatus t_status_; //トリガーステータス
 };
 
