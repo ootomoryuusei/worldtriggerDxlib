@@ -16,10 +16,12 @@ void TriggersArcIcon::Initialize()
 	pMainTriggerArcIcon->LoadSprite("Assets//Image//MainTriggerCircle.png");
 	const auto& pSubTriggerArcIcon = Instantiate<TriggerArcIcon>(this);
 	pSubTriggerArcIcon->LoadSprite("Assets//Image//SubTriggerCircle.png");
-	pTriggerArcIcon[RIGHT_HAND] = pMainTriggerArcIcon;
-	pTriggerArcIcon[LEFT_HAND] = pSubTriggerArcIcon;
-	pTriggerArcIcon[RIGHT_HAND]->SetHand(RIGHT_HAND);
-	pTriggerArcIcon[LEFT_HAND]->SetHand(LEFT_HAND);
+	size_t handIndex = ToIndex<HANDS>(HANDS::RIGHT_HAND);
+	pTriggerArcIcon[handIndex] = pMainTriggerArcIcon;
+	pTriggerArcIcon[handIndex]->SetHand(HANDS::RIGHT_HAND);
+	handIndex = ToIndex<HANDS>(HANDS::LEFT_HAND);
+	pTriggerArcIcon[handIndex] = pSubTriggerArcIcon;
+	pTriggerArcIcon[handIndex]->SetHand(HANDS::LEFT_HAND);
 	pFirstSelect = nullptr;
 }
 

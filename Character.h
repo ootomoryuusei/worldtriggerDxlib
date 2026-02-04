@@ -28,9 +28,9 @@ protected:
 	vector<VECTOR> moveMent;
 	deque<VECTOR> dq_moveMent;
 	list<Character*> characterlist_;
-	array<Trigger*, MAX> hands_;
-	array<VECTOR, MAX> handsPostion_;
-	array<array<Trigger*,4>, MAX> trigger_;
+	array<Trigger*, static_cast<size_t>(HANDS::MAX)> hands_;
+	array<VECTOR, static_cast<size_t>(HANDS::MAX)> handsPostion_;
+	array<array<Trigger*,4>, static_cast<size_t>(HANDS::MAX)> trigger_;
 	OWENER owener_;
 
 	Tiles* pTiles_;

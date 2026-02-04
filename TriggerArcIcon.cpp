@@ -10,7 +10,7 @@ using std::clamp;
 
 TriggerArcIcon::TriggerArcIcon(GameObject* parent) : ArcIcon(parent)
 {
-	step_ = SECONDE;
+	step_ = STEP::SECONDE;
 
 	firstSet = false;
 	moveing = false;
@@ -45,15 +45,15 @@ void TriggerArcIcon::Update()
 {
 		switch (step_)
 		{
-		case FIRST:
+		case STEP::FIRST:
 		{
 		}
 			break;
-		case SECONDE:
+		case STEP::SECONDE:
 		{
 			break;
 		}
-		case THIRD:
+		case STEP::THIRD:
 			
 			if (!firstSet) {
 				for (auto& itr : angle) {

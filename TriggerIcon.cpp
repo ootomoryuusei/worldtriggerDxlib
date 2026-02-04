@@ -19,7 +19,7 @@ void TriggerIcon::Update()
 {
 	TriggerSetUI* pUI = GetParent()->GetParent()->FindGameObject<TriggerSetUI>();
 
-	for (int index = 0;index < (int)MAX;index++) {
+	for (int index = 0;index < static_cast<size_t>(HANDS::MAX);index++) {
 		for (auto& itr : pUI->GetpFrames()->GetpUIFrames()[index]) {
 			XMFLOAT2 leftUp = { itr->GetPosition().x,itr->GetPosition().y };
 			XMFLOAT2 distance = { itr->GetBaseSizeF().x,itr->GetBaseSizeF().y };

@@ -20,8 +20,8 @@ void TriggerIcons::Initialize()
 void TriggerIcons::Update()
 {
 	if (!firstSet) { 
-		DefaultSetTriggers(pCharacterIcon_,RIGHT_HAND);
-		DefaultSetTriggers(pCharacterIcon_, LEFT_HAND);
+		DefaultSetTriggers(pCharacterIcon_,HANDS::RIGHT_HAND);
+		DefaultSetTriggers(pCharacterIcon_,HANDS::LEFT_HAND);
 		/*CreateCanSet(pCharacterIcon_,MAIN);
 		CreateCanSet(pCharacterIcon_, SUB);*/
 		firstSet = true;

@@ -15,11 +15,11 @@ public:
         if (reader.GetHeight() < 2) return result;
 
         vector<string> keys;
-        for (int col = 0; col < reader.GetWidth(0); ++col) {
+        for (size_t col = 0; col < reader.GetWidth(0); ++col) {
             keys.push_back(reader.GetString(col, 0));
         }
 
-        for (int row = 1; row < reader.GetHeight(); ++row) {
+        for (size_t row = 1; row < reader.GetHeight(); ++row) {
             Data status;
             for (int col = 0; col < keys.size(); ++col) {
                 status.Set(keys[col], reader.GetString(col, row));
@@ -29,16 +29,16 @@ public:
         return result;
     }
 
-    template<class T,class Factroy>
+    template<class T,class Factory>
     static T GetByName(const string& key, const string& name, const vector<Data>& list) {
         for (const auto& itr : list) {
             if (itr.GetString(key) == name) {
-                return Factroy::CreateFromStatusData(itr);
+                return Factory::CreateFromStatusData(itr);
             }
         }
     }
     
-    int GetByIndex(const string& key,const string& name, const vector<Data>& list) {
+    static int GetByIndex(const string& key,const string& name, const vector<Data>& list) {
         for (size_t i = 0; i < list.size();i++) {
             if (list[i].GetString(key) == name) {
                 return static_cast<int>(i);

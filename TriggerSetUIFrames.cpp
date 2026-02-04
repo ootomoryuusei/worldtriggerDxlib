@@ -15,7 +15,7 @@ void TriggerSetUIFrames::Initialize()
 	TriggerSetUI* pUI = GetParent()->GetParent()->FindGameObject<TriggerSetUI>();
 	XMFLOAT2 ui_pos = { pUI->GetPosition().x,pUI->GetPosition().y };
 	OBJ_SIZE_F ui_size = pUI->GetBaseSizeF();
-	for (int x = 0; x < (int)MAX; x++) { //TriggerSetのフレームの位置決め
+	for (int x = 0; x < static_cast<size_t>(HANDS::MAX); x++) { //TriggerSetのフレームの位置決め
 		for (int y = 0; y < MAX_CAN_SET_TRIGGER; y++) {
 			TriggerSetUIFrame* pUIframe = Instantiate<TriggerSetUIFrame>(this);
 			VECTOR graphPos = { 1110.0f - 330.0f * x, 50.0f + (pUIframe->GetBaseSizeF().y + 10) * y,0 };

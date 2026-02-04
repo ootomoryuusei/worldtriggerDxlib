@@ -19,7 +19,7 @@ Enemy::~Enemy()
 void Enemy::Initialize()
 {
 	csv_ = new CsvReader();
-	csv_->Load("Assets//Character//CharacterStatus.csv");
+	assert(csv_->Load("Assets//Character//DefaultData//Status.csv"));
 	std::vector<int> randomselect;
     std::vector<string> selectCharacterName;
     for (int x = 0; x < MAX_SELECT_CHARACTER; x++) {

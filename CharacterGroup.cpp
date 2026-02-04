@@ -24,13 +24,13 @@ void CharacterGroup::Update()
 		auto& unit_icons = pUnitIcons->GetpUnitIcons();
 		for (auto& member : members_) {
 			for (auto& arc_icon : unit_icons[index]->GetpTriggersArcIcon()->GetpTriggerArcIcon()) {
-				arc_icon->SetStep(THIRD);
+				arc_icon->SetStep(STEP::THIRD);
 			}
 			for (auto& movement : unit_icons[index]->GetMoveMent()) {
 				member->AddMoveMent(movement.movement);
 			}
-			unit_icons[index]->SetStep(THIRD);
-			member->SetStep(THIRD);
+			unit_icons[index]->SetStep(STEP::THIRD);
+			member->SetStep(STEP::THIRD);
 			index++;
 		}
 		pUnitIcons->SetMoveMentSet(false);

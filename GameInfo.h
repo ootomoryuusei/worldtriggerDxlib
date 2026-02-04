@@ -1,7 +1,9 @@
 #pragma once
 #include<string>
+#include<array>
 
 using std::string;
+using std::array;
 
 const int MAX_MAP_HIGHT = 11;
 const int MAX_MAP_WIDTH = 11;
@@ -71,7 +73,7 @@ struct MOVEMENT {
 	string movename;
 };
 
-enum STATUS {
+enum class STATUS {
 	MOVE = 0,
 	TRION,
 	ATTACK,
@@ -79,14 +81,15 @@ enum STATUS {
 	DEFENCE,
 	SUPPORT,
 	TECHNIQUE,
-	STATUS_MAX
+	SIZE
 };
 struct CHARACTER_STATUS
 {
-	int status[STATUS_MAX];
+	array<int, static_cast<size_t>(STATUS::SIZE)> status_;
+	/*int status[static_cast<size_t>(STATUS::SIZE)];*/
 };
 
-enum STEP {
+enum class STEP {
 	FIRST = 0,
 	SECONDE,
 	THIRD,
@@ -94,13 +97,13 @@ enum STEP {
 };
 
 
-enum HANDS {
+enum class HANDS {
 	RIGHT_HAND = 0,
 	LEFT_HAND,
 	MAX
 };
 
-enum WEAPON {
+enum class WEAPON {
 	FREE,
 	KOGETSU,
 	SHIELD,
@@ -108,3 +111,9 @@ enum WEAPON {
 	EAGLET,
 	WEAPON_MAX
 };
+
+template<class T>
+size_t ToIndex(T t) {
+	return static_cast<size_t>(t);
+}
+

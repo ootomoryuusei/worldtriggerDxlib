@@ -32,14 +32,14 @@ public:
     void SetpCharacterIcon_(CharacterIcon* _pChracterIcon) { pCharacterIcon_ = _pChracterIcon; }
 private:
     CsvReader* csv_;
-    array<vector<TriggerIcon*>, MAX> pTIcons_;
-    array<vector<TriggerIcon*>,MAX> pCanSet_;
+    array<vector<TriggerIcon*>,static_cast<size_t>(HANDS::MAX)> pTIcons_;
+    array<vector<TriggerIcon*>, static_cast<size_t>(HANDS::MAX)> pCanSet_;
     vector<TriggerIcon*> pSubTIcons_;
     vector<TriggerIcon*> pALLTIcons_;
     CharacterIcon* pCharacterIcon_;
     bool firstSet;
 
     void DefaultSetTriggers(CharacterIcon* pCharacterIcon, HANDS hands);
-    void CreateCanSet(CharacterIcon* pCharacterIcon,HANDS hands);
+    void CreateCanSet(CharacterIcon* pCharacterIcon, HANDS hands);
 };
 

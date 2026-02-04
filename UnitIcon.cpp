@@ -19,7 +19,7 @@ UnitIcon::UnitIcon(GameObject* parent) : Object2D(parent)
 {
 	createNum_ = -1;
 	
-	step_ = SECONDE;
+	step_ = STEP::SECONDE;
 
 	firstSet = false;
 	moveing = false;
@@ -63,7 +63,7 @@ void UnitIcon::Update()
 
 	switch (step_)
 	{
-	case FIRST:
+	case STEP::FIRST:
 	{
 		if (!selecting_) return;
 		//unitIcon‚ÌˆÚ“®ˆ—
@@ -71,17 +71,17 @@ void UnitIcon::Update()
 			for (auto& row : colmun) {
 				XMFLOAT2 leftUp = { row->GetPosition().x + row->GetBaseSizeF().x / 4, row->GetPosition().y };
 				XMFLOAT2 graphSize = { row->GetBaseSizeF().x / 4 * 2, row->GetBaseSizeF().y };
-				XMFLOAT2 graphCenter = { transform_.position_.x + GetBaseSizeF().halfX(),transform_.position_.y + GetBaseSizeF().halfY()};
+				XMFLOAT2 graphCenter = { transform_.position_.x + GetBaseSizeF().halfX(),transform_.position_.y + GetBaseSizeF().halfY() };
 				if (PointInBox({ graphCenter.x, graphCenter.y }, leftUp, graphSize)) {
 					transform_.position_ = { row->GetPosition() };
 				}
 			}
-		}	
+		}
 		break;
 	}
-	case SECONDE:
+	case STEP::SECONDE:
 	{
-		for (int i = 0;i < HANDS::MAX;i++) {
+		for (int i = 0;i < static_cast<size_t>(HANDS::MAX);i++) {
 			if (hands_[i] == nullptr) continue;
 			const auto& data = arcs[i]->GetpData()->GetTriggerData();
 			hands_[i]->GetTriggerData()->SetTriggerData(data);
@@ -92,7 +92,7 @@ void UnitIcon::Update()
 			}*/
 		break;
 	}
-	case THIRD:
+	case STEP::THIRD:
 	{		
 		if (!firstSet) {
 			for (auto& itr : moveMent) {
@@ -146,12 +146,12 @@ void UnitIcon::Draw()
 {
 	switch (step_)
 	{
-	case FIRST:
+	case STEP::FIRST:
 	{
 		Object2D::Draw();
 		break;
 	}
-	case SECONDE:
+	case STEP::SECONDE:
 	{
 		if (moveMent.size() >= 2) {
 			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 / 2);
@@ -161,7 +161,7 @@ void UnitIcon::Draw()
 		Object2D::Draw();
 		break;
 	}
-	case THIRD:
+	case STEP::THIRD:
 	{
 		Object2D::Draw();
 		break;

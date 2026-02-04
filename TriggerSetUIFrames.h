@@ -15,6 +15,6 @@ public:
     const auto& GetpUIFrames() const{ return pUIFrames_; }
 
 private:
-    array<vector<TriggerSetUIFrame*>,MAX > pUIFrames_;
+    array<vector<TriggerSetUIFrame*>,static_cast<size_t>(HANDS::MAX)> pUIFrames_;
 };
 

@@ -38,7 +38,7 @@ private:
 	vector<MOVEMENT> moveMent;
 	deque<MOVEMENT> dq_moveMent;
 
-	array<Trigger*, MAX> hands_;
+	array<Trigger*, static_cast<size_t>(HANDS::MAX)> hands_;
 
 	bool firstSet;
 	bool moveing;

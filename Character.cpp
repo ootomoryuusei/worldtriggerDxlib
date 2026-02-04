@@ -48,7 +48,7 @@ void Character::Update()
 	VECTOR lefthand_postion = MV1GetFramePosition(hModel_, LeftHand);
 	handsPostion_[LEFT] = lefthand_postion;
 
-	for (int hands = 0;hands < MAX;hands++) {
+	for (int hands = 0;hands < static_cast<size_t>(HANDS::MAX);hands++) {
 		for (int i = 0;i < 4;i++) {
 			if (trigger_[hands][i] != nullptr) {
 				trigger_[hands][i]->SetPosition(handsPostion_[hands]);
@@ -58,9 +58,9 @@ void Character::Update()
 
 	switch (step_)
 	{
-	case FIRST: break;
-	case SECONDE: break;
-	case THIRD:
+	case STEP::FIRST: break;
+	case STEP::SECONDE: break;
+	case STEP::THIRD:
 	{
 		MoveMent();
 		break;
@@ -93,7 +93,7 @@ void Character::Draw()
 
 void Character::CreateTriggerInstance()
 {
-	for (int hands = 0;hands < MAX;hands++) { //characterÇ™éùÇ¬triggerÇê∂ê¨
+	for (int hands = 0;hands < static_cast<size_t>(HANDS::MAX);hands++) { //characterÇ™éùÇ¬triggerÇê∂ê¨
 		for (int i = 0;i < 4;i++) {
 			MYTRIGGER myTrigger = pData_->GetMyTrigger();
 			string trigger_name = myTrigger.myTrigger[hands].trigger[i].triggerName;
@@ -107,7 +107,7 @@ void Character::CreateTriggerInstance()
 		}
 	}
 	hands_ = { trigger_[RIGHT][0],trigger_[LEFT][0] };
-	for (int hands = 0; hands < MAX; hands++) {
+	for (int hands = 0; hands < static_cast<size_t>(HANDS::MAX); hands++) {
 		if (hands_[hands] == nullptr) continue;
 			hands_[hands]->Enter();
 			hands_[hands]->Visible();

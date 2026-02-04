@@ -19,7 +19,7 @@ public:
 	const auto& GetpTriggerArcIcon() const { return pTriggerArcIcon; }
 
 private:
-	array<TriggerArcIcon*,MAX> pTriggerArcIcon;
+	array<TriggerArcIcon*, static_cast<size_t>(HANDS::MAX)> pTriggerArcIcon;
 	TriggerArcIcon* pFirstSelect;
 };
 
